@@ -1,73 +1,58 @@
-import React from 'react'
-import Header from '../components/molecules/Header/Header'
-import Introduction from '../components/molecules/Introduction'
-import CompanyLogo from '../components/molecules/CompanyLogo'
-import Apps from '../components/molecules/Apps'
-import UserComments from '../components/molecules/UserComments'
-import FreeUse from '../components/molecules/FreeUse'
-import Footer from '../components/molecules/Footer'
+import React from "react";
+import Header from "../components/molecules/Header/Header";
 
-
+import CompanyLogo from "../components/molecules/CompanyLogo/CompanyLogo";
+import Apps from "../components/molecules/Apps";
+import UserComments from "../components/molecules/UserComments";
+import FreeUse from "../components/molecules/FreeUse";
+import Footer from "../components/molecules/Footer";
+import Introduction from "../components/molecules/Introduction/Introduction";
 
 function HomePage() {
   return (
-<div className="container">
-<div className="container">
-<div className="row">
-    <Header/>
-</div>
-</div>
+    <>
+     
+        <div className="row">
+          <Header />
+        </div>
+      {/** ACIKLAMA KISMI */}
+        <div className="row">
+          <Introduction/>
+        </div>
+      
 
-<div className="container">
-<div className="row">
-    <Introduction/>
-</div>
-</div>
-  
-<div className="container">
-<div className="row">
-    <CompanyLogo/>
+      <div className="container">
+        <div className="row">
+          <CompanyLogo />
+        </div>
+      </div>
 
-</div>
-</div>
+      <div className="container">
+        <div className="row">
+          <Apps />
+        </div>
+      </div>
 
-<div className="container">
-<div className="row">
-        <Apps/>
-   
-</div>
-</div>
+      <div className="container">
+        <div className="row">
+          <UserComments />
+        </div>
+      </div>
 
-<div className="container">
-<div className="row">
-        <UserComments/>
-    
-</div>
-</div>
+      <div className="container">
+        <div className="row">
+          <FreeUse />
+        </div>
+      </div>
+      <div className="container">
+        <div className="row">
+          <Footer />
+        </div>
+      </div>
+    </>
+     
 
-
-<div className="container">
-<div className="row">
-        <FreeUse/>
-   
-</div>
-</div>
-<div className="container">
-<div className="row">
-        <Footer/>
-    
-</div>
-</div>
-
-    </div>
-
-   
-
-
-
-            
-    
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

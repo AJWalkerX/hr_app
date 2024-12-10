@@ -1,3 +1,7 @@
-.title{
-    background-color: aqua;
+.bg-color{
+    background-color: #37AFE1;
+    
 }
+.navbar-nav .nav-link:hover {
+    color: white;  /* Hover efekti */
+  }
