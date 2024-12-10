@@ -2,7 +2,9 @@ import React from 'react'
 
 function UserComments() {
   return (
-    <div>nUserCommets</div>
+   <div className="container">
+    
+   </div>
   )
 }
 export default UserComments

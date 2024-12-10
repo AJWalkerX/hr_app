@@ -1,16 +1,51 @@
+/* Swiper slide container stilleri */
 .swiper-slide-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 100px;
+}
+
+.swiper-slide-container:hover {
+  transform: translateY(-10px); /* Hover efektiyle hafif yukarı kayma */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Hover efektiyle daha belirgin gölge */
+}
+
+/* İçerik metni */
+.content-text {
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #555;
+  text-align: center;
+  line-height: 1.6;
+
   
-  .logo-image {
-    width: 80%; /* Resmin genişliği */
-    height: auto; /* Yükseklik orantılı olarak ayarlanır */
-    border-radius: 10px; /* Logolara yuvarlak köşeler ekler */
-    transition: transform 0.3s ease; /* Hover efekti için geçiş */
-  }
-  
-  .logo-image:hover {
-    transform: scale(1.1); /* Hover yapıldığında logoyu büyütür */
-  }
+}
+
+/* Pagination ve Navigation Stillendirme */
+.swiper-pagination-bullet {
+  background-color: black !important;
+  opacity: 0.7;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: black !important;
+  opacity: 1;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #37AFE1;
+  transition: color 0.3s ease;
+  padding: 15px;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  color: black;
+}

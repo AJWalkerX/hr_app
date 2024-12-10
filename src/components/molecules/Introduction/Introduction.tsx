@@ -1,19 +1,21 @@
 import React from "react";
-
+import './Introduction.css'
 function Introduction() {
   return (
-    <>
-      <div className="row bg-color ">
+    
+     <div className="container-fluid bg-color">
+       <div className="row ">
         <div className="col-2"></div>
         <div className="col-8 mt-5">
           <div className="row">
             <div className="col-6">
-              <h1 className="text" style={{fontWeight:'bold'}}>
-               Bordronun artık kolayı var! 
+              <h1  style={{fontWeight:'bold'}}>
+               Bordronun artık <span style={{color:'#0A5EB0',fontWeight:'bold'}}>kolayı var!</span> 
               </h1>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, itaque quasi? Nisi facere possimus tenetur totam nobis optio maxime neque quibusdam blanditiis laborum ut temporibus corporis sapiente accusamus, consectetur eaque.
+                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit possimus cupiditate blanditiis autem quae iure, omnis eaque inventore minima fuga incidunt ex exercitationem quos sit voluptas nobis earum ea ipsum.</p>
                 <br />
-                <button type="button" className="btn btn-primary btn-lg mt-3">Large button</button>
+              
+                <button type="button" className="btn btn-primary btn-lg mt-1">Large button</button>
             </div>
             <div className="col-6">
               <img src="http://picsum.photos/450/300" />
@@ -29,7 +31,8 @@ function Introduction() {
 
         <div className="col-2"></div>
       </div>
-    </>
+     </div>
+    
   );
 }
 
