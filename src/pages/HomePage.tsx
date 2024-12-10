@@ -2,9 +2,9 @@ import React from "react";
 import Header from "../components/molecules/Header/Header";
 
 import CompanyLogo from "../components/molecules/CompanyLogo/CompanyLogo";
-import Apps from "../components/molecules/Apps";
+import Apps from "../components/molecules/Apps/Apps";
 import UserComments from "../components/molecules/UserComments";
-import FreeUse from "../components/molecules/FreeUse";
+import FreeUse from "../components/molecules/FreeUse/FreeUse";
 import Footer from "../components/molecules/Footer";
 import Introduction from "../components/molecules/Introduction/Introduction";
 
