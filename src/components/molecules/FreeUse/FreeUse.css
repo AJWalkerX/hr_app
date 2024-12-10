@@ -1,0 +1,10 @@
+.freeuse {
+    width: 50% !important; /* Genişlik %50 */
+    height: 300px; /* Sabit yükseklik */
+    background-color: rgb(246, 242, 242); /* Bootstrap Primary renk (mavi) */
+    color: white; /* Yazı rengi beyaz */
+    text-align: center; /* Yazıyı ortala */
+    padding: 20px; /* İç boşluk */
+    border-radius: 8px; /* Köşeleri yuvarla */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
