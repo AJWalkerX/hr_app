@@ -1,0 +1,16 @@
+.swiper-slide-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-image {
+    width: 80%; /* Resmin genişliği */
+    height: auto; /* Yükseklik orantılı olarak ayarlanır */
+    border-radius: 10px; /* Logolara yuvarlak köşeler ekler */
+    transition: transform 0.3s ease; /* Hover efekti için geçiş */
+  }
+  
+  .logo-image:hover {
+    transform: scale(1.1); /* Hover yapıldığında logoyu büyütür */
+  }
