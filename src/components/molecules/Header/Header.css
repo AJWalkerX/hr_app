@@ -1,7 +1,15 @@
-.bg-color{
-    background-color: #37AFE1;
-    
+.bg-color {
+  background-color: #37afe1;
 }
 .navbar-nav .nav-link:hover {
-    color: white;  /* Hover efekti */
-  }
+  color: white; /* Hover efekti */
+}
+.navbar-nav {
+  justify-content: start !important; /* Flexbox ile sola hizalama */
+}
+
+.nav-item {
+  margin-right: 15px; /* Menü elemanları arasında boşluk bırak */
+}
+
+  
