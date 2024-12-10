@@ -6,7 +6,7 @@ import Apps from '../components/molecules/Apps'
 import UserComments from '../components/molecules/UserComments'
 import FreeUse from '../components/molecules/FreeUse'
 import Footer from '../components/molecules/Footer'
-import './HomePage.css'
+
 
 
 function HomePage() {
@@ -58,8 +58,6 @@ function HomePage() {
     
 </div>
 </div>
-
-
 
     </div>
 
