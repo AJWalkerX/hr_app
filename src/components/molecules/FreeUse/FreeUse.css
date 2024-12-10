@@ -1,10 +1,36 @@
 .freeuse {
     width: 50% !important; /* Genişlik %50 */
     height: 300px; /* Sabit yükseklik */
-    background-color: rgb(246, 242, 242); /* Bootstrap Primary renk (mavi) */
+    background-color: rgb(248, 243, 243); /* Bootstrap Primary renk (mavi) */
     color: white; /* Yazı rengi beyaz */
     text-align: center; /* Yazıyı ortala */
     padding: 20px; /* İç boşluk */
     border-radius: 8px; /* Köşeleri yuvarla */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
 }
+.btn-deneme{
+  justify-content: center;
+  align-items: center;
+  width: 200px; /* Genişlik */
+  height: 40px; /* Yükseklik */
+  font-size: 18px; /* Yazı boyutu */
+  padding: 10px 20px; /* İç boşluk */
+  border-radius: 20px; /* Köşeleri yuvarla */
+  background-color: #4caa41; /* Arka plan rengi */
+  color: white; /* Yazı rengi */
+  cursor: pointer; /* İmleci el yap */
+  margin-top: 5px;
+  display: flex;
+  border: none;
+}
+
+.btn-deneme:hover{
+    background-color: bisque;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+  }

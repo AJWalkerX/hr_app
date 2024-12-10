@@ -5,9 +5,10 @@ import CompanyLogo from "../components/molecules/CompanyLogo/CompanyLogo";
 
 import UserComments from "../components/molecules/UserComment/UserComments";
 import FreeUse from "../components/molecules/FreeUse/FreeUse";
-import Footer from "../components/molecules/Footer";
+import Footer from "../components/molecules/Footer/Footer";
 import Introduction from "../components/molecules/Introduction/Introduction";
 import Apps from "../components/molecules/Application/Apps";
+import './HomePage.css'
 
 function HomePage() {
   return (
@@ -32,7 +33,7 @@ function HomePage() {
           <UserComments />
         </div>
 
-        <div className="row">
+        <div className="row freeuse-style">
           <FreeUse />
         </div>
 
