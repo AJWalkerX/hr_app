@@ -1,4 +1,5 @@
 .freeuse {
+    position: relative;
     width: 50% !important; /* Genişlik %50 */
     height: 300px; /* Sabit yükseklik */
     background-color: rgb(248, 243, 243); /* Bootstrap Primary renk (mavi) */
@@ -7,7 +8,32 @@
     padding: 20px; /* İç boşluk */
     border-radius: 8px; /* Köşeleri yuvarla */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    overflow: hidden;
 }
+    /* Dairelerin Genel Özellikleri */
+.circle {
+  position: absolute;
+  width: 150px; /* Daire genişliği */
+  height: 150px; /* Daire yüksekliği */
+  border-radius: 50%; /* Yuvarlak yapmak için */
+  opacity: 0.8; /* Şeffaflık */
+  z-index: 0; /* İçeriğin altında görünmesi için */
+}
+
+/* Sol Üst Daire */
+.circle-left {
+  background-color: #ff6f6f; /* Kırmızımsı renk */
+  top: -50px; /* Üstte yer alacak şekilde */
+  left: -50px; /* Solda yer alacak şekilde */
+}
+
+/* Sağ Alt Daire */
+.circle-right {
+  background-color: #6fe7c2; /* Yeşilimsi renk */
+  bottom: -50px; /* Altta yer alacak şekilde */
+  right: -50px; /* Sağda yer alacak şekilde */
+}
+
 .btn-deneme{
   justify-content: center;
   align-items: center;
@@ -25,7 +51,7 @@
 }
 
 .btn-deneme:hover{
-    background-color: bisque;
+    background-color: #99e093;
 }
 
 .align-center {
@@ -33,4 +59,28 @@
     justify-content: center;
     align-items: center;
     margin-top: 3px;
+  }
+
+  /* Dairelerin Genel Özellikleri */
+.circle {
+    position: absolute;
+    width: 150px; /* Daire genişliği */
+    height: 150px; /* Daire yüksekliği */
+    border-radius: 50%; /* Yuvarlak yapmak için */
+    opacity: 0.8; /* Şeffaflık */
+    z-index: 0; /* İçeriğin altında görünmesi için */
+  }
+  
+  /* Sol Üst Daire */
+  .circle-left {
+    background-color: #ff6f6f; /* Kırmızımsı renk */
+    top: -50px; /* Üstte yer alacak şekilde */
+    left: -50px; /* Solda yer alacak şekilde */
+  }
+  
+  /* Sağ Alt Daire */
+  .circle-right {
+    background-color: #6fe7c2; /* Yeşilimsi renk */
+    bottom: -50px; /* Altta yer alacak şekilde */
+    right: -50px; /* Sağda yer alacak şekilde */
   }
