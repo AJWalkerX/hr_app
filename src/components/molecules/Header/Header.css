@@ -1,5 +1,5 @@
-.bg-color {
-  background-color: #37afe1;
+.bg-color-header {
+  background-color:  rgb(10, 57, 129);
 }
 .navbar-nav .nav-link:hover {
   color: white; /* Hover efekti */
