@@ -1,45 +1,96 @@
-import React from "react";
-
-function UserComments() {
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import {Navigation, Pagination } from 'swiper/modules';
+import './UserComment.css'
+const UserComments = () => {
   return (
-    <div className="container-fluid mt-5">
-      <div className="container">
-        <div className="row">
-          <div className="col-4">
-            <div className="card" style={{ width: "18rem" }}>
-              <div className="card-body">
-                <h5 className="card-title" style={{fontWeight:'bold',fontSize:'35px'}}>Kullanıcı Hikayeleri</h5>
-                <p className="card-text">
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, magni exercitationem tempore maxime quaerat sapiente non obcaecati! Architecto nemo accusantium laborum aliquam magni pariatur dolore mollitia sed! Eius, commodi laborum!
-                </p>
-                <a href="#" className="btn btn-primary">
-                  Go somewhere
-                </a>
+    <div className="container user-comment-container mt-5 ">
+      <div className="row">
+        <div className="col-md-6 d-flex flex-column justify-content-center">
+          <h2 className="mb-4">Kullanıcı Hikayeleri</h2>
+          <p>
+            Binlerce insan kaynakları profesyoneli ile hep beraber İK’yı kolaylaştırıyoruz. İK profesyonellerinin
+            Kolay İK ile tanışma hikayelerine göz atın.
+          </p>
+          <button className="btn btn-primary mt-3">TÜMÜNÜ İNCELEYİN</button>
+        </div>
+        <div className="col-md-6 position-relative">
+          {/* Özel Navigasyon Butonları */}
+          
+          <button className="btn btn-outline-primary swiper-button-next" style={{  top: "40%", right: "-50px" }}>
+            ›
+          </button>
+          <div className="swiper-container">
+
+          <Swiper
+          
+            modules={[Navigation, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              
+            }}
+            pagination={{ clickable: true }}
+          >
+            <SwiperSlide>
+              <div className="d-flex align-items-center">
+                <div className="me-4">
+                  <h5 className="fw-bold">DECATHLON</h5>
+                  <p className="mb-3">
+                    “Decathlon olarak, insan kaynakları süreçlerinde hayal ettiğimiz dijital dönüşümü Kolay İK'yla
+                    gerçekleştirdik.”
+                  </p>
+                  <p className="text-muted mb-2">
+                    Ali Kuşcuoğlu, Bordro Ücret ve Yan Haklar Takım Lideri
+                  </p>
+                  <a href="#" className="text-primary">
+                    Kullanıcı Hikayesini Oku →
+                  </a>
+                </div>
+                <div>
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt="Ali Kuşcuoğlu"
+                    className="rounded-circle"
+                    style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                  />
+                </div>
               </div>
-            </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="d-flex align-items-center">
+                <div className="me-4">
+                  <h5 className="fw-bold">FİRMA 2</h5>
+                  <p className="mb-3">
+                    “Başka bir firma ile olan deneyim açıklaması burada olacak.”
+                  </p>
+                  <p className="text-muted mb-2">
+                    İsim Soyisim, Görev Pozisyonu
+                  </p>
+                  <a href="#" className="text-primary">
+                    Kullanıcı Hikayesini Oku →
+                  </a>
+                </div>
+                <div>
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt="Başka bir kişi"
+                    className="rounded-circle"
+                    style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                  />
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
           </div>
-          <div className="col-8">
-            <div className="row">
-              <div className="col-6">
-              <div className="card" style={{ width: "18rem" }}>
-              <div className="card-body">
-                <h5 className="card-title" style={{fontWeight:'bold',fontSize:'35px'}}>Penti</h5>
-                <p className="card-text" style={{fontWeight:'bold',fontSize:'12px'}}>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, magni exercitationem tempore maxime quaerat sapiente non obcaecati! Architecto nemo accusantium laborum aliquam magni pariatur dolore mollitia sed! Eius, commodi laborum!
-                </p>
-                <p className="card-text" style={{fontWeight:'lighter'}}> ahmet eriş i was here !!!</p>
-                <a href="#" className="btn btn-primary">
-                  Go somewhere
-                </a>
-              </div>
-            </div>
-              </div>
-              <div className="col-6"></div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
   );
-}
+};
+
 export default UserComments;
