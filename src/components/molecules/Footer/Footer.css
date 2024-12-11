@@ -14,6 +14,7 @@
     grid-template-columns: auto auto; /* İkon ve yazıyı iki sütun yapar */
     text-align: end;
     
+    
   }
 
   .btn-footer{
@@ -28,4 +29,6 @@
     margin-top: 50px;
 
   }
+
+
 
