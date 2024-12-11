@@ -13,11 +13,11 @@ function Footer() {
         Mesa Koz Sahrayıcedit Mah. Atatürk Cad. N:69 K:5 D:81 Kadıköy / İstanbul / Türkiye
         +90 212 951 06 61
         </div>
-        <div className="row ">
-          <div className="col ms-4">
+        <div className="row justify-content-center">
+          <div className="col-auto">
           <button type="button" className="btn-footer"><i className="fa-brands fa-google-play"></i></button>
           </div>
-          <div className="col me-4">
+          <div className="col-auto">
           <button type="button" className="btn-footer"><i className="fa-brands fa-apple"></i></button>
           </div>
         </div>
