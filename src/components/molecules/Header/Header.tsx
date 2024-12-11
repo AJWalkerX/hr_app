@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../../img/ik-logo.svg";
+import logo from "../../../img/ik-logo2.svg"; // Varsayılan logo
+import logoScrolled from "../../../img/ik-logo.svg"; // Scroll yapıldığında kullanılacak logo
 import "./Header.css";
 
 function Header() {
-  const [bgColor, setBgColor] = useState("transparent"); 
-  const [textColor, setTextColor] = useState("white"); 
+  const [bgColor, setBgColor] = useState("transparent");
+  const [textColor, setTextColor] = useState("white");
   const [buttonStyle, setButtonStyle] = useState({
     color: "white",
     borderColor: "white",
-  }); 
+    backgroundColor: "transparent",
+  });
+  const [logoToUse, setLogoToUse] = useState(logo); // Scroll durumuna göre logo'yu değiştirecek state
+
+  const [isHovered, setIsHovered] = useState(false);  // Hover durumunu takip etmek için state
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,14 +23,18 @@ function Header() {
         setButtonStyle({
           color: "rgb(10, 57, 129)", 
           borderColor: "rgb(10, 57, 129)", 
+          backgroundColor: "transparent",  // Arka planı sabit tutuyoruz
         });
+        setLogoToUse(logoScrolled); // Scroll yapıldığında farklı logo'yu kullan
       } else {
         setBgColor("transparent");
         setTextColor("white"); 
         setButtonStyle({
           color: "white", 
           borderColor: "white", 
+          backgroundColor: "transparent",  // Arka planı sabit tutuyoruz
         });
+        setLogoToUse(logo); // Scroll yapılmadığında varsayılan logoyu kullan
       }
     };
 
@@ -33,6 +42,15 @@ function Header() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Hover durumunda buton stilini değiştirmeme
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div className="container-fluid p-0">
@@ -47,7 +65,7 @@ function Header() {
         <div className="container">
           <a className="navbar-brand d-flex align-items-center ms-5" href="#">
             <img
-              src={logo}
+              src={logoToUse} // Burada logo'yu scroll durumuna göre değiştiriyoruz
               alt="Logo"
               className="me-2"
               style={{ width: "40px", height: "40px" }}
@@ -122,10 +140,12 @@ function Header() {
               type="button"
               className="btn btn-outline-primary"
               style={{
-                color: buttonStyle.color, 
-                borderColor: buttonStyle.borderColor, 
-                transition: "color 0.3s, border-color 0.3s",
+                color: buttonStyle.color,
+                borderColor: buttonStyle.borderColor,
+                backgroundColor: isHovered ? "transparent" : "transparent", // Hover durumunda renk değişmesini engelle
               }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               GİRİŞ YAP
             </button>
