@@ -1,0 +1,18 @@
+.swiper-button-next {
+  color: #37afe1;
+  transition: color 0.3s ease;
+  padding: 15px;
+  border: none;
+}
+
+.user-comment-container {
+  max-width: 800px;
+  margin: 0 auto; 
+}
+
+.swiper-container {
+    width: 100%; /* Varsayılan genişlik, tam sayfa genişliği */
+    max-width: 1200px; /* Maksimum genişlik sınırı */
+    margin: 0 auto; /* Ortalamak için */
+  }
+  
