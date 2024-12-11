@@ -1,0 +1,31 @@
+
+.underline-on-hover:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);;
+
+}
+.social-media-icon{
+    margin-right: 20px;
+}
+
+.icon-text {
+  
+    grid-template-columns: auto auto; /* İkon ve yazıyı iki sütun yapar */
+    text-align: end;
+    
+  }
+
+  .btn-footer{
+    display: flex; /* Flexbox özelliği */
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    width: 100px; /* Buton boyutu (isteğe bağlı) */
+    height: 40px; /* Buton boyutu (isteğe bağlı) */
+    background-color: white; /* Arka plan rengi */
+    border-radius: 25px; /* Yuvarlatılmış köşeler */
+    cursor: pointer; /* İşaretçi gösterimi */
+    margin-top: 50px;
+
+  }
+
