@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Gradient Background for Depth -->
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A3E6C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E2147;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow Effect -->
+    <filter id="shadowEffect" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.5"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Gradient Background -->
+  <rect width="200" height="200" fill="rgb(10, 57, 129)"/>
+  
+  <!-- İK Letters with Shadow and Modern Design -->
+  <g filter="url(#shadowEffect)">
+    <!-- İ - Modern, slightly angled -->
+    <rect x="60" y="50" width="20" height="100" rx="5" ry="5" fill="white"/>
+    
+    <!-- K - More Dynamic Design -->
+    <path d="M120,50 L140,50 L110,100 L140,150 L120,150 Q100,125 90,110" fill="white"/>
+  </g>
+</svg>
