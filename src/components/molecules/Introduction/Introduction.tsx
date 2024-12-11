@@ -1,9 +1,10 @@
+
 import React from "react";
 import './Introduction.css'
 function Introduction() {
   return (
     
-     <div className="container-fluid bg-color">
+     <div className="container-fluid bg-color-introduction">
        <div className="row ">
         <div className="col-2"></div>
         <div className="col-8 mt-5">

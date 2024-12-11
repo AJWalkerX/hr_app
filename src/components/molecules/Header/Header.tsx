@@ -4,7 +4,7 @@ import './Header.css';
 function Header() {
   return (
     <div className="container-fluid p-0"> 
-      <nav className="navbar navbar-expand-lg bg-color">
+      <nav className="navbar navbar-expand-lg bg-color-header">
         <div className="row w-100 m-0"> 
           <div className="col-4 text-center">
             <a className="navbar-brand ms-5" style={{ fontWeight: 'bold' }} href="#">
