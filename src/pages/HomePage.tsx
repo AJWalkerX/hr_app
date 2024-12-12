@@ -25,13 +25,15 @@ function HomePage() {
           <CompanyLogo />
         </div>
 
-        <div className="row">
+        <div className="row mt-5 ">
           <Apps />
         </div>
-
+        
         <div className="row">
           <UserComments />
         </div>
+      
+        
 
         <div className="row freeuse-style">
           <FreeUse />
