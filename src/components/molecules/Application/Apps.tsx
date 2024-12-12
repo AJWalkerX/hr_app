@@ -1,7 +1,7 @@
 import React from "react";
 import './Apps.css'
 import AppsCard from "../../atoms/Apps/AppsCard";
-import { title } from "process";
+
 
 function Apps() {
   const appcards = [
@@ -62,9 +62,10 @@ function Apps() {
   return (
    
   <>
-    <div className="container">
-      <div className="row">
-        <div className=" text-center mb-4">
+   <div className="col-2"></div>
+   <div className="col-8">
+   <div className="row">
+        <div className=" text-center mb-2">
           <p className="text-center" style={{fontWeight:'bolder',fontSize:'35px',}}>Uygulamalar</p>
           <p className="text-center" style={{fontWeight:'bolder',fontSize:'25px',}}>Çalışan sayınıza göre fiyatlama, dilediğiniz kadar kullanın, kullandığınız kadar ödeyin!</p>
         </div>
@@ -73,7 +74,7 @@ function Apps() {
       
         {
             appcards.map((appcard, index) => (
-              <div className="col-lg-4 col-md-3 col-sm-6 mb-4" key={index}>
+              <div className="col-lg-4 col-md- col-sm-6 mb-4" key={index}>
                 <AppsCard 
                   imageUrl={appcard.imageUrl} 
                   title={appcard.title} 
@@ -88,7 +89,10 @@ function Apps() {
        
          
         </div>
-      </div>
+   </div>
+   <div className="col-2"></div>
+      
+      
   </>
  
   );

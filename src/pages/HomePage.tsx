@@ -12,24 +12,27 @@ import './HomePage.css'
 
 function HomePage() {
   return (
-    <>
-      <Header />
-      {/** ACIKLAMA KISMI */}
+    <div className="container-fluid">
       <div className="row">
+      <Header />
+      </div>
+      
+      {/** ACIKLAMA KISMI */}
+      
+      <div className="row ">
         <Introduction />
       </div>
-      <div className="container">
-        {/** logo kısmı !!! sonradan tuşlara bakılacak */}
+      
 
-        <div className="row">
+        <div className="row mt-5">
           <CompanyLogo />
         </div>
 
-        <div className="row mt-5 ">
+        <div className="row mt-5">
           <Apps />
         </div>
         
-        <div className="row">
+        <div className="row mt-5">
           <UserComments />
         </div>
       
@@ -43,7 +46,10 @@ function HomePage() {
           <Footer />
         </div>
       </div>
-    </>
+  
+
+    
+      
   );
 }
 

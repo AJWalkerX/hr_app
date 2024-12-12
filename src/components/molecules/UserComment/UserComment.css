@@ -8,9 +8,6 @@
 .user-comment-container {
   max-width: 800px;
   margin: 0 auto; 
-  
-  
-  
 }
 
 .swiper-container {
@@ -18,4 +15,6 @@
     max-width: 1200px; /* Maksimum genişlik sınırı */
     margin: 0 auto; /* Ortalamak için */
   }
+
+
   

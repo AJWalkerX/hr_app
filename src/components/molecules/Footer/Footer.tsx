@@ -3,7 +3,9 @@ import './Footer.css'
 
 function Footer() {
   return (
-  <div className="container">
+<>
+<div className="col-2" style={{backgroundColor:'#f2f4f7'}}></div>
+    <div className="col-8" style={{backgroundColor:'#f2f4f7'}}>
     <div className="row">
       <div className="col-4">
         <div className="row mt-5">
@@ -90,7 +92,15 @@ function Footer() {
       <span>2024 Kolaysa İK Yazılım A.Ş.</span>
       </div>
     </div>
-  </div>
+
+    </div>
+    <div className="col-2" style={{backgroundColor:'#f2f4f7'}}></div>
+
+</>
+    
+
+    
+  
 
   )
 }
