@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import { authSlice } from "./features";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    auth: authSlice,
+  },
 });
 
 export type hrDispatch = typeof store.dispatch;

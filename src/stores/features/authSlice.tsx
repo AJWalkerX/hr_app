@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { create } from "domain";
 import { ILoginRequest } from "../../models/ILoginRequest";
 import apis from "../../config/RestApis";
-import { RegisterRequest } from "../../models/IRegisterRequest";
+import { IRegisterRequest } from "../../models/IRegisterRequest";
 import Swal from "sweetalert2";
 import { IBaseResponse } from "../../models/IBaseResponse";
 
@@ -13,10 +13,10 @@ const initialAuthState = {
   user: {},
 };
 
-export const fetchLogin = createAsyncThunk(
-  "auth/fetchLogin",
-  async (payload: ILoginRequest) => {
-    const response = await fetch(apis.userService + "/login", {
+export const fetchRegister = createAsyncThunk(
+  "auth/fetchRegister",
+  async (payload: IRegisterRequest) => {
+    const response = await fetch(apis.authService + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,11 +26,10 @@ export const fetchLogin = createAsyncThunk(
     return response;
   }
 );
-
-export const fetchRegister = createAsyncThunk(
-  "user/fetchRegister",
-  async (payload: RegisterRequest) => {
-    const response = await fetch(apis.userService + "/register", {
+export const fetchLogin = createAsyncThunk(
+  "auth/fetchLogin",
+  async (payload: ILoginRequest) => {
+    const response = await fetch(apis.authService + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +78,24 @@ const authSlice = createSlice({
         if (action.payload.code === 200) {
           state.isAuth = true;
           localStorage.setItem("token", action.payload.data);
-        } else {
+          console.log(action.payload.message);
+        } else if (action.payload.code === 6100) {
+          Swal.fire({
+            icon: "error",
+            title: "Hata!",
+            text: action.payload.message,
+          });
+          console.log(action.payload.message);
+        } else if (
+          action.payload.code === 6120 ||
+          action.payload.code === 6130
+        ) {
+          Swal.fire({
+            icon: "warning",
+            title: "Bilgilendirme",
+            text: action.payload.message,
+          });
+          console.log(action.payload.message);
         }
       }
     );
