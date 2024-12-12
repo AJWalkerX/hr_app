@@ -35,99 +35,67 @@ function Login() {
 
   return (
     <>
-      {/* Section: Design Block */}
-      <section className="text-center text-lg-start">
-        <style>
-          {`
-            .cascading-right {
-              margin-right: -50px;
-            }
+      <section className="vh-100 ">
+        <div className="container-fluid body-login-bg-color">
+          <div className="row align-items-center">
+            <div className="col-sm-6 text-black">
+              <div className="px-5 ms-xl-4 text-center">
+                <i
+                  className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
+                  style={{ color: "#709085" }}
+                ></i>
+                <span className="h1 fw-bold mb-0 text-color-login">Logo</span>
+              </div>
 
-            @media (max-width: 991.98px) {
-              .cascading-right {
-                margin-right: 0;
-              }
-            }
-          `}
-        </style>
-
-        {/* Jumbotron */}
-        <div className="container py-4">
-          <div className="row g-0 align-items-center">
-            <div className="col-lg-6 mb-5 mb-lg-0">
-              <div
-                className="card cascading-right bg-body-tertiary"
-                style={{ backdropFilter: "blur(30px)" }}
-              >
-                <div className="card-body p-5 shadow-5 text-center">
-                  <h2 className="fw-bold mb-5">Logo Kolaysa İk</h2>
-                  {/* 2 column grid layout with text inputs for the first and last names */}
-                  <div className="row">
-                    <div className="col-md-6 mb-4"></div>
-                    <div className="col-md-6 mb-4"></div>
-                  </div>
-
-                  {/* Email input */}
+              <div className="d-flex align-items-center px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 justify-content-center">
+                <form style={{ width: "23rem" }}>
                   <div data-mdb-input-init className="form-outline mb-4">
                     <input
                       type="email"
-                      id="form3Example3"
-                      className="form-control"
-                      placeholder="Mail Adresiniz"
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="form2Example18"
+                      className="form-control form-control-lg"
+                      placeholder="Email "
                     />
                   </div>
 
-                  {/* Password input */}
-                  <div
-                    data-mdb-input-init
-                    className="form-outline mb-4 position-relative"
-                  >
+                  <div data-mdb-input-init className="form-outline mb-4">
                     <input
-                      type={passwordVisible ? "text" : "password"}
-                      id="form3Example4"
-                      className="form-control"
+                      type="password"
+                      id="form2Example28"
+                      className="form-control form-control-lg"
                       placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary position-absolute"
-                      style={{
-                        top: "50%",
-                        right: "10px",
-                        transform: "translateY(-50%)",
-                      }}
-                      onClick={togglePasswordVisibility}
-                    >
-                      {passwordVisible ? "Hide" : "Show"}
-                    </button>
                   </div>
 
-                  {/* Submit button */}
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block mb-4"
-                    onClick={doLogin}
-                  >
-                    Giriş Yap
-                  </button>
-                </div>
+                  <div className="pt-1 row">
+                    <button
+                      className="btn btn-outline-light btn-lg"
+                      type="button"
+                    >
+                      Login
+                    </button>
+                    <div className="col text-end mt-3">
+                      <p className="small mb-5 pb-lg-2 text-color-login">
+                        <a className=" text-color-login" href="#!">
+                          Forgot password?
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-
-            <div className="col-lg-6 mb-5 mb-lg-0">
+            <div className="col-sm-6 px-0 d-none d-sm-block">
               <img
-                src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
-                className="w-100 rounded-4 shadow-4"
-                alt="Sample"
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+                alt="Login image"
+                className="w-100 vh-100"
+                style={{ objectFit: "cover", objectPosition: "left" }}
               />
             </div>
           </div>
         </div>
-        {/* Jumbotron */}
       </section>
-      {/* Section: Design Block */}
     </>
   );
 }
