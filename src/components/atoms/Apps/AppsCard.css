@@ -1,7 +1,7 @@
 .card{
     border: 1px solid #ddd;
     border-radius: 10px;
-    height: 150px; /* Sabit yükseklik */
+    height: 200px; /* Sabit yükseklik */
     width: 300px;
     display: flex;
     flex-direction: column;
