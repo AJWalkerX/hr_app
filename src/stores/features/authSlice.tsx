@@ -29,7 +29,7 @@ export const fetchRegister = createAsyncThunk(
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
   async (payload: ILoginRequest) => {
-    const response = await fetch(apis.authService + "/login", {
+    const response = await fetch(apis.authService + "/dologin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,14 +78,12 @@ const authSlice = createSlice({
         if (action.payload.code === 200) {
           state.isAuth = true;
           localStorage.setItem("token", action.payload.data);
-          console.log(action.payload.message);
         } else if (action.payload.code === 6100) {
           Swal.fire({
             icon: "error",
             title: "Hata!",
             text: action.payload.message,
           });
-          console.log(action.payload.message);
         } else if (
           action.payload.code === 6120 ||
           action.payload.code === 6130
@@ -95,7 +93,12 @@ const authSlice = createSlice({
             title: "Bilgilendirme",
             text: action.payload.message,
           });
-          console.log(action.payload.message);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Hata!",
+            text: action.payload.message,
+          });
         }
       }
     );
