@@ -9,6 +9,8 @@ function Apps() {
           <p className="text-center" style={{fontWeight:'bolder',fontSize:'35px',}}>Uygulamalar</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius accusamus illum velit </p>
         </div>
+
+
         <div className="col-3">
         <div className="card" style={{ width: "18rem;" }}>
         <div className="card-body">
@@ -25,16 +27,19 @@ function Apps() {
                Çalışanların tüm bilgilerini tek uygulamada yönetin
               </p>
           </div>
-          <div className="row">
-          <a href="#" className="btn btn-primary">
-                Go somewhere
-              </a>
-          </div>
-
-
+          <div className="row mt-3">
           
-              
-              
+          <a className="me-5" style={{textDecoration:'none', color:'blue'}} href="#">
+            ŞİMDİ İNCELE
+            <i className="apps-arrow-style fa-solid fa-arrow-right"></i>
+
+          </a>
+          
+          
+            
+            </div>
+       
+         
             </div>
           </div>
         </div>
