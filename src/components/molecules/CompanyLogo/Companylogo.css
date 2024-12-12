@@ -5,28 +5,14 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  height: 250px;
+  height: 300px;
   background-color: #fff;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 100px;
+  margin: 20px; 
 }
 
-.swiper-slide-container:hover {
-  transform: translateY(-10px); /* Hover efektiyle hafif yukarı kayma */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Hover efektiyle daha belirgin gölge */
-}
 
-/* İçerik metni */
-.content-text {
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
-  color: #555;
-  text-align: center;
-  line-height: 1.6;
-
-  
-}
 
 /* Pagination ve Navigation Stillendirme */
 .swiper-pagination-bullet {
@@ -40,12 +26,34 @@
   opacity: 1;
 }
 
+.swiper-button-next {
+  color: rgb(10, 57, 129) !important; /* Sağ ok rengi */
+}
+
+.swiper-button-prev {
+  color: rgb(10, 57, 129) !important; /* Sol ok rengi */
+}
+
 .swiper-button-next, .swiper-button-prev {
-  color: #37AFE1;
+  color: rgb(10, 57, 129);
   transition: color 0.3s ease;
-  padding: 15px;
+  padding: 10px; /* Önceki değeri 15px'den 10px'e düşürdük */
+  font-size: 14px; /* Boyut küçültüldü */
 }
 
 .swiper-button-next:hover, .swiper-button-prev:hover {
   color: black;
 }
+
+/* İkon boyutlarını daha fazla küçültmek isterseniz */
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 18px; /* Varsayılan değeri 24px civarındadır, küçülttük */
+}
+
+.swiper-slide-container img {
+  width: 200px; /* Görsel genişliği */
+  height: 100px; /* Görsel yüksekliği */
+  object-fit: contain; /* Görüntünün sıkışmadan uygun şekilde görünmesini sağlar */
+  border-radius: 8px; /* Köşe yumuşatma (isteğe bağlı) */
+}
+
