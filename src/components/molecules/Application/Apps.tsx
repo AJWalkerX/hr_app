@@ -1,7 +1,7 @@
 import React from "react";
 import './Apps.css'
 import AppsCard from "../../atoms/Apps/AppsCard";
-import { title } from "process";
+
 
 function Apps() {
   const appcards = [

@@ -7,7 +7,7 @@ import './UserComment.css'
 const UserComments = () => {
   return (
     <div className="container-fluid user-comment-container mt-5 b">
-      <div className="row w-100" style={{backgroundColor:'#f8fbff'}}>
+      <div className="row">
         <div className="col-md-6 d-flex flex-column justify-content-center">
           <h2 className="mb-4">Kullanıcı Hikayeleri</h2>
           <p>

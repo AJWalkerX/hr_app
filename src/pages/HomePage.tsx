@@ -12,13 +12,18 @@ import './HomePage.css'
 
 function HomePage() {
   return (
-    <>
+    <div className="container-fluid">
+      <div className="row">
       <Header />
+      </div>
+      
       {/** ACIKLAMA KISMI */}
+      
       <div className="row">
         <Introduction />
       </div>
-      <div className="container">
+      
+      
         {/** logo kısmı !!! sonradan tuşlara bakılacak */}
 
         <div className="row">
@@ -43,7 +48,10 @@ function HomePage() {
           <Footer />
         </div>
       </div>
-    </>
+  
+
+    
+      
   );
 }
 
