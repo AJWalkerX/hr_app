@@ -3,14 +3,14 @@ import './FreeUse.css'
 
 function FreeUse() {
   return (
-    <div className="col freeuse" >
+      <div className="col freeuse" >
        {/* Sol Üst Daire */}
        <div className="circle circle-left"></div>
 
-         {/* Sağ Alt Daire */}
+       {/* Sağ Alt Daire */}
        <div className="circle circle-right"></div>
        
-       <div className="row align-items-center mt-3">
+      <div className="row align-items-center mt-3">
       <i className="fa-solid fa-hands-clapping" style={{color: '#FFD43B', fontSize: '70px'}}></i>
       </div>
       <div className="row mt-3">

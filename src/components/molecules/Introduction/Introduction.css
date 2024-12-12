@@ -1,6 +1,6 @@
 .bg-color-introduction{
     background-color: rgb(10, 57, 129);
-    position: relative;
+    
 }
 
 .btn-introduction{
@@ -13,7 +13,6 @@
   color: black; /* Yazı rengi */
   cursor: pointer; /* İmleci el yap */
   margin-top: 5px;
-  display: flex;
   border: none;
   display: flex;
   align-items: center;
