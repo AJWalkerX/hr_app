@@ -53,7 +53,7 @@ function Header() {
   };
 
   return (
-    <div className="container-fluid p-0">
+    <div className="col  p-0">
       <nav
         className={`navbar navbar-expand-lg ${
           bgColor === "white" ? "bg-white" : "bg-transparent"

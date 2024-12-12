@@ -3,8 +3,8 @@ import React from "react";
 import './Introduction.css'
 function Introduction() {
   return (
-    
-     <div className="container-fluid bg-color-introduction">
+    <>
+     <div className="col bg-color-introduction">
        <div className="row ">
         <div className="col-2"></div>
         <div className="col-8 mt-5">
@@ -37,6 +37,8 @@ function Introduction() {
         <div className="col-2"></div>
       </div>
      </div>
+    
+    </>
     
   );
 }

@@ -16,11 +16,13 @@ import logo5 from '../../../img/adidas.png'
 
 const CompanyLogo= () =>{
   return (
-   <Swiper
-   modules={[Navigation,Pagination,Scrollbar,Autoplay]}
+    <>
+     <div className="col-1"></div>
+     <div className="col-10">
+     <Swiper
+   modules={[Navigation,Scrollbar,Autoplay]}
    slidesPerView={4}
    navigation
-   pagination = {{ clickable:true}}
    loop={true}
    autoplay={{
     delay: 3000,
@@ -64,6 +66,11 @@ const CompanyLogo= () =>{
     </div>
   </SwiperSlide>
    </Swiper>
+     </div>
+    <div className="col-1"></div>
+   
+    </>
+   
   )
 };
 
