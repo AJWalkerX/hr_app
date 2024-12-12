@@ -13,26 +13,26 @@ function Header() {
   });
   const [logoToUse, setLogoToUse] = useState(logo); // Scroll durumuna göre logo'yu değiştirecek state
 
-  const [isHovered, setIsHovered] = useState(false);  // Hover durumunu takip etmek için state
+  const [isHovered, setIsHovered] = useState(false); // Hover durumunu takip etmek için state
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setBgColor("white");
-        setTextColor("rgb(10, 57, 129)"); 
+        setTextColor("rgb(10, 57, 129)");
         setButtonStyle({
-          color: "rgb(10, 57, 129)", 
-          borderColor: "rgb(10, 57, 129)", 
-          backgroundColor: "transparent",  // Arka planı sabit tutuyoruz
+          color: "rgb(10, 57, 129)",
+          borderColor: "rgb(10, 57, 129)",
+          backgroundColor: "transparent", // Arka planı sabit tutuyoruz
         });
         setLogoToUse(logoScrolled); // Scroll yapıldığında farklı logo'yu kullan
       } else {
         setBgColor("transparent");
-        setTextColor("white"); 
+        setTextColor("white");
         setButtonStyle({
-          color: "white", 
-          borderColor: "white", 
-          backgroundColor: "transparent",  // Arka planı sabit tutuyoruz
+          color: "white",
+          borderColor: "white",
+          backgroundColor: "transparent", // Arka planı sabit tutuyoruz
         });
         setLogoToUse(logo); // Scroll yapılmadığında varsayılan logoyu kullan
       }
@@ -106,7 +106,7 @@ function Header() {
                   className="nav-link"
                   href="#"
                   style={{
-                    color: textColor, 
+                    color: textColor,
                     transition: "color 0.3s",
                   }}
                 >
@@ -118,7 +118,7 @@ function Header() {
                   className="nav-link"
                   href="#"
                   style={{
-                    color: textColor, 
+                    color: textColor,
                     transition: "color 0.3s",
                   }}
                 >
