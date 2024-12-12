@@ -16,4 +16,4 @@ function RouterPage() {
   )
 }
 
-export default RouterPage
+export default RouterPage;
