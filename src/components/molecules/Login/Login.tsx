@@ -41,8 +41,8 @@ function Login() {
             <div className="col-sm-6 text-black">
               <div className="px-5 ms-xl-4 text-center">
                 <i
-                  className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
-                  style={{ color: "#709085" }}
+                  className="fa-solid fa-person-through-window fa-2x me-3 pt-5 mt-xl-4"
+                  style={{ color: "#fcfcfd" }}
                 ></i>
                 <span className="h1 fw-bold mb-0 text-color-login">Logo</span>
               </div>
