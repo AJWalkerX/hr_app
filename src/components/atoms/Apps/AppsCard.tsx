@@ -13,7 +13,7 @@ function AppsCard(props: IAppsCard) {
             <div className="col-2 mt-1 ">
             <img src={imageUrl} className='img-style'/>
             </div>
-            <div className="col-10 mt-1 ">            
+            <div className="col-10 mt-2 ">            
             <span className="apps-text-style">{title}</span>
             </div>
         </div>
@@ -24,7 +24,7 @@ function AppsCard(props: IAppsCard) {
           </div>
           <div className="row mt-2">
           
-          <a className="me-5 " style={{textDecoration:'none', color:'black', fontSize:'13px'}} href={linkUrl}>
+          <a className="me-5 mt-4 " style={{textDecoration:'none', color:'black', fontSize:'13px'}} href={linkUrl}>
             {hreftitle}
             <i className={`${arrow} apps-arrow-style`}></i>
           </a>

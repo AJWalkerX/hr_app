@@ -24,15 +24,15 @@ function HomePage() {
       </div>
       
 
-        <div className="row mt-5">
+        <div className="row companylogo-style">
           <CompanyLogo />
         </div>
 
-        <div className="row mt-5">
+        <div className="row apps-style">
           <Apps />
         </div>
         
-        <div className="row mt-5">
+        <div className="row freeuse-style">
           <UserComments />
         </div>
       
@@ -42,7 +42,7 @@ function HomePage() {
           <FreeUse />
         </div>
 
-        <div className="row">
+        <div className="row ">
           <Footer />
         </div>
       </div>

@@ -1,5 +1,37 @@
-.grid-template-columns{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Kartlar için dinamik kolon düzeni */
-    gap: 1rem;
-}
+.apps-container {
+    margin: 0 auto;
+    max-width: 925px; /* Kartların hizalanması için sınırlı genişlik */
+  }
+  
+  .apps-title {
+    font-weight: bold;
+    font-size: 35px;
+  }
+  
+  .apps-subtitle {
+    font-size: 25px;
+    color: #555; /* Alt başlık rengini daha okunaklı hale getirir */
+  }
+  
+  .apps-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f9fa; /* Hafif bir arka plan rengi */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .apps-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .apps-card img {
+    max-width: 100px;
+    margin-bottom: 15px;
+  }
+  
