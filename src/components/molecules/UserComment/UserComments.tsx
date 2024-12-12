@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./UserComment.css";
 const UserComments = () => {
   return (
@@ -21,22 +21,25 @@ const UserComments = () => {
           </div>
           <div className="col-md-8 position-relative">
             {/* Özel Navigasyon Butonları */}
-
             <button
-              className="btn btn-outline-primary swiper-button-next"
-              style={{ top: "40%", right: "-50px" }}
+              className="btn swiper-button-next"
+              style={{ top: "35%", right: "-50px" }}
             >
-              ›
+              {/* Buton içerik */}
             </button>
             <div className="swiper-container">
               <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={20}
+                modules={[Navigation, Autoplay, Pagination]} // Navigation modülünü burada kullanıyoruz
                 slidesPerView={1}
-                navigation={{
-                  nextEl: ".swiper-button-next",
+                loop={true}
+                autoplay={{
+                  delay: 5000,
+                  disableOnInteraction: false,
                 }}
-                pagination={{ clickable: true }}
+                navigation={{
+                  nextEl: ".swiper-button-next", // Doğru buton sınıfını tanımla
+                  prevEl: ".swiper-button-prev", // Önceki buton için
+                }}
               >
                 <SwiperSlide>
                   <div className="d-flex align-items-center">
