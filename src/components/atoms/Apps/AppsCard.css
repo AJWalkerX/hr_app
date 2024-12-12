@@ -1,0 +1,29 @@
+.card{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 150px; /* Sabit yükseklik */
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.card:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Hover sırasında gölge efekti */
+  cursor: pointer; /* Pointer imleç */
+  background-color: #D4EBF8;
+}
+.apps-text-style{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.apps-arrow-style{
+    margin-right: 5rem;
+    margin-top: 3px;
+    margin-left: 8px;
+}
+
+.img-style{
+    width:30px ;
+}
