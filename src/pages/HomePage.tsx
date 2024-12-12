@@ -19,22 +19,20 @@ function HomePage() {
       
       {/** ACIKLAMA KISMI */}
       
-      <div className="row">
+      <div className="row ">
         <Introduction />
       </div>
       
-      
-        {/** logo kısmı !!! sonradan tuşlara bakılacak */}
 
-        <div className="row">
+        <div className="row mt-5">
           <CompanyLogo />
         </div>
 
-        <div className="row mt-5 ">
+        <div className="row mt-5">
           <Apps />
         </div>
         
-        <div className="row">
+        <div className="row mt-5">
           <UserComments />
         </div>
       

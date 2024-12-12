@@ -3,7 +3,7 @@ import React from "react";
 import './Introduction.css'
 function Introduction() {
   return (
-    
+    <>
      <div className="col bg-color-introduction">
        <div className="row ">
         <div className="col-2"></div>
@@ -37,6 +37,8 @@ function Introduction() {
         <div className="col-2"></div>
       </div>
      </div>
+    
+    </>
     
   );
 }
