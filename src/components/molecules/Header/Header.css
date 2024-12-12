@@ -1,5 +1,6 @@
-
-
+.style{
+  background-color: rgb(10, 57, 129);
+}
 .nav-item {
   margin-right: 15px; /* Menü elemanları arasında boşluk bırak */
 }
@@ -18,7 +19,7 @@
 
 /* Navbar'ın başlangıçta şeffaf olması */
 .navbar.bg-transparent {
-  background-color: transparent !important;
+  background-color: rgb(10, 57, 129) !important;
   color: white;
 }
 
