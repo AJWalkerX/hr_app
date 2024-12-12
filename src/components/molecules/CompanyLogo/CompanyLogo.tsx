@@ -8,6 +8,11 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/effect-cards';
 import 'swiper/css/effect-fade';
 import './Companylogo.css';
+import logo from '../../../img/vivense.png'
+import logo2 from '../../../img/decathlon.png'
+import logo3 from '../../../img/nike.png'
+import logo4 from '../../../img/mac.png'
+import logo5 from '../../../img/adidas.png'
 
 const CompanyLogo= () =>{
   return (
@@ -26,35 +31,35 @@ const CompanyLogo= () =>{
   <SwiperSlide>
     <div className='swiper-slide-container'>
     <p className='content-text'>
-      <img src="http://picsum.photos/100/100" />
+      <img src={logo} />
     </p>
     </div>
   </SwiperSlide> 
   <SwiperSlide>
     <div className='swiper-slide-container'>
     <p className='content-text'>
-      <img src="http://picsum.photos/100/100" />
+      <img src={logo2} />
     </p>
     </div>
   </SwiperSlide>
    <SwiperSlide>
     <div className='swiper-slide-container'>
     <p className='content-text'>
-      <img src="http://picsum.photos/100/100" />
+      <img src={logo3} />
     </p>
     </div>
   </SwiperSlide>
   <SwiperSlide>
     <div className='swiper-slide-container'>
     <p className='content-text'>
-      <img src="http://picsum.photos/100/100" />
+      <img src={logo4} />
     </p>
     </div>
   </SwiperSlide> 
   <SwiperSlide>
     <div className='swiper-slide-container'>
     <p className='content-text'>
-      <img src="http://picsum.photos/100/100" />
+      <img src={logo5} />
     </p>
     </div>
   </SwiperSlide>
