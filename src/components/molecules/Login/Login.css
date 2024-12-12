@@ -11,3 +11,9 @@
     height: 100%;
   }
 }
+.body-login-bg-color {
+  background-color: #0a3981;
+}
+.text-color-login {
+  color: white;
+}

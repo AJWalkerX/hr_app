@@ -5,6 +5,7 @@ import Login from "../components/molecules/Login/Login";
 function LoginPage() {
   return (
     <>
+      <Header />
       <Login />
     </>
   );
