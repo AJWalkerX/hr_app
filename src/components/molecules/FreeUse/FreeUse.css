@@ -1,7 +1,7 @@
 .freeuse {
     position: relative;
-    width: 50% !important; /* Genişlik %50 */
-    height: 300px; /* Sabit yükseklik */
+    width: 65% !important; /* Genişlik %50 */
+    height: 350px; /* Sabit yükseklik */
     background-color: rgb(248, 243, 243); /* Bootstrap Primary renk (mavi) */
     color: white; /* Yazı rengi beyaz */
     text-align: center; /* Yazıyı ortala */
@@ -9,6 +9,7 @@
     border-radius: 8px; /* Köşeleri yuvarla */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
     overflow: hidden;
+ 
 }
     /* Dairelerin Genel Özellikleri */
 .circle {
