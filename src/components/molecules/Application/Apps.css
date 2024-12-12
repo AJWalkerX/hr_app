@@ -1,4 +1,23 @@
+.card{
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+.card:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hover sırasında gölge efekti */
+  cursor: pointer; /* Pointer imleç */
+  background-color: rgb(245, 245, 234);
+}
 .apps-text-style{
     font-size: 20px;
     font-weight: bold;
+}
+
+.btn-apps:hover{
+    background-color: rgb(245, 245, 234);
+}
+
+.apps-arrow-style{
+    margin-right: 5rem;
+    margin-top: 3px;
+    margin-left: 8px;
 }
