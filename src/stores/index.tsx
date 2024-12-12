@@ -1,9 +1,11 @@
-import React from 'react'
+import { configureStore } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
-function index() {
-  return (
-    <div>index</div>
-  )
-}
+const store = configureStore({
+  reducer: {},
+});
 
-export default index
+export type hrDispatch = typeof store.dispatch;
+export type hrState = ReturnType<typeof store.getState>;
+export const useAppSelector = useSelector.withTypes<hrState>();
+export default store;
