@@ -1,5 +1,6 @@
 .bg-color-introduction{
     background-color: rgb(10, 57, 129);
+    height: 1200px;
     
 }
 
@@ -34,12 +35,9 @@
     margin-top: 2px;
 }
 .introduction-photo-style{
-    
-    transform: translateY(-130px) translateZ(50px); /* Y ve Z eksenindeki konum */
-    transition: transform 0.3s ease; /* Hareketleri yumuşatmak için */
-    perspective: 1000px; /* Derinlik efekti için */
+    position: relative;
+    transform: translateY(50px);
+    z-index: 1;
+   
 }
 
-.introduction-photo-container{
-    margin-right: 50px;
-}
