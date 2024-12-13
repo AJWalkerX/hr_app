@@ -62,16 +62,16 @@ function Apps() {
   return (
    
   <>
-  <div className="col-2"></div>
-  <div className="col-8">
+  <div className="col-2" style={{backgroundColor:'#f2f4f7'}}></div>
+  <div className="col-8" style={{backgroundColor:'#f2f4f7'}}>
   <div className="apps-container">
-      <div className="text-center mb-4">
-        <h2 className="apps-title">Uygulamalar</h2>
+      <div className="text-center  mt-5">
+        <h2 className="apps-title ">Uygulamalar</h2>
         <p className="apps-subtitle ms-5">
           Çalışan sayınıza göre fiyatlama, dilediğiniz kadar kullanın, kullandığınız kadar ödeyin!
         </p>
       </div>
-      <div className="row g-3">
+      <div className="row g-3 mb-5">
         {appcards.map((appcard, index) => (
           <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
             <AppsCard
@@ -87,7 +87,7 @@ function Apps() {
       </div>
     </div>
   </div>
-  <div className="col-2"></div>
+  <div className="col-2 " style={{backgroundColor:'#f2f4f7'}}></div>
    
       
       

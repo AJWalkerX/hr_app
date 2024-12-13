@@ -26,9 +26,9 @@ function Introduction() {
           </div>
 
 
-          <div className="row mt-5 mb-3">
-            <div className="col d-flex justify-content-center">
-              <img src="http://picsum.photos/600/400 "  />         
+          <div className="row mt-5 mb-3 introduction-photo-container">
+            <div className="  introduction-photo-style ">
+              <img src="https://cdn.prod.website-files.com/6113889e45c6e62ebf4ca212/671b8d47e82f222c66db44b7_dashboard-yeni.avif  "  style={{width:'1300px'}}/>         
             </div>
               
           </div>
