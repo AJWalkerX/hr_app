@@ -4,6 +4,6 @@ export interface IRegisterRequest {
   email: string;
   password: string;
   rePassword: string;
-  role: string;
+  personalRole: string;
   companyName: string;
 }

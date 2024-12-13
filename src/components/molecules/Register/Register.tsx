@@ -4,43 +4,91 @@ import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
 import { fetchRegister } from "../../../stores/features/authSlice";
 import Swal from "sweetalert2";
+import {
+  Autocomplete,
+  Box,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Register() {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showRePassword, setShowRePassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowRePassword = () => setShowRePassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+  const handleMouseDownRePassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+  const handleMouseUpRePassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
-  const [role, setRole] = useState("");
+  const [personalRole, setPersonalRole] = useState("");
   const [companyName, setCompanyName] = useState("");
 
   const [isWrong, setIsWrong] = useState(false);
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [rePasswordVisible, setRePasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const toggleRePasswordVisibility = () => {
-    setRePasswordVisible(!rePasswordVisible);
-  };
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isSurnameEmpty, setIsSurnameEmpty] = useState(false);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [isRoleEmpty, setIsRoleEmpty] = useState(false);
+  const [isCompanyNameEmpty, setIsCompanyNameEmpty] = useState(false);
 
   const dispatch = useDispatch<hrDispatch>();
 
   const doRegister = () => {
+    setIsNameEmpty(name === "" || name === null);
+    setIsSurnameEmpty(surname === "" || surname === null);
+    setIsEmailEmpty(email === "" || email === null);
+    setIsPasswordEmpty(password === "" || password === null);
+    setIsRoleEmpty(personalRole === "" || personalRole === null);
+    setIsCompanyNameEmpty(companyName === "" || companyName === null);
     const payload = {
       name,
       surname,
       email,
       password,
       rePassword,
-      role,
+      personalRole,
       companyName,
     };
     dispatch(fetchRegister(payload));
   };
+  const options = [
+    "intern",
+    "junior",
+    "mid level",
+    "senior",
+    "team lead",
+    "manager",
+    "director",
+    "other",
+  ];
 
   return (
     <>
@@ -64,21 +112,30 @@ function Register() {
                     <div className="d-flex flex-row align-items-center mb-4">
                       <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0`}>
-                        <input
-                          type="text"
-                          className="form-control"
+                        <TextField
                           placeholder="Isim"
                           value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                            if (e.target.value === "") {
+                              setIsNameEmpty(true);
+                            }
+                          }}
+                          error={isNameEmpty}
                         />
                       </div>
                       <div className={`form-outline flex-fill mb-0`}>
-                        <input
-                          type="text"
-                          className={`form-control `}
+                        <TextField
                           placeholder="Soyisim"
                           value={surname}
-                          onChange={(e) => setSurname(e.target.value)}
+                          onChange={(e) => {
+                            setSurname(e.target.value);
+                            if (e.target.value === "") {
+                              setIsSurnameEmpty(true);
+                            }
+                          }}
+                          error={isSurnameEmpty}
+                          fullWidth
                         />
                       </div>
                     </div>
@@ -86,12 +143,18 @@ function Register() {
                     <div className="d-flex flex-row align-items-center mb-4">
                       <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0 `}>
-                        <input
-                          type="email"
-                          className="form-control"
+                        <TextField
                           placeholder="Email"
+                          type="email"
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (e.target.value === "") {
+                              setIsEmailEmpty(true);
+                            }
+                          }}
+                          error={isEmailEmpty}
+                          sx={{ width: "100%" }}
                         />
                       </div>
                     </div>
@@ -99,60 +162,107 @@ function Register() {
                     <div className="d-flex flex-row align-items-center mb-4 position-relative">
                       <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0 `}>
-                        <input
-                          type={passwordVisible ? "text" : "password"}
-                          className="form-control"
+                        <TextField
                           placeholder="Sifre"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          type={showPassword ? "text" : "password"}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                            if (e.target.value === "") {
+                              setIsPasswordEmpty(true);
+                            }
+                          }}
+                          error={isPasswordEmpty}
+                          sx={{ width: "100%" }}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label={
+                                    showPassword
+                                      ? "hide the password"
+                                      : "display the password"
+                                  }
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={handleMouseDownPassword}
+                                  onMouseUp={handleMouseUpPassword}
+                                  edge="end"
+                                >
+                                  {showPassword ? (
+                                    <VisibilityOff />
+                                  ) : (
+                                    <Visibility />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
                         />
-                        <i
-                          className={`fas ${
-                            passwordVisible ? "fa-eye-slash" : "fa-eye"
-                          } position-absolute top-50 end-0 translate-middle-y me-3`}
-                          style={{ cursor: "pointer" }}
-                          onClick={togglePasswordVisibility}
-                        ></i>
                       </div>
                     </div>
-                    {isWrong ? (
-                      <label className="text-danger fw-bold ms-5 mb-1">
-                        * Şifreler uyuşmuyor
-                      </label>
-                    ) : null}
+
                     <div className="d-flex flex-row align-items-center mb-4 position-relative">
                       <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0 `}>
-                        <input
-                          type={rePasswordVisible ? "text" : "password"}
-                          className="form-control"
+                        <TextField
                           placeholder="Sifre Tekrar"
+                          type={showRePassword ? "text" : "password"}
                           value={rePassword}
                           onChange={(e) => {
                             setRePassword(e.target.value);
-                            setIsWrong(password !== e.target.value);
+                            if (e.target.value !== password) {
+                              setIsWrong(true);
+                            } else {
+                              setIsWrong(false);
+                            }
+                          }}
+                          error={isWrong}
+                          sx={{ width: "100%" }}
+                          helperText={isWrong ? "Sifreler uyusmuyor" : null}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label={
+                                    showRePassword
+                                      ? "hide the password"
+                                      : "display the password"
+                                  }
+                                  onClick={handleClickShowRePassword}
+                                  onMouseDown={handleMouseDownRePassword}
+                                  onMouseUp={handleMouseUpRePassword}
+                                  edge="end"
+                                >
+                                  {showRePassword ? (
+                                    <VisibilityOff />
+                                  ) : (
+                                    <Visibility />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
                           }}
                         />
-
-                        <i
-                          className={`fas ${
-                            rePasswordVisible ? "fa-eye-slash" : "fa-eye"
-                          } position-absolute top-50 end-0 translate-middle-y me-3`}
-                          style={{ cursor: "pointer" }}
-                          onClick={toggleRePasswordVisibility}
-                        ></i>
                       </div>
                     </div>
 
                     <div className="d-flex flex-row align-items-center mb-4">
                       <i className="fas fa-briefcase fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0 `}>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Unvan"
-                          value={role}
-                          onChange={(e) => setRole(e.target.value)}
+                        <Autocomplete
+                          disablePortal
+                          options={options}
+                          value={personalRole}
+                          onChange={(event, value) => {
+                            setPersonalRole(value || "");
+                            setIsRoleEmpty(!value);
+                          }}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="Unvan"
+                              error={isRoleEmpty}
+                            />
+                          )}
                         />
                       </div>
                     </div>
@@ -160,12 +270,17 @@ function Register() {
                     <div className="d-flex flex-row align-items-center mb-4">
                       <i className="fas fa-building fa-lg me-3 fa-fw"></i>
                       <div className={`form-outline flex-fill mb-0 `}>
-                        <input
-                          type="text"
-                          className="form-control"
+                        <TextField
                           placeholder="Sirket Adi"
                           value={companyName}
-                          onChange={(e) => setCompanyName(e.target.value)}
+                          onChange={(e) => {
+                            setCompanyName(e.target.value);
+                            if (e.target.value === "") {
+                              setIsCompanyNameEmpty(true);
+                            }
+                          }}
+                          error={isCompanyNameEmpty}
+                          sx={{ width: "100%" }}
                         />
                       </div>
                     </div>
