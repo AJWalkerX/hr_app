@@ -56,7 +56,7 @@ const authSlice = createSlice({
           Swal.fire({
             icon: "success",
             title: action.payload.message,
-            timer: 1500,
+            timer: 3000,
           });
         } else {
           Swal.fire({

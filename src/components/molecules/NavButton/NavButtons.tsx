@@ -1,18 +1,29 @@
-import React from 'react'
-import NavButton from '../../atoms/NavButton/NavButton'
+import React from "react";
+import Button from "../../atoms/NavButton/NavButton";
+import './NavButtons.css';
 
-function NavButtons() {
-  return (
-    <div>
-        <div className="col">
-            <NavButton cls='nav-button-register' text='TEKLİF ALIN' />
-        </div>
-
-        <div className="col">
-          <NavButton cls='nav-button-login' text='GİRİŞ YAP'/>
-        </div>
-    </div>
-  )
+// ButtonStyle için bir arayüz tanımlayalım
+interface ButtonStyleProps {
+    color?: string;
+    borderColor?: string;
+    backgroundColor?: string;
 }
 
-export default NavButtons
+function NavButtons({ buttonStyle }: { buttonStyle?: ButtonStyleProps }) {
+    return (
+        <div className="d-flex justify-content-end">
+            <Button 
+                cls="nav-button-register" 
+                text="KAYIT OL"
+                style={buttonStyle}
+            />
+            <Button 
+                cls="nav-button-login" 
+                text="GİRİŞ YAP"
+                style={buttonStyle}
+            />
+        </div>
+    );
+}
+
+export default NavButtons;

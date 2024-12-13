@@ -14,15 +14,17 @@ function Header() {
   });
   const [logoToUse, setLogoToUse] = useState(logo); // Scroll durumuna göre logo'yu değiştirecek state
 
+  const [isHovered, setIsHovered] = useState(false); // Hover durumunu takip etmek için state
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setBgColor("white");
         setTextColor("rgb(10, 57, 129)");
         setButtonStyle({
-          color: "rgb(10, 57, 129)",
+          color: "white",
           borderColor: "rgb(10, 57, 129)",
-          backgroundColor: "transparent", 
+          backgroundColor: "transparent", // Arka planı sabit tutuyoruz
         });
         setLogoToUse(logoScrolled); // Scroll yapıldığında farklı logo'yu kullan
       } else {
@@ -31,7 +33,7 @@ function Header() {
         setButtonStyle({
           color: "white",
           borderColor: "white",
-          backgroundColor: "transparent", 
+          backgroundColor: "transparent", // Arka planı sabit tutuyoruz
         });
         setLogoToUse(logo); // Scroll yapılmadığında varsayılan logoyu kullan
       }
@@ -41,6 +43,15 @@ function Header() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Hover durumunda buton stilini değiştirmeme
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div className="col p-0">
@@ -63,7 +74,7 @@ function Header() {
             <span
               style={{ fontWeight: "bold", fontSize: "40px", color: textColor }}
             >
-              Kolaysaİk
+              KolaysaİK
             </span>
           </a>
           <button
@@ -133,7 +144,8 @@ function Header() {
                 </a>
               </li>
             </ul>
-            <NavButtons buttonStyle={buttonStyle} />
+            {/* Giriş Yap Butonuna özel style ile */}
+            <NavButtons/>
           </div>
         </div>
       </nav>
