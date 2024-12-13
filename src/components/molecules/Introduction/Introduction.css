@@ -33,3 +33,13 @@
     margin-left: 0.5rem;
     margin-top: 2px;
 }
+.introduction-photo-style{
+    
+    transform: translateY(-130px) translateZ(50px); /* Y ve Z eksenindeki konum */
+    transition: transform 0.3s ease; /* Hareketleri yumuşatmak için */
+    perspective: 1000px; /* Derinlik efekti için */
+}
+
+.introduction-photo-container{
+    margin-right: 50px;
+}
