@@ -28,7 +28,7 @@ function Introduction() {
 
           <div className="row mt-5 mb-3">
             <div className="col d-flex justify-content-center">
-              <img src="http://picsum.photos/500/300 "  />         
+              <img src="http://picsum.photos/600/400 "  />         
             </div>
               
           </div>
