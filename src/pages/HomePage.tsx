@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/molecules/Header/Header";
+import Header from "../components/organisms/Header/Header";
 
 import CompanyLogo from "../components/molecules/CompanyLogo/CompanyLogo";
 

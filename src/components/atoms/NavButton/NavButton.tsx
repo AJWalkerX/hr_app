@@ -8,12 +8,19 @@ interface buttonProps{
 function Button( props:buttonProps ) {
     const navigate =useNavigate ();
     const buttonClicked = () =>{
-        switch(text)
+        switch(text){
+          case 'TEKLİF ALIN': navigate('/register'); break;
+          case 'GİRİŞ YAP' : navigate('/login')
+        }
     }
+    const {text, cls} = props
   return (
-    <button type="button" className={className} style={style}>
-      {label}
-    </button>
+    <>
+        <input className={'btn ' + cls} type="button" value={text} onClick={buttonClicked} />    
+    
+    </>
+
+  
   );
 }
 
