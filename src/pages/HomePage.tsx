@@ -17,7 +17,7 @@ function HomePage() {
       <Header />
       </div>
       
-      {/** ACIKLAMA KISMI */}
+      
       
       <div className="row ">
         <Introduction />
