@@ -3,6 +3,7 @@ import "./Register.css";
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
 import { fetchRegister } from "../../../stores/features/authSlice";
+import Swal from "sweetalert2";
 
 function Register() {
   const [name, setName] = useState("");
@@ -58,6 +59,14 @@ function Register() {
       return;
     } else setIsEmpty(false);
 
+    if (isEmpty) {
+      Swal.fire({
+        icon: "error",
+        title: "Bilgileriniz eksik",
+        text: "Bilgileriniz eksik oldugundan kayıt olamazsınız.",
+      });
+    }
+
     const payload = {
       name,
       surname,
@@ -105,14 +114,12 @@ function Register() {
                             onChange={(e) => setName(e.target.value)}
                           />
                         </div>
-                        <div
-                          className={`form-outline flex-fill mb-0 ${
-                            surnameIsEmpty ? "" : "border-danger"
-                          }`}
-                        >
+                        <div className={`form-outline flex-fill mb-0`}>
                           <input
                             type="text"
-                            className="form-control"
+                            className={`form-control  ${
+                              surnameIsEmpty ? "" : "border-danger"
+                            }`}
                             placeholder="Soyisim"
                             value={surname}
                             onChange={(e) => setSurname(e.target.value)}
