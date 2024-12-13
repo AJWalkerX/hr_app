@@ -5,7 +5,7 @@ import Register from "../components/molecules/Register/Register";
 function RegisterPage() {
   return (
     <>
-      <Header />
+      <Header/>
 
       <Register />
     </>
