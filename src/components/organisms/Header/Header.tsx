@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../../../img/ik-logo2.svg"; // Varsayılan logo
 import logoScrolled from "../../../img/ik-logo.svg"; // Scroll yapıldığında kullanılacak logo
 import "./Header.css";
+import NavButtons from "../../molecules/NavButton/NavButtons";
 
 function Header() {
   const [bgColor, setBgColor] = useState("transparent");
@@ -126,29 +127,9 @@ function Header() {
                 </a>
               </li>
             </ul>
-            <button
-              type="button"
-              className="btn btn-primary mx-2"
-              style={{
-                color: "rgb(10, 57, 129)",
-                backgroundColor: "white",
-              }}
-            >
-              TEKLİF ALIN
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              style={{
-                color: buttonStyle.color,
-                borderColor: buttonStyle.borderColor,
-                backgroundColor: isHovered ? "transparent" : "transparent", // Hover durumunda renk değişmesini engelle
-              }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              GİRİŞ YAP
-            </button>
+            <NavButtons/>
+          
+      
           </div>
         </div>
       </nav>
