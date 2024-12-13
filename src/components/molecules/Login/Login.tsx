@@ -4,13 +4,17 @@ import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
 import { fetchLogin } from "../../../stores/features/authSlice";
 import Swal from "sweetalert2";
-import { title } from "process";
 
 function Login() {
   const dispatch = useDispatch<hrDispatch>();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const doLogin = () => {
     const payload = {
@@ -21,16 +25,11 @@ function Login() {
       Swal.fire({
         icon: "error",
         title: "Hata!",
-        text: "Mail adresi veya parola boş bırakılamaz.",
+        text: "Mail adresi veya parola boş bırakılamaz.",
       });
       return;
     }
     dispatch(fetchLogin(payload));
-  };
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -41,8 +40,8 @@ function Login() {
             <div className="col-sm-6 text-black">
               <div className="px-5 ms-xl-4 text-center">
                 <i
-                  className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
-                  style={{ color: "#709085" }}
+                  className="fa-solid fa-person-through-window fa-2x me-3 pt-5 mt-xl-4"
+                  style={{ color: "#fcfcfd" }}
                 ></i>
                 <span className="h1 fw-bold mb-0 text-color-login">Logo</span>
               </div>
@@ -54,23 +53,38 @@ function Login() {
                       type="email"
                       id="form2Example18"
                       className="form-control form-control-lg"
-                      placeholder="Email "
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
-                  <div data-mdb-input-init className="form-outline mb-4">
+                  <div
+                    data-mdb-input-init
+                    className="form-outline mb-4 position-relative"
+                  >
                     <input
-                      type="password"
+                      type={passwordVisible ? "text" : "password"}
                       id="form2Example28"
                       className="form-control form-control-lg"
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
+                    <i
+                      className={`fas ${
+                        passwordVisible ? "fa-eye-slash" : "fa-eye"
+                      } position-absolute top-50 end-0 translate-middle-y me-3`}
+                      style={{ cursor: "pointer" }}
+                      onClick={togglePasswordVisibility}
+                    ></i>
                   </div>
 
                   <div className="pt-1 row">
                     <button
                       className="btn btn-outline-light btn-lg"
                       type="button"
+                      onClick={doLogin}
                     >
                       Login
                     </button>

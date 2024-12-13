@@ -1,0 +1,26 @@
+ .vh-100-admin{
+    height: 100vh;
+     /* Ekranın tamamını kapsayacak şekilde yükseklik */
+  }
+  
+  .gradient-custom-admin {
+    background: linear-gradient(45deg, #6a11cb, #2575fc); /* İstediğiniz bir arka plan rengi */
+  }
+  
+  .card-admin{
+    height: 100%; /* Kartın yüksekliğini %100 yaparak tüm alanı kapsamasını sağla */
+    border-radius: 1rem;
+    width: 100%;
+  }
+  
+  .card-body-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* İçeriği dikeyde ortalar */
+    height: 100%;
+  }
+  
+  .form-outline-admin{
+    margin-bottom: 20px; /* Giriş alanlarının arasını açar */
+  }
+  
