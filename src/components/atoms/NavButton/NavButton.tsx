@@ -1,27 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { text } from "stream/consumers";
-interface buttonProps{
-    text: 'TEKLİF ALIN'| 'GİRİŞ YAP',
-    cls: String
+import './NavButton.css'
+
+interface ButtonProps {
+    text: 'KAYIT OL' | 'GİRİŞ YAP',
+    cls: string,
 }
-function Button( props:buttonProps ) {
-    const navigate =useNavigate ();
-    const buttonClicked = () =>{
-        switch(text){
-          case 'TEKLİF ALIN': navigate('/register'); break;
-          case 'GİRİŞ YAP' : navigate('/login')
+
+function Button(props: ButtonProps) {
+    const navigate = useNavigate();
+
+    const buttonClicked = () => {
+        switch (text) {
+            case 'KAYIT OL': 
+                navigate('/register'); 
+                break;
+            case 'GİRİŞ YAP': 
+                navigate('/login'); 
+                break;
         }
     }
-    const {text, cls} = props
-  return (
-    <>
-        <input className={'btn ' + cls} type="button" value={text} onClick={buttonClicked} />    
-    
-    </>
 
-  
-  );
+    const { text, cls } = props;
+
+    return (
+
+        <>
+        <input className={`btn ${cls} mx-2`} type="button"  value={text}  onClick={buttonClicked}/>
+            
+        
+        </>
+        
+        
+    );
 }
 
 export default Button;

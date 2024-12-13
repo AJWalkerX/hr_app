@@ -54,7 +54,7 @@ function Header() {
   };
 
   return (
-    <div className="col  p-0">
+    <div className="col p-0">
       <nav
         className={`navbar navbar-expand-lg ${
           bgColor === "white" ? "bg-white" : "bg-transparent"
@@ -127,9 +127,8 @@ function Header() {
                 </a>
               </li>
             </ul>
+            {/* Giriş Yap Butonuna özel style ile */}
             <NavButtons/>
-          
-      
           </div>
         </div>
       </nav>

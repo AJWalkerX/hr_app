@@ -10,20 +10,29 @@ function Introduction() {
         <div className="col-8 mt-5">
           <div className="row">
             <div className="col-8">
+              <div className="row">
               <p  style={{fontWeight:'bold',color:'white', fontSize:'80px'}}>
                Bordronun artık <span style={{color:'#37AFE1',fontWeight:'bold'}}>kolayı var!</span> 
               </p>
                 <p style={{color:'#BBE9FF', fontSize:'18px'}}> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit possimus cupiditate blanditiis autem quae iure, omnis eaque inventore minima fuga incidunt ex exercitationem quos sit voluptas nobis earum ea ipsum.</p>
                 <br />
-                <button type="button" className="btn-introduction mt-1 me-3 ">
+              </div>
+             
+               
+            </div>
+            <div className="col-4 ">
+              <img style={{width:'450px', height:'350px'}} src="https://cdn.prod.website-files.com/6113889e45c6e62ebf4ca212/671b8dfbb8ae947a766f8076_sgdpli-1-p-500.avif" />
+            </div>
+          </div>
+
+          <div className="row">
+              <button type="button" className="btn-introduction mt-4 me-3 ">
                   <span>HEMEN İNCELEYİN</span>
                   <i className="arrow-style fa-solid fa-arrow-right"></i>
                 </button>
-            </div>
-            <div className="col-4">
-              <img src="http://picsum.photos/400/300" />
-            </div>
-          </div>
+              </div>
+              
+
 
 
           <div className="row  mb-3 introduction-photo-container">
