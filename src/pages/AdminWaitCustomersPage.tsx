@@ -5,9 +5,8 @@ import AdminWaitCustomers from '../components/molecules/AdminPanel/AdminWaitCust
 function AdminWaitCustomersPage() {
   return (
     <div className='row'>
-            <div className="col"> <AdminSidebar/> </div>
-            <div className="col"> <AdminWaitCustomers/></div>
-           
+            <div className="col-3"> <AdminSidebar/></div>
+            <div className="col-9"> <AdminWaitCustomers/></div>
         </div>
   )
 }
