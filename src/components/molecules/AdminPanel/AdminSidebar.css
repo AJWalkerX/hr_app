@@ -1,0 +1,9 @@
+.sidebar-admin {
+    width: 23%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Taşan içerikler için kaydırma */
+  }
+
