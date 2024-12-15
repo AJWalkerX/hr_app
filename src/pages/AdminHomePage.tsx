@@ -4,15 +4,10 @@ import AdminHome from '../components/molecules/AdminPanel/AdminHome'
 
 function AdminHomePage() {
   return (
-    
-        
         <div className='row'>
-            <div className="col"> <AdminSidebar/> </div>
-            <div className="col"> <AdminHome/></div>
-           
+            <div className="col-3"> <AdminSidebar/> </div>
+            <div className="col-9"> <AdminHome/></div> 
         </div>
-        
-    
   )
 }
 
