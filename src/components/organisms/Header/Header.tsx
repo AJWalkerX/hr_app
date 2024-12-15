@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../../img/ik-logo2.svg"; // Varsayılan logo
-import logoScrolled from "../../../img/ik-logo.svg"; // Scroll yapıldığında kullanılacak logo
+import logo from "../../../img/ik-logo2.svg";
+import logoScrolled from "../../../img/ik-logo.svg";
 import "./Header.css";
 import NavButtons from "../../molecules/NavButton/NavButtons";
 
@@ -12,7 +12,7 @@ function Header() {
     borderColor: "white",
     backgroundColor: "transparent",
   });
-  const [logoToUse, setLogoToUse] = useState(logo); // Scroll durumuna göre logo'yu değiştirecek state
+  const [logoToUse, setLogoToUse] = useState(logo);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,23 +22,22 @@ function Header() {
         setButtonStyle({
           color: "rgb(10, 57, 129)",
           borderColor: "rgb(10, 57, 129)",
-          backgroundColor: "transparent", 
+          backgroundColor: "transparent",
         });
-        setLogoToUse(logoScrolled); // Scroll yapıldığında farklı logo'yu kullan
+        setLogoToUse(logoScrolled);
       } else {
         setBgColor("transparent");
         setTextColor("white");
         setButtonStyle({
           color: "white",
           borderColor: "white",
-          backgroundColor: "transparent", 
+          backgroundColor: "transparent",
         });
-        setLogoToUse(logo); // Scroll yapılmadığında varsayılan logoyu kullan
+        setLogoToUse(logo);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -48,22 +47,25 @@ function Header() {
         className={`navbar navbar-expand-lg ${
           bgColor === "white" ? "bg-white" : "bg-transparent"
         }`}
-        style={{
-          transition: "background-color 0.3s ease",
-        }}
+        style={{ transition: "background-color 0.3s ease" }}
       >
         <div className="container">
-          <a className="navbar-brand d-flex align-items-center ms-5" href="#">
+          <a className="navbar-brand d-flex align-items-center ms-5" href="/">
             <img
-              src={logoToUse} // Burada logo'yu scroll durumuna göre değiştiriyoruz
+              src={logoToUse}
               alt="Logo"
               className="me-2"
               style={{ width: "40px", height: "40px" }}
             />
             <span
-              style={{ fontWeight: "bold", fontSize: "40px", color: textColor }}
+              style={{
+                fontWeight: "bold",
+                fontSize: "40px",
+                color: textColor,
+                transition: "color 0.3s",
+              }}
             >
-              Kolaysaİk
+              KolaysaİK
             </span>
           </a>
           <button
@@ -79,55 +81,74 @@ function Header() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/"
-                  style={{
-                    fontWeight:'bold',
-                    color: textColor,
-                    transition: "color 0.3s",
-                  }}
-                >
-                  Ana Sayfa
-                </a>
-              </li>
-              <li className="nav-item">
+              {/* Uygulamalar Dropdown */}
+              <li className="nav-item dropdown hover-dropdown">
                 <a
                   className="nav-link"
                   href="#"
-                  style={{
-                    fontWeight:'bold',
-                    color: textColor,
-                    transition: "color 0.3s",
-                  }}
+                  style={{ fontWeight: "bold", color: textColor }}
                 >
                   Uygulamalar
                 </a>
+                
+                <ul className="dropdown-menu">
+                <div className="row">
+                  
+                </div>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Uygulama 1
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Uygulama 2
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Uygulama 3
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li className="nav-item">
+
+              {/* Danışmanlıklar Dropdown */}
+              <li className="nav-item dropdown hover-dropdown">
                 <a
                   className="nav-link"
                   href="#"
-                  style={{
-                    fontWeight:'bold',
-                    color: textColor,
-                    transition: "color 0.3s",
-                  }}
+                  style={{ fontWeight: "bold", color: textColor }}
                 >
                   Danışmanlıklar
                 </a>
+                <ul className="dropdown-menu ">
+                  <div className="row d-flex flex-direction-column">
+                  <li className="col">
+                    <a className="dropdown-item" href="#">
+                      <div className="row "><p style={{fontWeight:'bold'}}>Performans Değerlendirma Danışmanlığı</p>
+                      <p style={{fontWeight:'lighter',paddingBottom:'5px'}}>Kurgudan sonuç analizine kadar tüm danışmanlık ihtiyacınız için danışmmanlık hizmetimizden yaralanın</p>
+                   </div>              
+                    </a>
+                  </li>
+                  <hr style={{margin:'0px',padding:'0px'}}/>
+                  <li className="col">
+                    <a className="dropdown-item " href="#">
+                      <div className="row "><p style={{fontWeight:'bold'}}>İK Danışmanlığı</p>
+                      <p style={{fontWeight:'lighter'}}>İyileştirme ihtiyacı duyduğunuz İK süreçleriniz için kendi danışmanlık paketinizi oluşturun</p>
+                   </div>              
+                    </a>
+                  </li>
+                  </div>
+                
+                </ul>
               </li>
 
               <li className="nav-item">
                 <a
                   className="nav-link"
                   href="#"
-                  style={{
-                    fontWeight:'bold',
-                    color: textColor,
-                    transition: "color 0.3s",
-                  }}
+                  style={{ fontWeight: "bold", color: textColor }}
                 >
                   Kullanıcı Hikayeleri
                 </a>
