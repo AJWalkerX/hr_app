@@ -10,6 +10,7 @@ const initialAuthState = {
   isAuth: false,
   isLoginLoading: false,
   isRegisterLoading: false,
+  isForgotPasswordLoading: false,
   user: {},
 };
 
@@ -30,6 +31,20 @@ export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
   async (payload: ILoginRequest) => {
     const response = await fetch(apis.authService + "/dologin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }).then((data) => data.json());
+    return response;
+  }
+);
+
+export const fetchForgotPassword = createAsyncThunk(
+  "auth/fetchForgotPassword",
+  async (payload: String) => {
+    const response = await fetch(apis.authService + "/auth-forgot-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,6 +113,22 @@ const authSlice = createSlice({
             icon: "error",
             title: "Hata!",
             text: action.payload.message,
+          });
+        }
+      }
+    );
+    build.addCase(fetchForgotPassword.pending, (state) => {
+      state.isRegisterLoading = true;
+    });
+    build.addCase(
+      fetchForgotPassword.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) => {
+        state.isRegisterLoading = false;
+        if (action.payload.code === 200) {
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
           });
         }
       }
