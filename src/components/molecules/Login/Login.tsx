@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import "./Login.css"; // Stil dosyasını ayırmanızı öneririm.
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
-import {
-  fetchForgotPassword,
-  fetchLogin,
-} from "../../../stores/features/authSlice";
+import { fetchLogin } from "../../../stores/features/authSlice";
+import { fetchForgotPassword } from "../../../stores/features/forgotPasswordSlice";
 import Swal from "sweetalert2";
 
 function Login() {
