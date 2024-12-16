@@ -10,8 +10,6 @@ import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
 
 const initialAuthState = {
   isAuth: false,
-  isAdminAuth: false,
-  isAdminLoginLoading: false,
   isLoginLoading: false,
   isRegisterLoading: false,
 

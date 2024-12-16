@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { authSlice, commentSlice, forgotPasswordSlice } from "./features";
+import { adminAuthSlice, authSlice, commentSlice, forgotPasswordSlice } from "./features";
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
+    adminAuth: adminAuthSlice,
     comment: commentSlice,
     forgotPassword: forgotPasswordSlice,
   },
@@ -12,5 +13,5 @@ const store = configureStore({
 
 export type hrDispatch = typeof store.dispatch;
 export type hrState = ReturnType<typeof store.getState>;
-export const useAppSelector = useSelector.withTypes<hrState>();
+export const hrUseSelector = useSelector.withTypes<hrState>();
 export default store;
