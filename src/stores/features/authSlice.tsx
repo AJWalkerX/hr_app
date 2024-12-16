@@ -5,12 +5,16 @@ import apis from "../../config/RestApis";
 import { IRegisterRequest } from "../../models/IRegisterRequest";
 import Swal from "sweetalert2";
 import { IBaseResponse } from "../../models/IBaseResponse";
+import { IForgotPasswordRequest } from "../../models/IForgotPasswordRequest";
+import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
 
 const initialAuthState = {
   isAuth: false,
+  isAdminAuth: false,
+  isAdminLoginLoading: false,
   isLoginLoading: false,
   isRegisterLoading: false,
-  isForgotPasswordLoading: false,
+
   user: {},
 };
 
@@ -41,10 +45,10 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-export const fetchForgotPassword = createAsyncThunk(
-  "auth/fetchForgotPassword",
-  async (payload: String) => {
-    const response = await fetch(apis.authService + "/auth-forgot-password", {
+export const fetchNewPassword = createAsyncThunk(
+  "auth/fetchNewPassword",
+  async (payload: INewPasswordRequest) => {
+    const response = await fetch(apis.userService + "/new-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,18 +121,20 @@ const authSlice = createSlice({
         }
       }
     );
-    build.addCase(fetchForgotPassword.pending, (state) => {
+
+    build.addCase(fetchNewPassword.pending, (state) => {
       state.isRegisterLoading = true;
     });
     build.addCase(
-      fetchForgotPassword.fulfilled,
+      fetchNewPassword.fulfilled,
       (state, action: PayloadAction<IBaseResponse>) => {
         state.isRegisterLoading = false;
         if (action.payload.code === 200) {
+        } else {
           Swal.fire({
-            icon: "success",
-            title: action.payload.message,
-            timer: 3000,
+            icon: "error",
+            title: "Hata!",
+            text: action.payload.message,
           });
         }
       }

@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { authSlice, commentSlice } from "./features";
+import { authSlice, commentSlice, forgotPasswordSlice } from "./features";
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
-    comment: commentSlice
+    comment: commentSlice,
+    forgotPassword: forgotPasswordSlice,
   },
 });
 

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "./Login.css"; // Stil dosyasını ayırmanızı öneririm.
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
-import { fetchLogin } from "../../../stores/features/authSlice";
+import {
+  fetchForgotPassword,
+  fetchLogin,
+} from "../../../stores/features/authSlice";
 import Swal from "sweetalert2";
 
 function Login() {
@@ -10,6 +13,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [forgotPasswordEmail, setForgotPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -30,6 +34,26 @@ function Login() {
       return;
     }
     dispatch(fetchLogin(payload));
+  };
+
+  const doForgotPassword = () => {
+    if (forgotPasswordEmail === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Hata!",
+        text: "Mail adresi boş bırakılamaz.",
+      });
+      return;
+    } else if (!forgotPasswordEmail.includes("@")) {
+      Swal.fire({
+        icon: "error",
+        title: "Hata!",
+        text: "Gecersiz mail adresi girdiniz.",
+      });
+      return;
+    }
+
+    dispatch(fetchForgotPassword({ forgotPasswordEmail }));
   };
 
   return (
@@ -90,7 +114,12 @@ function Login() {
                     </button>
                     <div className="col text-end mt-3">
                       <p className="small mb-5 pb-lg-2 text-color-login">
-                        <a className=" text-color-login" href="#!">
+                        <a
+                          className=" text-color-login"
+                          href="#!"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                        >
                           Forgot password?
                         </a>
                       </p>
@@ -110,6 +139,56 @@ function Login() {
           </div>
         </div>
       </section>
+
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                Sifre Sifirlama
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Mail Adresinizi Giriniz"
+                value={forgotPasswordEmail}
+                onChange={(e) => setForgotPassword(e.target.value)}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Kapat
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={doForgotPassword}
+              >
+                Gonder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

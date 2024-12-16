@@ -1,4 +1,5 @@
 import authSlice from "./authSlice";
-import commentSlice from "./commentSlice"
+import commentSlice from "./commentSlice";
+import forgotPasswordSlice from "./forgotPasswordSlice";
 
-export { authSlice, commentSlice };
+export { authSlice, commentSlice, forgotPasswordSlice };
