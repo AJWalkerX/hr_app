@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./UserComment.css";
+import { useDispatch } from "react-redux";
+import { hrDispatch } from "../../../stores";
+import { fetchGetAllComment } from "../../../stores/features/commentSlice";
 const UserComments = () => {
+  const dispatch = useDispatch<hrDispatch>();
+  useEffect(()=>{
+    dispatch(fetchGetAllComment());
+  },[])
   return (
     <>
       <div className="col-2"></div>
