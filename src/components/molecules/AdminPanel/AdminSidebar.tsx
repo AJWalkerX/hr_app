@@ -1,7 +1,16 @@
 import React from 'react'
 import './AdminSidebar.css'
 import logo from '../../../img/ik-logo2.svg'
+import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { hrDispatch } from '../../../stores'
+import { adminLogin, adminLogout } from '../../../stores/features/adminAuthSlice'
 function AdminSidebar() {
+  const dispatch = useDispatch<hrDispatch>();
+  const logout = async()=>{
+    await localStorage.removeItem('adminToken');
+    dispatch(adminLogout());
+  }
   return (
     <>
     <div className="sidebar border-end sidebar-admin">
@@ -16,29 +25,36 @@ function AdminSidebar() {
   <li className="nav-item nav-group show">
     <ul className="nav-group-items">
 
+      
       <li className="nav-item">
+        <NavLink to={'/admin'}>
         <a className="nav-link fw-bold" href="#">
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-house"></span></span> ANASAYFA
         </a>
+        </NavLink>
       </li>
 
       <li className="nav-item">
+        <NavLink to={'/admin/customers'}>
         <a className="nav-link fw-bold" href="#">
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-users-line"></span></span> MÜŞTERİLER
         </a>
+        </NavLink>
       </li>
 
       <li className="nav-item">
+        <NavLink to={'/admin/wait-customers'}>
         <a className="nav-link fw-bold" href="#">
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-hourglass-half"></span></span> ONAY BEKLEYENLER
         </a>
+        </NavLink>
       </li>
 
     </ul>
   </li>
 </ul>
       <div className="sidebar-footer border-top d-flex">
-        <button className="sidebar-toggler" type="button"></button>
+        <button onClick={logout} className="sidebar-toggler sidebar-exit-button" type="button"></button>
       </div>
     </div>
     </>

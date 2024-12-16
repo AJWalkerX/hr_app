@@ -6,4 +6,7 @@
     left: 0;
     overflow-y: auto; /* Taşan içerikler için kaydırma */
   }
+  .sidebar-exit-button {
+    padding: 20px;   
+  }
 
