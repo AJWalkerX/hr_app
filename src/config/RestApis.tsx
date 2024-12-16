@@ -7,13 +7,11 @@ const server = devUrl;
 const apis = {
   userService: server + "/user",
   authService: server + "/user",
-<<<<<<< HEAD
-  commentService: server +"/comment",
-  adminAuthService: server + "/admin"
 
-=======
+  commentService: server +"/comment",
+  adminAuthService: server + "/admin",
   commentCardService: server +"/comment"
->>>>>>> b0d12cc2c9921f1c404166ecfa7760059e0d44f7
+
 };
 
 export default apis;
