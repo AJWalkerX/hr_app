@@ -8,9 +8,9 @@ const UserComments = () => {
   return (
     <>
       <div className="col-2"></div>
-      <div className="col-8">
+      <div className="col-10 ">
         <div className="row">
-          <div className="col-md-4 d-flex flex-column justify-content-center">
+          <div className="col-md-3 d-flex flex-column justify-content-center">
             <h2 className="mb-4">Kullanıcı Hikayeleri</h2>
             <p>
               Binlerce insan kaynakları profesyoneli ile hep beraber İK’yı
@@ -19,11 +19,11 @@ const UserComments = () => {
             </p>
             <button className="btn btn-primary mt-3">TÜMÜNÜ İNCELEYİN</button>
           </div>
-          <div className="col-md-8 position-relative">
+          <div className="col-md-8 position-relative ms-5">
             {/* Özel Navigasyon Butonları */}
             <button
               className="btn swiper-button-next"
-              style={{ top: "35%", right: "-50px" }}
+              style={{ top: "35%", right: "250px" }}
             >
               {/* Buton içerik */}
             </button>
@@ -42,7 +42,7 @@ const UserComments = () => {
                 }}
               >
                 <SwiperSlide>
-                  <div className="d-flex align-items-center">
+                  <div className=" col-7 d-flex align-items-center ms-5">
                     <div className="me-4">
                       <h5 className="fw-bold">DECATHLON</h5>
                       <p className="mb-3">
@@ -57,11 +57,11 @@ const UserComments = () => {
                         Kullanıcı Hikayesini Oku →
                       </a>
                     </div>
-                    <div>
+                    <div className="col-3">
                       <img
                         src="https://via.placeholder.com/150"
                         alt="Ali Kuşcuoğlu"
-                        className="rounded-circle"
+                        className="rounded-circle ms-4"
                         style={{
                           width: "150px",
                           height: "150px",
@@ -72,8 +72,8 @@ const UserComments = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="d-flex align-items-center">
-                    <div className="me-4">
+                  <div className="col-7 d-flex align-items-center  ">
+                    <div className="">
                       <h5 className="fw-bold">FİRMA 2</h5>
                       <p className="mb-3">
                         “Başka bir firma ile olan deneyim açıklaması burada
@@ -86,7 +86,7 @@ const UserComments = () => {
                         Kullanıcı Hikayesini Oku →
                       </a>
                     </div>
-                    <div>
+                    <div className="col-5">
                       <img
                         src="https://via.placeholder.com/150"
                         alt="Başka bir kişi"
@@ -105,7 +105,7 @@ const UserComments = () => {
           </div>
         </div>
       </div>
-      <div className="col-2"></div>
+      
     </>
   );
 };
