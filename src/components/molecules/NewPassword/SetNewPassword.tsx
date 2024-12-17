@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./SetNewPassword.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { hrDispatch } from "../../../stores";
+import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import {
   fetchNewPassword,
@@ -12,14 +12,14 @@ import { useLocation } from "react-router-dom";
 function SetNewPassword() {
   const dispatch = useDispatch<hrDispatch>();
   const location = useLocation();
-
+  const { userId } = hrUseSelector((state) => state.forgotPassword);
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const userId = searchParams.get("userId");
     if (userId) {
       dispatch(setUserId(Number(userId)));
     }
-  }, []);
+  }, [location, dispatch]);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [showRePassword, setShowRePassword] = React.useState(false);
@@ -83,7 +83,7 @@ function SetNewPassword() {
                   data-mdb-input-init
                   className="form-outline form-white mb-4"
                 >
-                  <input type="text" hidden />
+                  <input type="text" hidden readOnly value={userId || ""} />
                   <TextField
                     placeholder="Sifre"
                     type={showPassword ? "text" : "password"}
