@@ -27,7 +27,7 @@ const initialCommentState: ICommentState = {
   );
 
   const commentSlice = createSlice({
-    name:'POST',
+    name:'comment',
     initialState: initialCommentState,
     reducers:{},
 

@@ -60,7 +60,7 @@ const UserComments = () => {
                   nextEl: ".swiper-button-next", // Doğru buton sınıfını tanımla
                   prevEl: ".swiper-button-prev", // Önceki buton için
                 }}
-                pagination={{ clickable: true }}
+               className="custom-swiper"
               >
 {commentCardList.map((comment, index) => {
   return (
