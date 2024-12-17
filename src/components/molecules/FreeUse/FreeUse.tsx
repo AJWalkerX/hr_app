@@ -1,7 +1,15 @@
 import React from 'react'
 import './FreeUse.css'
+import { useNavigate } from 'react-router-dom';
 
 function FreeUse() {
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/register'); // Yönlendirme yapılacak sayfa
+  };
+
   return (
     <>
     <div className="col-2">
@@ -24,8 +32,11 @@ function FreeUse() {
   <div className="row mt-3">
     <h5 style={{color:'black'}}>Hiçbir kurulum ve kredi kartı gerektirmeden kullanmaya başlayın.</h5>
   </div>
-  <div className="row align-center">
-    <button type="button" className="btn-deneme">Ücretsiz Deneyin</button>
+  <div className="row align-center center-row" >
+    
+    <button type="button" className="btn-deneme mt-3" onClick={handleButtonClick}>Ücretsiz Deneyin</button>
+    
+   
   </div>
   </div>
 
