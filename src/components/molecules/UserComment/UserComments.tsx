@@ -51,11 +51,14 @@ const UserComments = () => {
               <Swiper
                 modules={[Navigation, Autoplay, Pagination]} // Navigation modülünü burada kullanıyoruz
                 slidesPerView={1}
+                spaceBetween={50}
                 loop={true}
                 autoplay={{
                   delay: 5000,
                   disableOnInteraction: false,
+                  pauseOnMouseEnter: true
                 }}
+          
                 navigation={{
                   nextEl: ".swiper-button-next", // Doğru buton sınıfını tanımla
                   prevEl: ".swiper-button-prev", // Önceki buton için
