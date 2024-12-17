@@ -21,7 +21,7 @@ const UserComments = () => {
 
  
 
-  console.log(commentCardList);
+  
 
 
 
