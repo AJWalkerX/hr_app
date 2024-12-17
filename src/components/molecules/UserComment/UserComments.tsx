@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./UserComment.css";
 import { useDispatch, useSelector } from "react-redux";
-import { hrDispatch, useAppSelector } from "../../../stores";
+import { hrDispatch, hrUseSelector} from "../../../stores";
 import { fetchGetAllComments } from "../../../stores/features/commentSlice";
 import CommentCard from "../../atoms/CommentCard/CommentCard";
 import { ICommentCard } from "../../../models/ICommentCard";
@@ -13,7 +13,7 @@ import { ICommentResponse } from "../../../models/ICommentResponse";
 
 
 const UserComments = () => {
-  const commentCardList : ICommentCard[]= useAppSelector(state => state.comment.commentCardList);
+  const commentCardList : ICommentCard[]=hrUseSelector(state => state.comment.commentCardList);
   const dispatch = useDispatch<hrDispatch>();
   useEffect(()=>{
     dispatch(fetchGetAllComments());
