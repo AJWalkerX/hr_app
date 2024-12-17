@@ -45,20 +45,6 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-export const fetchNewPassword = createAsyncThunk(
-  "auth/fetchNewPassword",
-  async (payload: INewPasswordRequest) => {
-    const response = await fetch(apis.userService + "/new-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }).then((data) => data.json());
-    return response;
-  }
-);
-
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
@@ -112,24 +98,6 @@ const authSlice = createSlice({
             title: "Bilgilendirme",
             text: action.payload.message,
           });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Hata!",
-            text: action.payload.message,
-          });
-        }
-      }
-    );
-
-    build.addCase(fetchNewPassword.pending, (state) => {
-      state.isRegisterLoading = true;
-    });
-    build.addCase(
-      fetchNewPassword.fulfilled,
-      (state, action: PayloadAction<IBaseResponse>) => {
-        state.isRegisterLoading = false;
-        if (action.payload.code === 200) {
         } else {
           Swal.fire({
             icon: "error",

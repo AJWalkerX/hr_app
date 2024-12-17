@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SetNewPassword.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { hrDispatch } from "../../../stores";
 import { useDispatch } from "react-redux";
-import { fetchNewPassword } from "../../../stores/features/authSlice";
+import {
+  fetchNewPassword,
+  setUserId,
+} from "../../../stores/features/forgotPasswordSlice";
+import { useLocation } from "react-router-dom";
 function SetNewPassword() {
   const dispatch = useDispatch<hrDispatch>();
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const userId = searchParams.get("userId");
+    if (userId) {
+      dispatch(setUserId(Number(userId)));
+    }
+  }, []);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [showRePassword, setShowRePassword] = React.useState(false);
@@ -53,6 +66,7 @@ function SetNewPassword() {
     } else setIsWrong(false);
     dispatch(fetchNewPassword({ password, rePassword }));
   };
+
   return (
     <section className="vh-100 gradient-custom-new-password">
       <div className="container h-100">
@@ -69,6 +83,7 @@ function SetNewPassword() {
                   data-mdb-input-init
                   className="form-outline form-white mb-4"
                 >
+                  <input type="text" hidden />
                   <TextField
                     placeholder="Sifre"
                     type={showPassword ? "text" : "password"}
