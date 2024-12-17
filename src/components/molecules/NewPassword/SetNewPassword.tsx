@@ -4,22 +4,18 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
-import {
-  fetchNewPassword,
-  setUserId,
-} from "../../../stores/features/forgotPasswordSlice";
+import { fetchNewPassword } from "../../../stores/features/forgotPasswordSlice";
 import { useLocation } from "react-router-dom";
 function SetNewPassword() {
   const dispatch = useDispatch<hrDispatch>();
+  const { isSuccess } = hrUseSelector((state) => state.forgotPassword);
   const location = useLocation();
-  const { userId } = hrUseSelector((state) => state.forgotPassword);
+  const [authCode, setCode] = useState("");
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const userId = searchParams.get("userId");
-    if (userId) {
-      dispatch(setUserId(Number(userId)));
-    }
-  }, [location, dispatch]);
+    const query = new URLSearchParams(window.location.search);
+    const codeFromUrl = query.get("code");
+    if (codeFromUrl) setCode(codeFromUrl);
+  }, [location.state]);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [showRePassword, setShowRePassword] = React.useState(false);
@@ -64,7 +60,11 @@ function SetNewPassword() {
       setIsWrong(true);
       return;
     } else setIsWrong(false);
-    dispatch(fetchNewPassword({ password, rePassword }));
+    dispatch(fetchNewPassword({ password, rePassword, authCode }));
+
+    if (isSuccess) {
+      window.location.href = "/login";
+    }
   };
 
   return (
@@ -83,7 +83,13 @@ function SetNewPassword() {
                   data-mdb-input-init
                   className="form-outline form-white mb-4"
                 >
-                  <input type="text" hidden readOnly value={userId || ""} />
+                  <input
+                    type="text"
+                    hidden
+                    readOnly
+                    value={authCode}
+                    name="code"
+                  />
                   <TextField
                     placeholder="Sifre"
                     type={showPassword ? "text" : "password"}

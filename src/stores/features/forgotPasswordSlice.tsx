@@ -4,18 +4,17 @@ import apis from "../../config/RestApis";
 import { IBaseResponse } from "../../models/IBaseResponse";
 import Swal from "sweetalert2";
 import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
-import { IUserIdRequest } from "../../models/IUSerIdRequest";
 
 interface IForgotPasswordState {
   isForgotPasswordLoading: boolean;
   isResetPasswordLoading: boolean;
-  userId: number | null;
+  isSuccess: boolean;
 }
 
 const initialState: IForgotPasswordState = {
   isForgotPasswordLoading: false,
   isResetPasswordLoading: false,
-  userId: null,
+  isSuccess: false,
 };
 
 export const fetchForgotPassword = createAsyncThunk(
@@ -49,11 +48,7 @@ export const fetchNewPassword = createAsyncThunk(
 const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
   initialState: initialState,
-  reducers: {
-    setUserId: (state, action: PayloadAction<number>) => {
-      state.userId = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (build) => {
     build.addCase(fetchForgotPassword.pending, (state) => {
       state.isForgotPasswordLoading = true;
@@ -79,16 +74,17 @@ const forgotPasswordSlice = createSlice({
       (state, action: PayloadAction<IBaseResponse>) => {
         state.isResetPasswordLoading = false;
         if (action.payload.code === 200) {
+          state.isSuccess = true;
         } else {
           Swal.fire({
             icon: "error",
             title: "Hata!",
             text: action.payload.message,
           });
+          state.isSuccess = false;
         }
       }
     );
   },
 });
-export const { setUserId } = forgotPasswordSlice.actions;
 export default forgotPasswordSlice.reducer;
