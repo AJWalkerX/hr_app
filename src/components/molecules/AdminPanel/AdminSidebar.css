@@ -7,6 +7,11 @@
     overflow-y: auto; /* Taşan içerikler için kaydırma */
   }
   .sidebar-exit-button {
-    padding: 20px;   
+    padding: 15px;   
+    
+  }
+
+  .nav-link-admin{
+    text-decoration: none ;
   }
 

@@ -19,12 +19,6 @@ const UserComments = () => {
     dispatch(fetchGetAllComments());
   },[]);
 
- 
-
-  
-
-
-
   return (
     <>
       <div className="col-1"></div>

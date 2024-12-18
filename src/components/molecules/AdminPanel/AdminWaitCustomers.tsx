@@ -22,17 +22,17 @@ function AdminWaitCustomers() {
   <thead className="bg-light">
     <tr>
       <th>Personel Info</th>
-      <th>Status</th>
+      <th>Şirket/Pozisyon</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <WaitCustomerCard Name='harun' Email='harun@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/8.jpg'/>
-    <WaitCustomerCard Name='alperen' Email='alperen@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/7.jpg'/>
-    <WaitCustomerCard Name='selin' Email='selin@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/6.jpg'/>
-    <WaitCustomerCard Name='muzaffer' Email='muzaffer@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/5.jpg'/>
-    <WaitCustomerCard Name='burak' Email='burak@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/4.jpg'/>
-    <WaitCustomerCard Name='anıl' Email='anıl@gmail.com' Status='InActive' Avatar='https://mdbootstrap.com/img/new/avatars/3.jpg'/>
+    <WaitCustomerCard Name='harun' Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior' />
+    <WaitCustomerCard Name='alperen' Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior'  />
+    <WaitCustomerCard Name='selin' Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior'/>
+    <WaitCustomerCard Name='muzaffer' Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior'/>
+    <WaitCustomerCard Name='burak' Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior'/>
+    <WaitCustomerCard Name='anıl'  Surname='kaya' Email='harun@gmail.com' CompanyName='Bilge Adam' Position='Junior'/>
     
 
     

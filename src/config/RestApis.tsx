@@ -10,7 +10,8 @@ const apis = {
 
   commentService: server +"/comment",
   adminAuthService: server + "/admin",
-  commentCardService: server +"/comment"
+  commentCardService: server +"/comment",
+  adminPanelService: server + "/adminPanel"
 
 };
 
