@@ -1,10 +1,9 @@
 import React from 'react'
 
 interface ICustomerCard{
-    Avatar: string,
-    Name: string,
-    Email: string,
-    Plan: string,	
+    CompanyLogo: string,
+    CompanyName: string,
+    CompanyMail: string,
     Balance: string,
     Status: string,	
     
@@ -17,22 +16,19 @@ function CustomerCard(props: ICustomerCard) {
       <td>
         <div className="d-flex align-items-center">
           <img
-              src= {props.Avatar}
+              src= {props.CompanyLogo}
               alt=""
               style={{width: "45px", height: "45px"}}
               className="rounded-circle"
               />
           <div className="ms-3">
-            <p className="fw-bold mb-1">{props.Name}</p>
-            <p className="text-muted mb-0">{props.Email}</p>
+            <p className="fw-bold mb-1">{props.CompanyName}</p>
+            <p className="text-muted mb-0">{props.CompanyMail}</p>
           </div>
         </div>
       </td>
-      <td>
-        <p className="fw-normal mb-1">{props.Plan}</p>
-      </td>
-      <td>
-        {props.Balance}
+      <td style={{paddingLeft:'60px'}}>
+        ${props.Balance}
       </td>
       <td>{props.Status}</td>
       <td>

@@ -1,10 +1,13 @@
 import React from 'react'
 
 interface IWaitCustomerCard{
-    Avatar: string,
+
     Name: string,
+    Surname: string,
     Email: string,
-    Status: string,	
+    Position: string,
+    CompanyName: string
+
     
 }
 
@@ -14,19 +17,20 @@ function WaitCustomerCard(props: IWaitCustomerCard) {
         <tr>
       <td>
         <div className="d-flex align-items-center">
-          <img
-              src= {props.Avatar}
-              alt=""
-              style={{width: "45px", height: "45px"}}
-              className="rounded-circle"
-              />
           <div className="ms-3">
-            <p className="fw-bold mb-1">{props.Name}</p>
+            <p className="fw-bold mb-1">{props.Name} {props.Surname}</p>
             <p className="text-muted mb-0">{props.Email}</p>
           </div>
         </div>
       </td>
-      <td>{props.Status}</td>
+
+      <td>
+        <div>
+          
+          <p>{props.CompanyName} / {props.Position} </p>
+        </div>
+      </td>
+
       <td>
       <div className="d-flex">
         <button type="button" className="btn btn-success btn-sm btn-rounded border text-white me-1">

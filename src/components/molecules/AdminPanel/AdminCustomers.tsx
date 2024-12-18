@@ -1,8 +1,5 @@
 import React from 'react'
-import CustomerCard from '../../atoms/CustomerCard/CustomerCard'
-import { useDispatch } from 'react-redux'
-import { hrDispatch } from '../../../stores'
-import { adminLogout } from '../../../stores/features/adminAuthSlice';
+import CustomerCard from '../../atoms/CustomerCard/CustomerCard';
 
 function AdminCustomers() {
   return (
@@ -22,21 +19,20 @@ function AdminCustomers() {
     <table className="table align-middle mb-0 bg-white">
   <thead className="bg-light">
     <tr>
-      <th>Personel Info</th>
-      <th>Plan</th>
-      <th>Balance</th>
-      <th>Status</th>
-      <th>Actions</th>
+      <th>Şirket Bilgisi</th>
+      <th >Ödenen Hizmet Bedeli</th>
+      <th>Durum</th>
+      <th>İşlemler</th>
     </tr>
   </thead>
   <tbody>
-    <CustomerCard Name='Mehmet' Email='mehmet@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/1.jpg'/>
-    <CustomerCard Name='Alex' Email='alex@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/2.jpg'/>
-    <CustomerCard Name='Alper' Email='alper@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/3.jpg'/>
-    <CustomerCard Name='Ahmet' Email='ahmet@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/4.jpg'/>
-    <CustomerCard Name='Emine' Email='emine@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/5.jpg'/>
-    <CustomerCard Name='Mehmet' Email='mehmet@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/6.jpg'/>
-    <CustomerCard Name='Mehmet' Email='mehmet@gmail.com' Plan= 'premium' Balance='100'Status='Active' Avatar='https://mdbootstrap.com/img/new/avatars/7.jpg'/>
+    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/1.jpg'/>
+    <CustomerCard CompanyName='Alex'   CompanyMail='alex@gmail.com'      Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/2.jpg'/>
+    <CustomerCard CompanyName='Alper'  CompanyMail='alper@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/3.jpg'/>
+    <CustomerCard CompanyName='Ahmet'  CompanyMail='ahmet@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/4.jpg'/>
+    <CustomerCard CompanyName='Emine'  CompanyMail='emine@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/5.jpg'/>
+    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/6.jpg'/>
+    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/7.jpg'/>
 
     
   </tbody>

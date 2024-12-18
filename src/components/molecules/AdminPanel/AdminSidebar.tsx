@@ -7,6 +7,7 @@ import { hrDispatch } from '../../../stores'
 import { adminLogin, adminLogout } from '../../../stores/features/adminAuthSlice'
 function AdminSidebar() {
   const dispatch = useDispatch<hrDispatch>();
+  
   const logout = async()=>{
     await localStorage.removeItem('adminToken');
     dispatch(adminLogout());
@@ -29,24 +30,24 @@ function AdminSidebar() {
 
       
       <li className="nav-item">
-        <NavLink to={'/admin'}>
-        <a className="nav-link fw-bold" href="#">
+        <NavLink className='nav-link-admin' to={'/admin'}>
+        <a className="nav-link fw-bold" href="#"  >
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-house"></span></span> ANASAYFA
         </a>
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink to={'/admin/customers'}>
-        <a className="nav-link fw-bold" href="#">
+        <NavLink className='nav-link-admin' to={'/admin/customers'}>
+        <a className="nav-link fw-bold"  href="#">
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-users-line"></span></span> MÜŞTERİLER
         </a>
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink to={'/admin/wait-customers'}>
-        <a className="nav-link fw-bold" href="#">
+        <NavLink className='nav-link-admin' to={'/admin/wait-customers'}>
+        <a className="nav-link fw-bold" href="#"   >
           <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-hourglass-half"></span></span> ONAY BEKLEYENLER
         </a>
         </NavLink>
@@ -55,8 +56,8 @@ function AdminSidebar() {
     </ul>
   </li>
 </ul>
-      <div className="sidebar-footer border-top d-flex">
-        <button  className="sidebar-toggler sidebar-exit-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button"></button>
+      <div className="sidebar-footer border-top d-flex" >
+        <button className="sidebar-toggler sidebar-exit-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button"></button>
       </div>
     </div>
 
