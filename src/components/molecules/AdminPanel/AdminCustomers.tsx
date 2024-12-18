@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomerCard from '../../atoms/CustomerCard/CustomerCard';
+import { ICustomers } from '../../../models/ICustomers';
+import { hrDispatch, hrUseSelector } from '../../../stores';
+import { useDispatch } from 'react-redux';
+import { fetchCustomerList } from '../../../stores/features/adminPanelSlice';
 
 function AdminCustomers() {
+  const customerCardList : ICustomers[] =hrUseSelector(state => state.adminpanel.customerList);
+  const dispatch = useDispatch<hrDispatch>();
+  useEffect(()=>{
+    dispatch(fetchCustomerList());
+  },[]);
+
   return (
     <>
     <div className='row mt-4' >
@@ -26,13 +36,17 @@ function AdminCustomers() {
     </tr>
   </thead>
   <tbody>
-    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/1.jpg'/>
-    <CustomerCard CompanyName='Alex'   CompanyMail='alex@gmail.com'      Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/2.jpg'/>
-    <CustomerCard CompanyName='Alper'  CompanyMail='alper@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/3.jpg'/>
-    <CustomerCard CompanyName='Ahmet'  CompanyMail='ahmet@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/4.jpg'/>
-    <CustomerCard CompanyName='Emine'  CompanyMail='emine@gmail.com'     Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/5.jpg'/>
-    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/6.jpg'/>
-    <CustomerCard CompanyName='Mehmet' CompanyMail='mehmet@gmail.com'    Balance='100'Status='Active'   CompanyLogo='https://mdbootstrap.com/img/new/avatars/7.jpg'/>
+    {customerCardList.map((customer,index) => {
+      return(
+      <CustomerCard key={index} companyLogo={customer.companyLogo}
+       companyName={customer.companyName}
+       companyMail={customer.companyMail}
+       totalPaymentAmount={customer.totalPaymentAmount}
+       memberShipState={customer.memberShipState}
+        />
+      );
+    })}
+    
 
     
   </tbody>
