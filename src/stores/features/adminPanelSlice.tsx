@@ -19,14 +19,14 @@ const initialWaitCustomerState: IAdminPanelState = {
 };
 
 export const fetchListUserOnWait = createAsyncThunk(
-  "userOnWait/fetchListUserOnWait",
+  "adminpanel/fetchListUserOnWait",
   async()=> {
     return await fetch(apis.adminPanelService + '/list-user-on-wait').then(data=>data.json());
   }
 )
 
 export const fetchCustomerList = createAsyncThunk(
-  "customer/fetchCustomerList ",
+  "adminpanel/fetchCustomerList ",
   async()=>{return await fetch(apis.adminPanelService+ '/list-customer').then(data=>data.json())
   }
 )

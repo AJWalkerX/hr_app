@@ -1,11 +1,11 @@
 import React from 'react'
 
 interface ICustomerCard{
-    CompanyLogo: string,
-    CompanyName: string,
-    CompanyMail: string,
-    Balance: string,
-    Status: string,	
+    companyLogo: string,
+    companyName: string,
+    companyMail: string,
+    totalPaymentAmount: number,
+    memberShipState: string,	
     
 }
 
@@ -16,21 +16,21 @@ function CustomerCard(props: ICustomerCard) {
       <td>
         <div className="d-flex align-items-center">
           <img
-              src= {props.CompanyLogo}
+              src= {props.companyLogo}
               alt=""
               style={{width: "45px", height: "45px"}}
               className="rounded-circle"
               />
           <div className="ms-3">
-            <p className="fw-bold mb-1">{props.CompanyName}</p>
-            <p className="text-muted mb-0">{props.CompanyMail}</p>
+            <p className="fw-bold mb-1">{props.companyName}</p>
+            <p className="text-muted mb-0">{props.companyMail}</p>
           </div>
         </div>
       </td>
       <td style={{paddingLeft:'60px'}}>
-        ${props.Balance}
+        ${props.totalPaymentAmount}
       </td>
-      <td>{props.Status}</td>
+      <td>{props.memberShipState}</td>
       <td>
         <button type="button" className="btn btn-link btn-sm btn-rounded">
           Edit
