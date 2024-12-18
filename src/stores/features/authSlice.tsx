@@ -8,22 +8,22 @@ import { IBaseResponse } from "../../models/IBaseResponse";
 import { IForgotPasswordRequest } from "../../models/IForgotPasswordRequest";
 import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
 import { ILoginResponse } from "../../models/ILoginResponse";
+import { IUserModel } from "../../models/IUserModel";
 
 interface IAuthState {
   loginResponse: ILoginResponse | null;
   isAuth: boolean;
   isLoginLoading: boolean;
   isRegisterLoading: boolean;
-  user: any; //todo: BURAYA MODEL EKLE! Alex
+  user: IUserModel | null;
 }
 
 const initialAuthState: IAuthState = {
   loginResponse: null,
+  user: null,
   isAuth: false,
   isLoginLoading: false,
   isRegisterLoading: false,
-
-  user: {},
 };
 
 export const fetchRegister = createAsyncThunk(

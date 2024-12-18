@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import "./Login.css"; // Stil dosyasını ayırmanızı öneririm.
 import { useDispatch } from "react-redux";
-import { hrDispatch } from "../../../stores";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import logo from "../../../img/ik-logo2.svg";
 import { fetchLogin } from "../../../stores/features/authSlice";
 import { fetchForgotPassword } from "../../../stores/features/forgotPasswordSlice";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [logoToUse, setLogoToUse] = useState(logo);
   const dispatch = useDispatch<hrDispatch>();
+  const navigate = useNavigate();
+  const [isFirstLogin, setIsFirstLogin] = useState(
+    hrUseSelector((state) => state.auth.loginResponse?.isFirstLogin)
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +39,12 @@ function Login() {
       return;
     }
     dispatch(fetchLogin(payload));
+    //TODO: Buradaki navigate kisimlarini duzenle! Alex
+    if (isFirstLogin) {
+      navigate("/register");
+    } else {
+      navigate("/");
+    }
   };
 
   const doForgotPassword = () => {
@@ -58,19 +71,44 @@ function Login() {
     <>
       <section className="vh-100 ">
         <div className="container-fluid body-login-bg-color">
-          <div className="row align-items-center">
+          <div className="row align-items-center" style={{ height: "100vh" }}>
             <div className="col-sm-6 text-black">
               <div className="px-5 ms-xl-4 text-center">
-                <i
+                <div className="row justify-content-center align-items-center">
+                  <div className="col-3"></div>
+                  <div className="col-1">
+                    <img
+                      src={logoToUse}
+                      alt=""
+                      width={"50px"}
+                      height={"50px"}
+                    />
+                  </div>
+                  {/* <i
                   className="fa-solid fa-person-through-window fa-2x me-3 pt-5 mt-xl-4"
                   style={{ color: "#fcfcfd" }}
-                ></i>
-                <span className="h1 fw-bold mb-0 text-color-login">Logo</span>
+                ></i> */}
+                  <div className="col-4 ms-4">
+                    <span className="h1 fw-bold mb-0 text-color-login">
+                      Giris Paneli
+                    </span>
+                  </div>
+                  <div className="col"></div>
+                </div>
               </div>
 
-              <div className="d-flex align-items-center px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 justify-content-center">
+              <div className="d-flex px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 justify-content-center">
                 <form style={{ width: "23rem" }}>
                   <div data-mdb-input-init className="form-outline mb-4">
+                    {isFirstLogin === true && (
+                      <input
+                        type="text"
+                        value={"false"}
+                        hidden
+                        readOnly
+                        name="isFirstLogin"
+                      />
+                    )}
                     <input
                       type="email"
                       id="form2Example18"
@@ -128,11 +166,20 @@ function Login() {
             </div>
             <div className="col-sm-6 px-0 d-none d-sm-block">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+                src="https://app.kolayik.com/assets/images/kolay-payroll.svg "
                 alt="Login image"
-                className="w-100 vh-100"
-                style={{ objectFit: "cover", objectPosition: "left" }}
+                width={"700px"}
               />
+              <div className="px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 col-9 text-center">
+                <span className="h1 fw-bold mb-0 text-color-login-2">
+                  Bordronun artık kolayı var!
+                </span>
+                <p className="text-color-login-2 mt-3">
+                  Kolay İK Bordro, kullanıcı dostu tasarımı, hatasız hesaplama
+                  yeteneği ve yasal uyumuyla ay sonu bordro stresini ortadan
+                  kaldırıyor.
+                </p>
+              </div>
             </div>
           </div>
         </div>
