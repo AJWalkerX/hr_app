@@ -8,11 +8,10 @@ const apis = {
   userService: server + "/user",
   authService: server + "/user",
 
-  commentService: server +"/comment",
+  commentService: server + "/comment",
   adminAuthService: server + "/admin",
-  commentCardService: server +"/comment",
-  adminPanelService: server + "/adminPanel"
-
+  commentCardService: server + "/comment",
+  adminPanelService: server + "/admin",
 };
 
 export default apis;

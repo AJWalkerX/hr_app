@@ -7,8 +7,18 @@ import Swal from "sweetalert2";
 import { IBaseResponse } from "../../models/IBaseResponse";
 import { IForgotPasswordRequest } from "../../models/IForgotPasswordRequest";
 import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
+import { ILoginResponse } from "../../models/ILoginResponse";
 
-const initialAuthState = {
+interface IAuthState {
+  loginResponse: ILoginResponse | null;
+  isAuth: boolean;
+  isLoginLoading: boolean;
+  isRegisterLoading: boolean;
+  user: any; //todo: BURAYA MODEL EKLE! Alex
+}
+
+const initialAuthState: IAuthState = {
+  loginResponse: null,
   isAuth: false,
   isLoginLoading: false,
   isRegisterLoading: false,
@@ -80,7 +90,10 @@ const authSlice = createSlice({
         state.isLoginLoading = false;
         if (action.payload.code === 200) {
           state.isAuth = true;
-          localStorage.setItem("token", action.payload.data);
+          state.loginResponse = action.payload.data;
+          if (state.loginResponse?.token) {
+            localStorage.setItem("token", state.loginResponse.token);
+          }
         } else if (action.payload.code === 6100) {
           Swal.fire({
             icon: "error",
