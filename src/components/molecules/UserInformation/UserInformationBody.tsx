@@ -5,7 +5,7 @@ function UserInformationBody() {
   return (
     <>
     
-        <div className="col-5">
+        <div className="col-5 ms-5">
             <h2 className='mt-5 ms-4'>Kişisel Bilgileriniz</h2>
         <input style={{height:'50px'}} className='form-control mb-2 mt-5'type="text" placeholder='Adınız'/>
         <input style={{height:'50px'}} className='form-control mb-2 'type="text" placeholder='Soyadınız'/>
@@ -34,8 +34,8 @@ function UserInformationBody() {
             <option value="OTHER">Belirtmek İstemiyorum</option>
         </select>
         </div>
-        <div className="col-2"></div>
-        <div className="col-5">
+        <div className="col-1"></div>
+        <div className="col-5 ms-4">
             <div className="row me-2">
             <h2 className='mt-5 ms-4 '>Şirket Bilgileriniz</h2>
         <input style={{height:'50px'}} className='form-control mb-2 mt-5 'type="text" placeholder='Şirket Adı'/>
@@ -66,7 +66,7 @@ function UserInformationBody() {
         <input className='form-control mb-2 mt-2'type="file" accept='image/*'/> 
         </div>
             </div>
-            <div className="row me-3 "> 
+            <div className="row me-5 "> 
                 <UserInformationButton/>
             </div>
         
