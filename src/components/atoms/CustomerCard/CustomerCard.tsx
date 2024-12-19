@@ -9,6 +9,16 @@ interface ICustomerCard {
 }
 
 function CustomerCard(props: ICustomerCard) {
+  const getButtonClass = (state: string) =>{
+    switch(state){
+      case "ACTIVE": return "btn btn-outline-success rounded-5";
+      case "INACTIVE": return"btn btn-outline-warning rounded-5";
+      case "PAUSED": return"btn btn-outline-danger rounded-5";
+      case "NONE": return"btn btn-outline-secondary rounded-5";
+      default : return"btn btn-outline-secondary rounded-5";
+
+    }
+  }
   return (
     <>
       <tr>
@@ -28,7 +38,7 @@ function CustomerCard(props: ICustomerCard) {
         </td>
         <td style={{ paddingLeft: "60px" }}>${props.totalPaymentAmount}</td>
         <td>
-          <button className="btn btn-outline-success rounded-5" disabled>
+          <button className={getButtonClass(props.memberShipState)} disabled>
             {props.memberShipState}
           </button>
         </td>
