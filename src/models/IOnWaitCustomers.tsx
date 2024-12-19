@@ -1,8 +1,7 @@
 export interface IOnWaitCustomers {
-    
-    email: string,
-    firstname: string,
-    lastname: string, 
-    companyname:string,
-    position: string,
+  firstName: string;
+  lastName: string;
+  email: string;
+  position: string;
+  companyName: string;
 }

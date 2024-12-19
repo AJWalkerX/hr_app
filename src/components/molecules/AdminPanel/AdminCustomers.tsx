@@ -11,7 +11,6 @@ function AdminCustomers() {
   );
   const dispatch = useDispatch<hrDispatch>();
   useEffect(() => {
-    console.log("customerCardList", customerCardList);
     dispatch(fetchCustomerList());
   }, [dispatch]);
 

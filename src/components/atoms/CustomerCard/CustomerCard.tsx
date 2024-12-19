@@ -4,7 +4,7 @@ interface ICustomerCard {
   companyLogo: string;
   companyName: string;
   companyMail: string;
-  totalPaymentAmount: number;
+  totalPaymentAmount: string;
   memberShipState: string;
 }
 
