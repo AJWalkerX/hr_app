@@ -7,8 +7,8 @@ import './UserInformationPage.css';  // CSS dosyasını ekleyin
 function UserInformationPage() {
   return (
     <div className="full-background">
-      <div className="container">
-        <div className="row mb-3 border">
+      <div className="container-information">
+        <div className="row mb-3 ">
           <UserInformationHeader />
         </div>
 

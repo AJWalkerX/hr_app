@@ -6,7 +6,8 @@
     align-items: center;     /* Dikeyde ortalamak için */
   }
   
-  .container {
+  .container-information {
     background-color: white; /* Container'ın içi sabit beyaz veya başka bir renk */
     height: 100vh;
+    width: 120vh;
   }
