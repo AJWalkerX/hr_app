@@ -1,0 +1,10 @@
+.saveButton{
+    width: 200px;
+    height: 75px;
+    border-radius: 30px;
+    border: none;
+    color:white ;
+    background-color: blue;
+    font-size: 26px;
+    
+}

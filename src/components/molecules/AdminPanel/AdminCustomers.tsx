@@ -42,7 +42,7 @@ function AdminCustomers() {
             <tr>
               <th>Şirket Bilgisi</th>
               <th>Ödenen Hizmet Bedeli</th>
-              <th>Durum</th>
+              <th>Plan</th>
               <th>İşlemler</th>
             </tr>
           </thead>
