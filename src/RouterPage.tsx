@@ -12,6 +12,7 @@ import { hrDispatch, hrUseSelector } from "./stores";
 import { useDispatch } from "react-redux";
 import { adminLogin, fetchAdminLogin } from "./stores/features/adminAuthSlice";
 import UserInformationPage from "./pages/UserInformationPage";
+import UserProfileSettingsPage from "./pages/UserProfileSettingsPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -33,6 +34,7 @@ function RouterPage() {
         <Route path="/admin/customers" element={isAdminLogin ? <AdminCustomersPage/> : <AdminLoginPage/>}/>
         <Route path="/admin/wait-customers" element={isAdminLogin ? <AdminWaitCustomersPage/> : <AdminLoginPage/>}/>
         <Route path="/user-information" element={<UserInformationPage />}/>
+        <Route path="/user-profile-settings" element={<UserProfileSettingsPage />}/>
         <Route
           path="/set-new-password"
           element={<SetNewPasswordPage />}
