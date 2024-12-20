@@ -6,10 +6,8 @@ function UserProfileSettingsPage() {
   return (
     <>
     <div className="container-profile-settings ">
-
       <UserProfileSettings/>
     </div>
-      
     </>
   )
 }
