@@ -80,7 +80,7 @@ const UserProfileSettings: React.FC = () => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                name="phoneNumber"
+                name="identityNumber"
                 value={formData.identityNumber}
                 onChange={handleInputChange}
               />
@@ -91,7 +91,7 @@ const UserProfileSettings: React.FC = () => {
                 type="date"
                 className="form-control"
                 placeholder=""
-                name="addressLine1"
+                name="dateOfBirth"
                 value={formData.dateOfBirth}
                 onChange={handleInputChange}
               />
@@ -102,7 +102,7 @@ const UserProfileSettings: React.FC = () => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                name="addressLine2"
+                name="mobileNumber"
                 value={formData.mobileNumber}
                 onChange={handleInputChange}
               />
@@ -113,7 +113,7 @@ const UserProfileSettings: React.FC = () => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                name="postcode"
+                name="address"
                 value={formData.address}
                 onChange={handleInputChange}
               />
@@ -125,7 +125,7 @@ const UserProfileSettings: React.FC = () => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                name="area"
+                name="email"
                 value={formData.email}
                 onChange={handleInputChange}
               />
@@ -137,7 +137,7 @@ const UserProfileSettings: React.FC = () => {
                 type="date"
                 className="form-control"
                 placeholder=""
-                name="education"
+                name="dateOfEmployment"
                 value={formData.dateOfEmployment}
                 onChange={handleInputChange}
               />
@@ -149,7 +149,7 @@ const UserProfileSettings: React.FC = () => {
                   type="text"
                   className="form-control"
                   placeholder=""
-                  name="SGK"
+                  name="socialSecurityNumber"
                   value={formData.socialSecurityNumber}
                   onChange={handleInputChange}
                 />
