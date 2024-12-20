@@ -5,12 +5,15 @@ import { IBaseResponse } from "../../models/IBaseResponse";
 import { ICustomers } from "../../models/ICustomers";
 import { IUserIdRequest } from "../../models/IUSerIdRequest";
 import { IUserAuthorize } from "../../models/IUserAuthorize";
+import { IUpdateCustomerRequest } from "../../models/IUpdateCustomerRequest";
 
 interface IAdminPanelState {
   onWaitCustomerList: IOnWaitCustomers[];
   isOnWaitCustomerListLoading: boolean;
   customerList: ICustomers[];
   isCustomerListLoading: boolean;
+  customer: ICustomers | null;
+  isCustomerUpdateLoading: boolean;
 }
 
 const initialWaitCustomerState: IAdminPanelState = {
@@ -18,6 +21,8 @@ const initialWaitCustomerState: IAdminPanelState = {
   isOnWaitCustomerListLoading: false,
   customerList: [],
   isCustomerListLoading: false,
+  customer: null,
+  isCustomerUpdateLoading: false,
 };
 
 export const fetchListUserOnWait = createAsyncThunk(
@@ -52,6 +57,24 @@ export const fetchUserAuthorisation = createAsyncThunk(
     ).then((data) => data.json());
     return response;
   }
+);
+
+export const fetchUpdateCustomer = createAsyncThunk(
+  "adminpanel/fetchUpdateCustomer",
+  async (payload: IUpdateCustomerRequest) => {
+    const response = await fetch(apis.adminPanelService +"/update-company",{
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+
+
+    }).then((data) => data.json());
+    return response;
+
+  }
+
 );
 
 const adminPanelSlice = createSlice({
@@ -100,6 +123,17 @@ const adminPanelSlice = createSlice({
         state.customerList = action.payload.data;
       }
     });
+    build.addCase(fetchUpdateCustomer.pending, (state) =>{
+      state.isCustomerUpdateLoading = true;
+       });
+    build.addCase(fetchUpdateCustomer.fulfilled,
+      (state, action : PayloadAction<IBaseResponse>) =>{
+        state.isCustomerUpdateLoading =false;
+        if(action.payload.code===200){
+          state.customer = action.payload.data;
+        }
+      }
+    )
   },
 });
 export const { removeUserFromList } = adminPanelSlice.actions;
