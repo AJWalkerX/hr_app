@@ -50,6 +50,7 @@ function AdminCustomers() {
               return (
                 <CustomerCard
                   key={index}
+                  companyId={customer.companyId}
                   companyLogo={customer.companyLogo}
                   companyName={customer.companyName}
                   companyMail={customer.companyMail}
