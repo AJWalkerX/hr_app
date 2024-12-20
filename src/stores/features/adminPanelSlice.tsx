@@ -3,6 +3,8 @@ import { IOnWaitCustomers } from "../../models/IOnWaitCustomers";
 import apis from "../../config/RestApis";
 import { IBaseResponse } from "../../models/IBaseResponse";
 import { ICustomers } from "../../models/ICustomers";
+import { IUserIdRequest } from "../../models/IUSerIdRequest";
+import { IUserAuthorize } from "../../models/IUserAuthorize";
 
 interface IAdminPanelState {
   onWaitCustomerList: IOnWaitCustomers[];
@@ -35,11 +37,33 @@ export const fetchCustomerList = createAsyncThunk(
     );
   }
 );
+export const fetchUserAuthorisation = createAsyncThunk(
+  "adminpanel/fetchUserAuthorisation",
+  async (payload: IUserAuthorize) => {
+    const response = await fetch(
+      apis.adminPanelService + "/user-authorisation",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    ).then((data) => data.json());
+    return response;
+  }
+);
 
 const adminPanelSlice = createSlice({
   name: "adminpanel",
   initialState: initialWaitCustomerState,
-  reducers: {},
+  reducers: {
+    removeUserFromList: (state, action: PayloadAction<number>) => {
+      state.onWaitCustomerList = state.onWaitCustomerList.filter(
+        (user) => user.userId !== action.payload
+      );
+    },
+  },
 
   extraReducers: (build) => {
     build.addCase(fetchListUserOnWait.pending, (state) => {
@@ -67,6 +91,16 @@ const adminPanelSlice = createSlice({
         }
       }
     );
+    build.addCase(fetchUserAuthorisation.pending, (state) => {
+      state.isOnWaitCustomerListLoading = true;
+    });
+    build.addCase(fetchUserAuthorisation.fulfilled, (state, action) => {
+      state.isOnWaitCustomerListLoading = false;
+      if (action.payload.code === 200) {
+        state.customerList = action.payload.data;
+      }
+    });
   },
 });
+export const { removeUserFromList } = adminPanelSlice.actions;
 export default adminPanelSlice.reducer;

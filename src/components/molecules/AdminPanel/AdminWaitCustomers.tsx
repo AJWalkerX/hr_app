@@ -47,8 +47,10 @@ function AdminWaitCustomers() {
             </tr>
           </thead>
           <tbody>
-            {waitCustomerList.map((item) => (
+            {waitCustomerList.map((item, index) => (
               <WaitCustomerCard
+                key={index}
+                userId={item.userId}
                 Name={item.firstName}
                 Surname={item.lastName}
                 Email={item.email}
