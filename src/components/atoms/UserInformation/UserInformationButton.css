@@ -1,10 +1,17 @@
 .saveButton{
-    width: 200px;
-    height: 75px;
+    width: 180px;
+    height: 60px;
     border-radius: 30px;
     border: none;
     color:white ;
-    background-color: blue;
+    background-color: #006ea6;
     font-size: 26px;
+    margin-top: 70px;
+    margin-top: 210px;
+   
     
+}
+
+.saveButton:hover{
+    background-color:  #7FA1C3 ;
 }
