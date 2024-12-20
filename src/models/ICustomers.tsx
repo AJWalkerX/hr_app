@@ -1,4 +1,5 @@
 export interface ICustomers {
+  companyId: number;
   companyLogo: string;
   companyName: string;
   companyMail: string;

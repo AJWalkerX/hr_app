@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ICustomers } from "../../../models/ICustomers";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { fetchUpdateCustomer } from "../../../stores/features/adminPanelSlice";
+import { IUpdateCustomerRequest } from "../../../models/IUpdateCustomerRequest";
 
 interface ICustomerCard {
+  companyId: number;
   companyLogo: string;
   companyName: string;
   companyMail: string;
@@ -10,10 +16,35 @@ interface ICustomerCard {
   companyType: string;
   companyRegion: string;
   totalPaymentAmount: string;
+
 }
 
 function CustomerCard(props: ICustomerCard) {
-  // Ana state'ler
+  
+   // Redux customer state
+   const customer = hrUseSelector((state) => state.adminpanel.customer);
+   const dispatch = useDispatch<hrDispatch>();
+ 
+   useEffect(() => {
+     if (customer) {
+       // Sadece customer varsa update işlemi başlatılır
+       const payload: IUpdateCustomerRequest = {
+            companyId: customer.companyId,
+            companyLogo: customer.companyLogo,
+            companyName:customer.companyName,
+            companyMail: customer.companyMail,
+            companyAddress : customer.companyAddress,
+            telNo: customer.companyTelNo,
+            companyType: customer.companyType,
+            region: customer.companyRegion,
+            memberType: customer.memberShipState
+       };
+       dispatch(fetchUpdateCustomer(payload));
+     }
+   }, [customer, dispatch]);
+
+
+
   const [companyName, setCompanyName] = useState(props.companyName);
   const [companyMail, setCompanyMail] = useState(props.companyMail);
   const [companyAddress, setCompanyAddress] = useState(props.companyAddress);
