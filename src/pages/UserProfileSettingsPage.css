@@ -1,0 +1,13 @@
+.full-background {
+    background-color: #d5efff;
+    min-height: 100vh; /* Sayfanın tamamını kaplamak için */
+    display: flex;
+    justify-content: center; /* Ortaya hizalamak için */
+    align-items: center;     /* Dikeyde ortalamak için */
+  }
+  
+  .container-profile-settings {
+    background-color: white; /* Container'ın içi sabit beyaz veya başka bir renk */
+    height: 100vh;
+    
+  }
