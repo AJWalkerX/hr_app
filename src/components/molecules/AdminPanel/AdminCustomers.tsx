@@ -55,6 +55,12 @@ function AdminCustomers() {
                   companyMail={customer.companyMail}
                   totalPaymentAmount={customer.totalPaymentAmount}
                   memberShipState={customer.memberShipState}
+                  companyAddress={customer.companyAddress}
+                  companyTelNo={customer.companyTelNo}
+                  companyType={customer.companyType}
+                  companyRegion={customer.companyRegion}
+
+
                 />
               );
             })}

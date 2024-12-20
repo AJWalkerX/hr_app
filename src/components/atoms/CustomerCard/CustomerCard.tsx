@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface ICustomerCard {
   companyLogo: string;
   companyName: string;
   companyMail: string;
-  totalPaymentAmount: string;
   memberShipState: string;
+  companyAddress: string;
+  companyTelNo: string;
+  companyType: string;
+  companyRegion: string;
+  totalPaymentAmount: string;
 }
 
 function CustomerCard(props: ICustomerCard) {
+  // Ana state'ler
+  const [companyName, setCompanyName] = useState(props.companyName);
+  const [companyMail, setCompanyMail] = useState(props.companyMail);
+  const [companyAddress, setCompanyAddress] = useState(props.companyAddress);
+  const [companyTelNo, setCompanyTelNo] = useState(props.companyTelNo);
+  const [companyType, setCompanyType] = useState(props.companyType);
+  const [companyRegion, setCompanyRegion] = useState(props.companyRegion);
+  const [companyLogo, setCompanyLogo] = useState(props.companyLogo);
+
+  // Geçici state'ler (modal için)
+  const [tempCompanyName, setTempCompanyName] = useState(companyName);
+  const [tempCompanyMail, setTempCompanyMail] = useState(companyMail);
+  const [tempCompanyAddress, setTempCompanyAddress] = useState(companyAddress);
+  const [tempCompanyTelNo, setTempCompanyTelNo] = useState(companyTelNo);
+  const [tempCompanyType, setTempCompanyType] = useState(companyType);
+  const [tempCompanyRegion, setTempCompanyRegion] = useState(companyRegion);
+  const [tempCompanyLogo, setTempCompanyLogo] = useState(companyLogo);
+
   const getButtonClass = (state: string) => {
     switch (state) {
       case "ACTIVE":
@@ -23,20 +45,53 @@ function CustomerCard(props: ICustomerCard) {
         return "btn btn-outline-secondary rounded-5";
     }
   };
+
+  // Modal açıldığında geçici state'leri sıfırla
+  const handleModalOpen = () => {
+    setTempCompanyName(companyName);
+    setTempCompanyMail(companyMail);
+    setTempCompanyAddress(companyAddress);
+    setTempCompanyTelNo(companyTelNo);
+    setTempCompanyType(companyType);
+    setTempCompanyRegion(companyRegion);
+    setTempCompanyLogo(companyLogo);
+  };
+
+  const handleSave = () => {
+    // Geçici state'lerdeki değerleri ana state'lere aktar
+    setCompanyName(tempCompanyName);
+    setCompanyMail(tempCompanyMail);
+    setCompanyAddress(tempCompanyAddress);
+    setCompanyTelNo(tempCompanyTelNo);
+    setCompanyType(tempCompanyType);
+    setCompanyRegion(tempCompanyRegion);
+    setCompanyLogo(tempCompanyLogo);
+
+    console.log("Veriler kaydedildi:", {
+      companyName: tempCompanyName,
+      companyMail: tempCompanyMail,
+      companyAddress: tempCompanyAddress,
+      companyTelNo: tempCompanyTelNo,
+      companyType: tempCompanyType,
+      companyRegion: tempCompanyRegion,
+      companyLogo: tempCompanyLogo,
+    });
+  };
+
   return (
     <>
       <tr>
         <td>
           <div className="d-flex align-items-center">
             <img
-              src={props.companyLogo}
+              src={companyLogo}
               alt=""
               style={{ width: "45px", height: "45px" }}
               className="rounded-circle"
             />
             <div className="ms-3">
-              <p className="fw-bold mb-1">{props.companyName}</p>
-              <p className="text-muted mb-0">{props.companyMail}</p>
+              <p className="fw-bold mb-1">{companyName}</p>
+              <p className="text-muted mb-0">{companyMail}</p>
             </div>
           </div>
         </td>
@@ -52,11 +107,13 @@ function CustomerCard(props: ICustomerCard) {
             className="btn btn-link btn-sm btn-rounded"
             data-bs-toggle="modal"
             data-bs-target="#customerEdit"
+            onClick={handleModalOpen}
           >
             Edit
           </button>
         </td>
       </tr>
+
       <div
         className="modal fade"
         id="customerEdit"
@@ -69,7 +126,7 @@ function CustomerCard(props: ICustomerCard) {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="customerEdit">
-                Sifre Sifirlama
+                Şirket Bilgileri Güncelleme
               </h1>
               <button
                 type="button"
@@ -79,22 +136,111 @@ function CustomerCard(props: ICustomerCard) {
               ></button>
             </div>
             <div className="modal-body">
+              <label htmlFor="companyLogo" className="form-label">
+                Şirket Logosu Yükleyin
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="companyLogo"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files ? e.target.files[0] : null;
+                  if (file) {
+                    setTempCompanyLogo(URL.createObjectURL(file));
+                  }
+                }}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Şirket Adınızı Giriniz"
+                value={tempCompanyName}
+                onChange={(e) => setTempCompanyName(e.target.value)}
+              />
+            </div>
+            <div className="modal-body">
               <input
                 type="text"
                 className="form-control"
                 placeholder="Mail Adresinizi Giriniz"
+                value={tempCompanyMail}
+                onChange={(e) => setTempCompanyMail(e.target.value)}
               />
             </div>
+            <div className="modal-body">
+              <input
+                readOnly
+                type="text"
+                className="form-control"
+                placeholder="Üyelik Planınızı Giriniz"
+                value={props.memberShipState}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Şirket Adresinizi Giriniz"
+                value={tempCompanyAddress}
+                onChange={(e) => setTempCompanyAddress(e.target.value)}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Şirket Telefon Numaranızı Giriniz"
+                value={tempCompanyTelNo}
+                onChange={(e) => setTempCompanyTelNo(e.target.value)}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Şirket Bölgesini Giriniz"
+                value={tempCompanyRegion}
+                onChange={(e) => setTempCompanyRegion(e.target.value)}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Şirket Türünü Giriniz"
+                value={tempCompanyType}
+                onChange={(e) => setTempCompanyType(e.target.value)}
+              />
+            </div>
+            <div className="modal-body">
+              <input
+                readOnly
+                type="text"
+                className="form-control"
+                placeholder="Ödenen Hizmet Bedelini Giriniz"
+                value={props.totalPaymentAmount}
+              />
+            </div>
+
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Kapat
+                İptal
               </button>
-              <button type="button" className="btn btn-primary">
-                Gonder
+              <button
+                type="button"
+                className="btn btn-success"
+                style={{ color: "white" }}
+                data-bs-dismiss="modal"
+                onClick={handleSave}
+              >
+                Kaydet
               </button>
             </div>
           </div>
