@@ -10,5 +10,5 @@ export interface IUserProfileSettings {
     position: string;
     dateOfEmployment: number;
     socialSecurityNumber: string;
-  
+    
 }
