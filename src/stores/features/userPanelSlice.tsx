@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import React from 'react'
 import apis from '../../config/RestApis';
+import { IBaseResponse } from "../../models/IBaseResponse";
 
 
 interface IUserProfileSettings{
@@ -15,12 +16,13 @@ const initialUserProfileSettingsState: IUserProfileSettings = {
 
 export const fetchUserProfileSettings = createAsyncThunk(
     "userpanel/fetchUserProfileSettings",
-    async () =>{
-        return await fetch(apis.userPanelService + "/user-profile-settings").then(
-            (data) => data.json()
-        );
+    async ( ) =>{
+        const token = localStorage.getItem("token");
+        return await fetch(apis.userService + "/get-user-profile-info?token=" + token)
+        .then((data) => data.json())
     }
 );
+
 
 const userPanelSlice = createSlice({
     name:"userpanel",
@@ -28,7 +30,20 @@ const userPanelSlice = createSlice({
     reducers: {
 
         
+    },
+
+    extraReducers: (build) =>{
+
+        build.addCase(fetchUserProfileSettings.pending,(state)=>{state.isUserProfileSettingsLoading = true});
+        build.addCase(fetchUserProfileSettings.fulfilled,(state,action: PayloadAction<IBaseResponse>) => {
+            state.isUserProfileSettingsLoading = false;
+            if(action.payload.code === 200) {
+                state.userProfileSettings = action.payload.data;
+            }
+        });
     }
+
 })
 
+export default userPanelSlice.reducer;
 
