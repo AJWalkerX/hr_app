@@ -5,8 +5,8 @@ export interface IUpdateCustomerRequest{
      companyName:string
      companyMail: string
      companyAddress :string
-     telNo: string
+     companyTelNo: string
      companyType: string
-     region: string
-     memberType: string
+     companyRegion: string
+
 }
