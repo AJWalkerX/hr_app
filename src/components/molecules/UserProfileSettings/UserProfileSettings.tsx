@@ -31,7 +31,7 @@ const UserProfileSettings: React.FC = () => {
 
   return (
     <div className="row">
-      <div className="col-md-3 border-right">
+      <div className="col-md-3 border-right" style={{backgroundColor:'rgb(10, 57, 129)'}}>
         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
           <img
             className="rounded-circle mt-5"
@@ -39,8 +39,8 @@ const UserProfileSettings: React.FC = () => {
             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             alt="Profile"
           />
-          <span className="font-weight-bold">Edogaru</span>
-          <span className="text-black-50">edogaru@mail.com.my</span>
+          <span className="font-weight-bold text-white" >Edogaru</span>
+          <span className="text-white">edogaru@mail.com.my</span>
         </div>
       </div>
 
