@@ -38,7 +38,9 @@ const initialcompanyState: ICompanyState = {
   const companySlice = createSlice({
     name: "company",
     initialState: initialcompanyState,
-    reducers: {},
+    reducers: {
+ 
+    },
 
     extraReducers: (build) =>{
         build.addCase(fetchUpdateCustomer.pending, (state) =>{

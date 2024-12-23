@@ -4,23 +4,24 @@ import { IUserPermitResponse } from '../../../models/Response/IUserPermitRespons
 function UserPermitCard(props: IUserPermitResponse) {
   return (
     <tr>
-      <th scope="row">{props.userId}</th>
-      <td>
+      <th scope="row " style={{ verticalAlign: 'middle' }}>{props.userId}</th>
+      <td style={{ verticalAlign: 'middle' }}>
         <img
           src={props.avatar}
-          style={{ width: '50px', borderRadius: '50%' }}
+          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
           alt="Avatar"
         />
       </td>
-      <td>
-        <p>{props.firstName} {props.lastName}</p>
+      <td style={{ verticalAlign: 'middle' }} >
+        <>{props.firstName} {props.lastName}</>
       </td>
-      <td>{props.position}</td>
-      <td>{props.employmentStatus}</td>
-      <td>
+      <td style={{ verticalAlign: 'middle' }}>{props.position}</td>
+      <td style={{ verticalAlign: 'middle' }}>{props.employmentStatus}</td>
+      <td style={{ verticalAlign: 'middle' }}>
         <button
+        style={{color:'white'}}
           type="button"
-          className="btn btn-link btn-sm btn-rounded"
+          className="btn btn-success"
           data-bs-toggle="modal"
           data-bs-target={`#user${props.userId}`}
         >
