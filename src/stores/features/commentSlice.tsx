@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICommentResponse } from "../../models/ICommentResponse";
+import { ICommentResponse } from "../../models/Response/ICommentResponse";
 import apis from "../../config/RestApis";
 import reducer from "./authSlice";
-import { IBaseResponse } from "../../models/IBaseResponse";
+import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { ICommentCard } from "../../models/ICommentCard";
 
 

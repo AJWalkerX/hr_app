@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IForgotPasswordRequest } from "../../models/IForgotPasswordRequest";
+import { IForgotPasswordRequest } from "../../models/Request/IForgotPasswordRequest";
 import apis from "../../config/RestApis";
-import { IBaseResponse } from "../../models/IBaseResponse";
+import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import Swal from "sweetalert2";
 import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
 

@@ -8,8 +8,9 @@ const store = configureStore({
     adminAuth: adminAuthSlice,
     comment: commentSlice,
     forgotPassword: forgotPasswordSlice,
-    adminpanel: adminPanelSlice, 
+    adminpanel: adminPanelSlice ,
     userpanel : userPanelSlice
+
   },
 });
 

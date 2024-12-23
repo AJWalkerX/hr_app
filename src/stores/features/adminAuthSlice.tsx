@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAdminLoginRequest } from "../../models/IAdminLoginRequest";
+import { IAdminLoginRequest } from "../../models/Request/IAdminLoginRequest";
 import apis from "../../config/RestApis";
-import { IBaseResponse } from "../../models/IBaseResponse";
+import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import Swal from "sweetalert2";
 import { authSlice } from ".";
 

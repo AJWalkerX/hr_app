@@ -9,7 +9,7 @@ import { hrDispatch, hrUseSelector} from "../../../stores";
 import { fetchGetAllComments } from "../../../stores/features/commentSlice";
 import CommentCard from "../../atoms/CommentCard/CommentCard";
 import { ICommentCard } from "../../../models/ICommentCard";
-import { ICommentResponse } from "../../../models/ICommentResponse";
+import { ICommentResponse } from "../../../models/Response/ICommentResponse";
 
 
 const UserComments = () => {

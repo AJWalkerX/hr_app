@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import CustomerCard from "../../atoms/CustomerCard/CustomerCard";
-import { ICustomers } from "../../../models/ICustomers";
+import { ICustomers } from "../../../models/Response/ICustomersResponse";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { fetchCustomerList } from "../../../stores/features/adminPanelSlice";
@@ -60,6 +60,7 @@ function AdminCustomers() {
                   companyTelNo={customer.companyTelNo}
                   companyType={customer.companyType}
                   companyRegion={customer.companyRegion}
+                 
 
 
                 />

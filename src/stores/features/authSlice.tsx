@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { create } from "domain";
-import { ILoginRequest } from "../../models/ILoginRequest";
+import { ILoginRequest } from "../../models/Request/ILoginRequest";
 import apis from "../../config/RestApis";
-import { IRegisterRequest } from "../../models/IRegisterRequest";
+import { IRegisterRequest } from "../../models/Request/IRegisterRequest";
 import Swal from "sweetalert2";
-import { IBaseResponse } from "../../models/IBaseResponse";
-import { IForgotPasswordRequest } from "../../models/IForgotPasswordRequest";
+import { IBaseResponse } from "../../models/Response/IBaseResponse";
+import { IForgotPasswordRequest } from "../../models/Request/IForgotPasswordRequest";
 import { INewPasswordRequest } from "../../models/INewForgotPasswordRequest";
-import { ILoginResponse } from "../../models/ILoginResponse";
+import { ILoginResponse } from "../../models/Response/ILoginResponse";
 import { IUserModel } from "../../models/IUserModel";
 
 interface IAuthState {
