@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import React from 'react'
 import apis from '../../config/RestApis';
-import { IBaseResponse } from "../../models/IBaseResponse";
+import { IBaseResponse } from "../../models/Response/IBaseResponse";
 
 
 interface IUserProfileSettings{
