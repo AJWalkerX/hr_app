@@ -4,5 +4,6 @@ import forgotPasswordSlice from "./forgotPasswordSlice";
 import adminAuthSlice from "./adminAuthSlice";
 import adminPanelSlice from "./adminPanelSlice";
 import userPanelSlice from "./userPanelSlice";
+import companySlice from "./companySlice"
 
-export { authSlice, commentSlice, forgotPasswordSlice, adminAuthSlice,adminPanelSlice, userPanelSlice};
+export { authSlice, commentSlice, forgotPasswordSlice, adminAuthSlice,adminPanelSlice, userPanelSlice, companySlice};
