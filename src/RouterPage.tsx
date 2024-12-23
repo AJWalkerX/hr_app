@@ -34,7 +34,7 @@ function RouterPage() {
         <Route path="/admin/customers" element={isAdminLogin ? <AdminCustomersPage/> : <AdminLoginPage/>}/>
         <Route path="/admin/wait-customers" element={isAdminLogin ? <AdminWaitCustomersPage/> : <AdminLoginPage/>}/>
         <Route path="/user-information" element={<UserInformationPage />}/>
-        <Route path="/user-profile-settings" element={<UserProfileSettingsPage />}/>
+        <Route path="/profile" element={<UserProfileSettingsPage />}/>
         <Route
           path="/set-new-password"
           element={<SetNewPasswordPage />}

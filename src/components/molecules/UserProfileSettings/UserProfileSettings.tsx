@@ -1,37 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserProfileSettings.css";
 import { IUserProfileSettings } from "../../../models/IUserProfileSettings";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { fetchUserProfileSettings } from "../../../stores/features/userPanelSlice";
 
-const UserProfileSettings: React.FC = () => {
-  const [formData, setFormData] = useState<IUserProfileSettings>({
-    firstName: "",
-    lastName: "",
-    identityNumber: "",
-    dateOfBirth: 0,
-    mobileNumber: "",
-    address: "",
-    gender: "",
-    email: "",
-    position: "",
-    dateOfEmployment: 0,
-    socialSecurityNumber: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSaveProfile = () => {
-    console.log("Profile saved:", formData);
-  };
+const UserProfileSettings  = () => {
+  const profile: IUserProfileSettings | any= hrUseSelector(state=> state.userpanel.userProfileSettings);
+  
+  const dispatch = useDispatch<hrDispatch>();
+  useEffect(()=>{
+      dispatch(fetchUserProfileSettings())
+      
+  },[]);
+    
 
   return (
     <div className="row">
-      <div className="col-md-3 border-right">
+      <div className="col-md-3 border-right" style={{backgroundColor:'rgb(10, 57, 129)'}}>
         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
           <img
             className="rounded-circle mt-5"
@@ -39,8 +25,8 @@ const UserProfileSettings: React.FC = () => {
             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             alt="Profile"
           />
-          <span className="font-weight-bold">Edogaru</span>
-          <span className="text-black-50">edogaru@mail.com.my</span>
+          <span className="font-weight-bold text-white" ><input type="text" value={profile?.firstName || ''} />  </span>
+          <span className="text-white"  > <input type="text" value={profile?.email || ''} />  </span>
         </div>
       </div>
 
@@ -57,8 +43,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
+                value={profile?.firstName || ''}
+                readOnly
               />
             </div>
             <div className="col-md-6">
@@ -68,8 +54,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
+                value={profile?.lastName || ''}
+                readOnly
               />
             </div>
           </div>
@@ -81,8 +67,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="identityNumber"
-                value={formData.identityNumber}
-                onChange={handleInputChange}
+                value={profile?.identityNumber || ''}
+                readOnly
               />
             </div>
             <div className="col-md-12">
@@ -92,8 +78,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleInputChange}
+                value={profile?.dateOfBirth || ''}
+                readOnly
               />
             </div>
             <div className="col-md-12">
@@ -103,8 +89,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="mobileNumber"
-                value={formData.mobileNumber}
-                onChange={handleInputChange}
+                value={profile?.mobileNumber || ''}
+                readOnly
               />
             </div>
             <div className="col-md-12">
@@ -114,8 +100,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="address"
-                value={formData.address}
-                onChange={handleInputChange}
+                value={profile?.address || ''}
+                readOnly
               />
             </div>
 
@@ -126,8 +112,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="email"
-                value={formData.email}
-                onChange={handleInputChange}
+                value={profile?.email || ''}
+                readOnly
               />
             </div>
 
@@ -138,8 +124,8 @@ const UserProfileSettings: React.FC = () => {
                 className="form-control"
                 placeholder=""
                 name="dateOfEmployment"
-                value={formData.dateOfEmployment}
-                onChange={handleInputChange}
+                value={profile?.dateOfEmployment || ''}
+                readOnly
               />
             </div>
             
@@ -150,8 +136,8 @@ const UserProfileSettings: React.FC = () => {
                   className="form-control"
                   placeholder=""
                   name="socialSecurityNumber"
-                  value={formData.socialSecurityNumber}
-                  onChange={handleInputChange}
+                  value={profile?.socialSecurityNumber || ''}
+                  readOnly
                 />
               </div>
               <div className="col-md-12">
@@ -185,7 +171,7 @@ const UserProfileSettings: React.FC = () => {
             <button
               className="btn btn-primary profile-button"
               type="button"
-              onClick={handleSaveProfile}
+              
             >
               Kaydet
             </button>

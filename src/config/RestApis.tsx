@@ -12,7 +12,12 @@ const apis = {
   adminAuthService: server + "/admin",
   commentCardService: server + "/comment",
   adminPanelService: server + "/admin",
+
   
+
+  userPanelService: server +"/user-panel"
+
+
 };
 
 export default apis;
