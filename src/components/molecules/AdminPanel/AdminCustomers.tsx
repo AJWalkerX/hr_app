@@ -10,6 +10,7 @@ function AdminCustomers() {
     (state) => state.adminpanel.customerList
   );
   const dispatch = useDispatch<hrDispatch>();
+
   useEffect(() => {
     dispatch(fetchCustomerList());
   }, [dispatch]);
@@ -46,26 +47,29 @@ function AdminCustomers() {
             </tr>
           </thead>
           <tbody>
-            {customerCardList.map((customer, index) => {
-              return (
-                <CustomerCard
-                  key={index}
-                  companyId={customer.companyId}
-                  companyLogo={customer.companyLogo}
-                  companyName={customer.companyName}
-                  companyMail={customer.companyMail}
-                  totalPaymentAmount={customer.totalPaymentAmount}
-                  memberShipState={customer.memberShipState}
-                  companyAddress={customer.companyAddress}
-                  companyTelNo={customer.companyTelNo}
-                  companyType={customer.companyType}
-                  companyRegion={customer.companyRegion}
-                 
-
-
-                />
-              );
-            })}
+            {Array.isArray(customerCardList) ? (
+              customerCardList.map((customer, index) => {
+                return (
+                  <CustomerCard
+                    key={index}
+                    companyId={customer.companyId}
+                    companyLogo={customer.companyLogo}
+                    companyName={customer.companyName}
+                    companyMail={customer.companyMail}
+                    totalPaymentAmount={customer.totalPaymentAmount}
+                    memberShipState={customer.memberShipState}
+                    companyAddress={customer.companyAddress}
+                    companyTelNo={customer.companyTelNo}
+                    companyType={customer.companyType}
+                    companyRegion={customer.companyRegion}
+                  />
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={4}>Müşteri bilgileri yüklenemedi.</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

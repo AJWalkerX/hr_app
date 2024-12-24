@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
 import {
+  emptyCustomerList,
   fetchListUserOnWait,
   fetchUserAuthorisation,
   removeUserFromList,
@@ -21,12 +22,14 @@ function WaitCustomerCard(props: IWaitCustomerCard) {
   const doUserAccept = () => {
     const answer = "accept"; // Değeri doğrudan burada belirtiyoruz
     dispatch(removeUserFromList(props.userId));
+    dispatch(emptyCustomerList());
     dispatch(fetchUserAuthorisation({ userId: props.userId, answer }));
   };
 
   const doUserDenied = () => {
     const answer = "deny"; // Değeri doğrudan burada belirtiyoruz
     dispatch(removeUserFromList(props.userId));
+    dispatch(emptyCustomerList());
     dispatch(fetchUserAuthorisation({ userId: props.userId, answer }));
   };
   return (

@@ -12,7 +12,6 @@ interface IAdminPanelState {
   isOnWaitCustomerListLoading: boolean;
   customerList: ICustomers[];
   isCustomerListLoading: boolean;
-  
 }
 
 const initialWaitCustomerState: IAdminPanelState = {
@@ -20,7 +19,6 @@ const initialWaitCustomerState: IAdminPanelState = {
   isOnWaitCustomerListLoading: false,
   customerList: [],
   isCustomerListLoading: false,
- 
 };
 
 export const fetchListUserOnWait = createAsyncThunk(
@@ -57,8 +55,6 @@ export const fetchUserAuthorisation = createAsyncThunk(
   }
 );
 
-
-
 const adminPanelSlice = createSlice({
   name: "adminpanel",
   initialState: initialWaitCustomerState,
@@ -67,6 +63,9 @@ const adminPanelSlice = createSlice({
       state.onWaitCustomerList = state.onWaitCustomerList.filter(
         (user) => user.userId !== action.payload
       );
+    },
+    emptyCustomerList: (state) => {
+      state.customerList = [];
     },
   },
 
@@ -93,6 +92,9 @@ const adminPanelSlice = createSlice({
         state.isCustomerListLoading = false;
         if (action.payload.code === 200) {
           state.customerList = action.payload.data;
+        } else {
+          console.error("Unexpected data format:", action.payload);
+          state.customerList = [];
         }
       }
     );
@@ -105,8 +107,8 @@ const adminPanelSlice = createSlice({
         state.customerList = action.payload.data;
       }
     });
-   
   },
 });
+export const { emptyCustomerList } = adminPanelSlice.actions;
 export const { removeUserFromList } = adminPanelSlice.actions;
 export default adminPanelSlice.reducer;
