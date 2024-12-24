@@ -24,23 +24,30 @@ const initialWaitCustomerState: IAdminPanelState = {
 export const fetchListUserOnWait = createAsyncThunk(
   "adminpanel/fetchListUserOnWait",
   async () => {
-    return await fetch(apis.adminPanelService + "/list-user-on-wait").then(
-      (data) => data.json()
-    );
+    const adminToken = localStorage.getItem("adminToken");
+    return await fetch(
+      apis.adminPanelService + "/list-user-on-wait?token=" + adminToken
+    ).then((data) => data.json());
   }
 );
 
 export const fetchCustomerList = createAsyncThunk(
   "adminpanel/fetchCustomerList ",
   async () => {
-    return await fetch(apis.adminPanelService + "/list-customer").then((data) =>
-      data.json()
-    );
+    const adminToken = localStorage.getItem("adminToken");
+    return await fetch(
+      apis.adminPanelService + "/list-customer?token=" + adminToken
+    ).then((data) => data.json());
   }
 );
 export const fetchUserAuthorisation = createAsyncThunk(
   "adminpanel/fetchUserAuthorisation",
   async (payload: IUserAuthorize) => {
+    const adminToken = localStorage.getItem("adminToken");
+    const requestBody = {
+      ...payload,
+      adminToken: adminToken,
+    };
     const response = await fetch(
       apis.adminPanelService + "/user-authorisation",
       {
@@ -48,7 +55,7 @@ export const fetchUserAuthorisation = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(requestBody),
       }
     ).then((data) => data.json());
     return response;
