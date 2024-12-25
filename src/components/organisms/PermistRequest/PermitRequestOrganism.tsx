@@ -21,26 +21,15 @@ function PermitRequestOrganism() {
       <div className="row justify-content-center">
         <img src={permitLogo} style={{ width: '300px', height: '250px' }} alt="Permit Logo" />
       </div>
-      <div className="row text-center">
-        <h1>Personel İzin Formu</h1>
-      </div>
-      <div className="row">
-        <div className="col">avatar</div>
-        <div className="col">isim soyisim</div>
-        <div className="col">pozisyon</div>
-      </div>
-      <div className="row">
-        <button onClick={handleButtonClick}>
-          {isPermitRequestVisible ? 'Hide Permit Request' : 'Show Permit Request'}
-        </button>
-        {isPermitRequestVisible && <PermitRequest />}
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row mb-4">
+     
+      <div className="row mb-4">
             <h1 className='text-center mt-5'>İzin İstek Talep Formu</h1>
             <h6 className='text-center mt-3'>İzin talebinde bulunmak için lütfen aşağıdaki formu doldurunuz...</h6>
           </div>
+     
+      <div className="row">
+        <div className="col">
+        
           <div className="row">
             <form className="form-container">
               <div className="form-group">
@@ -60,11 +49,11 @@ function PermitRequestOrganism() {
                 <input type="email" placeholder="E-mail Adresinizi Giriniz" />
               </div>
               <div className="form-group">
-                <label>İzin Başlangıç Tarihi</label>
+                <label>İzin Başlangıç Tarihi:</label>
                 <input type="date" />
               </div>
               <div className="form-group">
-                <label>İzin Bitiş Tarihi</label>
+                <label>İzin Bitiş Tarihi:</label>
                 <input type="date" />
               </div>
               <div className="form-group">
@@ -173,14 +162,14 @@ function PermitRequestOrganism() {
                 </div>
               </div>
               <div className="form-group">
-                <label >Yorum:</label>
-                <textarea  placeholder="Yorumunuzu yazın..."></textarea>
+                <label >Açıklama:</label>
+                <textarea  placeholder="Açıklamanızı yazın..."></textarea>
               </div>
             </form>
           </div>
         </div>
         <div className="row mt-5 mb-5">
-        <button style={{color:'white'}}type="button" className="btn btn-success">İzin Oluştur</button>
+        <button style={{color:'white', width:'150px', borderRadius:'30px', marginLeft:'1100px'}}type="button" className="btn btn-success">İzin Oluştur</button>
          </div>
       </div>
     </>

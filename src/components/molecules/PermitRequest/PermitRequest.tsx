@@ -17,7 +17,7 @@ function PermitRequest() {
             <th scope="col">İzin Türü</th>
             <th scope="col">İzin Acıklaması</th>
             <th scope="col">İzin Durumu</th>
-            
+           
           </tr>
         </thead>
         <tbody>

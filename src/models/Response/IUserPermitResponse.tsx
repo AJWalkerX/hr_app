@@ -5,4 +5,5 @@ export interface IUserPermitResponse{
     lastName: string;
     position: string;
     employmentStatus: string;
+    description: string;
 }
