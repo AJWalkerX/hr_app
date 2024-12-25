@@ -1,5 +1,18 @@
-.manager-sidebar{
-        color : black,
+.sidebar-manager {
+        width: 23%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto; /* Taşan içerikler için kaydırma */
+      }
+      .sidebar-exit-button-m {
+        padding: 15px;   
         
-
-}
+        
+      }
+    
+      .nav-link-manager{
+        text-decoration: none ;
+      }
+    
