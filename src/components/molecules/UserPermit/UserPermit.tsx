@@ -29,8 +29,11 @@ function UserPermit() {
             <th scope="col">Avatar</th>
             <th scope="col">Personel</th>
             <th scope="col">Departman</th>
-            <th scope="col">izin Durumu</th>
-            <th scope="col">Düzenleme</th>
+            <th scope="col">İzin Başlangıç Tarihi</th>
+            <th scope="col">İzin Bitiş Tarihi</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">İzin Durumu</th>
+            <th scope="col">İzin Değerlendirme Durumu</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +46,7 @@ function UserPermit() {
               lastName={user.lastName}
               position={user.position}
               employmentStatus={user.employmentStatus}
+              description={user.description}
             />
           ))}
         </tbody>
