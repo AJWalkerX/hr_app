@@ -24,13 +24,11 @@ function ManagerEmployees() {
         <table className="table align-middle mb-0 bg-white">
           <thead className="bg-light">
             <tr>
-              <th>Foto</th>
-              <th>İsim</th>
-              <th>Soyisim</th>
-              <th>Email</th>
+              <th>Profil</th>
+              <th>Ad Soyad</th>
               <th>Pozisyon</th>
-              <th>Düzenle</th>
-              <th>Sil</th>
+              <th>Detay/Düzenle</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
