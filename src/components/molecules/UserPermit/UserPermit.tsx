@@ -32,6 +32,7 @@ function UserPermit() {
             <th scope="col">İzin Başlangıç Tarihi</th>
             <th scope="col">İzin Bitiş Tarihi</th>
             <th scope="col">Açıklama</th>
+            <th scope="col">İzin Türü</th>
             <th scope="col">İzin Durumu</th>
             <th scope="col">İzin Değerlendirme Durumu</th>
           </tr>
@@ -45,8 +46,11 @@ function UserPermit() {
               firstName={user.firstName}
               lastName={user.lastName}
               position={user.position}
-              employmentStatus={user.employmentStatus}
+              beginDate={user.beginDate}
+              endDate={user.endDate}
               description={user.description}
+              holidayType={user.holidayType}
+              holidayState={user.holidayState}
             />
           ))}
         </tbody>
