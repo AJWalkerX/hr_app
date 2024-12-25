@@ -3,6 +3,7 @@ import React from 'react'
 import apis from '../../config/RestApis';
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { IUserPermitResponse } from "../../models/Response/IUserPermitResponse";
+import { IUserPermitRequest } from "../../models/Request/IUserPermitRequest";
 
 
 interface IUserProfileSettings{
@@ -10,14 +11,32 @@ userProfileSettings: IUserProfileSettings | null ;
 isUserProfileSettingsLoading: boolean;
 userPermitCardList: IUserPermitResponse[];
 isUserPermitCardListLoading:boolean;
+userCreatePermit: IUserPermitRequest | null;
+isUserCreatePermitLoading: boolean;
 }
 
 const initialUserProfileSettingsState: IUserProfileSettings = {
     userProfileSettings: null,
     isUserProfileSettingsLoading: false,
     userPermitCardList: [],
-    isUserPermitCardListLoading : false
+    isUserPermitCardListLoading : false,
+    userCreatePermit: null,
+    isUserCreatePermitLoading: false
 }
+
+export const fetchUserPermitCreate = createAsyncThunk(
+    "userpanel/fetchUserPermitCreate",
+    async(payload: IUserPermitRequest) =>{
+       const response = await fetch (apis.userService + "/create-holiday",{
+        method:"POST",
+        headers:{
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+       }).then((data)=>data.json());
+       return response;
+    }
+)
 
 export const fetchGetUserPermitInfo = createAsyncThunk(
     "userpanel/fetchGetUserPermitInfo",
@@ -58,6 +77,14 @@ const userPanelSlice = createSlice({
             state.isUserPermitCardListLoading = false ;
             if(action.payload.code===200){
                 state.userPermitCardList = action.payload.data
+            }
+        });
+
+        build.addCase(fetchUserPermitCreate.pending,(state)=>{state.isUserCreatePermitLoading=true});
+        build.addCase(fetchUserPermitCreate.fulfilled,(state,action: PayloadAction<IBaseResponse>)=>{
+            state.isUserCreatePermitLoading =false;
+            if(action.payload.code===200){
+                state.userCreatePermit =action.payload.data
             }
         });
     }

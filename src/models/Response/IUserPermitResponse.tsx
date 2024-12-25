@@ -4,8 +4,8 @@ export interface IUserPermitResponse{
     firstName: string;
     lastName: string;
     position: string;
-    beginDate: number;
-    endDate: number;
+    beginDate: Date;
+    endDate: Date;
     description: string;
     holidayType: string;
     holidayState: string;

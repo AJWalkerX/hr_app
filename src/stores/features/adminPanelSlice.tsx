@@ -12,6 +12,8 @@ interface IAdminPanelState {
   isOnWaitCustomerListLoading: boolean;
   customerList: ICustomers[];
   isCustomerListLoading: boolean;
+  
+
 }
 
 const initialWaitCustomerState: IAdminPanelState = {

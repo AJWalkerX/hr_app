@@ -16,8 +16,8 @@ function UserPermitCard(props: IUserPermitResponse) {
         <>{props.firstName} {props.lastName}</>
       </td>
       <td style={{ verticalAlign: 'middle' }}>{props.position}</td>
-      <td style={{ verticalAlign: 'middle' }}>{props.beginDate}</td>
-      <td style={{ verticalAlign: 'middle' }}>{props.endDate}</td>
+      <td style={{ verticalAlign: 'middle' }}>  {new Date(props.beginDate).toLocaleDateString('tr-TR')}</td>
+      <td style={{ verticalAlign: 'middle' }}> {new Date(props.endDate).toLocaleDateString('tr-TR')}</td>
       <td style={{ verticalAlign: 'middle' }}>{props.description}</td>
 
       <td style={{ verticalAlign: 'middle' }}>{props.holidayType}</td>
