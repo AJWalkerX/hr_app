@@ -22,10 +22,17 @@ function UserPermitCard(props: IUserPermitResponse) {
         style={{color:'white'}}
           type="button"
           className="btn btn-success"
-          data-bs-toggle="modal"
           data-bs-target={`#user${props.userId}`}
         >
-          İzin oluştur
+          Accept
+        </button>
+        <button
+        style={{color:'white'}}
+          type="button"
+          className="btn btn-danger ms-3"
+          data-bs-target={`#user${props.userId}`}
+        >
+         Denied
         </button>
       </td>
     </tr>
