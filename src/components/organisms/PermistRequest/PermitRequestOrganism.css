@@ -1,0 +1,41 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  label {
+    flex: 0 0 150px; /* Label genişliğini sabit tutar */
+   
+  }
+  
+  input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    width: 100%; /* Genişliği doldurur */
+    max-width: 100%; /* Taşmayı önler */
+    min-height: 80px; /* Yüksekliği ayarlar */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    resize: vertical; /* Yalnızca dikey boyutlandırmaya izin verir */
+  }
+  
+  textarea:focus {
+    outline: none;
+    border-color: #007bff; /* Odaklanıldığında kenar rengi */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3); /* Hafif bir parlama efekti */
+  }

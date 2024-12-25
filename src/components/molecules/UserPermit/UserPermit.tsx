@@ -29,7 +29,7 @@ function UserPermit() {
             <th scope="col">Avatar</th>
             <th scope="col">Personel</th>
             <th scope="col">Departman</th>
-            <th scope="col">Çalışma Durumu</th>
+            <th scope="col">izin Durumu</th>
             <th scope="col">Düzenleme</th>
           </tr>
         </thead>
