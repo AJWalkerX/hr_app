@@ -19,6 +19,7 @@ import UserInformationPage from "./pages/UserInformationPage";
 import UserProfileSettingsPage from "./pages/UserProfileSettingsPage";
 import ManagerHomePage from "./pages/ManagerHomePage";
 import UserPermitPage from "./pages/UserPermitPage";
+import ManagerEmployeesPage from "./pages/ManagerEmployeesPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -59,7 +60,8 @@ function RouterPage() {
       <Route path="/user-information" element={<UserInformationPage />} />
       <Route path="/profile" element={<UserProfileSettingsPage />} />
       <Route path="/manager" element={<ManagerHomePage />} />
-      <Route path="/manager-permit" element={<UserPermitPage />} />
+      <Route path="/manager/permit" element={<UserPermitPage />} />
+      <Route path="/manager/employees" element={<ManagerEmployeesPage />} />
 
       <Route path="/set-new-password" element={<SetNewPasswordPage />}></Route>
     </Routes>

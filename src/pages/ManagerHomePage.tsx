@@ -5,12 +5,13 @@ import ManagerHome from '../components/molecules/ManagerPanel/ManagerHome'
 
 function ManagerHomePage() {
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid' style={{ backgroundColor: '#e5e8e8',height:'100vh'}}>
     <div className='row'>
         <div className="col-3"><ManagerSidebar/> </div>
         <div className="col-9"><ManagerHome/></div> 
     </div>
     </div>
+    
   )
 }
 
