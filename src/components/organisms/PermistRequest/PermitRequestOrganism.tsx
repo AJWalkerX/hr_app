@@ -93,8 +93,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Yıllık İzin"
-                      checked={holidayType === 'Yıllık İzin'}
+                      value="ANNUAL_LEAVE"
+                      checked={holidayType === 'ANNUAL_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Yıllık İzin
@@ -103,8 +103,8 @@ function PermitRequestOrganism() {
                     <input 
                       type="radio"
                       name="izinTipi"
-                      value="Hastalık"
-                      checked={holidayType === 'Hastalık'}
+                      value="SICK_LEAVE"
+                      checked={holidayType === 'SICK_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Hastalık
@@ -113,8 +113,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Mazeret İzni"
-                      checked={holidayType === 'Mazeret İzni'}
+                      value="CASUAL_LEAVE"
+                      checked={holidayType === 'CASUAL_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Mazeret İzni
@@ -123,8 +123,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Doğum İzni"
-                      checked={holidayType === 'Doğum İzni'}
+                      value="MATERNITY_LEAVE"
+                      checked={holidayType === 'MATERNITY_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Doğum İzni
@@ -133,8 +133,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Babalık İzni"
-                      checked={holidayType === 'Babalık İzni'}
+                      value="PATERNITY_LEAVE"
+                      checked={holidayType === 'PATERNITY_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Babalık İzni
@@ -143,8 +143,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Telafi İzni"
-                      checked={holidayType === 'Telafi İzni'}
+                      value="PUBLIC_HOLIDAY"
+                      checked={holidayType === 'PUBLIC_HOLIDAY'}
                       onChange={handleIzinTipiChange}
                     />
                     Telafi İzni
@@ -153,8 +153,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Ücretsiz İzin"
-                      checked={holidayType === 'Ücretsiz İzin'}
+                      value="RELIGIOUS_HOLIDAY"
+                      checked={holidayType === 'RELIGIOUS_HOLIDAY'}
                       onChange={handleIzinTipiChange}
                     />
                     Ücretsiz İzin
@@ -163,8 +163,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Eğitim İzni"
-                      checked={holidayType === 'Eğitim İzni'}
+                      value="STUDY_LEAVE"
+                      checked={holidayType === 'STUDY_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Eğitim İzni
@@ -173,8 +173,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Acil Durum İzni"
-                      checked={holidayType === 'Acil Durum İzni'}
+                      value="EMERGENCY_LEAVE"
+                      checked={holidayType === 'EMERGENCY_LEAVE'}
                       onChange={handleIzinTipiChange}
                     />
                     Acil Durum İzni
@@ -183,8 +183,8 @@ function PermitRequestOrganism() {
                     <input
                       type="radio"
                       name="izinTipi"
-                      value="Diğer"
-                      checked={holidayType === 'Diğer'}
+                      value="OTHER"
+                      checked={holidayType === 'OTHER'}
                       onChange={handleIzinTipiChange}
                     />
                     Diğer
@@ -218,15 +218,8 @@ function PermitRequestOrganism() {
         </div>
       </div>
 
-      {userCreatePermit && (
-        <div>
-          <h3>İzin Talebi Oluşturuldu</h3>
-          <p>İzin Tipi:{userCreatePermit.beginDate?.toLocaleDateString()}</p>
-          <p>Başlangıç Tarihi: {userCreatePermit.endDate?.toLocaleDateString()}</p>
-          <p>Bitiş Tarihi: {userCreatePermit.holidayType}</p>
-          <p>Açıklama: {userCreatePermit.description}</p>
-        </div>
-      )}
+     
+      
     </>
   );
 }
