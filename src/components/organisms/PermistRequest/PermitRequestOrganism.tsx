@@ -49,7 +49,7 @@ function PermitRequestOrganism() {
       .then(() => {
         // Başarılı işlem sonrası SweetAlert bildirimi
         Swal.fire({
-          title: "Drag me!",
+          title: "İzin Talebiniz Oluşturuldu",
           icon: "success",
         });
       })
