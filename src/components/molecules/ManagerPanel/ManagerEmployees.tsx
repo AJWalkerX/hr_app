@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomerCard from '../../atoms/CustomerCard/CustomerCard'
+import EmployeeCard from '../../atoms/EmployeeCard/EmployeeCard'
 
 function ManagerEmployees() {
   return (

@@ -1,79 +1,75 @@
-import React, { useState } from "react";
-import { hrDispatch } from "../../../stores";
-import { useDispatch } from "react-redux";
-import { IListEmployeeListResponse } from "../../../models/Response/IListEmployeeListResponse";
+import React, { useState } from 'react'
+import { hrDispatch } from '../../../stores';
+import { useDispatch } from 'react-redux';
+import { IListEmployeeListResponse } from '../../../models/Response/IListEmployeeListResponse';
+import { fecthEmployeeListByCompany } from '../../../stores/features/managerPanelSlice';
 
 interface IEmployeeCard {
-  companyId: number;
-  userId: number;
-  avatar: string;
-  email: string;
-  userState: string;
-  address: string;
-  annualSalary: string;
-  dateOfBirth: string;
-  dateOfEmployment: string;
-  dateOfTermination: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  identityNumber: string;
-  socialSecurityNumber: string;
-  mobileNumber: string;
-  position: string;
+    companyId: number;
+    userId: number;
+    avatar: string;
+    email: string;
+    address: string;
+    annualSalary: string;
+    dateOfBirth: string;
+    dateOfEmployment: string;
+    dateOfTermination: string;
+    firstName: string;
+    lastName: string;
+    gender:string;
+    identityNumber: string;
+    socialSecurityNumber: string;
+    mobileNumber: string;
+    position: string;
+    employmentStatus: string;
+
 }
 
 function EmployeeCard(props: IEmployeeCard) {
-  const [avatar, setUserAvatar] = useState(props.avatar);
-  const [email, setEmail] = useState(props.email);
-  const [userState, setUserState] = useState(props.userState);
-  const [address, setAddress] = useState(props.address);
-  const [annualSalary, setAnnualSalary] = useState(props.annualSalary);
-  const [dateOfBirth, setDateOfBirth] = useState(props.dateOfBirth);
-  const [dateOfEmployment, setDateOfEmployment] = useState(
-    props.dateOfEmployment
-  );
-  const [dateOfTermination, setDateOfTermination] = useState(
-    props.dateOfTermination
-  );
-  const [firstName, setFirstName] = useState(props.firstName);
-  const [lastName, setLastName] = useState(props.lastName);
-  const [gender, setGender] = useState(props.gender);
-  const [identityNumber, setIdentityNumber] = useState(props.identityNumber);
-  const [socialSecurityNumber, setSocialSecurityNumber] = useState(
-    props.socialSecurityNumber
-  );
-  const [mobileNumber, setMobileNumber] = useState(props.mobileNumber);
-  const [position, setPosition] = useState(props.position);
+    const[avatar, setUserAvatar] =useState(props.avatar);
+    const[email, setEmail] =useState(props.email);
+    const[address, setAddress] =useState(props.address);
+    const[annualSalary, setAnnualSalary] =useState(props.annualSalary);
+    const[dateOfBirth, setDateOfBirth] =useState(props.dateOfBirth);
+    const[dateOfEmployment, setDateOfEmployment] =useState(props.dateOfEmployment);
+    const[dateOfTermination, setDateOfTermination] =useState(props.dateOfTermination);
+    const[firstName, setFirstName] =useState(props.firstName);
+    const[lastName, setLastName] =useState(props.lastName);
+    const[gender, setGender] =useState(props.gender);
+    const[identityNumber, setIdentityNumber] =useState(props.identityNumber);
+    const[socialSecurityNumber, setSocialSecurityNumber] =useState(props.socialSecurityNumber);
+    const[mobileNumber, setMobileNumber] =useState(props.mobileNumber);
+    const[position, setPosition] =useState(props.position);
 
-  const dispatch = useDispatch<hrDispatch>();
+    const dispatch = useDispatch<hrDispatch>();
 
-  const handleSave = () => {
-    const getEmployeeList: IListEmployeeListResponse = {
-      companyId: props.companyId,
-      userId: props.userId,
-      avatar,
-      email,
-      userState,
-      address,
-      annualSalary,
-      dateOfBirth,
-      dateOfEmployment,
-      dateOfTermination,
-      firstName,
-      lastName,
-      gender,
-      identityNumber,
-      socialSecurityNumber,
-      mobileNumber,
-      position,
+    const handleSave = () => {
+        const getEmployeeList: IListEmployeeListResponse = {
+          companyId : props.companyId,
+          userId: props.userId,
+          avatar,
+          email,
+          
+          address,
+          annualSalary,
+          dateOfBirth,
+          dateOfEmployment,
+          dateOfTermination,
+          firstName,
+          lastName,
+          gender,
+          identityNumber,
+          socialSecurityNumber,
+          mobileNumber,
+          position,
+          
+        };
+        console.log(getEmployeeList);
+        dispatch(fecthEmployeeListByCompany());
     };
-    console.log(getEmployeeList);
-    dispatch(fetchGetEmployeeList(getEmployeeList));
-  };
 
-  return (
-    <>
+    return (
+      <>
       <tr>
         <td>
           <div className="d-flex align-items-center">
@@ -89,12 +85,8 @@ function EmployeeCard(props: IEmployeeCard) {
             </div>
           </div>
         </td>
-        <td style={{ paddingLeft: "60px" }}>${props.userState}</td>
-        <td>
-          <button className={getButtonClass(props.memberShipState)} disabled>
-            {props.memberShipState}
-          </button>
-        </td>
+        
+
         <td>
           <button
             type="button"
@@ -119,10 +111,7 @@ function EmployeeCard(props: IEmployeeCard) {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1
-                className="modal-title fs-5"
-                id={"customer" + props.companyId}
-              >
+              <h1 className="modal-title fs-5" id={"customer" + props.companyId}>
                 Şirket Bilgileri Güncelleme
               </h1>
               <button
@@ -142,9 +131,6 @@ function EmployeeCard(props: IEmployeeCard) {
                 className="form-control"
                 id="companyLogo"
                 accept="image/*"
-                onChange={(e) =>
-                  setCompanyLogo(URL.createObjectURL(e.target.files![0]))
-                }
               />
             </div>
             <div className="modal-body">
@@ -152,8 +138,8 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Adınızı Giriniz"
-                value={companyName || ""}
-                onChange={(e) => setCompanyName(e.target.value)}
+                value=""
+                
               />
             </div>
             <div className="modal-body">
@@ -161,9 +147,8 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Mail Adresinizi Giriniz"
-                value={companyMail || ""}
-                onChange={(e) => setCompanyMail(e.target.value)}
-              />
+                value=""
+                />
             </div>
             <div className="modal-body">
               <input
@@ -171,7 +156,7 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Üyelik Planınızı Giriniz"
-                value={props.memberShipState || ""}
+                value=""
               />
             </div>
             <div className="modal-body">
@@ -179,8 +164,7 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Adresinizi Giriniz"
-                value={companyAddress || ""}
-                onChange={(e) => setCompanyAddress(e.target.value)}
+                value=""
               />
             </div>
             <div className="modal-body">
@@ -188,8 +172,7 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Telefon Numaranızı Giriniz"
-                value={props.companyTelNo || ""}
-                onChange={(e) => setCompanyTelNo(e.target.value)}
+                value=""
               />
             </div>
             <div className="modal-body">
@@ -197,8 +180,8 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Bölgesini Giriniz"
-                value={props.companyRegion || ""}
-                onChange={(e) => setCompanyRegion(e.target.value)}
+                value=""
+                
               />
             </div>
             <div className="modal-body">
@@ -206,8 +189,8 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Türünü Giriniz"
-                value={companyType || ""}
-                onChange={(e) => setCompanyType(e.target.value)}
+                value=""
+                
               />
             </div>
             <div className="modal-body">
@@ -216,7 +199,7 @@ function EmployeeCard(props: IEmployeeCard) {
                 type="text"
                 className="form-control"
                 placeholder="Ödenen Hizmet Bedelini Giriniz"
-                value={props.totalPaymentAmount || ""}
+                value=""
               />
             </div>
 
@@ -242,7 +225,7 @@ function EmployeeCard(props: IEmployeeCard) {
         </div>
       </div>
     </>
-  );
+    );
 }
 
-export default EmployeeCard;
+export default EmployeeCard

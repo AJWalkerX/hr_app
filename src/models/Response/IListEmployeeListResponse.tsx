@@ -4,7 +4,6 @@ export interface IListEmployeeListResponse{
     userId: number;
     avatar: string;
     email: string;
-    userState: string;
     address: string;
     annualSalary: string;
     dateOfBirth: string;
