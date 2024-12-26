@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
-import { IUserPermitResponse } from '../../../models/Response/IUserPermitResponse';
-import { hrDispatch, hrUseSelector } from '../../../stores';
-import { useDispatch } from 'react-redux';
-import { fetchGetUserPermitInfo } from '../../../stores/features/userPanelSlice';
-import UserPermitCard from '../../atoms/UserCard/UserPermitCard';
-import permitLogo from '../../../img/permitlogo.png'
+import React, { useEffect } from "react";
+import { IUserPermitResponse } from "../../../models/Response/IUserPermitResponse";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { fetchGetUserPermitInfo } from "../../../stores/features/managerPanelSlice";
+import UserPermitCard from "../../atoms/UserCard/UserPermitCard";
+import permitLogo from "../../../img/permitlogo.png";
 
 function UserPermit() {
   const userPermitCardList: IUserPermitResponse[] = hrUseSelector(
-    state => state.userpanel.userPermitCardList
+    (state) => state.manager.userPermitCardList
   );
   const dispatch = useDispatch<hrDispatch>();
 
   useEffect(() => {
     dispatch(fetchGetUserPermitInfo());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container mt-5">
       <div className="text-center mb-4">
-      <img src={permitLogo} style={{width:'300px',height:'250px'}} />
+        <img src={permitLogo} style={{ width: "300px", height: "250px" }} />
         <h1>İzin Yönetim Paneli</h1>
       </div>
       <table className="table table-striped table-hover text-center">
@@ -38,10 +38,11 @@ function UserPermit() {
           </tr>
         </thead>
         <tbody>
-          {userPermitCardList.map(user => (
+          {userPermitCardList.map((user, index) => (
             <UserPermitCard
-              key={user.userId}
+              key={index}
               userId={user.userId}
+              workHolidayId={user.workHolidayId}
               avatar={user.avatar}
               firstName={user.firstName}
               lastName={user.lastName}
