@@ -1,8 +1,6 @@
-export interface IUserPermitRequest{
-    userId: number;
-    beginDate: Date;
-    endDate: Date;
-    holidayType: string;
-    description: string;
-
+export interface IUserPermitRequest {
+  beginDate: Date;
+  endDate: Date;
+  holidayType: string;
+  description: string;
 }
