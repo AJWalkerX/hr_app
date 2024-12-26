@@ -8,8 +8,7 @@ import { IUserPermitRequest } from "../../models/Request/IUserPermitRequest";
 interface IUserProfileSettings {
   userProfileSettings: IUserProfileSettings | null;
   isUserProfileSettingsLoading: boolean;
-  userPermitCardList: IUserPermitResponse[];
-  isUserPermitCardListLoading: boolean;
+  
   userCreatePermit: IUserPermitRequest | null;
   isUserCreatePermitLoading: boolean;
 }
@@ -17,8 +16,7 @@ interface IUserProfileSettings {
 const initialUserProfileSettingsState: IUserProfileSettings = {
   userProfileSettings: null,
   isUserProfileSettingsLoading: false,
-  userPermitCardList: [],
-  isUserPermitCardListLoading: false,
+ 
   userCreatePermit: null,
   isUserCreatePermitLoading: false,
 };
@@ -39,14 +37,7 @@ export const fetchUserPermitCreate = createAsyncThunk(
   }
 );
 
-export const fetchGetUserPermitInfo = createAsyncThunk(
-  "userpanel/fetchGetUserPermitInfo",
-  async () => {
-    return await fetch(apis.userService + "/get-user-permit-list").then(
-      (data) => data.json()
-    );
-  }
-);
+
 
 export const fetchUserProfileSettings = createAsyncThunk(
   "userpanel/fetchUserProfileSettings",
@@ -77,18 +68,7 @@ const userPanelSlice = createSlice({
         }
       }
     );
-    build.addCase(fetchGetUserPermitInfo.pending, (state) => {
-      state.isUserPermitCardListLoading = true;
-    });
-    build.addCase(
-      fetchGetUserPermitInfo.fulfilled,
-      (state, action: PayloadAction<IBaseResponse>) => {
-        state.isUserPermitCardListLoading = false;
-        if (action.payload.code === 200) {
-          state.userPermitCardList = action.payload.data;
-        }
-      }
-    );
+   
 
     build.addCase(fetchUserPermitCreate.pending, (state) => {
       state.isUserCreatePermitLoading = true;
