@@ -7,6 +7,7 @@ import UserPermitCard from "../../atoms/UserCard/UserPermitCard";
 import permitLogo from "../../../img/permitlogo.png";
 
 function UserPermit() {
+  const isEmpty = hrUseSelector((state)=>state.manager.isPermitListEmpty)
   const userPermitCardList: IUserPermitResponse[] = hrUseSelector(
     (state) => state.manager.userPermitCardList
   );
@@ -37,10 +38,15 @@ function UserPermit() {
             <th scope="col">İzin Değerlendirme Durumu</th>
           </tr>
         </thead>
-        <tbody>
-          {userPermitCardList.map((user, index) => (
+        {
+  isEmpty ? (
+    <span>İzin bekleyen çalışan bulunamamaktadır.</span>
+  ) : (
+    <table>
+      <tbody>
+        {userPermitCardList.map((user, index) => (
+          <tr key={index}>
             <UserPermitCard
-              key={index}
               userId={user.userId}
               workHolidayId={user.workHolidayId}
               avatar={user.avatar}
@@ -53,8 +59,13 @@ function UserPermit() {
               holidayType={user.holidayType}
               holidayState={user.holidayState}
             />
-          ))}
-        </tbody>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+        
       </table>
     </div>
   );

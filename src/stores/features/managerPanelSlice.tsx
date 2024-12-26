@@ -13,6 +13,7 @@ interface IManagerPanelState {
   userPermitCardList: IUserPermitResponse[];
   isUserPermitCardListLoading: boolean;
   isPermitAuthoriseLoading: boolean;
+  isPermitListEmpty: boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -21,6 +22,7 @@ const initialListEmployeeState: IManagerPanelState = {
   userPermitCardList: [],
   isUserPermitCardListLoading: false,
   isPermitAuthoriseLoading: false,
+  isPermitListEmpty:false
 };
 
 export const fetchGetUserPermitInfo = createAsyncThunk(
@@ -97,6 +99,10 @@ const managerSlice = createSlice({
         state.isUserPermitCardListLoading = false;
         if (action.payload.code === 200) {
           state.userPermitCardList = action.payload.data;
+          state.isPermitListEmpty = false;
+        }else if (action.payload.code === 7003){
+          state.isPermitListEmpty = true;
+
         }
       }
     );
