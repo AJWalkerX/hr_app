@@ -11,7 +11,7 @@ const store = configureStore({
     adminpanel: adminPanelSlice ,
     userpanel : userPanelSlice,
     company: companySlice
-
+   
   },
 });
 
