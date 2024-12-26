@@ -1,4 +1,4 @@
-export interface IUpdateEmployeeRequest{
+export interface IListEmployeeListResponse{
     
     companyId: number;
     userId: number;
