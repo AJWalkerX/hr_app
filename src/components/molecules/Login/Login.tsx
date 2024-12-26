@@ -25,11 +25,13 @@ function Login() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const doLogin = () => {
+  const doLogin = async () => {
     const payload = {
       email,
       password,
     };
+    
+    // Input validation
     if (payload.email === "" || payload.password === "") {
       Swal.fire({
         icon: "error",
@@ -38,14 +40,43 @@ function Login() {
       });
       return;
     }
-    dispatch(fetchLogin(payload));
-    //TODO: Buradaki navigate kisimlarini duzenle! Alex
-    if (isFirstLogin) {
-      navigate("/register");
-    } else {
-      navigate("/");
+
+    try {
+      const resultAction = await dispatch(fetchLogin(payload));
+      
+      if (fetchLogin.fulfilled.match(resultAction)) {
+        // Check if authentication was successful
+        if (resultAction.payload.code === 200) { // Assuming your API returns a success flag
+          const { isFirstLogin } = resultAction.payload;
+          if (isFirstLogin) {
+            navigate("/register");
+          } else {
+            navigate("/manager");
+          }
+        } else {
+          // Authentication failed
+          Swal.fire({
+            icon: "error",
+            title: "Hata!",
+            text: "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+          });
+        }
+      } else {
+        // API call failed
+        Swal.fire({
+          icon: "error",
+          title: "Hata!",
+          text: "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Hata!",
+        text: "Bir hata oluştu. Lütfen tekrar deneyin.",
+      });
     }
-  };
+};
 
   const doForgotPassword = () => {
     if (forgotPasswordEmail === "") {
