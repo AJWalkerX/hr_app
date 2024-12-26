@@ -33,9 +33,7 @@ function ManagerEmployees() {
             </tr>
           </thead>
           <tbody>
-                  <EmployeeCard 
-                 
-                  />
+                  
           </tbody>
         </table>
       </div>
