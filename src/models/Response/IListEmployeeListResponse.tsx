@@ -16,5 +16,5 @@ export interface IListEmployeeListResponse{
     socialSecurityNumber: string;
     mobileNumber: string;
     position: string;
-
+    employmentStatus: string;
 }

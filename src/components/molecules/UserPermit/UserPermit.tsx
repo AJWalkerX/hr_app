@@ -4,7 +4,7 @@ import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { fetchGetUserPermitInfo } from "../../../stores/features/managerPanelSlice";
 import UserPermitCard from "../../atoms/UserCard/UserPermitCard";
-import permitLogo from "../../../img/permitlogo.png";
+import permitlogo from "../../../img/permit-logo.png";
 
 function UserPermit() {
   const isEmpty = hrUseSelector((state)=>state.manager.isPermitListEmpty)
@@ -18,9 +18,9 @@ function UserPermit() {
   }, [dispatch]);
 
   return (
-    <div className="container mt-5">
+    <div style={{backgroundColor:"#e5e8e8"}} className="container mt-5">
       <div className="text-center mb-4">
-        <img src={permitLogo} style={{ width: "300px", height: "250px" }} />
+        <img src={permitlogo} style={{ width: "300px", height: "250px" }} className="border" />
         <h1>İzin Yönetim Paneli</h1>
       </div>
       <table className="table table-striped table-hover text-center">

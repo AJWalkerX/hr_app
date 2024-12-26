@@ -37,7 +37,8 @@ export const fetchGetUserPermitInfo = createAsyncThunk(
 export const fecthEmployeeListByCompany = createAsyncThunk(
   "manager/fecthEmployeeListByCompany",
   async () => {
-    return await fetch(apis.managerService + "/employees").then((data) =>
+    const managerToken = localStorage.getItem("managerToken")
+    return await fetch(apis.managerService + "/employees?token="+managerToken).then((data) =>
       data.json()
     );
   }

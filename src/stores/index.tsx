@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { adminAuthSlice, adminPanelSlice, authSlice, commentSlice, forgotPasswordSlice,userPanelSlice, companySlice, managerSlice } from "./features";
+import { adminAuthSlice, adminPanelSlice, authSlice, commentSlice, forgotPasswordSlice,userPanelSlice, companySlice, managerPanelSlice } from "./features";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ const store = configureStore({
     adminpanel: adminPanelSlice ,
     userpanel : userPanelSlice,
     company: companySlice,
-    manager: managerSlice
+    manager: managerPanelSlice
    
   },
 });

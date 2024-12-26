@@ -4,13 +4,14 @@ import ManagerSidebar from '../components/molecules/ManagerPanel/ManagerSidebar'
 
 function UserPermitPage() {
   return (
-    <div className="container">
+    <div style={{ backgroundColor: '#e5e8e8',height:'100vh'}} className="container-fluid">
         
         <div className="row">
           <div className="col-1">
             <ManagerSidebar/>
           </div>
-          <div className="col-11 ">
+          
+          <div  className="col-11 ">
           <UserPermit/>
           </div>
            
