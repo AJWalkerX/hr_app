@@ -58,11 +58,16 @@ export const fetchUserProfileSettings = createAsyncThunk(
   }
 );
 
-
 const userPanelSlice = createSlice({
   name: "userpanel",
   initialState: initialUserProfileSettingsState,
-  reducers: {},
+  reducers: {
+    removeUserFromPermitList: (state, action: PayloadAction<number>) => {
+      state.userPermitCardList = state.userPermitCardList.filter(
+        (user) => user.userId !== action.payload
+      );
+    },
+  },
 
   extraReducers: (build) => {
     build.addCase(fetchUserProfileSettings.pending, (state) => {
@@ -105,4 +110,5 @@ const userPanelSlice = createSlice({
   },
 });
 
+export const { removeUserFromPermitList } = userPanelSlice.actions;
 export default userPanelSlice.reducer;
