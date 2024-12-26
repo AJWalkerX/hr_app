@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../../../img/ik-logo2.svg'
+import logo from '../../../img/ik-logo3.svg'
 import './ManagerSidebar.css'
 
 function ManagerSidebar() {

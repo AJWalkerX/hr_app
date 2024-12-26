@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomerCard from '../../atoms/CustomerCard/CustomerCard'
 import EmployeeCard from '../../atoms/EmployeeCard/EmployeeCard'
+import { IEmployeesResponse } from '../../../models/Response/IEmployeesResponse'
+import { hrDispatch, hrUseSelector } from '../../../stores'
+import { useDispatch } from 'react-redux'
+import { fecthEmployeeListByCompany } from '../../../stores/features/managerPanelSlice'
+import { EmojiEmotions } from '@mui/icons-material'
 
 function ManagerEmployees() {
+  const employeeList: IEmployeesResponse[] = hrUseSelector(
+    (state) => state.manager.employeeList
+  );
+  const dispatch = useDispatch<hrDispatch>();
+
+  useEffect(()=> {
+    dispatch(fecthEmployeeListByCompany());
+  },[dispatch])
+
   return (
     <>
       <div className="row mt-4">
@@ -33,6 +47,30 @@ function ManagerEmployees() {
             </tr>
           </thead>
           <tbody>
+              {employeeList.map((employee,index)=>{
+                return(
+                  <EmployeeCard
+                  key={index}
+                  companyId={employee.companyId}
+                  userId={employee.userId}
+                  avatar={employee.avatar}
+                  email={employee.email}
+                  address={employee.address}
+                  annualSalary={employee.annualSalary}
+                  dateOfBirth={employee.dateOfBirth}
+                  dateOfEmployment={employee.dateOfEmployment}
+                  dateOfTermination={employee.dateOfTermination}
+                  firstName={employee.firstName}
+                  lastName={employee.lastName}
+                  gender={employee.gender}
+                  identityNumber={employee.identityNumber}
+                  socialSecurityNumber={employee.socialSecurityNumber}
+                  mobileNumber={employee.mobileNumber}
+                  position={employee.position}          
+                  employmentStatus={employee.employmentStatus}
+                                    />
+                )
+              })}
                   
           </tbody>
         </table>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PermitRequest from "../../molecules/PermitRequest/PermitRequest";
-import permitLogo from "../../../img/permitlogo.png";
+import permitLogo from "../../../img/permit-logo.png";
 import "./PermitRequestOrganism.css";
 import { fetchUserPermitCreate } from "../../../stores/features/userPanelSlice";
 import { hrDispatch, hrUseSelector } from "../../../stores";

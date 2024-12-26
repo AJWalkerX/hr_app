@@ -3,7 +3,6 @@ export interface IEmployeesResponse{
     userId: number;
     avatar: string;
     email: string;
-    userState: string;
     address: string;
     annualSalary: string;
     dateOfBirth: string;
@@ -16,5 +15,6 @@ export interface IEmployeesResponse{
     socialSecurityNumber: string;
     mobileNumber: string;
     position: string;
+    employmentStatus: string;
   }
   

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- White Background -->
+  <rect width="200" height="200" fill="#e5e8e8"/>
+  
+  <!-- İK Letters with Shadow and Modern Design -->
+  <defs>
+    <filter id="shadowEffect" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g filter="url(#shadowEffect)">
+    <!-- İ - Modern, slightly angled -->
+    <rect x="60" y="50" width="20" height="100" rx="5" ry="5" fill="#1A3E6C"/>
+    
+    <!-- K - More Dynamic Design -->
+    <path d="M120,50 L140,50 L110,100 L140,150 L120,150 Q100,125 90,110" fill="#1A3E6C"/>
+  </g>
+</svg>
