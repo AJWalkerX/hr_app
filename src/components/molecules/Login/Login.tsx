@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css"; // Stil dosyasını ayırmanızı öneririm.
 import { useDispatch } from "react-redux";
 import { hrDispatch, hrUseSelector } from "../../../stores";
@@ -7,14 +7,16 @@ import { fetchLogin } from "../../../stores/features/authSlice";
 import { fetchForgotPassword } from "../../../stores/features/forgotPasswordSlice";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { ILoginResponse } from "../../../models/Response/ILoginResponse";
 
 function Login() {
   const [logoToUse, setLogoToUse] = useState(logo);
+  const isAuth = hrUseSelector((state) => state.auth.isAuth);
+  const loginResponse: ILoginResponse | null = hrUseSelector(
+    (state) => state.auth.loginResponse
+  );
   const dispatch = useDispatch<hrDispatch>();
   const navigate = useNavigate();
-  const [isFirstLogin, setIsFirstLogin] = useState(
-    hrUseSelector((state) => state.auth.loginResponse?.isFirstLogin)
-  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,58 +27,25 @@ function Login() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const doLogin = async () => {
-    const payload = {
-      email,
-      password,
-    };
-    
-    // Input validation
-    if (payload.email === "" || payload.password === "") {
-      Swal.fire({
-        icon: "error",
-        title: "Hata!",
-        text: "Mail adresi veya parola boş bırakılamaz.",
-      });
-      return;
-    }
-
-    try {
-      const resultAction = await dispatch(fetchLogin(payload));
-      
-      if (fetchLogin.fulfilled.match(resultAction)) {
-        // Check if authentication was successful
-        if (resultAction.payload.code === 200) { // Assuming your API returns a success flag
-          const { isFirstLogin } = resultAction.payload;
-          if (isFirstLogin) {
-            navigate("/register");
-          } else {
-            navigate("/manager");
-          }
-        } else {
-          // Authentication failed
-          Swal.fire({
-            icon: "error",
-            title: "Hata!",
-            text: "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
-          });
-        }
-      } else {
-        // API call failed
-        Swal.fire({
-          icon: "error",
-          title: "Hata!",
-          text: "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
-        });
+  useEffect(() => {
+    if (isAuth && loginResponse) {
+      if (loginResponse.isFirstLogin && loginResponse.position === "MANAGER") {
+        navigate("/user-information");
+      } else if (
+        loginResponse.position === "MANAGER" &&
+        !loginResponse.isFirstLogin
+      ) {
+        navigate("/manager");
+      } else if (loginResponse.position !== "MANAGER") {
+        navigate("/");
       }
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Hata!",
-        text: "Bir hata oluştu. Lütfen tekrar deneyin.",
-      });
     }
-};
+  }, [isAuth, loginResponse, navigate]);
+
+  const doLogin = async () => {
+    const payload = { email, password };
+    await dispatch(fetchLogin(payload));
+  };
 
   const doForgotPassword = () => {
     if (forgotPasswordEmail === "") {
@@ -131,15 +100,6 @@ function Login() {
               <div className="d-flex px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 justify-content-center">
                 <form style={{ width: "23rem" }}>
                   <div data-mdb-input-init className="form-outline mb-4">
-                    {isFirstLogin === true && (
-                      <input
-                        type="text"
-                        value={"false"}
-                        hidden
-                        readOnly
-                        name="isFirstLogin"
-                      />
-                    )}
                     <input
                       type="email"
                       id="form2Example18"

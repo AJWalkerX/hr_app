@@ -56,7 +56,15 @@ export const fetchLogin = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.isAuth = false;
+      localStorage.removeItem("token");
+    },
+    login(state) {
+      state.isAuth = true;
+    },
+  },
   extraReducers: (build) => {
     build.addCase(fetchRegister.pending, (state) => {
       state.isRegisterLoading = true;
@@ -91,6 +99,7 @@ const authSlice = createSlice({
         if (action.payload.code === 200) {
           state.isAuth = true;
           state.loginResponse = action.payload.data;
+
           if (state.loginResponse?.token) {
             localStorage.setItem("token", state.loginResponse.token);
           }
@@ -120,5 +129,5 @@ const authSlice = createSlice({
     );
   },
 });
-
+export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;

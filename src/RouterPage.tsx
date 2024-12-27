@@ -27,6 +27,18 @@ function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
   const location = useLocation();
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
+  const isAuth = hrUseSelector((state) => state.auth.isAuth);
+
+  const isManagerLogin = hrUseSelector(
+    (state) => state.auth.loginResponse?.position === "MANAGER"
+  );
+  const position = hrUseSelector((state) => state.auth.loginResponse?.position);
+  console.log(position);
+  console.log(isManagerLogin);
+  const isFirstLogin = hrUseSelector(
+    (state) => state.auth.loginResponse?.isFirstLogin
+  );
+  console.log(isFirstLogin);
   useEffect(() => {
     const adminToken = localStorage.getItem("adminToken");
     if (adminToken) {
