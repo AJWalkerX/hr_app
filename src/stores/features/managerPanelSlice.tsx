@@ -6,6 +6,8 @@ import { IUserPermitResponse } from "../../models/Response/IUserPermitResponse";
 import exp from "constants";
 import { IHolidayAuthorizeRequest } from "../../models/Request/IHolidayAuthorizeRequest";
 import Swal from "sweetalert2";
+import { IUpdateEmployeeRequest } from "../../models/Request/IUpdateEmployeeRequest";
+
 
 interface IManagerPanelState {
   employeeList: IListEmployeeListResponse[];
@@ -24,6 +26,20 @@ const initialListEmployeeState: IManagerPanelState = {
   isPermitAuthoriseLoading: false,
   isPermitListEmpty:false
 };
+
+export const fetchUpdateEmployee = createAsyncThunk(
+  "manager/fetchUpdateEmployee",
+  async(payload: IUpdateEmployeeRequest) => {
+    const response = await fetch(apis.managerService + "/employee-update-information",{
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload), 
+    }).then((data)=> data.json());
+    return response;
+  }
+)
 
 export const fetchGetUserPermitInfo = createAsyncThunk(
   "manager/fetchGetUserPermitInfo",
@@ -114,6 +130,9 @@ const managerSlice = createSlice({
     build.addCase(fetchPermitAuthorisation.fulfilled, (state) => {
       state.isPermitAuthoriseLoading = false;
     });
+
+    
+
   },
 });
 
