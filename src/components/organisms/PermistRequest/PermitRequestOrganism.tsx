@@ -33,6 +33,37 @@ function PermitRequestOrganism() {
     const beginDate = new Date();
     const endDate = new Date();
 
+    if (beginDate >= endDate) {
+      Swal.fire({
+        title: "Hata!",
+        text: "Başlangıç tarihi, bitiş tarihinden önce olmalıdır.",
+        icon: "error",
+      });
+      return; // Formu göndermeyi engelle
+    }
+  
+    // Tarihlerin boş olmaması gerektiğini kontrol et
+    if (!beginDate || !endDate) {
+      Swal.fire({
+        title: "Hata!",
+        text: "Başlangıç tarihi ve bitiş tarihi boş olamaz.",
+        icon: "error",
+      });
+      return; // Formu göndermeyi engelle
+    }
+  
+    // Geçmiş tarihlere izin verilmemesi durumunda kontrol
+    const today = new Date();
+    if (beginDate < today || endDate < today) {
+      Swal.fire({
+        title: "Hata!",
+        text: "Tarih aralığı geçmişte olamaz.",
+        icon: "error",
+      });
+      return; // Formu göndermeyi engelle
+    }
+  
+
     const permitRequest: IUserPermitRequest = {
       beginDate,
       endDate,
@@ -192,9 +223,6 @@ function PermitRequestOrganism() {
                     Diğer
                   </label>
                 </div>
-              </div>
-              <div className="form-group">
-                <label>Açıklama:</label>
               </div>
               <div className="form-group">
                 <label>Açıklama:</label>
