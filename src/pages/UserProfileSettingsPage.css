@@ -7,7 +7,8 @@
   }
   
   .container-profile-settings {
-    background-color: white; /* Container'ın içi sabit beyaz veya başka bir renk */
-    height: 100vh;
+    display: flex; /* Flexbox kullanarak öğeleri yatayda hizala */
+    align-items: flex-start; /* Yükseklikleri hizalayacak şekilde */
+    padding: 20px;
     
   }

@@ -42,7 +42,7 @@ function PermitRequestOrganism() {
       return; // Formu göndermeyi engelle
     }
   
-    // Tarihlerin boş olmaması gerektiğini kontrol et
+
     if (!beginDate || !endDate) {
       Swal.fire({
         title: "Hata!",
