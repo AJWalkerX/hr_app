@@ -4,6 +4,7 @@ import apis from "../../config/RestApis";
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { IUserPermitResponse } from "../../models/Response/IUserPermitResponse";
 import { IUserPermitRequest } from "../../models/Request/IUserPermitRequest";
+import Swal from "sweetalert2";
 
 interface IUserProfileSettings {
   userProfileSettings: IUserProfileSettings | null;
@@ -79,9 +80,16 @@ const userPanelSlice = createSlice({
         state.isUserCreatePermitLoading = false;
         if (action.payload.code === 200) {
           state.userCreatePermit = action.payload.data;
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Hata!',
+            text: action.payload.message || 'Girdiğiniz tarih aralığı hatalıdır.',
+          });
         }
       }
     );
+    
   },
 });
 
