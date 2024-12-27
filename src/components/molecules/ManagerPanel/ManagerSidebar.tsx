@@ -44,6 +44,30 @@ function ManagerSidebar() {
         </NavLink>
       </li>
 
+       <li className="nav-item">
+              <NavLink className='nav-link-manager' to={'/personal/profile'}>
+              <a className="nav-link fw-bold"  href="#">
+                <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-user"></span></span>PERSONEL BİLGİLERİ
+              </a>
+              </NavLink>
+            </li>
+      
+            <li className="nav-item">
+              <NavLink className='nav-link-manager' to={'/personal/permit-request'}>
+              <a className="nav-link fw-bold"  href="#">
+                <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-pen-to-square"></span></span> İZİN OLUŞTUR
+              </a>
+              </NavLink>
+            </li>
+      
+            <li className="nav-item">
+              <NavLink className='nav-link-manager' to={'/personal'}>
+              <a className="nav-link fw-bold"  href="#">
+                <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-regular fa-calendar-days"></span></span> İZİNLERİ GÖRÜNTÜLE
+              </a>
+              </NavLink>
+            </li>
+
     </ul>
   </li>
 </ul>
