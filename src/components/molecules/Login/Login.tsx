@@ -37,7 +37,7 @@ function Login() {
       ) {
         navigate("/manager");
       } else if (loginResponse.position !== "MANAGER") {
-        navigate("/");
+        navigate("/personal");
       }
     }
   }, [isAuth, loginResponse, navigate]);

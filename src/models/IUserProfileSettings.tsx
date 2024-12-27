@@ -1,14 +1,15 @@
 export interface IUserProfileSettings {
+    avatar:string,
     firstName: string;
     lastName: string;
     identityNumber: string;
-    dateOfBirth: number;
+    dateOfBirth: Date;
     mobileNumber: string;
     address: string;
     gender: string;
     email: string;
     position: string;
-    dateOfEmployment: number;
+    dateOfEmployment: Date;
     socialSecurityNumber: string;
     
 }

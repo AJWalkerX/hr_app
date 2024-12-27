@@ -19,15 +19,15 @@ const UserProfileSettings  = () => {
     <div className="row">
       <div className="col-md-5 border-right">
 
-      <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+      <div className="d-flex flex-column align-items-center text-center">
           <img
-            className="rounded-circle mt-5"
+            className="rounded-circle"
             width="150px"
-            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+            height="150px"
+            src={profile?.avatar}
             alt="Profile"
           />
-          <span className="font-weight-bold text-white" ><input type="text" value={ `${profile?.firstName || ''} ${profile?.lastName || ''}` } />  </span>
-          <span className="text-white"  > <input type="text" value={profile?.email || ''} />  </span>
+          <span className="font-weight-bold text-white" ><input style={{border:'none', textAlign:'center', fontWeight:'bold'}}  type="text" value={ `${profile?.firstName || ''} ${profile?.lastName || ''}` } />  </span>
         </div>
 
         <div className="p-3 py-5">
@@ -142,7 +142,7 @@ const UserProfileSettings  = () => {
               <div className="col-md-12">
                 <label className="labels mt-2 ">Cinsiyet</label>
                 <select style={{height:'50px'}} className="form-control mb-2" aria-label="Default select example">  
-                <option >Seçiniz</option>  
+                <option >{profile?.gender}</option>  
             <option value="MALE">Erkek</option>  
             <option value="FEMALE">Kadın</option>
             <option value="OTHER">Diğer</option>
@@ -153,7 +153,7 @@ const UserProfileSettings  = () => {
             <div className="col-md-12">
               <label className="labels mt-2">İş Pozisyonunuz</label>
               <select style={{height:'50px'}} className="form-control mb-2" aria-label="Default select example">  
-              <option >Seçiniz</option>  
+              <option >{profile?.position}</option>  
              <option value="INTERN">Intern</option>  
             <option value="JUNIOR">Junior</option>  
             <option value="MID_LEVEL">Mid_Level</option>
