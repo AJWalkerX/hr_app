@@ -4,10 +4,9 @@ import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { fetchGetUserPermitInfo } from "../../../stores/features/managerPanelSlice";
 import UserPermitCard from "../../atoms/UserCard/UserPermitCard";
-import permitlogo from "../../../img/permit-logo.png";
 
 function UserPermit() {
-  const isEmpty = hrUseSelector((state)=>state.manager.isPermitListEmpty)
+  const isEmpty = hrUseSelector((state) => state.manager.isPermitListEmpty);
   const userPermitCardList: IUserPermitResponse[] = hrUseSelector(
     (state) => state.manager.userPermitCardList
   );
@@ -18,9 +17,8 @@ function UserPermit() {
   }, [dispatch]);
 
   return (
-    <div style={{backgroundColor:"#e5e8e8"}} className="container mt-5">
+    <div style={{ backgroundColor: "#e5e8e8" }} className="container">
       <div className="text-center mb-4">
-        <img src={permitlogo} style={{ width: "300px", height: "250px" }} className="border" />
         <h1>İzin Yönetim Paneli</h1>
       </div>
       <table className="table table-striped table-hover text-center">
@@ -38,34 +36,30 @@ function UserPermit() {
             <th scope="col">İzin Değerlendirme Durumu</th>
           </tr>
         </thead>
-        {
-  isEmpty ? (
-    <span>İzin bekleyen çalışan bulunamamaktadır.</span>
-  ) : (
-    <table>
-      <tbody>
-        {userPermitCardList.map((user, index) => (
-          <tr key={index}>
-            <UserPermitCard
-              userId={user.userId}
-              workHolidayId={user.workHolidayId}
-              avatar={user.avatar}
-              firstName={user.firstName}
-              lastName={user.lastName}
-              position={user.position}
-              beginDate={user.beginDate}
-              endDate={user.endDate}
-              description={user.description}
-              holidayType={user.holidayType}
-              holidayState={user.holidayState}
-            />
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  )
-}
-        
+        <tbody>
+          {isEmpty ? (
+            <tr>
+              <td colSpan={10}>İzin bekleyen çalışan bulunamamaktadır.</td>
+            </tr>
+          ) : (
+            userPermitCardList.map((user, index) => (
+              <UserPermitCard
+                key={index}
+                userId={user.userId}
+                workHolidayId={user.workHolidayId}
+                avatar={user.avatar}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                position={user.position}
+                beginDate={user.beginDate}
+                endDate={user.endDate}
+                description={user.description}
+                holidayType={user.holidayType}
+                holidayState={user.holidayState}
+              />
+            ))
+          )}
+        </tbody>
       </table>
     </div>
   );
