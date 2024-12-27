@@ -17,20 +17,19 @@ const UserProfileSettings  = () => {
 
   return (
     <div className="row">
-      <div className="col-md-3 border-right" style={{backgroundColor:'rgb(10, 57, 129)'}}>
-        <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+      <div className="col-md-5 border-right">
+
+      <div className="d-flex flex-column align-items-center text-center p-3 py-5">
           <img
             className="rounded-circle mt-5"
             width="150px"
             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             alt="Profile"
           />
-          <span className="font-weight-bold text-white" ><input type="text" value={profile?.firstName || ''} />  </span>
+          <span className="font-weight-bold text-white" ><input type="text" value={ `${profile?.firstName || ''} ${profile?.lastName || ''}` } />  </span>
           <span className="text-white"  > <input type="text" value={profile?.email || ''} />  </span>
         </div>
-      </div>
 
-      <div className="col-md-5 border-right">
         <div className="p-3 py-5">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h4 className="text-right">Profil Ayarları</h4>
@@ -175,6 +174,7 @@ const UserProfileSettings  = () => {
             >
               Kaydet
             </button>
+
           </div>
         </div>
       </div>
