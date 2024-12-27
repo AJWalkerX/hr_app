@@ -26,6 +26,18 @@ function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
   const location = useLocation();
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
+  const isAuth = hrUseSelector((state) => state.auth.isAuth);
+
+  const isManagerLogin = hrUseSelector(
+    (state) => state.auth.loginResponse?.position === "MANAGER"
+  );
+  const position = hrUseSelector((state) => state.auth.loginResponse?.position);
+  console.log(position);
+  console.log(isManagerLogin);
+  const isFirstLogin = hrUseSelector(
+    (state) => state.auth.loginResponse?.isFirstLogin
+  );
+  console.log(isFirstLogin);
   useEffect(() => {
     const adminToken = localStorage.getItem("adminToken");
     if (adminToken) {
@@ -58,14 +70,63 @@ function RouterPage() {
         path="/admin/wait-customers"
         element={isAdminLogin ? <AdminWaitCustomersPage /> : <AdminLoginPage />}
       />
-      <Route path="/user-information" element={<UserInformationPage />} />
-      <Route path="/profile" element={<UserProfileSettingsPage />} />
-      <Route path="/manager" element={<ManagerHomePage />} />
-      <Route path="/manager/permit" element={<UserPermitPage />} />
-      <Route path="/manager/employees" element={<ManagerEmployeesPage />} />
+      <Route
+        path="/user-information"
+        element={isFirstLogin && isManagerLogin && <UserInformationPage />}
+      />
+      <Route
+        path="/profile"
+        element={isAuth ? <UserProfileSettingsPage /> : <LoginPage />}
+      />
+      <Route
+        path="/manager"
+        element={
+          isManagerLogin && isFirstLogin ? (
+            <UserInformationPage />
+          ) : isManagerLogin ? (
+            <ManagerHomePage />
+          ) : isAuth ? (
+            <HomePage />
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/manager/permit"
+        element={
+          isManagerLogin ? (
+            <UserPermitPage />
+          ) : isAuth ? (
+            <HomePage />
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
+      <Route
+        path="/manager/employees"
+        element={
+          isManagerLogin ? (
+            <ManagerEmployeesPage />
+          ) : isAuth ? (
+            <HomePage />
+          ) : (
+            <LoginPage />
+          )
+        }
+      />
 
-      <Route path="/set-new-password" element={<SetNewPasswordPage />}></Route>
-      <Route path="/permit-request" element={<PermitRequestPage/>}> </Route>
+      <Route
+        path="/set-new-password"
+        element={isAuth ? <SetNewPasswordPage /> : <LoginPage />}
+      ></Route>
+      <Route
+        path="/permit-request"
+        element={isAuth ? <PermitRequestPage /> : <LoginPage />}
+      >
+        {" "}
+      </Route>
     </Routes>
   );
 }
