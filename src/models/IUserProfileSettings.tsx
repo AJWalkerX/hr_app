@@ -11,5 +11,6 @@ export interface IUserProfileSettings {
     position: string;
     dateOfEmployment: Date;
     socialSecurityNumber: string;
+    companyName: string
     
 }
