@@ -2,8 +2,18 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../../img/ik-logo3.svg'
 import './ManagerSidebar.css'
+import { useDispatch } from 'react-redux';
+import { hrDispatch } from '../../../stores';
+import { logout } from '../../../stores/features/authSlice';
 
 function ManagerSidebar() {
+
+  const dispatch = useDispatch<hrDispatch>();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = '/login';
+  };
 
   return (
     <>
@@ -113,7 +123,7 @@ function ManagerSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
-                /* onClick={logout} */
+                 onClick={handleLogout}
                 data-bs-dismiss="modal"
               >
                 Çıkış Yap
