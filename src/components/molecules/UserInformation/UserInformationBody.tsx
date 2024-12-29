@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserInformationButton from "../../atoms/UserInformation/UserInformationButton";
+import { IUserProfileSettings } from "../../../models/IUserProfileSettings";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { fetchUserProfileSettings } from "../../../stores/features/userPanelSlice";
 
 function UserInformationBody() {
+
+  const profile: IUserProfileSettings | any= hrUseSelector(state=> state.userpanel.userProfileSettings);
+  
+  const dispatch = useDispatch<hrDispatch>();
+  useEffect(()=>{
+      dispatch(fetchUserProfileSettings())
+      
+  },[]);
+
   return (
     <>
       <div className="col-4">
@@ -13,12 +26,18 @@ function UserInformationBody() {
           className="form-control mb-2 mt-5"
           type="text"
           placeholder="Adınız"
+          name="firstName"
+          value={profile?.firstName || ''}
+          readOnly
         />
         <input
           style={{ height: "50px" }}
           className="form-control mb-2 "
           type="text"
           placeholder="Soyadınız"
+          name="lastName"
+          value={profile?.lastName || ''}
+          readOnly
         />
         <input
           style={{ height: "50px" }}
@@ -50,6 +69,9 @@ function UserInformationBody() {
           className="form-control mb-2 "
           type="email"
           placeholder="Mail Adresiniz"
+          name="email"
+           value={profile?.email || ''}
+               
         />
 
         <select
@@ -72,6 +94,9 @@ function UserInformationBody() {
           className="form-control mb-2 mt-5 "
           type="text"
           placeholder="Şirket Adı"
+          name="companyName"
+          value={profile?.companyName || ''}
+          
         />
         <input
           style={{ height: "50px" }}
@@ -151,22 +176,19 @@ function UserInformationBody() {
               className="form-control mb-2 "
               type="date"
             />
-          
-          <select
+            <input
+            
             style={{ height: "50px" }}
-            className="form-select mb-2"
-            aria-label="Default select example"
-          >
-            <option selected>Pozisyonunuz</option>
-            <option value="INTERN">INTERN</option>
-            <option value="JUNIOR">JUNIOR</option>
-            <option value="MID_LEVEL">MID_LEVEL</option>
-            <option value="SENIOR">SENIOR</option>
-            <option value="TEAM_LEAD">TEAM_LEAD</option>
-            <option value="MANAGER">MANAGER</option>
-            <option value="DIRECTOR">DIRECTOR</option>
-            <option value="NONE">NONE</option>
-          </select>
+            className="form-control mb-2 "
+            type="text"
+            placeholder="Posizyonunuz"
+            name="position"
+             value={profile?.position}
+             readOnly
+                 
+          />
+            
+        
         
         <div className="row me-5  ">
           <UserInformationButton />
