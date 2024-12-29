@@ -1,4 +1,5 @@
 export interface IUserProfileSettings {
+    userId:number,
     avatar:string,
     firstName: string;
     lastName: string;

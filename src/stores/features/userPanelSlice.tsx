@@ -5,10 +5,12 @@ import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { IUserPermitResponse } from "../../models/Response/IUserPermitResponse";
 import { IUserPermitRequest } from "../../models/Request/IUserPermitRequest";
 import Swal from "sweetalert2";
+import { IUpdateUserProfileSettings } from "../../models/Request/IUpdateUserProfileSettings";
 
 interface IUserProfileSettings {
   userProfileSettings: IUserProfileSettings | null;
   isUserProfileSettingsLoading: boolean;
+  isUpdateProfileSettingsLoading: boolean
   
   userCreatePermit: IUserPermitRequest | null;
   isUserCreatePermitLoading: boolean;
@@ -20,6 +22,8 @@ const initialUserProfileSettingsState: IUserProfileSettings = {
  
   userCreatePermit: null,
   isUserCreatePermitLoading: false,
+
+  isUpdateProfileSettingsLoading: false,
 };
 
 export const fetchUserPermitCreate = createAsyncThunk(
@@ -50,6 +54,20 @@ export const fetchUserProfileSettings = createAsyncThunk(
   }
 );
 
+export const fetchUpdateProfileSettings = createAsyncThunk(
+  "userpanel/fetchUpdateProfileSettings",
+  async (payload:IUpdateUserProfileSettings) =>{
+    const response =await fetch(apis.userService+'/user-update-information',{
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }).then((data) => data.json());
+    return response;
+  }
+)
+
 
 const userPanelSlice = createSlice({
   name: "userpanel",
@@ -69,6 +87,20 @@ const userPanelSlice = createSlice({
         }
       }
     );
+
+    build.addCase(fetchUpdateProfileSettings.pending,(state)=>{
+      state.isUpdateProfileSettingsLoading=true;
+    });
+    build.addCase(
+      fetchUpdateProfileSettings.fulfilled,
+      (state, action:PayloadAction<IBaseResponse>)=>{
+        state.isUpdateProfileSettingsLoading = false;
+        if(action.payload.code === 200){
+          state.userProfileSettings = action.payload.data;
+        }
+      });
+   
+    
    
 
     build.addCase(fetchUserPermitCreate.pending, (state) => {

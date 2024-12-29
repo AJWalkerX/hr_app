@@ -3,23 +3,66 @@ import "./UserProfileSettings.css";
 import { IUserProfileSettings } from "../../../models/IUserProfileSettings";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
-import { fetchUserProfileSettings } from "../../../stores/features/userPanelSlice";
+import { fetchUserProfileSettings, fetchUpdateProfileSettings } from "../../../stores/features/userPanelSlice";
 
-const UserProfileSettings  = () => {
-  const profile: IUserProfileSettings | any= hrUseSelector(state=> state.userpanel.userProfileSettings);
-  
+const UserProfileSettings = () => {
+  const profile: IUserProfileSettings | any = hrUseSelector(
+    (state) => state.userpanel.userProfileSettings
+  );
+
   const dispatch = useDispatch<hrDispatch>();
-  useEffect(()=>{
-      dispatch(fetchUserProfileSettings())
-      
-  },[]);
-    
+  const [isEditing, setIsEditing] = useState(false); // Düzenleme durumu
+  const [updatedProfile, setUpdatedProfile] = useState(profile); // Güncellenmiş profil
+
+  useEffect(() => {
+    dispatch(fetchUserProfileSettings());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (profile) {
+      setUpdatedProfile(profile); // profile yüklendikten sonra updatedProfile'ı güncelle
+    }
+  }, [profile]);
+
+  const handleEditClick = () => {
+    setIsEditing(true); // Düzenleme modunu aç
+  };
+
+  const handleSaveClick = () => {
+    if (updatedProfile) {
+      const updatedData = {
+        userId: updatedProfile.userId, // Ensure userId is included
+        avatar: updatedProfile.avatar || profile?.avatar || '',
+        firstName: updatedProfile.firstName || '',
+        lastName: updatedProfile.lastName || '',
+        identityNumber: updatedProfile.identityNumber || '',
+        dateOfBirth: updatedProfile.dateOfBirth || '',
+        mobileNumber: updatedProfile.mobileNumber || '',
+        address: updatedProfile.address || '',
+        gender: updatedProfile.gender || '',
+        email: updatedProfile.email || '',
+        position: updatedProfile.position || '',
+        dateOfEmployment: updatedProfile.dateOfEmployment || '',
+        socialSecurityNumber: updatedProfile.socialSecurityNumber || '',
+      };
+
+      dispatch(fetchUpdateProfileSettings(updatedData)); // Backend'e gönder
+      setIsEditing(false); // Düzenleme modunu kapat
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUpdatedProfile((prevState: IUserProfileSettings) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className="row">
       <div className="col-md-5 border-right">
-
-      <div className="d-flex flex-column align-items-center text-center">
+        <div className="d-flex flex-column align-items-center text-center">
           <img
             className="rounded-circle"
             width="150px"
@@ -27,13 +70,34 @@ const UserProfileSettings  = () => {
             src={profile?.avatar}
             alt="Profile"
           />
-          <span className="font-weight-bold text-white" ><input style={{border:'none', textAlign:'center', fontWeight:'bold'}}  type="text" value={ `${profile?.firstName || ''} ${profile?.lastName || ''}` } />  </span>
+          <input type="text" 
+          hidden
+          readOnly
+          value={profile?.userId}
+          />
+
+          <span className="font-weight-bold text-white">
+            <input
+              style={{
+                border: "none",
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+
+              type="text"
+              value={`${profile?.firstName || ""} ${profile?.lastName || ""}`}
+              readOnly={!isEditing}
+              name="fullName"
+              onChange={handleInputChange}
+            />
+          </span>
         </div>
 
         <div className="p-3 py-5">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h4 className="text-right">Profil Ayarları</h4>
           </div>
+
           <div className="row mt-2">
             <div className="col-md-6">
               <label className="labels">Adınız</label>
@@ -42,8 +106,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="firstName"
-                value={profile?.firstName || ''}
-                readOnly
+                value={updatedProfile?.firstName || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
             <div className="col-md-6">
@@ -53,11 +118,13 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="lastName"
-                value={profile?.lastName || ''}
-                readOnly
+                value={updatedProfile?.lastName || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
           </div>
+
           <div className="row mt-3">
             <div className="col-md-12">
               <label className="labels">T.C. No</label>
@@ -66,8 +133,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="identityNumber"
-                value={profile?.identityNumber || ''}
-                readOnly
+                value={updatedProfile?.identityNumber || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
             <div className="col-md-12">
@@ -77,8 +145,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="dateOfBirth"
-                value={profile?.dateOfBirth || ''}
-                readOnly
+                value={updatedProfile?.dateOfBirth || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
             <div className="col-md-12">
@@ -88,8 +157,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="mobileNumber"
-                value={profile?.mobileNumber || ''}
-                readOnly
+                value={updatedProfile?.mobileNumber || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
             <div className="col-md-12">
@@ -99,8 +169,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="address"
-                value={profile?.address || ''}
-                readOnly
+                value={updatedProfile?.address || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -111,8 +182,9 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="email"
-                value={profile?.email || ''}
-                readOnly
+                value={updatedProfile?.email || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -123,58 +195,63 @@ const UserProfileSettings  = () => {
                 className="form-control"
                 placeholder=""
                 name="dateOfEmployment"
-                value={profile?.dateOfEmployment || ''}
-                readOnly
+                value={updatedProfile?.dateOfEmployment || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
               />
             </div>
-            
-              <div className="col-md-12">
-                <label className="labels mt-3">Sosyal Güvenlik No</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder=""
-                  name="socialSecurityNumber"
-                  value={profile?.socialSecurityNumber || ''}
-                  readOnly
-                />
-              </div>
-              <div className="col-md-12">
-                <label className="labels mt-2 ">Cinsiyet</label>
-                <select style={{height:'50px'}} className="form-control mb-2" aria-label="Default select example">  
-                <option >{profile?.gender}</option>  
-            <option value="MALE">Erkek</option>  
-            <option value="FEMALE">Kadın</option>
-            <option value="OTHER">Diğer</option>
-        </select>
-              </div>
-            
+
+            <div className="col-md-12">
+              <label className="labels mt-3">Sosyal Güvenlik No</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder=""
+                name="socialSecurityNumber"
+                value={updatedProfile?.socialSecurityNumber || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="col-md-12">
+              <label className="labels mt-2 ">Cinsiyet</label>
+              <input
+                style={{ height: "50px" }}
+                className="form-control mb-2 "
+                type="text"
+                placeholder="Posizyonunuz"
+                name="gender"
+                value={updatedProfile?.gender || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
+              />
+            </div>
 
             <div className="col-md-12">
               <label className="labels mt-2">İş Pozisyonunuz</label>
-              <select style={{height:'50px'}} className="form-control mb-2" aria-label="Default select example">  
-              <option >{profile?.position}</option>  
-             <option value="INTERN">Intern</option>  
-            <option value="JUNIOR">Junior</option>  
-            <option value="MID_LEVEL">Mid_Level</option>
-            <option value="SENIOR">Senior</option>
-            <option value="TEAM_LEAD">Team_Lead</option>
-            <option value="MANAGER">Manager</option>
-            <option value="DIRECTOR">Director</option>
-            <option value="NONE">None</option>
-         </select>
+              <input
+                style={{ height: "50px" }}
+                className="form-control mb-2 "
+                type="text"
+                placeholder="Posizyonunuz"
+                name="position"
+                value={updatedProfile?.position || ""}
+                readOnly={!isEditing}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
 
           <div className="mt-5 text-center">
-            <button
-              className="btn btn-primary profile-button"
-              type="button"
-              
-            >
-              Kaydet
-            </button>
-
+            {!isEditing ? (
+              <button className="btn btn-primary profile-button" type="button" onClick={handleEditClick}>
+                Düzenle
+              </button>
+            ) : (
+              <button className="btn btn-success profile-button" type="button" onClick={handleSaveClick}>
+                Kaydet
+              </button>
+            )}
           </div>
         </div>
       </div>
