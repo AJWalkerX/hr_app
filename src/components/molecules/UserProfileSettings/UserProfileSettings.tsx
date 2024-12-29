@@ -4,6 +4,7 @@ import { IUserProfileSettings } from "../../../models/IUserProfileSettings";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { fetchUserProfileSettings, fetchUpdateProfileSettings } from "../../../stores/features/userPanelSlice";
+import Swal from 'sweetalert2';
 
 const UserProfileSettings = () => {
   const profile: IUserProfileSettings | any = hrUseSelector(
@@ -46,9 +47,20 @@ const UserProfileSettings = () => {
         socialSecurityNumber: updatedProfile.socialSecurityNumber || '',
       };
 
-      dispatch(fetchUpdateProfileSettings(updatedData)); // Backend'e gönder
+      dispatch(fetchUpdateProfileSettings(updatedData));
+      
+      Swal.fire({
+        icon: 'success',
+        title: 'Başarılı!',
+        text: 'Profil bilgileriniz başarıyla güncellendi.',
+       
+      });
       setIsEditing(false); // Düzenleme modunu kapat
     }
+  };
+  const handleCancelClick = () => {
+    setUpdatedProfile(profile); // Değişiklikleri iptal et ve eski profile'ı geri yükle
+    setIsEditing(false); // Düzenleme modunu kapat
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +98,7 @@ const UserProfileSettings = () => {
 
               type="text"
               value={`${profile?.firstName || ""} ${profile?.lastName || ""}`}
-              readOnly={!isEditing}
+              readOnly
               name="fullName"
               onChange={handleInputChange}
             />
@@ -107,7 +119,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="firstName"
                 value={updatedProfile?.firstName || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -119,7 +131,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="lastName"
                 value={updatedProfile?.lastName || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -134,7 +146,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="identityNumber"
                 value={updatedProfile?.identityNumber || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -146,7 +158,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="dateOfBirth"
                 value={updatedProfile?.dateOfBirth || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -196,7 +208,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="dateOfEmployment"
                 value={updatedProfile?.dateOfEmployment || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -209,7 +221,7 @@ const UserProfileSettings = () => {
                 placeholder=""
                 name="socialSecurityNumber"
                 value={updatedProfile?.socialSecurityNumber || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -222,7 +234,7 @@ const UserProfileSettings = () => {
                 placeholder="Posizyonunuz"
                 name="gender"
                 value={updatedProfile?.gender || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -236,7 +248,7 @@ const UserProfileSettings = () => {
                 placeholder="Posizyonunuz"
                 name="position"
                 value={updatedProfile?.position || ""}
-                readOnly={!isEditing}
+                readOnly
                 onChange={handleInputChange}
               />
             </div>
@@ -248,9 +260,14 @@ const UserProfileSettings = () => {
                 Düzenle
               </button>
             ) : (
-              <button className="btn btn-success profile-button" type="button" onClick={handleSaveClick}>
-                Kaydet
-              </button>
+              <>
+                <button className="btn btn-primary profile-button profile-btn-wide" type="button" onClick={handleSaveClick}>
+                  Kaydet
+                </button>
+                <button className="btn btn-secondary profile-button profile-btn-wide" type="button" onClick={handleCancelClick}>
+                  İptal
+                </button>
+              </>
             )}
           </div>
         </div>
