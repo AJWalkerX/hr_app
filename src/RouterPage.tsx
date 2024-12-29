@@ -22,6 +22,11 @@ import UserPermitPage from "./pages/UserPermitPage";
 import ManagerEmployeesPage from "./pages/ManagerEmployeesPage";
 import PermitRequestPage from "./pages/PermitRequestPage";
 import PersonelHomePage from "./pages/PersonelHomePage";
+import PermitRequestManagerPage from "./pages/PermitRequestPageManager";
+import ManagerProfileSettingsPage from "./pages/ManagerProfileSettingsPage";
+import UserPermitViewPage from "./pages/UserPermitViewPage";
+import ManagerPermitView from "./pages/ManagerPermitViewPage";
+import ManagerPermitViewPage from "./pages/ManagerPermitViewPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -80,6 +85,11 @@ function RouterPage() {
       <Route path="/set-new-password" element={<SetNewPasswordPage />}></Route>
       <Route path="/personal/permit-request" element={<PermitRequestPage/>}> </Route>
       <Route path="/personal" element={<PersonelHomePage/>}></Route>
+      <Route path="/manager/permit-request" element={<PermitRequestManagerPage/>}> </Route>
+      <Route path="/manager/profile" element={<ManagerProfileSettingsPage/>} />
+      <Route path="/personal/view-permit" element={<UserPermitViewPage/>}></Route>
+      <Route path="/manager/view-permit" element={<ManagerPermitViewPage/>}></Route>
+
     </Routes>
   );
 }

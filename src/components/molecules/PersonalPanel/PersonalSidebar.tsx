@@ -81,7 +81,7 @@ function PersonalSidebar() {
               </li>
 
               <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal'}>
+                <NavLink className="nav-link-manager" to={'/personal/view-permit'}>
                 <a className='nav-link fw-bold' href=''>
                   <span className="nav-icon">
                     <span
