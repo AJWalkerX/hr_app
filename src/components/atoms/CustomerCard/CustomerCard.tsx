@@ -15,15 +15,15 @@ interface ICustomerCard {
   companyType: string;
   companyRegion: string;
   totalPaymentAmount: string;
+  onRefresh: () => void; // Yeni prop eklendi
 }
 
 function CustomerCard(props: ICustomerCard) {
-
-  const [companyLogo, setCompanyLogo] = useState(props.companyLogo);
+  const [companyLogo, setCompanyLogo] = useState(props.companyLogo  );
   const [companyName, setCompanyName] = useState(props.companyName);
   const [companyMail, setCompanyMail] = useState(props.companyMail);
   const [companyAddress, setCompanyAddress] = useState(props.companyAddress);
-  const [companyTelNo, setCompanyTelNo] = useState(props.companyTelNo);
+  const [companyTelNo, setCompanyTelNo] = useState(props.companyTelNo || "");
   const [companyRegion, setCompanyRegion] = useState(props.companyRegion);
   const [companyType, setCompanyType] = useState(props.companyType);
   
@@ -56,8 +56,12 @@ function CustomerCard(props: ICustomerCard) {
       companyType,
     };
     console.log(updatedCustomer);
-    dispatch(fetchUpdateCustomer(updatedCustomer));
+    dispatch(fetchUpdateCustomer(updatedCustomer)).then(() => {
+      // Veriler güncellenince onRefresh fonksiyonu çağrılır
+      props.onRefresh();
+    });
   };
+      
 
   return (
     <>
@@ -172,7 +176,7 @@ function CustomerCard(props: ICustomerCard) {
                 type="text"
                 className="form-control"
                 placeholder="Şirket Telefon Numaranızı Giriniz"
-                value={props.companyTelNo || ""}
+                value={props.companyTelNo }
                 onChange={(e) => setCompanyTelNo(e.target.value)}
               />
             </div>

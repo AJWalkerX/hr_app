@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CustomerCard from "../../atoms/CustomerCard/CustomerCard";
 import { ICustomers } from "../../../models/Response/ICustomersResponse";
 import { hrDispatch, hrUseSelector } from "../../../stores";
@@ -10,9 +10,14 @@ function AdminCustomers() {
     (state) => state.adminpanel.customerList
   );
   const dispatch = useDispatch<hrDispatch>();
+  
+  // refreshCustomerList fonksiyonunu tanımlayın
+  const refreshCustomerList = () => {
+    dispatch(fetchCustomerList()); // Bu fonksiyon customer listesini tekrar yükleyecek
+  };
 
   useEffect(() => {
-    dispatch(fetchCustomerList());
+    dispatch(fetchCustomerList()); // İlk yükleme
   }, [dispatch]);
 
   return (
@@ -62,6 +67,7 @@ function AdminCustomers() {
                     companyTelNo={customer.companyTelNo}
                     companyType={customer.companyType}
                     companyRegion={customer.companyRegion}
+                    onRefresh={refreshCustomerList}  
                   />
                 );
               })
