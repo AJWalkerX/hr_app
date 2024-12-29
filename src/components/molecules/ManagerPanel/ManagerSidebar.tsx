@@ -49,13 +49,13 @@ function ManagerSidebar() {
       <li className="nav-item">
         <NavLink className='nav-link-manager' to={'/manager/permit'}>
         <a className="nav-link fw-bold" href="#"   >
-          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="bi bi-person-raised-hand"></span></span> İZİNLER
+          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="bi bi-person-raised-hand"></span></span> ÇALIŞAN İZİN TALEPLERİ
         </a>
         </NavLink>
       </li>
 
        <li className="nav-item">
-              <NavLink className='nav-link-manager' to={'/personal/profile'}>
+              <NavLink className='nav-link-manager' to={'/manager/profile'}>
               <a className="nav-link fw-bold"  href="#">
                 <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-user"></span></span>PERSONEL BİLGİLERİ
               </a>
@@ -63,7 +63,7 @@ function ManagerSidebar() {
             </li>
       
             <li className="nav-item">
-              <NavLink className='nav-link-manager' to={'/personal/permit-request'}>
+              <NavLink className='nav-link-manager' to={'/manager/permit-request'}>
               <a className="nav-link fw-bold"  href="#">
                 <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-pen-to-square"></span></span> İZİN OLUŞTUR
               </a>
@@ -71,7 +71,7 @@ function ManagerSidebar() {
             </li>
       
             <li className="nav-item">
-              <NavLink className='nav-link-manager' to={'/personal'}>
+              <NavLink className='nav-link-manager' to={'/manager/view-permit'}>
               <a className="nav-link fw-bold"  href="#">
                 <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-regular fa-calendar-days"></span></span> İZİNLERİ GÖRÜNTÜLE
               </a>
