@@ -6,14 +6,18 @@ import { IUserPermitResponse } from "../../models/Response/IUserPermitResponse";
 import { IUserPermitRequest } from "../../models/Request/IUserPermitRequest";
 import Swal from "sweetalert2";
 import { IUpdateUserProfileSettings } from "../../models/Request/IUpdateUserProfileSettings";
+import { IUserPermitViewResponse } from "../../models/Response/IUserPermitViewResponse";
 
 interface IUserProfileSettings {
   userProfileSettings: IUserProfileSettings | null;
   isUserProfileSettingsLoading: boolean;
   isUpdateProfileSettingsLoading: boolean
-  
+
   userCreatePermit: IUserPermitRequest | null;
   isUserCreatePermitLoading: boolean;
+
+  viewPermitCardList: IUserPermitViewResponse[];
+  isViewPermitCardListLoading: boolean;
 }
 
 const initialUserProfileSettingsState: IUserProfileSettings = {
@@ -24,7 +28,24 @@ const initialUserProfileSettingsState: IUserProfileSettings = {
   isUserCreatePermitLoading: false,
 
   isUpdateProfileSettingsLoading: false,
+
+  
+  viewPermitCardList: [],
+  isViewPermitCardListLoading: false,
 };
+
+
+export const fetchUserPermitView = createAsyncThunk(
+  "userpanel/fetchUserPermitView",
+  async () => {
+    const token = localStorage.getItem("token");
+    return await fetch(
+      apis.userService + "/get-all-view-user-permit?token=" + token
+    ).then((data) => data.json());
+  }
+);
+
+
 
 export const fetchUserPermitCreate = createAsyncThunk(
   "userpanel/fetchUserPermitCreate",
@@ -118,6 +139,19 @@ const userPanelSlice = createSlice({
             title: 'Hata!',
             text: action.payload.message || 'Girdiğiniz tarih aralığı hatalıdır.',
           });
+        }
+      }
+    );
+
+    build.addCase(fetchUserPermitView.pending, (state)=>{
+      state.isViewPermitCardListLoading = true;
+    });
+    build.addCase(
+      fetchUserPermitView.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) =>{
+        state.isViewPermitCardListLoading =false;
+        if(action.payload.code === 200){
+          state.viewPermitCardList = action.payload.data;
         }
       }
     );

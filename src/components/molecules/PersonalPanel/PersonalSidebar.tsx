@@ -81,7 +81,7 @@ function PersonalSidebar() {
               </li>
 
               <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/view-permit'}>
+                <NavLink className="nav-link-manager" to={'/personal/view-your-permit'}>
                 <a className='nav-link fw-bold' href=''>
                   <span className="nav-icon">
                     <span
@@ -90,6 +90,20 @@ function PersonalSidebar() {
                     ></span>
                   </span>{' '}
                   İZİNLERİ GÖRÜNTÜLE
+                  </a>
+                </NavLink>
+              </li>
+
+              <li className="nav-item">
+                <NavLink className="nav-link-manager" to={'/personal/add-spending'}>
+                <a className='nav-link fw-bold' href=''>
+                  <span className="nav-icon">
+                    <span
+                      style={{ color: 'rgb(10, 57, 129)'}}
+                      className="fa-solid  fa-money-check-dollar"
+                    ></span>
+                  </span>{' '}
+                  HARCAMA EKLE
                   </a>
                 </NavLink>
               </li>

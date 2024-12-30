@@ -28,7 +28,11 @@ import UserPermitViewPage from "./pages/UserPermitViewPage";
 import ManagerPermitView from "./pages/ManagerPermitViewPage";
 import ManagerPermitViewPage from "./pages/ManagerPermitViewPage";
 import ManagerCommentPage from "./pages/ManagerCommentPage";
-import ViewYourPermitPage from "./pages/ViewYourPermitPage";
+
+import AddSpendingPage from "./pages/AddSpendingPage";
+import PersonalViewYourPermitPage from "./pages/PersonalViewYourPermitPage";
+import CommentListPage from "./pages/CommentListPage";
+import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -89,10 +93,12 @@ function RouterPage() {
       <Route path="/personal" element={<PersonelHomePage/>}></Route>
       <Route path="/manager/permit-request" element={<PermitRequestManagerPage/>}> </Route>
       <Route path="/manager/profile" element={<ManagerProfileSettingsPage/>} />
-      <Route path="/personal/view-permit" element={<UserPermitViewPage/>}></Route>
-      <Route path="/manager/view-permit" element={<ManagerPermitViewPage/>}></Route>
+      <Route path="/personal/view-your-permit" element={<PersonalViewYourPermitPage/>}></Route>
+      <Route path="/manager/view-manager-permit" element={<ManagerPermitViewPage/>}></Route>
       <Route path="/manager/comment" element={<ManagerCommentPage/>}></Route>
-      <Route path="view-your-permit" element={<ViewYourPermitPage/>}></Route>
+      <Route path="/comment/list" element={<CommentListPage />} />
+      <Route path="/personal/add-spending" element={<AddSpendingPage/>}></Route>
+      <Route path="/employee-details" element={<EmployeeDetailsPage/>}></Route>
     </Routes>
   );
 }

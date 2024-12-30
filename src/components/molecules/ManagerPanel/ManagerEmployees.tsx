@@ -5,8 +5,8 @@ import { IEmployeesResponse } from "../../../models/Response/IEmployeesResponse"
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
 import {
-  fecthEmployeeListByCompany,
   fetchAddNewEmployee,
+  fetchEmployeeListByCompany,
 } from "../../../stores/features/managerPanelSlice";
 import {
   EmojiEmotions,
@@ -103,13 +103,49 @@ function ManagerEmployees() {
 
   const dispatch = useDispatch<hrDispatch>();
   useEffect(() => {
-    dispatch(fecthEmployeeListByCompany());
+    dispatch(fetchEmployeeListByCompany());
   }, [dispatch]);
 
   const addNewEmployee = async () => {
+    setIsFirstNameEmpty(
+      newEmployee.firstName === "" || newEmployee.firstName === undefined
+    );
+    setIsLastNameEmpty(
+      newEmployee.lastName === "" || newEmployee.lastName === undefined
+    );
+    setIsEmailEmpty(
+      newEmployee.email === "" || newEmployee.email === undefined
+    );
+    setIsGenderEmpty(
+      newEmployee.gender === "" || newEmployee.gender === undefined
+    );
+    setIsPasswordEmpty(
+      newEmployee.password === "" || newEmployee.password === undefined
+    );
+    setIsMobileNumberEmpty(
+      newEmployee.mobileNumber === "" || newEmployee.mobileNumber === undefined
+    );
+    setIsAddressEmpty(
+      newEmployee.address === "" || newEmployee.address === undefined
+    );
+    setIsIdentityNumberEmpty(
+      newEmployee.identityNumber === "" ||
+        newEmployee.identityNumber === undefined
+    );
+    setIsPositionEmpty(
+      newEmployee.position === "" || newEmployee.position === undefined
+    );
+    setIsAnnualSalaryEmpty(
+      newEmployee.annualSalary === 0 || newEmployee.annualSalary === undefined
+    );
+    setIsSocialSecurityNumberEmpty(
+      newEmployee.socialSecurityNumber === "" ||
+        newEmployee.socialSecurityNumber === undefined
+    );
+
     const payload = newEmployee;
     await dispatch(fetchAddNewEmployee(payload));
-    dispatch(fecthEmployeeListByCompany());
+    dispatch(fetchEmployeeListByCompany());
   };
   return (
     <>

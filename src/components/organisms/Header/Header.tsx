@@ -3,9 +3,11 @@ import logo from "../../../img/ik-logo2.svg";
 import logoScrolled from "../../../img/ik-logo.svg";
 import "./Header.css";
 import NavButtons from "../../molecules/NavButton/NavButtons";
+import { useNavigate } from "react-router-dom";
 
 // Kartlar için veriler
 function Header() {
+  const navigate = useNavigate();
   const [bgColor, setBgColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
   const [buttonStyle, setButtonStyle] = useState({
@@ -210,8 +212,9 @@ function Header() {
                   className="nav-link"
                   href="#"
                   style={{ fontWeight: "bold", color: textColor }}
+                  onClick={() => navigate("/comment/list")} // Yönlendirme işlemi
                 >
-                  Kullanıcı Hikayeleri
+                  Kullanici hikayeleri
                 </a>
               </li>
             </ul>
