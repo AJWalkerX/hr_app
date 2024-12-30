@@ -32,6 +32,11 @@ const initialListEmployeeState: IManagerPanelState = {
 export const fetchUpdateEmployee = createAsyncThunk(
   "manager/fetchUpdateEmployee",
   async (payload: IUpdateEmployeeRequest) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      ...payload,
+      token: token,
+    };
     const response = await fetch(
       apis.managerService + "/employee-update-information",
       {
@@ -39,7 +44,7 @@ export const fetchUpdateEmployee = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(requestBody),
       }
     ).then((data) => data.json());
     return response;
@@ -74,7 +79,7 @@ export const fetchAddNewEmployee = createAsyncThunk(
   }
 );
 
-export const fecthEmployeeListByCompany = createAsyncThunk(
+export const fetchEmployeeListByCompany = createAsyncThunk(
   "manager/fecthEmployeeListByCompany",
   async () => {
     const managerToken = localStorage.getItem("token");
@@ -141,11 +146,33 @@ const managerSlice = createSlice({
         }
       }
     );
-    build.addCase(fecthEmployeeListByCompany.pending, (state) => {
+    build.addCase(fetchUpdateEmployee.pending, (state) => {
+      state.isAddNewEmployeeLoading = true;
+    });
+    build.addCase(
+      fetchUpdateEmployee.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) => {
+        state.isAddNewEmployeeLoading = false;
+        if (action.payload.code === 200) {
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        }
+      }
+    );
+    build.addCase(fetchEmployeeListByCompany.pending, (state) => {
       state.isEmployeeListLoading = true;
     });
     build.addCase(
-      fecthEmployeeListByCompany.fulfilled,
+      fetchEmployeeListByCompany.fulfilled,
       (state, action: PayloadAction<IBaseResponse>) => {
         state.isEmployeeListLoading = false;
         if (action.payload.code === 200) {

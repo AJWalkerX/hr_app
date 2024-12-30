@@ -2,77 +2,111 @@ import React, { useState } from "react";
 import { hrDispatch } from "../../../stores";
 import { useDispatch } from "react-redux";
 import { IListEmployeeListResponse } from "../../../models/Response/IListEmployeeListResponse";
-import { fecthEmployeeListByCompany } from "../../../stores/features/managerPanelSlice";
+import {
+  Autocomplete,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Menu,
+  MenuItem,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
+import { MoreHoriz } from "@mui/icons-material";
+import { IUpdateEmployeeRequest } from "../../../models/Request/IUpdateEmployeeRequest";
+import {
+  fetchEmployeeListByCompany,
+  fetchUpdateEmployee,
+} from "../../../stores/features/managerPanelSlice";
 
-interface IEmployeeCard {
-  companyId: number;
-  userId: number;
-  avatar: string;
-  email: string;
-  address: string;
-  annualSalary: string;
-  dateOfBirth: string;
-  dateOfEmployment: string;
-  dateOfTermination: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  identityNumber: string;
-  socialSecurityNumber: string;
-  mobileNumber: string;
-  position: string;
-  employmentStatus: string;
-}
+function EmployeeCard(props: IListEmployeeListResponse) {
+  const {
+    companyId,
+    userId,
+    avatar,
+    firstName,
+    lastName,
+    email,
+    position,
+    dateOfEmployment,
+    dateOfTermination,
+    annualSalary,
+    address,
+    dateOfBirth,
+    gender,
+    identityNumber,
+    socialSecurityNumber,
+    mobileNumber,
+    employmentStatus,
+  } = props;
+  const options = ["Detay", "Duzenle", "Sil"];
 
-function EmployeeCard(props: IEmployeeCard) {
-  const [avatar, setUserAvatar] = useState(props.avatar);
-  const [email, setEmail] = useState(props.email);
-  const [address, setAddress] = useState(props.address);
-  const [annualSalary, setAnnualSalary] = useState(props.annualSalary);
-  const [dateOfBirth, setDateOfBirth] = useState(props.dateOfBirth);
-  const [dateOfEmployment, setDateOfEmployment] = useState(
-    props.dateOfEmployment
-  );
-  const [dateOfTermination, setDateOfTermination] = useState(
-    props.dateOfTermination
-  );
-  const [firstName, setFirstName] = useState(props.firstName);
-  const [lastName, setLastName] = useState(props.lastName);
-  const [gender, setGender] = useState(props.gender);
-  const [identityNumber, setIdentityNumber] = useState(props.identityNumber);
-  const [socialSecurityNumber, setSocialSecurityNumber] = useState(
-    props.socialSecurityNumber
-  );
-  const [mobileNumber, setMobileNumber] = useState(props.mobileNumber);
-  const [position, setPosition] = useState(props.position);
-  const [employmentStatus, setEmploymentStatus] = useState(
-    props.employmentStatus
-  );
+  const [updateEmployee, setUpdateEmployee] = useState<IUpdateEmployeeRequest>({
+    companyId: companyId,
+    userId: userId,
+    avatar: avatar,
+    email: email,
+    userState: employmentStatus,
+    address: address,
+    annualSalary: annualSalary as number,
+    dateOfBirth: dateOfBirth,
+    dateOfEmployment: dateOfEmployment,
+    dateOfTermination: dateOfTermination,
+    firstName: firstName,
+    lastName: lastName,
+    gender: gender,
+    identityNumber: identityNumber,
+    socialSecurityNumber: socialSecurityNumber,
+    mobileNumber: mobileNumber,
+    position: position,
+  });
 
   const dispatch = useDispatch<hrDispatch>();
 
-  const handleSave = () => {
-    const getEmployeeList: IListEmployeeListResponse = {
-      companyId: props.companyId,
-      userId: props.userId,
-      avatar,
-      email,
-      address,
-      annualSalary,
-      dateOfBirth,
-      dateOfEmployment,
-      dateOfTermination,
-      firstName,
-      lastName,
-      gender,
-      identityNumber,
-      socialSecurityNumber,
-      mobileNumber,
-      position,
-      employmentStatus,
-    };
-    console.log(getEmployeeList);
-    dispatch(fecthEmployeeListByCompany());
+  const doEmployeeUpdate = () => {
+    dispatch(fetchUpdateEmployee(updateEmployee));
+    setShowModal(false);
+  };
+  const ITEM_HEIGHT = 48;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [showModal, setShowModal] = useState(false);
+  const open = Boolean(anchorEl);
+
+  const genderOptions = ["male", "female", "other"];
+  const positionOptions = [
+    "intern",
+    "junior",
+    "mid level",
+    "senior",
+    "team lead",
+    "manager",
+    "director",
+    "other",
+  ];
+
+  const [isFirstNameEmpty, setIsFirstNameEmpty] = useState(false);
+  const [isLastNameEmpty, setIsLastNameEmpty] = useState(false);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isGenderEmpty, setIsGenderEmpty] = useState(false);
+  const [isMobileNumberEmpty, setIsMobileNumberEmpty] = useState(false);
+  const [isAddressEmpty, setIsAddressEmpty] = useState(false);
+  const [isIdentityNumberEmpty, setIsIdentityNumberEmpty] = useState(false);
+  const [isPositionEmpty, setIsPositionEmpty] = useState(false);
+  const [isAnnualSalaryEmpty, setIsAnnualSalaryEmpty] = useState(false);
+  const [isSocialSecurityNumberEmpty, setIsSocialSecurityNumberEmpty] =
+    useState(false);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDuzenleClick = () => {
+    setShowModal(true); // Modal'ı göster
+    handleClose(); // Menü kapansın
   };
 
   return (
@@ -81,227 +115,323 @@ function EmployeeCard(props: IEmployeeCard) {
         <td>
           <div className="d-flex align-items-center">
             <img
-              src={props.avatar || ""}
+              src={updateEmployee.avatar || ""}
               style={{ width: "45px", height: "45px" }}
               className="rounded-circle"
             />
             <div className="ms-3">
-              <p className="text-muted mb-0">{props.email}</p>
+              <p className="text-muted mb-0">{updateEmployee.email}</p>
             </div>
           </div>
         </td>
 
         <td /*style={{ verticalAlign: 'middle' }}*/>
           <>
-            {props.firstName} {props.lastName}
+            {updateEmployee.firstName} {updateEmployee.lastName}
           </>
         </td>
 
-        <td>{props.position}</td>
+        <td>{updateEmployee.position}</td>
 
         <td>
-          <button
-            type="button"
-            className="btn btn-link btn-sm btn-rounded"
-            data-bs-toggle="modal"
-            data-bs-target="#employeeUpdate"
-          >
-            Edit
-          </button>
+          <div>
+            <IconButton
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreHoriz />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              MenuListProps={{
+                "aria-labelledby": "long-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              slotProps={{
+                paper: {
+                  style: {
+                    maxHeight: ITEM_HEIGHT * 4.5,
+                    width: "20ch",
+                  },
+                },
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem
+                  key={option}
+                  onClick={
+                    option === "Duzenle" ? handleDuzenleClick : handleClose
+                  }
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
+          </div>
         </td>
       </tr>
+      {showModal && (
+        <div
+          className="modal fade show"
+          tabIndex={-1}
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Calisani Duzenle
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <TextField
+                  className="form-control"
+                  placeholder="Isim"
+                  value={updateEmployee.firstName}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      firstName: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsFirstNameEmpty(true);
+                    }
+                  }}
+                  error={isFirstNameEmpty}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Soy Isim"
+                  value={updateEmployee.lastName}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      lastName: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsLastNameEmpty(true);
+                    }
+                  }}
+                  error={isLastNameEmpty}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Email"
+                  value={updateEmployee.email}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      email: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsEmailEmpty(true);
+                    }
+                  }}
+                  error={isEmailEmpty}
+                />
 
-      {/* Modal for editing customer details */}
-      <div
-        className="modal fade"
-        id="employeeUpdate"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        aria-labelledby="employeeUpdateLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="employeeUpdate">
-                Çalışan Bilgisi Güncelleme
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <input type="text" readOnly hidden value={props.companyId} />
-              <label htmlFor="avatar" className="form-label">
-                Personel için fotoğraf yükleyiniz.
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                id="avatar"
-                accept="image/*"
-                onChange={(e) => setUserAvatar(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personel Adı"
-                value={firstName || ""}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personel soyadı"
-                value={lastName || ""}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personel mail adresi"
-                value={email || ""}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personel Adresi"
-                value={address || ""}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personel Telefon Numarası"
-                value={mobileNumber || ""}
-                onChange={(e) => setMobileNumber(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personelin Yıllık Maaaşı"
-                value={annualSalary || ""}
-                onChange={(e) => setAnnualSalary(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Personel Doğum Tarihi"
-                value={dateOfBirth || ""}
-                onChange={(e) => setDateOfBirth(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personelin İşe Başlama Tarihi"
-                value={dateOfEmployment || ""}
-                onChange={(e) => setDateOfEmployment(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personelin işten Ayrılma Tarihi"
-                value={dateOfTermination || ""}
-                onChange={(e) => setDateOfTermination(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personelin Cinsiyeti"
-                value={gender || ""}
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personel TC Kimlik Numarası"
-                value={identityNumber || ""}
-                onChange={(e) => setIdentityNumber(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personelin Sosyal Güvenlik Numarası"
-                value={socialSecurityNumber || ""}
-                onChange={(e) => setSocialSecurityNumber(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personelin Pozisyonu"
-                value={position || ""}
-                onChange={(e) => setPosition(e.target.value)}
-              />
-            </div>
-            <div className="modal-body">
-              <input
-                readOnly
-                type="text"
-                className="form-control"
-                placeholder="Personel"
-                value={employmentStatus || ""}
-                onChange={(e) => setEmploymentStatus(e.target.value)}
-              />
-            </div>
+                <TextField
+                  className="mt-4 form-control"
+                  label="Dogum Tarihi"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={
+                    updateEmployee.dateOfBirth
+                      ? updateEmployee.dateOfBirth.toISOString().split("T")[0]
+                      : ""
+                  }
+                  onChange={(e) =>
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      dateOfBirth: new Date(e.target.value),
+                    }))
+                  }
+                />
 
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                İptal
-              </button>
-              <button
-                type="button"
-                className="btn btn-success"
-                style={{ color: "white" }}
-                data-bs-dismiss="modal"
-                onClick={handleSave}
-              >
-                Kaydet
-              </button>
+                <Autocomplete
+                  className="mt-3"
+                  disablePortal
+                  options={genderOptions}
+                  value={updateEmployee.gender}
+                  onChange={(event, value) => {
+                    setUpdateEmployee({
+                      ...updateEmployee,
+                      gender: value || "",
+                    });
+                    setIsGenderEmpty(!value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Cinsiyet"
+                      error={isGenderEmpty}
+                    />
+                  )}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Telefon Numarasi"
+                  value={updateEmployee.mobileNumber}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      mobileNumber: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsMobileNumberEmpty(true);
+                    }
+                  }}
+                  error={isMobileNumberEmpty}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Adres"
+                  value={updateEmployee.address}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      address: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsAddressEmpty(true);
+                    }
+                  }}
+                  error={isAddressEmpty}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="TC Kimlik Numarasi"
+                  value={updateEmployee.identityNumber}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      identityNumber: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsIdentityNumberEmpty(true);
+                    }
+                  }}
+                  error={isIdentityNumberEmpty}
+                />
+                <TextField
+                  className="mt-4 form-control"
+                  label="Ise Giris Tarihi"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={
+                    updateEmployee.dateOfEmployment
+                      ? updateEmployee.dateOfEmployment
+                          .toISOString()
+                          .split("T")[0]
+                      : ""
+                  }
+                  onChange={(e) =>
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      dateOfEmployment: new Date(e.target.value),
+                    }))
+                  }
+                />
+                <Autocomplete
+                  className="mt-3"
+                  disablePortal
+                  options={positionOptions}
+                  value={updateEmployee.position}
+                  onChange={(event, value) => {
+                    setUpdateEmployee({
+                      ...updateEmployee,
+                      position: value || "",
+                    });
+                    setIsPositionEmpty(!value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Pozisyon"
+                      error={isPositionEmpty}
+                    />
+                  )}
+                />
+                <FormControl className="mt-4 form-control">
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Yillik Maasi
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-amount"
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    label="Yillik Maasi"
+                    value={updateEmployee.annualSalary || ""} // Boş değer için güvenlik
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      const numericValue = value ? parseInt(value, 10) : ""; // Boş bırakılabilir
+                      setUpdateEmployee({
+                        ...updateEmployee,
+                        annualSalary: !!numericValue ? numericValue : 0,
+                      });
+                      setIsAnnualSalaryEmpty(value.trim() === ""); // Sadece boş mu kontrol et
+                    }}
+                    error={isAnnualSalaryEmpty}
+                  />
+                </FormControl>
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Sosyal Guvence Numarasi"
+                  value={updateEmployee.socialSecurityNumber}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      socialSecurityNumber: e.target.value,
+                    }));
+                    if (e.target.value === "") {
+                      setIsSocialSecurityNumberEmpty(true);
+                    }
+                  }}
+                  error={isSocialSecurityNumberEmpty}
+                />
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowModal(false)}
+                >
+                  Kapat
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  style={{ color: "white" }}
+                  onClick={doEmployeeUpdate}
+                >
+                  Guncelle
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
