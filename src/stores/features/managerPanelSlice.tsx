@@ -17,6 +17,7 @@ interface IManagerPanelState {
   isPermitAuthoriseLoading: boolean;
   isPermitListEmpty: boolean;
   isAddNewEmployeeLoading: boolean;
+  isDeleteEmployeeLoading: boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -27,6 +28,7 @@ const initialListEmployeeState: IManagerPanelState = {
   isPermitAuthoriseLoading: false,
   isPermitListEmpty: false,
   isAddNewEmployeeLoading: false,
+  isDeleteEmployeeLoading: false,
 };
 
 export const fetchUpdateEmployee = createAsyncThunk(
@@ -47,6 +49,25 @@ export const fetchUpdateEmployee = createAsyncThunk(
         body: JSON.stringify(requestBody),
       }
     ).then((data) => data.json());
+    return response;
+  }
+);
+
+export const fetchDeleteEmployee = createAsyncThunk(
+  "manager/fetchDeleteEmployee",
+  async (userId: number) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      userId: userId,
+      token: token,
+    };
+    const response = await fetch(apis.managerService + "/delete-employee", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then((data) => data.json());
     return response;
   }
 );
@@ -136,7 +157,6 @@ const managerSlice = createSlice({
             title: action.payload.message,
             timer: 3000,
           });
-          state.employeeList.push(action.payload.data);
         } else {
           Swal.fire({
             icon: "error",
@@ -180,7 +200,31 @@ const managerSlice = createSlice({
         }
       }
     );
-
+    build.addCase(fetchDeleteEmployee.pending, (state) => {
+      state.isDeleteEmployeeLoading = true;
+    });
+    build.addCase(
+      fetchDeleteEmployee.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) => {
+        state.isDeleteEmployeeLoading = false;
+        if (action.payload.code === 200) {
+          state.employeeList = state.employeeList.filter(
+            (user) => user.userId !== action.payload.data.userId
+          );
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        }
+      }
+    );
     build.addCase(fetchGetUserPermitInfo.pending, (state) => {
       state.isUserPermitCardListLoading = true;
     });

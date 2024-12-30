@@ -16,9 +16,11 @@ import {
 import { MoreHoriz } from "@mui/icons-material";
 import { IUpdateEmployeeRequest } from "../../../models/Request/IUpdateEmployeeRequest";
 import {
+  fetchDeleteEmployee,
   fetchEmployeeListByCompany,
   fetchUpdateEmployee,
 } from "../../../stores/features/managerPanelSlice";
+import { stringify } from "querystring";
 
 function EmployeeCard(props: IListEmployeeListResponse) {
   const {
@@ -68,6 +70,15 @@ function EmployeeCard(props: IListEmployeeListResponse) {
     dispatch(fetchUpdateEmployee(updateEmployee));
     setShowModal(false);
   };
+  const handleDelete = async () => {
+    try {
+      await dispatch(fetchDeleteEmployee(userId)).unwrap(); // Unwrap ile hata kontrolü
+      dispatch(fetchEmployeeListByCompany()); // Listeyi yeniden yükleme aksiyonu
+    } catch (error) {
+      console.error("Kullanıcı silme işlemi sırasında bir hata oluştu:", error);
+    }
+  };
+
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showModal, setShowModal] = useState(false);
@@ -166,7 +177,11 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                 <MenuItem
                   key={option}
                   onClick={
-                    option === "Duzenle" ? handleDuzenleClick : handleClose
+                    option === "Duzenle"
+                      ? handleDuzenleClick
+                      : option === "Sil"
+                        ? handleDelete
+                        : handleClose
                   }
                 >
                   {option}

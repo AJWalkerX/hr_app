@@ -25,6 +25,7 @@ import {
   TextField,
 } from "@mui/material";
 import { INewEmployeeRequest } from "../../../models/Request/INewEmployeeRequest";
+import Swal from "sweetalert2";
 
 function ManagerEmployees() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -100,6 +101,7 @@ function ManagerEmployees() {
   const [isAnnualSalaryEmpty, setIsAnnualSalaryEmpty] = useState(false);
   const [isSocialSecurityNumberEmpty, setIsSocialSecurityNumberEmpty] =
     useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const dispatch = useDispatch<hrDispatch>();
   useEffect(() => {
@@ -142,10 +144,33 @@ function ManagerEmployees() {
       newEmployee.socialSecurityNumber === "" ||
         newEmployee.socialSecurityNumber === undefined
     );
-
-    const payload = newEmployee;
-    await dispatch(fetchAddNewEmployee(payload));
-    dispatch(fetchEmployeeListByCompany());
+    if (
+      isFirstNameEmpty ||
+      isLastNameEmpty ||
+      isEmailEmpty ||
+      isGenderEmpty ||
+      isPasswordEmpty ||
+      isMobileNumberEmpty ||
+      isAddressEmpty ||
+      isIdentityNumberEmpty ||
+      isPositionEmpty ||
+      isAnnualSalaryEmpty ||
+      isSocialSecurityNumberEmpty
+    ) {
+      setIsEmpty(true);
+      Swal.fire({
+        icon: "error",
+        title: "Hata!",
+        text: "Alanlar bos olamaz!",
+      });
+      return;
+    } else {
+      const payload = newEmployee;
+      const response = await dispatch(fetchAddNewEmployee(payload));
+      if (response.payload) {
+        await dispatch(fetchEmployeeListByCompany());
+      }
+    }
   };
   return (
     <>
