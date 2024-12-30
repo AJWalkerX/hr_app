@@ -10,6 +10,7 @@ import { fetchGetAllComments } from "../../../stores/features/commentSlice";
 import CommentCard from "../../atoms/CommentCard/CommentCard";
 import { ICommentCard } from "../../../models/ICommentCard";
 import { ICommentResponse } from "../../../models/Response/ICommentResponse";
+import { useNavigate } from "react-router-dom";
 
 
 const UserComments = () => {
@@ -18,7 +19,7 @@ const UserComments = () => {
   useEffect(()=>{
     dispatch(fetchGetAllComments());
   },[]);
-
+  const navigate = useNavigate();
   return (
     <>
       <div className="col-1"></div>
@@ -31,7 +32,12 @@ const UserComments = () => {
               kolaylaştırıyoruz. İK profesyonellerinin Kolay İK ile tanışma
               hikayelerine göz atın.
             </p>
-            <button className="btn btn-primary mt-3">TÜMÜNÜ İNCELEYİN</button>
+            <button
+            className="btn btn-primary mt-3"
+            onClick={() => navigate("/comment/list")} // Yönlendirme işlemi
+          >
+            TÜMÜNÜ İNCELEYİN
+          </button>
           </div>
           <div className="col-md-8 position-relative ms-5">
             {/* Özel Navigasyon Butonları */}
