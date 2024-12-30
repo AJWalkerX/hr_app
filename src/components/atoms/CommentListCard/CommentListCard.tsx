@@ -1,7 +1,7 @@
 import React from 'react'
-import { ICommentListCard } from '../../../models/Response/ICommentListCard';
+import { ICommentResponse } from '../../../models/Response/ICommentResponse';
 
-function CommentListCard(props: ICommentListCard) {
+function CommentListCard(props: ICommentResponse) {
     const {content, firstName,lastName,position,avatar} = props;
   return (
     <div className="row" style={{backgroundColor:'rgb(242, 244, 247)', borderRadius:'15px'}}>
