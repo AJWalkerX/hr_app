@@ -32,6 +32,7 @@ import ManagerCommentPage from "./pages/ManagerCommentPage";
 import AddSpendingPage from "./pages/AddSpendingPage";
 import PersonalViewYourPermitPage from "./pages/PersonalViewYourPermitPage";
 import CommentListPage from "./pages/CommentListPage";
+import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -96,8 +97,8 @@ function RouterPage() {
       <Route path="/manager/view-manager-permit" element={<ManagerPermitViewPage/>}></Route>
       <Route path="/manager/comment" element={<ManagerCommentPage/>}></Route>
       <Route path="/comment/list" element={<CommentListPage />} />
-      
       <Route path="/personal/add-spending" element={<AddSpendingPage/>}></Route>
+      <Route path="/employee-details" element={<EmployeeDetailsPage/>}></Route>
     </Routes>
   );
 }
