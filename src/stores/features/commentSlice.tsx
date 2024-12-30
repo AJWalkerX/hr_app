@@ -4,18 +4,44 @@ import apis from "../../config/RestApis";
 import reducer from "./authSlice";
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { ICommentCard } from "../../models/ICommentCard";
+import { IAddCommentRequest } from "../../models/Request/IAddCommentRequest";
 
 
 interface ICommentState{
     commentCardList: ICommentCard[],
     isCommentCardListLoading: boolean,
+    addComment:IAddCommentRequest | null,
+    isAddCommentLoading:boolean,
 
 }
 const initialCommentState: ICommentState = {
     commentCardList: [],
-    isCommentCardListLoading:false
-    
+    isCommentCardListLoading:false,
+
+    addComment: null,
+    isAddCommentLoading: false,
+
   };
+
+  export const fetchAddComment = createAsyncThunk(
+    "comment/fetchAddComment",
+
+    async(payload:IAddCommentRequest)=>{
+        const token = localStorage.getItem("token");
+    const requestBody = {
+      ...payload,
+      token: token,
+    };
+        const response = await fetch(apis.commentService+'/add-comment',{
+            method: "POST",
+            headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+        }).then((data) => data.json());
+        return response;
+    }
+  )
 
   export const fetchGetAllComments= createAsyncThunk(
     "comment/fetchGetAllComments",
@@ -40,6 +66,14 @@ const initialCommentState: ICommentState = {
                 state.commentCardList = action.payload.data;
             }
         });
+
+        build.addCase(fetchAddComment.pending,(state)=>{state.isAddCommentLoading =true});
+        build.addCase(fetchAddComment.fulfilled,(state,action:PayloadAction<IBaseResponse>)=>{
+            state.isAddCommentLoading = false;
+            if(action.payload.code === 200){
+                state.addComment = action.payload.data;
+            }
+        })
     }
 
     })
