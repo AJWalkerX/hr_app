@@ -7,7 +7,7 @@ import exp from "constants";
 import { IHolidayAuthorizeRequest } from "../../models/Request/IHolidayAuthorizeRequest";
 import Swal from "sweetalert2";
 import { IUpdateEmployeeRequest } from "../../models/Request/IUpdateEmployeeRequest";
-
+import { INewEmployeeRequest } from "../../models/Request/INewEmployeeRequest";
 
 interface IManagerPanelState {
   employeeList: IListEmployeeListResponse[];
@@ -16,6 +16,7 @@ interface IManagerPanelState {
   isUserPermitCardListLoading: boolean;
   isPermitAuthoriseLoading: boolean;
   isPermitListEmpty: boolean;
+  isAddNewEmployeeLoading: boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -24,22 +25,26 @@ const initialListEmployeeState: IManagerPanelState = {
   userPermitCardList: [],
   isUserPermitCardListLoading: false,
   isPermitAuthoriseLoading: false,
-  isPermitListEmpty:false
+  isPermitListEmpty: false,
+  isAddNewEmployeeLoading: false,
 };
 
 export const fetchUpdateEmployee = createAsyncThunk(
   "manager/fetchUpdateEmployee",
-  async(payload: IUpdateEmployeeRequest) => {
-    const response = await fetch(apis.managerService + "/employee-update-information",{
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload), 
-    }).then((data)=> data.json());
+  async (payload: IUpdateEmployeeRequest) => {
+    const response = await fetch(
+      apis.managerService + "/employee-update-information",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    ).then((data) => data.json());
     return response;
   }
-)
+);
 
 export const fetchGetUserPermitInfo = createAsyncThunk(
   "manager/fetchGetUserPermitInfo",
@@ -50,13 +55,32 @@ export const fetchGetUserPermitInfo = createAsyncThunk(
   }
 );
 
+export const fetchAddNewEmployee = createAsyncThunk(
+  "manager/fetchAddNewEmployee",
+  async (payload: INewEmployeeRequest) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      ...payload,
+      token: token,
+    };
+    const response = await fetch(apis.managerService + "/add-new-employee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then((data) => data.json());
+    return response;
+  }
+);
+
 export const fecthEmployeeListByCompany = createAsyncThunk(
   "manager/fecthEmployeeListByCompany",
   async () => {
-    const managerToken = localStorage.getItem("managerToken")
-    return await fetch(apis.managerService + "/employees?token="+managerToken).then((data) =>
-      data.json()
-    );
+    const managerToken = localStorage.getItem("token");
+    return await fetch(
+      apis.managerService + "/employees?token=" + managerToken
+    ).then((data) => data.json());
   }
 );
 
@@ -94,6 +118,28 @@ const managerSlice = createSlice({
   },
 
   extraReducers: (build) => {
+    build.addCase(fetchAddNewEmployee.pending, (state) => {
+      state.isAddNewEmployeeLoading = true;
+    });
+    build.addCase(
+      fetchAddNewEmployee.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) => {
+        state.isAddNewEmployeeLoading = false;
+        if (action.payload.code === 200) {
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: action.payload.message,
+            timer: 3000,
+          });
+        }
+      }
+    );
     build.addCase(fecthEmployeeListByCompany.pending, (state) => {
       state.isEmployeeListLoading = true;
     });
@@ -117,9 +163,8 @@ const managerSlice = createSlice({
         if (action.payload.code === 200) {
           state.userPermitCardList = action.payload.data;
           state.isPermitListEmpty = false;
-        }else if (action.payload.code === 7003){
+        } else if (action.payload.code === 7003) {
           state.isPermitListEmpty = true;
-
         }
       }
     );
@@ -130,9 +175,6 @@ const managerSlice = createSlice({
     build.addCase(fetchPermitAuthorisation.fulfilled, (state) => {
       state.isPermitAuthoriseLoading = false;
     });
-
-    
-
   },
 });
 
