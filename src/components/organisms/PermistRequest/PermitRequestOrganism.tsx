@@ -30,43 +30,45 @@ function PermitRequestOrganism() {
   };
 
   const handleFormSubmit = () => {
-    const beginDate = new Date();
-    const endDate = new Date();
+    const beginDateObject = new Date(beginDate);
+    const endDateObject = new Date(endDate);
 
-    if (beginDate >= endDate) {
-      Swal.fire({
-        title: "Hata!",
-        text: "Başlangıç tarihi, bitiş tarihinden önce olmalıdır.",
-        icon: "error",
-      });
-      return; // Formu göndermeyi engelle
-    }
-  
+   
+  if (!beginDate || !endDate) {
+    Swal.fire({
+      title: "Hata!",
+      text: "Başlangıç tarihi ve bitiş tarihi boş olamaz.",
+      icon: "error",
+    });
+    return;
+  }
 
-    if (!beginDate || !endDate) {
-      Swal.fire({
-        title: "Hata!",
-        text: "Başlangıç tarihi ve bitiş tarihi boş olamaz.",
-        icon: "error",
-      });
-      return; // Formu göndermeyi engelle
-    }
-  
-    // Geçmiş tarihlere izin verilmemesi durumunda kontrol
-    const today = new Date();
-    if (beginDate < today || endDate < today) {
-      Swal.fire({
-        title: "Hata!",
-        text: "Tarih aralığı geçmişte olamaz.",
-        icon: "error",
-      });
-      return; // Formu göndermeyi engelle
-    }
+  if (beginDateObject >= endDateObject) {
+    Swal.fire({
+      title: "Hata!",
+      text: "Başlangıç tarihi, bitiş tarihinden önce olmalıdır.",
+      icon: "error",
+    });
+    return;
+  }
+
+  // Geçmiş tarihlere izin verilmemesi kontrolü
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Bugünün saatini sıfırla (yalnızca tarih karşılaştırması için)
+
+  if (beginDateObject < today || endDateObject < today) {
+    Swal.fire({
+      title: "Hata!",
+      text: "Tarih aralığı geçmişte olamaz.",
+      icon: "error",
+    });
+    return;
+  }
   
 
     const permitRequest: IUserPermitRequest = {
-      beginDate,
-      endDate,
+      beginDate: beginDateObject,
+      endDate: endDateObject,
       holidayType,
       description,
     };
@@ -113,11 +115,16 @@ function PermitRequestOrganism() {
             <form className="form-container">
               <div className="form-group">
                 <label>İzin Başlangıç Tarihi:</label>
-                <input type="date" />
+                <input type="date"
+                 value={beginDate}
+                 onChange={(e) => setBeginDate(e.target.value)}  />
               </div>
               <div className="form-group">
                 <label>İzin Bitiş Tarihi:</label>
-                <input type="date" />
+                <input type="date"
+                 value={endDate}
+                 onChange={(e) => setEndDate(e.target.value)}
+                  />
               </div>
               <div className="form-group">
                 <label>İzin Tipi:</label>
