@@ -1,5 +1,6 @@
 import React from 'react'
 import ManagerSidebar from '../components/molecules/ManagerPanel/ManagerSidebar'
+import PersonalViewYourPermitPage from './PersonalViewYourPermitPage'
 
 function ManagerPermitViewPage() {
   return (
@@ -11,7 +12,7 @@ function ManagerPermitViewPage() {
       </div>
       
       <div  className="col-11 ">
-      
+      <PersonalViewYourPermitPage/>
       </div>
        
     </div>
