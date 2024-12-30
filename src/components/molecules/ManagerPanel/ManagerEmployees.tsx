@@ -109,6 +109,7 @@ function ManagerEmployees() {
   const addNewEmployee = async () => {
     const payload = newEmployee;
     await dispatch(fetchAddNewEmployee(payload));
+    dispatch(fecthEmployeeListByCompany());
   };
   return (
     <>
@@ -486,6 +487,7 @@ function ManagerEmployees() {
                 type="button"
                 className="btn btn-primary"
                 onClick={addNewEmployee}
+                data-bs-dismiss="modal"
               >
                 Gonder
               </button>

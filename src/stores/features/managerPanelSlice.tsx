@@ -131,6 +131,7 @@ const managerSlice = createSlice({
             title: action.payload.message,
             timer: 3000,
           });
+          state.employeeList.push(action.payload.data);
         } else {
           Swal.fire({
             icon: "error",
