@@ -214,7 +214,7 @@ function Header() {
                   style={{ fontWeight: "bold", color: textColor }}
                   onClick={() => navigate("/comment/list")} // Yönlendirme işlemi
                 >
-                  Kullanici hikayeleri
+                  Kullanıcı Hikayeleri
                 </a>
               </li>
             </ul>
