@@ -13,7 +13,7 @@ import {
   OutlinedInput,
   TextField,
 } from "@mui/material";
-import { MoreHoriz } from "@mui/icons-material";
+import { Delete, MoreHoriz } from "@mui/icons-material";
 import { IUpdateEmployeeRequest } from "../../../models/Request/IUpdateEmployeeRequest";
 import {
   fetchDeleteEmployee,
@@ -42,8 +42,8 @@ function EmployeeCard(props: IListEmployeeListResponse) {
     mobileNumber,
     employmentStatus,
   } = props;
-  const options = ["Detay", "Duzenle", "Sil"];
 
+  const options = ["Detay", "Duzenle", "Sil"];
   const [updateEmployee, setUpdateEmployee] = useState<IUpdateEmployeeRequest>({
     companyId: companyId,
     userId: userId,
@@ -70,10 +70,12 @@ function EmployeeCard(props: IListEmployeeListResponse) {
     dispatch(fetchUpdateEmployee(updateEmployee));
     setShowModal(false);
   };
+
   const handleDelete = async () => {
     try {
       await dispatch(fetchDeleteEmployee(userId)).unwrap(); // Unwrap ile hata kontrolü
       dispatch(fetchEmployeeListByCompany()); // Listeyi yeniden yükleme aksiyonu
+      setShowDeleteModal(false); // Modalı kapat
     } catch (error) {
       console.error("Kullanıcı silme işlemi sırasında bir hata oluştu:", error);
     }
@@ -82,6 +84,8 @@ function EmployeeCard(props: IListEmployeeListResponse) {
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // Silme modal'ı için state
+
   const open = Boolean(anchorEl);
 
   const genderOptions = ["male", "female", "other"];
@@ -120,6 +124,11 @@ function EmployeeCard(props: IListEmployeeListResponse) {
     handleClose(); // Menü kapansın
   };
 
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true); // Silme modal'ını göster
+    handleClose(); // Menü kapansın
+  };
+
   return (
     <>
       <tr>
@@ -136,10 +145,8 @@ function EmployeeCard(props: IListEmployeeListResponse) {
           </div>
         </td>
 
-        <td /*style={{ verticalAlign: 'middle' }}*/>
-          <>
-            {updateEmployee.firstName} {updateEmployee.lastName}
-          </>
+        <td>
+          {updateEmployee.firstName} {updateEmployee.lastName}
         </td>
 
         <td>{updateEmployee.position}</td>
@@ -180,10 +187,14 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                     option === "Duzenle"
                       ? handleDuzenleClick
                       : option === "Sil"
-                        ? handleDelete
+                        ? handleDeleteClick
                         : handleClose
                   }
+                  style={option === "Sil" ? { color: "red" } : {}}
                 >
+                  {option === "Sil" && (
+                    <Delete style={{ marginRight: 8, fontSize: 18 }} />
+                  )}
                   {option}
                 </MenuItem>
               ))}
@@ -191,6 +202,8 @@ function EmployeeCard(props: IListEmployeeListResponse) {
           </div>
         </td>
       </tr>
+
+      {/* Modal for Editing Employee Details */}
       {showModal && (
         <div
           className="modal fade show"
@@ -204,7 +217,7 @@ function EmployeeCard(props: IListEmployeeListResponse) {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  Calisani Duzenle
+                  Çalışanı Düzenle
                 </h5>
                 <button
                   type="button"
@@ -215,33 +228,30 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                 ></button>
               </div>
               <div className="modal-body">
+                {/* Fields for updating employee */}
                 <TextField
                   className="form-control"
-                  placeholder="Isim"
+                  placeholder="İsim"
                   value={updateEmployee.firstName}
                   onChange={(e) => {
                     setUpdateEmployee((prev) => ({
                       ...prev,
                       firstName: e.target.value,
                     }));
-                    if (e.target.value === "") {
-                      setIsFirstNameEmpty(true);
-                    }
+                    setIsFirstNameEmpty(e.target.value === "");
                   }}
                   error={isFirstNameEmpty}
                 />
                 <TextField
                   className="form-control mt-3"
-                  placeholder="Soy Isim"
+                  placeholder="Soy İsim"
                   value={updateEmployee.lastName}
                   onChange={(e) => {
                     setUpdateEmployee((prev) => ({
                       ...prev,
                       lastName: e.target.value,
                     }));
-                    if (e.target.value === "") {
-                      setIsLastNameEmpty(true);
-                    }
+                    setIsLastNameEmpty(e.target.value === "");
                   }}
                   error={isLastNameEmpty}
                 />
@@ -254,193 +264,108 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                       ...prev,
                       email: e.target.value,
                     }));
-                    if (e.target.value === "") {
-                      setIsEmailEmpty(true);
-                    }
+                    setIsEmailEmpty(e.target.value === "");
                   }}
                   error={isEmailEmpty}
                 />
-
-                <TextField
-                  className="mt-4 form-control"
-                  label="Dogum Tarihi"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={
-                    updateEmployee.dateOfBirth
-                      ? updateEmployee.dateOfBirth.toISOString().split("T")[0]
-                      : ""
-                  }
-                  onChange={(e) =>
-                    setUpdateEmployee((prev) => ({
-                      ...prev,
-                      dateOfBirth: new Date(e.target.value),
-                    }))
-                  }
-                />
-
-                <Autocomplete
-                  className="mt-3"
-                  disablePortal
-                  options={genderOptions}
-                  value={updateEmployee.gender}
-                  onChange={(event, value) => {
-                    setUpdateEmployee({
-                      ...updateEmployee,
-                      gender: value || "",
-                    });
-                    setIsGenderEmpty(!value);
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Cinsiyet"
-                      error={isGenderEmpty}
-                    />
-                  )}
-                />
                 <TextField
                   className="form-control mt-3"
-                  placeholder="Telefon Numarasi"
+                  placeholder="Telefon Numarası"
                   value={updateEmployee.mobileNumber}
                   onChange={(e) => {
                     setUpdateEmployee((prev) => ({
                       ...prev,
                       mobileNumber: e.target.value,
                     }));
-                    if (e.target.value === "") {
-                      setIsMobileNumberEmpty(true);
-                    }
+                    setIsMobileNumberEmpty(e.target.value === "");
                   }}
                   error={isMobileNumberEmpty}
                 />
-                <TextField
-                  className="form-control mt-3"
-                  placeholder="Adres"
-                  value={updateEmployee.address}
-                  onChange={(e) => {
-                    setUpdateEmployee((prev) => ({
-                      ...prev,
-                      address: e.target.value,
-                    }));
-                    if (e.target.value === "") {
-                      setIsAddressEmpty(true);
-                    }
-                  }}
-                  error={isAddressEmpty}
-                />
-                <TextField
-                  className="form-control mt-3"
-                  placeholder="TC Kimlik Numarasi"
-                  value={updateEmployee.identityNumber}
-                  onChange={(e) => {
-                    setUpdateEmployee((prev) => ({
-                      ...prev,
-                      identityNumber: e.target.value,
-                    }));
-                    if (e.target.value === "") {
-                      setIsIdentityNumberEmpty(true);
-                    }
-                  }}
-                  error={isIdentityNumberEmpty}
-                />
-                <TextField
-                  className="mt-4 form-control"
-                  label="Ise Giris Tarihi"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={
-                    updateEmployee.dateOfEmployment
-                      ? updateEmployee.dateOfEmployment
-                          .toISOString()
-                          .split("T")[0]
-                      : ""
-                  }
-                  onChange={(e) =>
-                    setUpdateEmployee((prev) => ({
-                      ...prev,
-                      dateOfEmployment: new Date(e.target.value),
-                    }))
-                  }
-                />
-                <Autocomplete
-                  className="mt-3"
-                  disablePortal
-                  options={positionOptions}
-                  value={updateEmployee.position}
-                  onChange={(event, value) => {
-                    setUpdateEmployee({
-                      ...updateEmployee,
-                      position: value || "",
-                    });
-                    setIsPositionEmpty(!value);
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Pozisyon"
-                      error={isPositionEmpty}
-                    />
-                  )}
-                />
                 <FormControl className="mt-4 form-control">
                   <InputLabel htmlFor="outlined-adornment-amount">
-                    Yillik Maasi
+                    Yıllık Maaş
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-amount"
                     startAdornment={
                       <InputAdornment position="start">$</InputAdornment>
                     }
-                    label="Yillik Maasi"
-                    value={updateEmployee.annualSalary || ""} // Boş değer için güvenlik
+                    value={updateEmployee.annualSalary || ""}
                     onChange={(e) => {
                       const value = e.target.value;
-                      const numericValue = value ? parseInt(value, 10) : ""; // Boş bırakılabilir
                       setUpdateEmployee({
                         ...updateEmployee,
-                        annualSalary: !!numericValue ? numericValue : 0,
+                        annualSalary: value ? parseInt(value, 10) : 0,
                       });
-                      setIsAnnualSalaryEmpty(value.trim() === ""); // Sadece boş mu kontrol et
+                      setIsAnnualSalaryEmpty(value.trim() === "");
                     }}
                     error={isAnnualSalaryEmpty}
                   />
                 </FormControl>
-                <TextField
-                  className="form-control mt-3"
-                  placeholder="Sosyal Guvence Numarasi"
-                  value={updateEmployee.socialSecurityNumber}
-                  onChange={(e) => {
-                    setUpdateEmployee((prev) => ({
-                      ...prev,
-                      socialSecurityNumber: e.target.value,
-                    }));
-                    if (e.target.value === "") {
-                      setIsSocialSecurityNumberEmpty(true);
-                    }
-                  }}
-                  error={isSocialSecurityNumberEmpty}
-                />
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-secondary"
+                  data-bs-dismiss="modal"
                   onClick={() => setShowModal(false)}
                 >
                   Kapat
                 </button>
                 <button
                   type="button"
-                  className="btn btn-success"
-                  style={{ color: "white" }}
+                  className="btn btn-primary"
                   onClick={doEmployeeUpdate}
                 >
-                  Guncelle
+                  Güncelle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Deleting Employee */}
+      {showDeleteModal && (
+        <div
+          className="modal fade show"
+          tabIndex={-1}
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          role="dialog"
+          aria-labelledby="deleteModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="deleteModalLabel">
+                  Çalışanı Sil
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  aria-label="Close"
+                  onClick={() => setShowDeleteModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                Bu çalışanı silmek istediğinizden emin misiniz?
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Hayır
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleDelete}
+                  style={{ color: "white" }}
+                >
+                  Evet, Sil
                 </button>
               </div>
             </div>
