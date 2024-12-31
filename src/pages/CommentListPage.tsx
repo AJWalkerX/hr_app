@@ -6,11 +6,11 @@ function CommentListPage() {
   return (
     <div >
       <div className="container">
-        <div className="row mb-3 ">
+        <div className="row">
           <Header />
         </div>
 
-        <div className="row d-flex">
+        <div className="row mt-5">
           <CommentList />
         </div>
       </div>

@@ -1,27 +1,24 @@
-import React from 'react'
+import React from 'react';
 import { ICommentResponse } from '../../../models/Response/ICommentResponse';
 
-function CommentListCard(props: ICommentResponse) {
-    const {companyName, firstName,lastName,position,avatar} = props;
+function CommentListCard({ avatar, companyName, firstName, lastName, position }: ICommentResponse) {
   return (
-    <div className="row" style={{backgroundColor:'rgb(242, 244, 247)', borderRadius:'15px'}}>
-        <div className="col-6">
-            <div className="row mt-4">
-                <span style={{fontSize:'20px', fontWeight:'bold'}}>{companyName}</span>
-            </div>
-            <div className="row mt-4">
-                <span>{firstName} {lastName} {position}</span>
-            </div>
-            <div className="row mt-5" >
-                <a style={{textDecoration:'none'}} href="">Kullanıcı Hikayelerini Oku</a>
-            </div>
-        </div> 
-        <div className="col-6" style={{ backgroundColor:'rgb(242, 244, 247)', borderRadius:'15px'}}>
-            <img className='m-3 justify-content-center' style={{borderRadius:'20px', height:'500px', width:'500px'}} src={avatar} alt="" />
+    <div className="col">
+      <div className="card" style={{ width: '350px', height:'510px'}}>
+      
+        <img src={avatar} alt={`${firstName} ${lastName}`} style={{width:'350px', height:'400px', borderRadius:'10px'}} />
+
+        <div className="card-body">
+          
+          <h5 className="card-title" >{companyName}</h5>
+          
+          <p className="card-text">
+            {firstName} {lastName} - {position}
+          </p>
         </div>
+      </div>
     </div>
-    
-  )
+  );
 }
 
-export default CommentListCard
+export default CommentListCard;
