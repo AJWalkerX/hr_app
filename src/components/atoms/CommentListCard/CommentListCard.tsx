@@ -2,12 +2,12 @@ import React from 'react'
 import { ICommentResponse } from '../../../models/Response/ICommentResponse';
 
 function CommentListCard(props: ICommentResponse) {
-    const {content, firstName,lastName,position,avatar} = props;
+    const {companyName, firstName,lastName,position,avatar} = props;
   return (
     <div className="row" style={{backgroundColor:'rgb(242, 244, 247)', borderRadius:'15px'}}>
         <div className="col-6">
             <div className="row mt-4">
-                <span style={{fontSize:'20px', fontWeight:'bold'}}>{content}</span>
+                <span style={{fontSize:'20px', fontWeight:'bold'}}>{companyName}</span>
             </div>
             <div className="row mt-4">
                 <span>{firstName} {lastName} {position}</span>
