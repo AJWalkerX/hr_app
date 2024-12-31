@@ -21,7 +21,7 @@ function CommentList() {
   return (
     <div className="container comment-card">
       <div className="row text-center mb-4">
-        <div className="col-12 " style={{marginTop:'100px'}}>
+        <div className="col-12 " >
           <h1>KULLANICI HİKAYELERİ</h1>
         </div>
       </div>
