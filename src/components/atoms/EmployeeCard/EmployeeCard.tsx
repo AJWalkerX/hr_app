@@ -228,9 +228,8 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                 ></button>
               </div>
               <div className="modal-body">
-                {/* Fields for updating employee */}
                 <TextField
-                  className="form-control"
+                  className="form-control mt-3"
                   placeholder="İsim"
                   value={updateEmployee.firstName}
                   onChange={(e) => {
@@ -282,11 +281,10 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                   error={isMobileNumberEmpty}
                 />
                 <FormControl className="mt-4 form-control">
-                  <InputLabel htmlFor="outlined-adornment-amount">
-                    Yıllık Maaş
-                  </InputLabel>
+                  <InputLabel htmlFor="Yillik Maas">Yıllık Maaş</InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-amount"
+                    label="Yillik Maas"
+                    id="Yillik Maas"
                     startAdornment={
                       <InputAdornment position="start">$</InputAdornment>
                     }
@@ -302,6 +300,125 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                     error={isAnnualSalaryEmpty}
                   />
                 </FormControl>
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Adres"
+                  value={updateEmployee.address}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      address: e.target.value,
+                    }));
+                    setIsAddressEmpty(e.target.value === "");
+                  }}
+                  error={isAddressEmpty}
+                />
+                <TextField
+                  className="mt-4 form-control"
+                  label="Dogum Tarihi"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={
+                    updateEmployee.dateOfBirth
+                      ? updateEmployee.dateOfBirth.toISOString().split("T")[0]
+                      : ""
+                  }
+                  onChange={(e) =>
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      dateOfBirth: new Date(e.target.value),
+                    }))
+                  }
+                />
+                <TextField
+                  className="mt-4 form-control"
+                  label="Ise Giris Tarihi"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={
+                    updateEmployee.dateOfEmployment
+                      ? updateEmployee.dateOfEmployment
+                          .toISOString()
+                          .split("T")[0]
+                      : ""
+                  }
+                  onChange={(e) =>
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      dateOfEmployment: new Date(e.target.value),
+                    }))
+                  }
+                />
+                <Autocomplete
+                  className="mt-3"
+                  disablePortal
+                  options={genderOptions}
+                  value={updateEmployee.gender}
+                  onChange={(event, value) => {
+                    setUpdateEmployee({
+                      ...updateEmployee,
+                      gender: value || "",
+                    });
+                    setIsGenderEmpty(!value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Cinsiyet"
+                      error={isGenderEmpty}
+                    />
+                  )}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Kimlik Numarası"
+                  value={updateEmployee.identityNumber}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      identityNumber: e.target.value,
+                    }));
+                    setIsIdentityNumberEmpty(e.target.value === "");
+                  }}
+                  error={isIdentityNumberEmpty}
+                />
+                <TextField
+                  className="form-control mt-3"
+                  placeholder="Sosyal Güvenlik Numarası"
+                  value={updateEmployee.socialSecurityNumber}
+                  onChange={(e) => {
+                    setUpdateEmployee((prev) => ({
+                      ...prev,
+                      socialSecurityNumber: e.target.value,
+                    }));
+                    setIsSocialSecurityNumberEmpty(e.target.value === "");
+                  }}
+                  error={isSocialSecurityNumberEmpty}
+                />
+                <Autocomplete
+                  className="mt-3"
+                  disablePortal
+                  options={positionOptions}
+                  value={updateEmployee.position}
+                  onChange={(event, value) => {
+                    setUpdateEmployee({
+                      ...updateEmployee,
+                      position: value || "",
+                    });
+                    setIsPositionEmpty(!value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Pozisyon"
+                      error={isPositionEmpty}
+                    />
+                  )}
+                />
               </div>
               <div className="modal-footer">
                 <button
