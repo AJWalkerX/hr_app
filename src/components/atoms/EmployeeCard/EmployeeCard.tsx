@@ -315,23 +315,19 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                 />
                 <TextField
                   className="mt-4 form-control"
-                  label="Dogum Tarihi"
+                  label="Date of Employment"
                   type="date"
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={
-                    updateEmployee.dateOfBirth
-                      ? updateEmployee.dateOfBirth.toISOString().split("T")[0]
-                      : ""
-                  }
                   onChange={(e) =>
                     setUpdateEmployee((prev) => ({
                       ...prev,
-                      dateOfBirth: new Date(e.target.value),
+                      dateOfEmployment: new Date(e.target.value), // Ensure this is a valid Date object
                     }))
                   }
                 />
+
                 <TextField
                   className="mt-4 form-control"
                   label="Ise Giris Tarihi"
@@ -339,13 +335,6 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={
-                    updateEmployee.dateOfEmployment
-                      ? updateEmployee.dateOfEmployment
-                          .toISOString()
-                          .split("T")[0]
-                      : ""
-                  }
                   onChange={(e) =>
                     setUpdateEmployee((prev) => ({
                       ...prev,
