@@ -10,9 +10,9 @@ function CommentListCard({ avatar, companyName, firstName, lastName, position }:
 
         <div className="card-body">
           
-          <h5 className="card-title" >{companyName}</h5>
+          <h5 className="card-title" style={{color:'rgb(10, 57, 129)'}}>{companyName}</h5>
           
-          <p className="card-text">
+          <p className="card-text" style={{color:'rgb(10, 57, 129)'}}>
             {firstName} {lastName} - {position}
           </p>
         </div>
