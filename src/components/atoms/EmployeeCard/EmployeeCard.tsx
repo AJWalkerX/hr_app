@@ -21,8 +21,10 @@ import {
   fetchUpdateEmployee,
 } from "../../../stores/features/managerPanelSlice";
 import { stringify } from "querystring";
+import { useNavigate } from "react-router-dom";
 
 function EmployeeCard(props: IListEmployeeListResponse) {
+  const navigate = useNavigate();
   const {
     companyId,
     userId,
@@ -129,6 +131,11 @@ function EmployeeCard(props: IListEmployeeListResponse) {
     handleClose(); // Menü kapansın
   };
 
+  const handleDetayClick = () => {
+    navigate("/employee-details", { state: { employee: props } });
+    handleClose(); // Menü kapansın
+  };
+
   return (
     <>
       <tr>
@@ -188,7 +195,9 @@ function EmployeeCard(props: IListEmployeeListResponse) {
                       ? handleDuzenleClick
                       : option === "Sil"
                         ? handleDeleteClick
-                        : handleClose
+                        : option === "Detay"
+                          ? handleDetayClick
+                          : handleClose
                   }
                   style={option === "Sil" ? { color: "red" } : {}}
                 >
