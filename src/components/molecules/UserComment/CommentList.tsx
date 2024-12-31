@@ -4,49 +4,42 @@ import { useDispatch } from "react-redux";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { ICommentResponse } from "../../../models/Response/ICommentResponse";
 import { fetchGetAllUserComments } from "../../../stores/features/commentSlice";
+import { Key } from "@mui/icons-material";
+import CommentListCard from "../../atoms/CommentListCard/CommentListCard";
 
 function CommentList() {
-  const commentUserCardList = hrUseSelector((state)=> (state.comment.isCommentUserCardList))
-  
+  const commentUserCardList: ICommentResponse[] = hrUseSelector(
+    (state) => state.comment.commentUserCardList
+  );
+
   const dispatch = useDispatch<hrDispatch>();
-  useEffect (()=>{dispatch(fetchGetAllUserComments())
-  },[dispatch]
-)
 
+  useEffect(() => {
+    dispatch(fetchGetAllUserComments());
+  }, [dispatch]);
 
-//   return (
-//      <div className="container container-comment-list px-5">
-//     <div className="row justify-content-center g-4 mt-5">
-//       {commentUserCardList.map((comment, index) => (
-//         <div
-//           key={index}
-//           className="col-12 col-md-4 d-flex justify-content-center"
-//           style={{
-//             marginBottom: "20px",
-//           }}
-//         >
-//           <div
-//             className="comment-card"
-//             style={{
-//               backgroundImage: `url(${comment.avatar})`, 
-//               padding: "15px",  
-//               borderRadius: "15px",  
-//               backgroundSize: "cover",
-//               backgroundPosition: "center",
-//             }}
-//           >
-//             <div className="comment-text">
-//               <h4>{comment.firstName} {comment.lastName}</h4>
-//               <p>{comment.position}</p>
-//               <p>{comment.companyName}</p>
-//             </div>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   </div>
-// );
-  
+  return (
+    <div className="container comment-card">
+      <div className="row text-center mb-4">
+        <div className="col-12 " style={{marginTop:'100px'}}>
+          <h1>KULLANICI HİKAYELERİ</h1>
+        </div>
+      </div>
+      <div className="row row-cols-md-3 g-4 " >
+        {commentUserCardList.map((comment, index) => (
+          <div className="col" key={index}>
+            <CommentListCard
+              avatar={comment.avatar}
+              companyName={comment.companyName}
+              firstName={comment.firstName}
+              lastName={comment.lastName}
+              position={comment.position}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default CommentList;
