@@ -3,13 +3,14 @@ import { IUserPermitResponse } from "../../../models/Response/IUserPermitRespons
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
 import {
+  fetchGetUserPermitInfo,
   fetchPermitAuthorisation,
   removeUserFromPermitList,
 } from "../../../stores/features/managerPanelSlice";
 
 function UserPermitCard(props: IUserPermitResponse) {
   const dispatch = useDispatch<hrDispatch>();
-  const doApprove = () => {
+  const doApprove = async () => {
     const answer = "Approved";
     dispatch(removeUserFromPermitList(props.userId));
     dispatch(
@@ -19,10 +20,10 @@ function UserPermitCard(props: IUserPermitResponse) {
         answer,
       })
     );
+    await dispatch(fetchGetUserPermitInfo());
   };
-  const doReject = () => {
+  const doReject = async () => {
     const answer = "Rejected";
-    dispatch(removeUserFromPermitList(props.userId));
     dispatch(
       fetchPermitAuthorisation({
         userId: props.userId,
@@ -30,6 +31,7 @@ function UserPermitCard(props: IUserPermitResponse) {
         answer,
       })
     );
+    await dispatch(fetchGetUserPermitInfo());
   };
   return (
     <tr>
