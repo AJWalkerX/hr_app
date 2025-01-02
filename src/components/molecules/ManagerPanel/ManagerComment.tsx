@@ -5,7 +5,7 @@ import { hrDispatch, hrState } from "../../../stores";
 import { IAddCommentRequest } from "../../../models/Request/IAddCommentRequest";
 import Swal from "sweetalert2"; 
 
-const ManagerComment = () => {
+function ManagerComment()  {
   const dispatch = useDispatch<hrDispatch>();
   const isLoading = useSelector((state: hrState) => state.comment.isAddCommentLoading);
 

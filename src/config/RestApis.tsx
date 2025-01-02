@@ -18,7 +18,9 @@ const apis = {
   userPanelService: server +"/user-panel",
   companyService: server+ "/company",
 
-  managerService: server+"/manager"
+  managerService: server+"/manager",
+
+  spendingService: server+"/personal-spending"
 
 };
 
