@@ -34,6 +34,8 @@ import PersonalViewYourPermitPage from "./pages/PersonalViewYourPermitPage";
 import CommentListPage from "./pages/CommentListPage";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import PersonalViewAllMySpendingPage from "./pages/PersonalViewAllMySpendingPage";
+import CommentDetails from "./components/molecules/UserComment/CommentDetails";
+import CommentDetailsPage from "./pages/CommentDetailsPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -101,6 +103,7 @@ function RouterPage() {
       <Route path="/personal/add-spending" element={<AddSpendingPage/>}></Route>
       <Route path="/employee-details" element={<EmployeeDetailsPage/>}></Route>
       <Route path="/personal/view-my-spending" element={<PersonalViewAllMySpendingPage/>}></Route>
+      <Route path="/comment/list/comment-details" element={<CommentDetailsPage/>}></Route>
     </Routes>
   );
 }
