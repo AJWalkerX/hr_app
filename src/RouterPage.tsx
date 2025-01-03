@@ -105,7 +105,7 @@ function RouterPage() {
       <Route path="/personal/view-my-spending" element={<PersonalViewAllMySpendingPage/>}></Route>
       <Route path="/comment/list/comment-details" element={<CommentDetailsPage/>}></Route>
       <Route path="/manager/employees/spending-list" element={<ManagerSpendingViewPage/>}></Route>
-      <Route path="/comment/list/comment-details" element={<CommentDetailsPage/>}></Route>
+      <Route path="/comment/list/comment-details/:commentId" element={<CommentDetailsPage/>}></Route>
     </Routes>
   );
 }

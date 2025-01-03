@@ -7,6 +7,7 @@ const navigate = useNavigate();
   const goToComment = ()=>{        
     navigate('/commentDetails/'+commentId)
 }
+console.log(commentId);
   return (
     <div className="col" onClick={goToComment}>
       <div className="card" style={{ width: '350px', height:'510px'}}>
