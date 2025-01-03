@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { IUpdateEmployeeRequest } from "../../models/Request/IUpdateEmployeeRequest";
 import { INewEmployeeRequest } from "../../models/Request/INewEmployeeRequest";
 import { IManagerSpendingResponse } from "../../models/Response/IManagerSpendingResponse";
+import { IspendingAuthorizeRequest } from "../../models/Request/ISpendingAuthorizeRequest";
 
 interface IManagerPanelState {
   employeeList: IListEmployeeListResponse[];
@@ -21,6 +22,7 @@ interface IManagerPanelState {
   isDeleteEmployeeLoading: boolean;
   employeeSpendingList: IManagerSpendingResponse[];
   isEmployeeSpendingListLoading: boolean;
+  isSpendingAuthoriseLoading:boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -34,6 +36,7 @@ const initialListEmployeeState: IManagerPanelState = {
   isDeleteEmployeeLoading: false,
   employeeSpendingList: [],
   isEmployeeSpendingListLoading:false,
+  isSpendingAuthoriseLoading:false,
 };
 
 export const fetchEmployeeListBySpending = createAsyncThunk(
@@ -147,6 +150,28 @@ export const fetchPermitAuthorisation = createAsyncThunk(
   }
 );
 
+export const fetchAuthorizeSpending = createAsyncThunk(
+  "manager/fetchAuthorizeSpending",
+  async(payload:IspendingAuthorizeRequest)=>{
+    const token = localStorage.getItem("token");
+    const requestBody ={
+      ...payload,
+      token:token,
+    };
+    const response = await fetch(
+      apis.managerService+ "/spending-authorization",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body: JSON.stringify(requestBody),
+      }
+    ).then((data)=>data.json())
+    return response;
+  }
+);
+
 const managerSlice = createSlice({
   name: "manager",
   initialState: initialListEmployeeState,
@@ -156,6 +181,12 @@ const managerSlice = createSlice({
         (user) => user.userId !== action.payload
       );
     },
+    removeEmployeeFromSpendingList:(state,action:PayloadAction<number>)=>{
+      state.employeeSpendingList = state.employeeSpendingList.filter(
+        (emplooye)=>emplooye.userId !== action.payload
+      );
+    },
+
   },
 
   extraReducers: (build) => {
@@ -276,8 +307,17 @@ const managerSlice = createSlice({
     build.addCase(fetchPermitAuthorisation.fulfilled, (state) => {
       state.isPermitAuthoriseLoading = false;
     });
+
+    build.addCase(fetchAuthorizeSpending.pending,(state)=>{
+      state.isSpendingAuthoriseLoading=true;
+    });
+    build.addCase(fetchAuthorizeSpending.fulfilled,(state)=>{
+      state.isSpendingAuthoriseLoading = false;
+    });
+
   },
 });
 
+export const {removeEmployeeFromSpendingList} = managerSlice.actions;
 export const { removeUserFromPermitList } = managerSlice.actions;
 export default managerSlice.reducer;
