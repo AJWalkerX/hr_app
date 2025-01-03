@@ -5,6 +5,7 @@ import reducer from "./authSlice";
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { ICommentCard } from "../../models/ICommentCard";
 import { IAddCommentRequest } from "../../models/Request/IAddCommentRequest";
+import { ICommentDetailsResponse } from "../../models/Response/ICommentDetailsResponse";
 
 
 interface ICommentState{
@@ -16,6 +17,9 @@ interface ICommentState{
     
     commentUserCardList: ICommentResponse[],
     isCommentUserCardList: boolean,
+
+    commentDetails: ICommentDetailsResponse | null,
+    isCommentDetailsLoading: boolean,
 
 }
 
@@ -29,8 +33,19 @@ const initialCommentState: ICommentState = {
     commentUserCardList: [],
     isCommentUserCardList: false,
 
+    commentDetails: null,
+    isCommentDetailsLoading: false,
+
   };
     
+  export const fetchGetCommentDetails = createAsyncThunk(
+    "comment/fetchGetCommentDetails",
+    async(commentId: number)=>{
+        return await fetch(apis.commentService + '/get-comment-details?commentId='+ commentId).then(data=>data.json())
+    }
+  )
+
+
   export const fetchGetAllUserComments = createAsyncThunk(
     "comment/fetchGetAllUserComments",
     async()=>{
@@ -99,6 +114,13 @@ const initialCommentState: ICommentState = {
                     state.commentUserCardList=action.payload.data;
                 }
         });
+        build.addCase(fetchGetCommentDetails.pending,(state)=>{state.isCommentDetailsLoading=true});
+        build.addCase(fetchGetCommentDetails.fulfilled,(state,action: PayloadAction<IBaseResponse>)=>{
+            state.isCommentDetailsLoading = false;
+            if(action.payload.code ===200){
+                state.commentDetails=action.payload.data;
+            }
+        })
 
     }
 

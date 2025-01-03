@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from '../components/organisms/Header/Header'
-import CommentDetails from '../components/molecules/UserComment/CommentDetails'
-import CommentList from '../components/molecules/UserComment/CommentList'
+
 import FreeUse from '../components/molecules/FreeUse/FreeUse'
 import Footer from '../components/molecules/Footer/Footer'
+import CommentDetails from '../components/atoms/CommentCard/CommentDetails'
 
 function CommentDetailsPage() {
   return (

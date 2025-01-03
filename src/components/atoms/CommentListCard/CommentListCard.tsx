@@ -1,9 +1,14 @@
 import React from 'react';
 import { ICommentResponse } from '../../../models/Response/ICommentResponse';
+import { useNavigate } from 'react-router-dom';
 
-function CommentListCard({ avatar, companyName, firstName, lastName, position }: ICommentResponse) {
+function CommentListCard({commentId, avatar, companyName, firstName, lastName, position }: ICommentResponse) {
+const navigate = useNavigate();
+  const goToComment = ()=>{        
+    navigate('/commentDetails/'+commentId)
+}
   return (
-    <div className="col">
+    <div className="col" onClick={goToComment}>
       <div className="card" style={{ width: '350px', height:'510px'}}>
       
         <img src={avatar} alt={`${firstName} ${lastName}`} style={{width:'350px', height:'400px', borderRadius:'10px'}} />
