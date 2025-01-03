@@ -35,6 +35,7 @@ useEffect(()=>{
               managerEmployeeSpendingCardList.map((employee,index)=>(
                 <ManagerEmployeeSpendingCard
                 key={index}
+                
                 companyId={employee.companyId}
                 avatar={employee.avatar}
                 firstName={employee.firstName}

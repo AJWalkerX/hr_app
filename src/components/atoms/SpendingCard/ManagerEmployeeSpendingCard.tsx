@@ -5,7 +5,7 @@ function ManagerEmployeeSpendingCard(props:IManagerSpendingResponse) {
     return (
         <tr>
           <th scope="row " style={{ verticalAlign: "middle" }}>
-           
+          
           </th>
           <td style={{ verticalAlign: "middle" }}>
             <img

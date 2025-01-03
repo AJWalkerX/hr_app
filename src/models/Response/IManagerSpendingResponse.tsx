@@ -1,5 +1,5 @@
 export interface IManagerSpendingResponse{
-
+		
          companyId:number,
 		 avatar:string,
 		 firstName:string,
@@ -7,5 +7,5 @@ export interface IManagerSpendingResponse{
 		 position:string,
 		 spendingDate: Date,
 		 description: string,
-		 spendingType: string
+		 spendingType: string,
 }
