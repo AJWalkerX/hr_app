@@ -93,6 +93,14 @@ function ManagerSidebar() {
               </a>
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink className='nav-link-manager' to={'/manager/shift-request'}>
+              <a className="nav-link fw-bold"  href="#">
+                <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-users-gear"></span></span> VARDİYA OLUŞTUR <br />
+              </a>
+              </NavLink>
+            </li>
             
     </ul>
   </li>

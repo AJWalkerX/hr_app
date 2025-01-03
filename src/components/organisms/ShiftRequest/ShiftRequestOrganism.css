@@ -1,0 +1,144 @@
+/* Genel Stil */
+.shift-request-organism {
+  font-family: Arial, sans-serif;
+  width: 100%; /* Ekranın tamamını kapsar */
+  height: 100%; /* Yüksekliği ekranın tamamına ayarlar */
+  margin: 0; /* Kenar boşluklarını sıfırlar */
+  padding: 10px; /* İçeriğe biraz boşluk ekler */
+  box-sizing: border-box; /* Padding'in genişlik ve yükseklik hesaplamalarına dahil edilmesini sağlar */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* İçeriği yukarıya hizalar */
+  align-items: center; /* İçeriği yatayda ortalar */
+}
+
+
+/* Başlıklar */
+.shift-request-organism h2 {
+  text-align: center;
+  color: #333;
+}
+
+.shift-request-organism h4 {
+  color: #555;
+}
+
+/* Form Alanları */
+.shift-request-organism div {
+  margin-bottom: 15px;
+}
+
+.shift-request-organism label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.shift-request-organism input[type="time"],
+.shift-request-organism input[type="text"] {
+  width: 100%; /* Form elemanlarını genişletecek */
+  max-width: 500px; /* Maksimum genişlik sınırı */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Butonlar */
+.add-shift-btn,
+.submit-plan-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%; /* Buton genişliği */
+  max-width: 500px; /* Maksimum genişlik sınırı */
+  margin-top: 10px;
+}
+
+.add-shift-btn:disabled,
+.submit-plan-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-shift-btn:hover:enabled,
+.submit-plan-btn:hover:enabled {
+  background-color: #45a049;
+}
+
+/* Vardiya Listesi */
+.shift-request-organism ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.shift-request-organism li {
+  background-color: #f1f1f1;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+.delete-btn {
+  background-color: red; /* Kırmızı arka plan */
+  color: white; /* Beyaz metin */
+  border: none; /* Kenarlık yok */
+  border-radius: 5px; /* Yuvarlak köşeler */
+  padding: 5px 10px; /* Yastıklar */
+  cursor: pointer; /* Fare işaretçisi değişir */
+  font-weight: bold; /* Kalın yazı */
+  margin-left: 10px; /* Vardiya isminin sağında biraz boşluk */
+  transition: background-color 0.3s ease; /* Renk değişimini yumuşat */
+}
+
+.delete-btn:hover {
+  background-color: darkred; /* Üzerine gelindiğinde daha koyu kırmızı */
+}
+
+.delete-btn:focus {
+  outline: none; /* Butona tıklandığında odak çerçevesi yok */
+}
+
+/* Form Container */
+.form-container-shift {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%; /* Burada istediğiniz bir yüzdelik değeri kullanabilirsiniz */
+  max-width: 500px; /* Maksimum genişlik sınırı belirleyebilirsiniz */
+}
+
+
+.error-message {
+  color: black;  /* Mesajın rengini siyah yap */
+  font-size: 16px; /* Font boyutunu ayarlayabilirsiniz */
+  font-weight: bold; /* Hata mesajını daha belirgin yapmak için */
+}
+
+
+.custom-btn {
+  padding: 10px 30px; /* Yükseklik ve genişlik artırıldı */
+  font-size: 18px; /* Yazı boyutu büyütüldü */
+  border-radius: 5px; /* Kenarları yuvarlatıldı */
+  width: 20%; /* Butonun genişliği tam olarak 100% */
+}
+
+.button-container-shift{
+  display: grid;             /* Grid kullan */
+  place-items: center;       /* Hem yatay hem de dikeyde ortala */
+  height: 100%;              /* Yüksekliği %100 yaparak tam ekranı kaplatabilirsin */
+}
+
+.btn-shift-hover:hover{
+  color: white;
+}
