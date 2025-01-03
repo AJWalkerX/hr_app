@@ -1,31 +1,32 @@
 import React from 'react'
+import { IManagerSpendingResponse } from '../../../models/Response/IManagerSpendingResponse';
 
-function ManagerEmployeeSpendingCard() {
+function ManagerEmployeeSpendingCard(props:IManagerSpendingResponse) {
     return (
         <tr>
           <th scope="row " style={{ verticalAlign: "middle" }}>
-            1
+          
           </th>
           <td style={{ verticalAlign: "middle" }}>
             <img
-              src="https://picsum.photos/40/40"
+              src={props.avatar}
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
               alt="Avatar"
             />
           </td>
           <td style={{ verticalAlign: "middle" }}>
             <>
-              Ahmet Amca
+              {props.firstName}{props.lastName}
             </>
           </td>
-          <td style={{ verticalAlign: "middle" }}>Müdür</td>
+          <td style={{ verticalAlign: "middle" }}>{props.position}</td>
           <td style={{ verticalAlign: "middle" }}>
             {" "}
-            02.02.2025
+            {new Date(props.spendingDate).toLocaleDateString("tr-TR")}
           </td>
-          <td style={{ verticalAlign: "middle" }}>açıklama</td>
+          <td style={{ verticalAlign: "middle" }}>{props.description}</td>
     
-          <td style={{ verticalAlign: "middle" }}>harcama tür</td>
+          <td style={{ verticalAlign: "middle" }}>{props.spendingType}</td>
     
           <td style={{ verticalAlign: "middle" }}>
             <button

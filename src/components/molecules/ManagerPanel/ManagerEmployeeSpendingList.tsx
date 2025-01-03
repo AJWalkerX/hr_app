@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { IManagerSpendingResponse } from '../../../models/Response/IManagerSpendingResponse';
+import { hrDispatch, hrUseSelector } from '../../../stores';
+import { useDispatch } from 'react-redux';
+import { fetchEmployeeListBySpending } from '../../../stores/features/managerPanelSlice';
+import ManagerEmployeeSpendingCard from '../../atoms/SpendingCard/ManagerEmployeeSpendingCard';
 
 function ManagerEmployeeSpendingList() {
+
+const managerEmployeeSpendingCardList: IManagerSpendingResponse[] = hrUseSelector((state)=>state.manager.employeeSpendingList);
+const dispatch = useDispatch<hrDispatch>();
+useEffect(()=>{
+  dispatch(fetchEmployeeListBySpending());
+},[dispatch]);
     return (
         <div style={{ backgroundColor: "#e5e8e8" }} className="container">
           <div className="text-center mb-4">
@@ -20,7 +31,22 @@ function ManagerEmployeeSpendingList() {
               </tr>
             </thead>
             <tbody>
-             
+             {
+              managerEmployeeSpendingCardList.map((employee,index)=>(
+                <ManagerEmployeeSpendingCard
+                key={index}
+                
+                companyId={employee.companyId}
+                avatar={employee.avatar}
+                firstName={employee.firstName}
+                lastName={employee.lastName}
+                position={employee.position}
+                spendingDate={employee.spendingDate}
+                description={employee.description}
+                spendingType={employee.spendingType}
+                />
+              ))
+             }
             </tbody>
           </table>
         </div>
