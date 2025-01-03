@@ -8,6 +8,7 @@ import { IHolidayAuthorizeRequest } from "../../models/Request/IHolidayAuthorize
 import Swal from "sweetalert2";
 import { IUpdateEmployeeRequest } from "../../models/Request/IUpdateEmployeeRequest";
 import { INewEmployeeRequest } from "../../models/Request/INewEmployeeRequest";
+import { IManagerSpendingResponse } from "../../models/Response/IManagerSpendingResponse";
 
 interface IManagerPanelState {
   employeeList: IListEmployeeListResponse[];
@@ -18,6 +19,8 @@ interface IManagerPanelState {
   isPermitListEmpty: boolean;
   isAddNewEmployeeLoading: boolean;
   isDeleteEmployeeLoading: boolean;
+  employeeSpendingList: IManagerSpendingResponse[];
+  isEmployeeSpendingListLoading: boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -29,7 +32,19 @@ const initialListEmployeeState: IManagerPanelState = {
   isPermitListEmpty: false,
   isAddNewEmployeeLoading: false,
   isDeleteEmployeeLoading: false,
+  employeeSpendingList: [],
+  isEmployeeSpendingListLoading:false,
 };
+
+export const fetchEmployeeListBySpending = createAsyncThunk(
+  "manager/fetchEmployeeListBySpending",
+  async () => {
+    const managerToken = localStorage.getItem("token")
+    return await fetch(
+      apis.managerService + "/manager-employees-spending?token=" + managerToken
+    ).then((data) => data.json()); 
+  }
+);
 
 export const fetchUpdateEmployee = createAsyncThunk(
   "manager/fetchUpdateEmployee",
@@ -200,6 +215,20 @@ const managerSlice = createSlice({
         }
       }
     );
+
+    build.addCase(fetchEmployeeListBySpending.pending, (state)=>{
+      state.isEmployeeSpendingListLoading = true;
+    });
+    build.addCase(
+      fetchEmployeeListBySpending.fulfilled,
+      (state,action: PayloadAction<IBaseResponse>)=>{
+        state.isEmployeeSpendingListLoading = false;
+        if(action.payload.code === 200 ){
+          state.employeeSpendingList = action.payload.data;
+        }
+      }
+    );
+
     build.addCase(fetchDeleteEmployee.pending, (state) => {
       state.isDeleteEmployeeLoading = true;
     });
