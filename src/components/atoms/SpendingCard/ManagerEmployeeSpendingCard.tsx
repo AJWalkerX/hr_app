@@ -1,13 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IManagerSpendingResponse } from '../../../models/Response/IManagerSpendingResponse';
+import { useDispatch, useSelector } from 'react-redux';
+import { hrDispatch, hrState, hrUseSelector } from '../../../stores';
+import { fetchAuthorizeSpending, fetchEmployeeListBySpending, removeEmployeeFromSpendingList } from '../../../stores/features/managerPanelSlice';
+
+interface SpendingDetails {
+    spendingDate: Date;
+    description: string;
+    spendingType: string;
+    spendingId: number;
+}
 
 function ManagerEmployeeSpendingCard(props: IManagerSpendingResponse) {
+    const dispatch = useDispatch<hrDispatch>();
+
+    // Redux store'dan employee listesi
+    const employeeList = useSelector((state: hrState) => state.manager.employeeSpendingList);
+
+    // Onay ve reddetme işlemleri
+    const doApprove = async (spendingId: number) => {
+        const answer = "Approved";
+        
+        // Kullanıcıyı harcama listeden çıkar
+        dispatch(removeEmployeeFromSpendingList(props.userId));
+
+        // Harcama onayı için dispatch işlemi
+        dispatch(
+            fetchAuthorizeSpending({
+                userId: props.userId,
+                spendingId: spendingId, // spendingId parametresi doğru şekilde gönderildi
+                answer: answer
+            })
+        );
+
+        // Güncel employee listesi alındıktan sonra sayfa renderlanır
+        await dispatch(fetchEmployeeListBySpending());
+    };
+
+    const doReject = async (spendingId: number) => {
+        const answer = "Rejected";
+        
+        // Kullanıcıyı harcama listeden çıkar
+        dispatch(removeEmployeeFromSpendingList(props.userId));
+
+        // Harcama reddetme işlemi
+        dispatch(
+            fetchAuthorizeSpending({
+                userId: props.userId,
+                spendingId: spendingId, // spendingId parametresi doğru şekilde gönderildi
+                answer: answer
+            })
+        );
+
+        // Güncel employee listesi alındıktan sonra sayfa renderlanır
+        await dispatch(fetchEmployeeListBySpending());
+    };
+
+    // Verilerin değiştiğini izlemek için useEffect
+    useEffect(() => {
+        if (employeeList.length === 0) {
+            // Eğer employeeList boşsa, sayfa render'ı yapılır
+        }
+    }, [employeeList]);
+
     return (
         <>
             {props.spendingDetails.map((spending, index) => (
                 <tr key={index}>
-                    {/* Avatar, ad, soyad, pozisyon her harcama detayında görünecek */}
-                    <th scope="row" style={{ verticalAlign: "middle" }}></th> {/* İlk sütun boş kalacak */}
+                    <th scope="row" style={{ verticalAlign: "middle" }}></th> 
                     <td style={{ verticalAlign: "middle" }}>
                         <img
                             src={props.avatar}
@@ -35,7 +95,8 @@ function ManagerEmployeeSpendingCard(props: IManagerSpendingResponse) {
                             style={{ color: "white" }}
                             type="button"
                             className="btn btn-success"
-                            data-bs-target=""
+                            data-bs-target={`#user${props.userId}`}
+                            onClick={() => doApprove(spending.spendingId)} // onClick'e harcama id'sini ekledik
                         >
                             Accept
                         </button>
@@ -43,7 +104,8 @@ function ManagerEmployeeSpendingCard(props: IManagerSpendingResponse) {
                             style={{ color: "white" }}
                             type="button"
                             className="btn btn-danger ms-3"
-                            data-bs-target=""
+                            data-bs-target={`#user${props.userId}`}
+                            onClick={() => doReject(spending.spendingId)} // onClick'e harcama id'sini ekledik
                         >
                             Denied
                         </button>

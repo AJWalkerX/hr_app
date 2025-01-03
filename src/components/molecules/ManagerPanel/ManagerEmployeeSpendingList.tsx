@@ -35,6 +35,7 @@ function ManagerEmployeeSpendingList() {
                     {managerEmployeeSpendingCardList.map((employee, index) => (
                         <ManagerEmployeeSpendingCard
                             key={index}
+                            userId={employee.userId}
                             companyId={employee.companyId}
                             avatar={employee.avatar}
                             firstName={employee.firstName}
