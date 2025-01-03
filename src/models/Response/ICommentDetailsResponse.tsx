@@ -1,5 +1,4 @@
 export interface ICommentDetailsResponse{
-    userId: number;
     commentId: number;
     companyLogo: string;
     companyName: string;

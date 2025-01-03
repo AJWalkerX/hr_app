@@ -29,6 +29,7 @@ function CommentList() {
         {commentUserCardList.map((comment, index) => (
           <div className="col" key={index}>
             <CommentListCard
+            commentId={comment.commentId}
               avatar={comment.avatar}
               companyName={comment.companyName}
               firstName={comment.firstName}
