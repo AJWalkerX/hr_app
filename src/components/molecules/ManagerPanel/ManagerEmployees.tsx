@@ -174,15 +174,15 @@ function ManagerEmployees() {
   };
   return (
     <>
-      <div className="row mt-4">
+      <div className="row mt-4 ms-5">
         <div className="col-3">
           <p style={{ fontSize: "25px", fontWeight: "bold" }}>Çalışanlar</p>
         </div>
-        <div className="col-5"></div>
-        <div className="col-4 d-flex">
+        <div className="col-6"></div>
+        <div className="col-3 d-flex">
           <button
-            className="btn btn-outline-secondary my-2 my-sm-0"
-            style={{ backgroundColor: "#85c1e9", color: "white" }}
+            className="btn btn-outline-success my-2 my-sm-0 shadow-lg" 
+            style={{fontWeight: 'bold'}}
             type="submit"
             data-bs-toggle="modal"
             data-bs-target="#newEmployeeModal"
@@ -191,9 +191,9 @@ function ManagerEmployees() {
           </button>
         </div>
       </div>
-      <div className="row mt-5">
-        <table className="table align-middle mb-0 bg-white">
-          <thead className="bg-light">
+      <div className="row mt-5 me-5 ms-5" > 
+        <table className="table align-middle mb-0 bg-white" >
+          <thead className="table-dark"  >
             <tr>
               <th>Profil</th>
               <th>Ad Soyad</th>
