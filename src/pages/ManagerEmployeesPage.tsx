@@ -7,8 +7,8 @@ function ManagerEmployeesPage() {
     return (
         <div className='container-fluid' style={{ backgroundColor: '#e5e8e8',height:'100vh'}}>
         <div className='row'>
-            <div className="col-3"><ManagerSidebar/> </div>
-            <div className="col-9"><ManagerEmployees/></div> 
+            <div className="col-2"><ManagerSidebar/> </div>
+            <div className="col-10"><ManagerEmployees/></div> 
         </div>
         </div>
         

@@ -24,7 +24,7 @@ function ManagerEmployeeSpendingList() {
                         <th scope="col">#</th>
                         <th scope="col">Avatar</th>
                         <th scope="col">Personel</th>
-                        <th scope="col">Departman</th>
+                        <th scope="col">Harcama Tutarı</th>
                         <th scope="col">Harcama Tarihi</th>
                         <th scope="col">Açıklama</th>
                         <th scope="col">Harcama Türü</th>
@@ -40,7 +40,6 @@ function ManagerEmployeeSpendingList() {
                             avatar={employee.avatar}
                             firstName={employee.firstName}
                             lastName={employee.lastName}
-                            position={employee.position}
                             spendingDetails={employee.spendingDetails} // Harcama detayları burada ekleniyor
                         />
                     ))}
