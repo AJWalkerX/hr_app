@@ -98,6 +98,7 @@ function AdminSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
+                style={{color:'white'}}
                 onClick={logout}
                 data-bs-dismiss="modal"
               >
