@@ -5,6 +5,7 @@ import './ManagerSidebar.css'
 import { useDispatch } from 'react-redux';
 import { hrDispatch } from '../../../stores';
 import { logout } from '../../../stores/features/authSlice';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 function ManagerSidebar() {
 
@@ -101,6 +102,17 @@ function ManagerSidebar() {
               </a>
               </NavLink>
             </li>
+
+            <li className="nav-item">
+      <NavLink className="nav-link-manager" to="/manager/shift-assignment">
+        <a className="nav-link fw-bold" href="#">
+          <span className="nav-icon">
+            <AssignmentIndIcon style={{ color: 'rgb(10, 57, 129)', fontSize: '24px' }} />
+          </span>
+          VARDİYA ATAMA <br />
+        </a>
+      </NavLink>
+    </li>
 
             <li className="nav-item">
               <NavLink className='nav-link-manager' to={'/manager/embezzlement'}>
