@@ -11,6 +11,7 @@ import {
   managerPanelSlice,
   spendingSlice,
   shiftSlice,
+  embezzlementSlice
 } from "./features";
 
 const store = configureStore({
@@ -25,6 +26,7 @@ const store = configureStore({
     manager: managerPanelSlice,
     spending: spendingSlice,
     shift: shiftSlice,
+    embezzlement: embezzlementSlice,
   },
 });
 
