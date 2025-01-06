@@ -163,7 +163,7 @@ function ManagerEmbezzlement() {
               <th>Ürün</th>
               <th>Ürün Türü</th>
               <th>Ürün Durumu</th>
-              <th>Detay</th>
+              <th>Zimmetleme/Detay</th>
             </tr>
           </thead>
           <tbody>
