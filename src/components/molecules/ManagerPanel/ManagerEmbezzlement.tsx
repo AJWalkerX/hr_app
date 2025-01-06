@@ -174,8 +174,8 @@ function ManagerEmbezzlement() {
                 </td>
               </tr>
             ) : (
-              embezzlementList.map((embezzlement, index) => (
-                <EmbezzlementCard key={index} {...embezzlement} />
+              embezzlementList.map((embezzlement) => (
+                <EmbezzlementCard key={embezzlement.embezzlementId} {...embezzlement} />
               ))
             )}
           </tbody>

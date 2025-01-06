@@ -3,6 +3,7 @@ import { IEmbezzlementResponseDto } from "../../models/Response/IEmbezzlementRes
 import apis from "../../config/RestApis";
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { IAddEmbezzlementRequestDto } from "../../models/Request/IAddEmbezzlementRequestDto";
+import { IAssignmentEmbezzlementRequest } from "../../models/Request/IAssignmentEmbezzlementRequestDto";
 
 
 interface IEmbezzlementState{
@@ -11,6 +12,8 @@ interface IEmbezzlementState{
 
     addEmbezzlement: IAddEmbezzlementRequestDto | null,
     isAddEmbezzlementLoading: boolean,
+
+    isAssigmentEmbezzlementLoading: boolean,
 }
 
 const initialEmbezzlementState: IEmbezzlementState = {
@@ -18,7 +21,30 @@ const initialEmbezzlementState: IEmbezzlementState = {
     isEmbezlementListLoading: false,
     addEmbezzlement: null,
     isAddEmbezzlementLoading: false,
+    isAssigmentEmbezzlementLoading: false,
 }
+
+export const fetchAssigmentEmbezzlement = createAsyncThunk(
+    "embezzlement/fetchAssigmentEmbezzlement",
+    async(payload: IAssignmentEmbezzlementRequest)=> {
+        const token = localStorage.getItem("token");
+        const requestBody = {
+            ...payload,
+            token: token,
+        };
+        const response = await fetch(
+            apis.embezzlementService + "/assignment-embezzlement",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestBody),
+            }
+        ).then((data) => data.json());
+        return response;
+    }
+);
 
 export const fetchEmbezzlementListByCompany = createAsyncThunk(
     "embezzlement/fetchEmbezzlementListByCompany",
@@ -73,7 +99,18 @@ const embezzlementSlice = createSlice({
             if(action.payload.code === 200){
                 state.addEmbezzlement = action.payload.data;
             }
-        })
+        });
+        build.addCase(fetchAssigmentEmbezzlement.pending, (state) => {
+            state.isAssigmentEmbezzlementLoading=true;
+        });
+        build.addCase(fetchAssigmentEmbezzlement.fulfilled,
+            (state, action: PayloadAction<IBaseResponse>) => {
+                state.isAssigmentEmbezzlementLoading = false;
+                if(action.payload.code === 200) {
+                    state.embezzlementList = action.payload.data
+                }
+            }
+        );
         
     }
 })
