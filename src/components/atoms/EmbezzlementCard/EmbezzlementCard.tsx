@@ -12,16 +12,25 @@ import {
 } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { IEmbezzlementResponseDto } from "../../../models/Response/IEmbezzlementResponseDto";
+import { useDispatch } from "react-redux";
+import { hrDispatch } from "../../../stores";
+import { fetchAssigmentEmbezzlement } from "../../../stores/features/embezzlementSlice";
 
 interface EmbezzlementCardProps extends IEmbezzlementResponseDto {
   // Extend from IEmbezzlementResponseDto
 }
 
 const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
-  const { description, embezzlementType, embezzlementState, employee } = props;
+  const { description, embezzlementType, embezzlementState, embezzlementId } = props;
+  const dispatch = useDispatch<hrDispatch>();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -45,6 +54,19 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
   const handleCloseModal2 = () => {
     setShowModal2(false);
   }
+
+  const handleAssignmentEmbezzlement = async() => {
+    const payload = {
+      embezzlementId: embezzlementId,
+      firstName,
+      lastName,
+      email 
+    }
+    dispatch(fetchAssigmentEmbezzlement(payload))
+    handleCloseModal2();
+  };
+
+ 
 
   return (
     <>
@@ -73,24 +95,7 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       <Dialog open={showModal} onClose={handleCloseModal}>
         <DialogTitle>Embezzlement Details</DialogTitle>
         <DialogContent>
-          {employee ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={employee.avatar}
-                alt="avatar"
-                width={50}
-                height={50}
-                style={{ borderRadius: "50%", marginRight: "10px" }}
-              />
-              <div>
-                <p>
-                  {employee.firstName} {employee.lastName}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <p>Herhangi bir personel ataması bulunmamaktadır.</p>
-          )}
+        <p>Herhangi bir personel ataması bulunmamaktadır.</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseModal} color="primary">
@@ -109,20 +114,20 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
               <TextField
                  className="form-control mt-3"
                  placeholder="Personelin adı"
-                 
-               
+                 value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
                />
                 <TextField
                  className="form-control mt-3"
                  placeholder="Personelin soyadı"
-                 
-               
+                 value={lastName}
+                 onChange={(e)=>setLastName(e.target.value)}
                />
                <TextField
                  className="form-control mt-3"
                  placeholder="Personelin mail adresi"
-                 
-               
+                 value={email}
+                 onChange={(e)=>setEmail(e.target.value)}
                />
 
             </div>
@@ -131,14 +136,14 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
                   type="button"
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"
-                  
+                  onClick={handleCloseModal2}
                 >
                   Kapat
                 </button>
                 <button
                   type="button"
                   className="btn btn-primary"
-                  
+                  onClick={handleAssignmentEmbezzlement}
                 >
                   Zimmetle
                 </button>
