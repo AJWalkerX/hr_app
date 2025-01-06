@@ -169,6 +169,7 @@ function PersonalSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
+                style={{color:'white'}}
                 onClick={handleLogout}
                 data-bs-dismiss="modal"
               >

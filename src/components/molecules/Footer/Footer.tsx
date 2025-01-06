@@ -74,7 +74,10 @@ function Footer() {
       </div>
     </div>
     <div className="row">
-      <p>icon koyulacak</p>
+     
+        <img style={{width:'100px', height:'40px'}} src="https://cdn.prod.website-files.com/6113889e45c6e62ebf4ca212/67226cbbb9eab1aa177830bf_Yerli_u%CC%88retim_logosu%20-%20kolayik.png" alt="" />
+      
+    
     </div>
     <div className="row">
       <div className="col ">
@@ -83,9 +86,6 @@ function Footer() {
       <i className="social-media-icon fa-brands fa-youtube"></i>
       <i className="social-media-icon fa-brands fa-instagram"></i>
       <i className="social-media-icon fa-brands fa-facebook-f"></i>
-      </div>
-      <div className="col text-center">
-        <h5 className='underline-on-hover'>Sözleşmeler ve Politikalar</h5>
       </div>
       <div className="col icon-text">
       <i className="me-1 fa-regular fa-copyright"></i>
