@@ -9,6 +9,7 @@ interface SpendingDetails {
     description: string;
     spendingType: string;
     spendingId: number;
+    billAmount: number;
 }
 
 function ManagerEmployeeSpendingCard(props: IManagerSpendingResponse) {
@@ -79,7 +80,7 @@ function ManagerEmployeeSpendingCard(props: IManagerSpendingResponse) {
                         {props.firstName} {props.lastName}
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
-                        {props.position}
+                        {spending.billAmount}
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
                         {new Date(spending.spendingDate).toLocaleDateString("tr-TR")}

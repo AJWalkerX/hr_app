@@ -4,11 +4,11 @@ export interface IManagerSpendingResponse {
     avatar: string;
     firstName: string;
     lastName: string;
-    position: string;
     spendingDetails: {
         spendingDate: Date; 
         description: string;
         spendingType: string;
         spendingId:number;
+        billAmount: number;
     }[];
 }
