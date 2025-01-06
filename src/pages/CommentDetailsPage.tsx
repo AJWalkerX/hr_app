@@ -12,7 +12,12 @@ function CommentDetailsPage() {
             <Header/>
         </div>
         <div className="row">
+            <div className="col-2"></div>
+            <div className="col-8">
             <CommentDetails/>
+            </div>
+            <div className="col-2"></div>
+           
         </div>
         <div className="row">
             <FreeUse/>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function CommentListCard({commentId, avatar, companyName, firstName, lastName, position }: ICommentResponse) {
 const navigate = useNavigate();
   const goToComment = ()=>{        
-    navigate('/commentDetails/'+commentId)
+    navigate('/comment/comment-details/'+commentId)
 }
 console.log(commentId);
   return (
