@@ -15,7 +15,7 @@ function PersonalSidebar() {
 
   return (
     <>
-      <div className="sidebar border-end sidebar-manager" style={{ backgroundColor: '#e5e8e8' }}>
+      <div className="sidebar border-end sidebar-manager" style={{width:'300px', backgroundColor: '#e5e8e8' }}>
         <div className="sidebar-header border-bottom">
           <div className="sidebar-brand">
             <img
@@ -169,6 +169,7 @@ function PersonalSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
+                style={{color:'white'}}
                 onClick={handleLogout}
                 data-bs-dismiss="modal"
               >

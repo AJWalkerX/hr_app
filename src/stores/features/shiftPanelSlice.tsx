@@ -3,15 +3,22 @@ import apis from "../../config/RestApis";
 import { ICreateShiftRequest } from "../../models/Request/ICreateShiftRequest";
 import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import Swal from "sweetalert2";
+import { IShiftListResponse } from "../../models/Response/IShiftListResponse";
+import { DateTime } from "luxon";
 
 interface IShiftState {
   createShift: ICreateShiftRequest[];
   isCreateShiftLoading: boolean;
+  shiftList: IShiftListResponse[];
+  isShiftListLoading: boolean;
 }
 
 const initialShiftState: IShiftState = {
   createShift: [],
   isCreateShiftLoading: false,
+
+  shiftList: [],
+  isShiftListLoading: false,
 };
 
 export const fetchCreateShift = createAsyncThunk(
@@ -32,6 +39,18 @@ export const fetchCreateShift = createAsyncThunk(
       body: JSON.stringify(requestBody),
     }).then((data) => data.json());
     return response;
+  }
+);
+
+export const fetchShiftList = createAsyncThunk(
+  "shift/fetchShiftList",
+  async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      apis.shiftService + "/list-shift?token=" + token
+    );
+    const data = await response.json();
+    return data;
   }
 );
 
@@ -62,6 +81,16 @@ const shiftSlice = createSlice({
           });
       }
     );
+
+    builder.addCase(fetchShiftList.pending, (state) => {
+      state.isShiftListLoading = true;
+    });
+    builder.addCase(fetchShiftList.fulfilled, (state, action) => {
+      state.isShiftListLoading = false;
+      if (action.payload.code === 200) {
+        state.shiftList = action.payload.data;
+      }
+    });
   },
 });
 

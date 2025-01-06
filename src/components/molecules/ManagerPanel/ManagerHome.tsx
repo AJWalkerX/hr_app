@@ -67,7 +67,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 function ManagerHome() {
   return (
-    <div style={{ padding: '0px', backgroundColor: '#f0f4f8', minHeight: '100vh', minWidth:'100%', marginBottom:'70px' }}>
+    <div style={{ padding: '0px', backgroundColor: '#f0f4f8', minHeight: '100vw', minWidth:'100%', margin:0}}>
       {/* Üst Başlık */}
       <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
         <Typography variant="body2" color="textSecondary" style={{ marginTop: '0' }}>

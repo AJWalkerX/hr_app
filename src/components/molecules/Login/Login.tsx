@@ -90,7 +90,7 @@ function Login() {
                 ></i> */}
                   <div className="col-4 ms-4">
                     <span className="h1 fw-bold mb-0 text-color-login">
-                      Giris Paneli
+                      Giriş Paneli
                     </span>
                   </div>
                   <div className="col"></div>
