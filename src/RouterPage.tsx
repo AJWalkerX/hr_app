@@ -38,6 +38,7 @@ import CommentDetailsPage from "./pages/CommentDetailsPage";
 import ManagerSpendingViewPage from "./pages/ManagerSpendingViewPage";
 import ShiftManagerPage from "./pages/ShiftManagerPage";
 import ManagerEmbezzlementPage from "./pages/ManagerEmbezzlementPage";
+import ShiftAssignmentPage from "./pages/ShiftAssignmentPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -109,6 +110,8 @@ function RouterPage() {
       <Route path="/comment/list/comment-details/:commentId" element={<CommentDetailsPage/>}></Route>
       <Route path="/manager/shift-request" element={<ShiftManagerPage/>}></Route>
       <Route path="/manager/embezzlement" element={<ManagerEmbezzlementPage/>}></Route>
+      <Route path="/manager/shift-assignment" element={<ShiftAssignmentPage/>}></Route>
+
     </Routes>
   );
 }
