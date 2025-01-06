@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  TextField,
 } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { IEmbezzlementResponseDto } from "../../../models/Response/IEmbezzlementResponseDto";
@@ -20,6 +21,7 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
   const { description, embezzlementType, embezzlementState, employee } = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,10 +35,16 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
     setShowModal(true);
     handleClose();
   };
+  const embezzlementClick = () => {
+    setShowModal2(true);
+  }
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  const handleCloseModal2 = () => {
+    setShowModal2(false);
+  }
 
   return (
     <>
@@ -56,6 +64,7 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
             onClose={handleClose}
           >
             <MenuItem onClick={handleDetailClick}>Detay</MenuItem>
+            <MenuItem onClick={embezzlementClick}>Personele Zimmetle</MenuItem>
           </Menu>
         </td>
       </tr>
@@ -88,6 +97,55 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
             Kapat
           </Button>
         </DialogActions>
+      </Dialog>
+
+      {/*Modal 2*/}
+      <Dialog open={showModal2} onClose={handleCloseModal2}>
+          <DialogTitle>Zimmeti vermek istediğiniz personelin bilgilerini giriniz.</DialogTitle>
+          <DialogContent>
+            <div className="modal-dialog" role="document">
+            <div className="modal-content">
+            <div className="modal-body">
+              <TextField
+                 className="form-control mt-3"
+                 placeholder="Personelin adı"
+                 
+               
+               />
+                <TextField
+                 className="form-control mt-3"
+                 placeholder="Personelin soyadı"
+                 
+               
+               />
+               <TextField
+                 className="form-control mt-3"
+                 placeholder="Personelin mail adresi"
+                 
+               
+               />
+
+            </div>
+            <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  
+                >
+                  Kapat
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  
+                >
+                  Zimmetle
+                </button>
+              </div>
+              </div>
+              </div>
+          </DialogContent>
       </Dialog>
     </>
   );
