@@ -13,15 +13,13 @@ const apis = {
   commentCardService: server + "/comment",
   adminPanelService: server + "/admin",
 
-  
+  userPanelService: server + "/user-panel",
+  companyService: server + "/company",
 
-  userPanelService: server +"/user-panel",
-  companyService: server+ "/company",
+  managerService: server + "/manager",
 
-  managerService: server+"/manager",
-
-  spendingService: server+"/personal-spending"
-
+  spendingService: server + "/personal-spending",
+  shiftService: server + "/shift",
 };
 
 export default apis;
