@@ -5,7 +5,7 @@ import { ICommentDetailsResponse } from '../../../models/Response/ICommentDetail
 import { fetchGetCommentDetails } from '../../../stores/features/commentSlice';
 import { useParams } from 'react-router-dom';
 import { companySlice } from '../../../stores/features';
-import './CommentDetails.css'
+
 
 function CommentDetails () {
     const commentDetails: ICommentDetailsResponse | null = hrUseSelector((state)=>state.comment.commentDetails);
