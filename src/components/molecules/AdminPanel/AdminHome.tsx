@@ -1,238 +1,204 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, Typography, LinearProgress, Box } from '@mui/material';
-import { BarChart, LineChart, PieChart, AreaChart, XAxis, YAxis, Tooltip, Legend, Bar, Line, Pie, Cell, ResponsiveContainer, Area, TooltipProps } from 'recharts';
-import { FaUsers, FaBriefcase, FaFileAlt, FaCalendar } from 'react-icons/fa';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
+  Box,
+  Container,
+  Grid,
+} from '@mui/material';
+import {
+  BarChart, PieChart, AreaChart, XAxis, YAxis, Tooltip, Legend, Bar, Pie, Cell, ResponsiveContainer, Area,
+} from 'recharts';
+import { FaTasks, FaUsers, FaChartBar, FaClock, FaShoppingCart, FaDollarSign, FaRegSadTear, FaBoxOpen } from 'react-icons/fa';
 
-interface Payload {
-  name: string;
-  value: number;
-  percent?: number;
-} 
-type Stat = {
+// Types
+interface Stat {
   title: string;
   value: string;
   icon: React.ElementType;
   change: string;
   color: string;
-};
+}
 
-type DepartmentData = {
+interface TaskData {
   name: string;
-  çalışan: number;
-};
+  tamamlanan: number;
+  tamamlanmayan: number;
+}
 
-type MonthlyHiringData = {
-  ay: string;
-  işeAlım: number;
-  iştenAyrılma: number;
-};
-
-type PerformanceData = {
+interface PerformanceData {
   name: string;
   value: number;
-};
+}
 
+// Mock Data
 const stats: Stat[] = [
-  { title: "Toplam Çalışan", value: "248", icon: FaUsers, change: "+12%", color: "primary" },
-  { title: "Açık Pozisyonlar", value: "15", icon: FaBriefcase, change: "+3", color: "success" },
-  { title: "Onay Bekleyen İzinler", value: "8", icon: FaFileAlt, change: "-2", color: "warning" },
-  { title: "Bu Ay Doğum Günü", value: "6", icon: FaCalendar, change: "", color: "secondary" }
+  { title: 'Toplam Kullanıcılar', value: '350', icon: FaUsers, change: '+8%', color: '#4F46E5' },
+  { title: 'Aylık Performans', value: '75%', icon: FaChartBar, change: '+4%', color: '#10B981' },
+  { title: 'Toplam Çalışma Saatleri', value: '230', icon: FaClock, change: '-5h', color: '#F59E0B' },
+  { title: 'Tamamlanan Görevler', value: '300', icon: FaTasks, change: '+12%', color: '#6B7280' },
+  { title: 'Yeni Kullanıcılar', value: '45', icon: FaUsers, change: '+15%', color: '#F472B6' },
+  { title: 'Gelir Durumu', value: '5,000₺', icon: FaDollarSign, change: '+10%', color: '#34D399' },
+  { title: 'İade Oranı', value: '5%', icon: FaRegSadTear, change: '-1%', color: '#EF4444' },
 ];
 
-const departmentData: DepartmentData[] = [
-  { name: 'Yazılım', çalışan: 45 },
-  { name: 'Pazarlama', çalışan: 30 },
-  { name: 'Satış', çalışan: 35 },
-  { name: 'İK', çalışan: 15 },
-  { name: 'Finans', çalışan: 20 },
-];
-
-const monthlyHiringData: MonthlyHiringData[] = [
-  { ay: 'Oca', işeAlım: 8, iştenAyrılma: 3 },
-  { ay: 'Şub', işeAlım: 12, iştenAyrılma: 4 },
-  { ay: 'Mar', işeAlım: 15, iştenAyrılma: 6 },
-  { ay: 'Nis', işeAlım: 10, iştenAyrılma: 5 },
-  { ay: 'May', işeAlım: 14, iştenAyrılma: 4 },
-  { ay: 'Haz', işeAlım: 18, iştenAyrılma: 7 },
+const taskData: TaskData[] = [
+  { name: 'Hafta 1', tamamlanan: 50, tamamlanmayan: 10 },
+  { name: 'Hafta 2', tamamlanan: 70, tamamlanmayan: 5 },
+  { name: 'Hafta 3', tamamlanan: 60, tamamlanmayan: 8 },
+  { name: 'Hafta 4', tamamlanan: 80, tamamlanmayan: 3 },
 ];
 
 const performanceData: PerformanceData[] = [
   { name: 'Üstün', value: 15 },
   { name: 'İyi', value: 45 },
-  { name: 'Orta', value: 30 },
-  { name: 'Gelişmeli', value: 10 },
+  { name: 'Orta', value: 25 },
+  { name: 'Gelişmeli', value: 15 },
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-function AdminHome() {
+function AdminDashboard() {
   return (
-    <div style={{ padding: '24px', backgroundColor: '#f0f4f8', minHeight: '100vh' }}>
+    <Box
+      sx={{
+        backgroundColor: '#f0f4f8',
+        minHeight: '100vh',
+      }}
+    >
       {/* Üst Başlık */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h4">İK Dashboard</Typography>
-        <Typography variant="body2" color="textSecondary">
-          Son güncelleme: {new Date().toLocaleDateString('tr-TR')}
-        </Typography>
-      </div>
+      <Container>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            marginBottom: '24px',
+          }}
+        >
+          <Typography variant="body2" color="textSecondary">
+            Son güncelleme: {new Date().toLocaleDateString('tr-TR')}
+          </Typography>
+        </Box>
 
-      {/* Ana İstatistikler */}
-      <Box display="flex" flexWrap="wrap" gap="24px" marginTop="24px">
-        {stats.map((stat, index) => (
-          <Card variant="outlined" key={index} style={{ flex: '1 1 calc(25% - 24px)', maxWidth: 'calc(25% - 24px)' }}>
-            <CardContent style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <Typography variant="body2" color="textSecondary">{stat.title}</Typography>
-                  <div style={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}>
-                    <Typography variant="h6">{stat.value}</Typography>
-                    {stat.change && (
-                      <Typography variant="body2" color={stat.change.startsWith('+') ? 'green' : 'red'} style={{ marginLeft: '8px' }}>
-                        {stat.change}
+        {/* İstatistik Kartları */}
+        <Grid container spacing={3}>
+          {stats.map((stat, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div>
+                      <Typography variant="body2" color="textSecondary">
+                        {stat.title}
                       </Typography>
-                    )}
-                  </div>
-                </div>
-                <div style={{ backgroundColor: stat.color, borderRadius: '50%', padding: '12px' }}>
-                  <stat.icon style={{ color: 'white', fontSize: '24px' }} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}>
+                        <Typography variant="h6">{stat.value}</Typography>
+                        {stat.change && (
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: stat.change.startsWith('+') ? 'green' : 'red',
+                              marginLeft: '8px',
+                            }}
+                          >
+                            {stat.change}
+                          </Typography>
+                        )}
+                      </Box>
+                    </div>
+                    <Box
+                      sx={{
+                        backgroundColor: stat.color,
+                        borderRadius: '50%',
+                        padding: '12px',
+                      }}
+                    >
+                      <stat.icon style={{ color: 'white', fontSize: '24px' }} />
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
 
-      {/* Grafikler */}
-      <Box display="flex" flexWrap="wrap" gap="24px" marginTop="24px">
-        {/* Departman Dağılımı */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(50% - 24px)', maxWidth: 'calc(50% - 24px)' }}>
-          <CardHeader title="Departman Dağılımı" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={departmentData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="çalışan" fill="#4F46E5" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        {/* Grafikler */}
+        <Grid container spacing={3} sx={{ marginTop: '24px' }}>
+          {/* Görev Dağılımı */}
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <CardHeader title="Görev Dağılımı" />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={taskData}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="tamamlanan" fill="#4F46E5" />
+                    <Bar dataKey="tamamlanmayan" fill="#EF4444" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </Grid>
 
-        {/* İşe Alım Trendi */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(50% - 24px)', maxWidth: 'calc(50% - 24px)' }}>
-          <CardHeader title="İşe Alım ve Ayrılma Trendi" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={monthlyHiringData}>
-                <XAxis dataKey="ay" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="işeAlım" stroke="#4F46E5" />
-                <Line type="monotone" dataKey="iştenAyrılma" stroke="#EF4444" />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+          {/* Performans Dağılımı */}
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <CardHeader title="Performans Dağılımı" />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={performanceData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      outerRadius={100}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {performanceData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </Grid>
 
-        {/* Performans Dağılımı */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(50% - 24px)', maxWidth: 'calc(50% - 24px)' }}>
-          <CardHeader title="Performans Dağılımı" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={performanceData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={100}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {performanceData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  content={({ payload }: TooltipProps<any, any>) => {
-                    if (!payload || payload.length === 0) return null;
-
-                    const firstPayload = payload[0] as Payload;  // Explicitly cast payload to Payload type
-
-                    const { name, value, percent } = firstPayload;
-
-                    return (
-                      <div>
-                        <p>{name}: {value}</p>
-                        {percent !== undefined && <p>Percent: {percent}%</p>}
-                      </div>
-                    );
-                  }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* Personel Dağılımı Trendi */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(50% - 24px)', maxWidth: 'calc(50% - 24px)' }}>
-          <CardHeader title="Personel Dağılımı Trendi" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={monthlyHiringData}>
-                <XAxis dataKey="ay" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="işeAlım" stroke="#8884d8" fill="#8884d8" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </Box>
-
-      {/* Alt Kartlar */}
-      <Box display="flex" flexWrap="wrap" gap="24px" marginTop="24px">
-        {/* Performans Takibi */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(33% - 24px)', maxWidth: 'calc(33% - 24px)' }}>
-          <CardHeader title="Performans Takibi" />
-          <CardContent>
-            <div>
-              <Typography variant="body2" color="textSecondary">Değerlendirme Tamamlanma</Typography>
-              <LinearProgress variant="determinate" value={82} color="primary" />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* İzin Durumu */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(33% - 24px)', maxWidth: 'calc(33% - 24px)' }}>
-          <CardHeader title="İzin Durumu" />
-          <CardContent>
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <Typography variant="body2" color="textSecondary">Bekleyen İzinler</Typography>
-                <Typography variant="h6">3</Typography>
-              </div>
-              <LinearProgress variant="determinate" value={30} color="warning" />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Gerçekleştirilen Toplantılar */}
-        <Card variant="outlined" style={{ flex: '1 1 calc(33% - 24px)', maxWidth: 'calc(33% - 24px)' }}>
-          <CardHeader title="Gerçekleştirilen Toplantılar" />
-          <CardContent>
-            <div>
-              <Typography variant="body2" color="textSecondary">Bu Ay Gerçekleştirilen Toplantılar</Typography>
-              <Typography variant="h6">12</Typography>
-            </div>
-          </CardContent>
-        </Card>
-      </Box>
-    </div>
+          {/* Çalışma Saatleri */}
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <CardHeader title="Çalışma Saatleri" />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={taskData}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="tamamlanan" stroke="#4F46E5" fill="#4F46E5" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 }
 
-export default AdminHome;
+export default AdminDashboard;
