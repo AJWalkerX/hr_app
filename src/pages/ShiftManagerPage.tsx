@@ -1,6 +1,8 @@
 import React from 'react'
 import ShiftRequestOrganism from '../components/organisms/ShiftRequest/ShiftRequestOrganism'
 import ManagerSidebar from '../components/molecules/ManagerPanel/ManagerSidebar'
+import CompanyShiftList from '../components/organisms/CompanyShiftList/CompanyShiftList'
+
 
 function ShiftManagerPage() {
   return (
@@ -11,9 +13,13 @@ function ShiftManagerPage() {
         <ManagerSidebar/>
       </div>
       <div className="col-11 " style={{marginTop:'70px', marginLeft: '250px'}}>
+      <div className="row">
       <ShiftRequestOrganism/>
+        </div>
+      <div className="row">
+            <CompanyShiftList/>
+        </div>
       </div>
-      
     </div>
 </div>
   )
