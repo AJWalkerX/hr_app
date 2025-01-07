@@ -167,7 +167,8 @@ function ManagerSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
-                 onClick={handleLogout}
+                style={{color:'white'}}
+                onClick={handleLogout}
                 data-bs-dismiss="modal"
               >
                 Çıkış Yap

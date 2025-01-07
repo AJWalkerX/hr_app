@@ -8,8 +8,9 @@ import companySlice from "./companySlice";
 import managerPanelSlice from "./managerPanelSlice";
 import spendingSlice from "./spendingSlice";
 import shiftSlice from "./shiftPanelSlice";
-
+import embezzlementSlice from "./embezzlementSlice"
 export {
+  embezzlementSlice,
   authSlice,
   commentSlice,
   forgotPasswordSlice,

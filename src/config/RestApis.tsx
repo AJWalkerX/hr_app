@@ -20,6 +20,9 @@ const apis = {
 
   spendingService: server + "/personal-spending",
   shiftService: server + "/shift",
+
+  embezzlementService: server + "/embezzlement"
+  
 };
 
 export default apis;

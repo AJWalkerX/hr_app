@@ -6,7 +6,10 @@ import { ICreateShiftRequest } from "../../../models/Request/ICreateShiftRequest
 import { DateTime } from "luxon";
 import { hrDispatch } from "../../../stores";
 import { useDispatch } from "react-redux";
-import { fetchCreateShift } from "../../../stores/features/shiftPanelSlice";
+import {
+  fetchCreateShift,
+  fetchShiftList,
+} from "../../../stores/features/shiftPanelSlice";
 
 function ShiftRequestOrganism() {
   const [shifts, setShifts] = useState<ICreateShiftRequest[]>([]);
@@ -76,7 +79,7 @@ function ShiftRequestOrganism() {
   };
 
   const dispatch = useDispatch<hrDispatch>();
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const totalMinutes = calculateTotalTime();
 
     if (totalMinutes > 24 * 60) {
@@ -86,9 +89,23 @@ function ShiftRequestOrganism() {
       return;
     }
 
-    dispatch(fetchCreateShift(shifts));
+    try {
+      await dispatch(fetchCreateShift(shifts));
+      await dispatch(fetchShiftList());
+      Swal.fire({
+        title: "Başarılı!",
+        text: "Vardiya planı başarıyla kaydedildi!",
+        icon: "success",
+      });
+      setShifts([]);
+    } catch (error) {
+      Swal.fire({
+        title: "Hata!",
+        text: "Vardiya planı kaydedilemedi. Lütfen tekrar deneyin.",
+        icon: "error",
+      });
+    }
   };
-
   const handleDeleteShift = (index: number) => {
     Swal.fire({
       title: "Emin misiniz?",

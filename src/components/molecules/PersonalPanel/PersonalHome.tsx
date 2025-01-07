@@ -9,19 +9,7 @@ import {
   Grid,
 } from '@mui/material';
 import {
-  BarChart,
-  PieChart,
-  AreaChart,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Bar,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Area,
-} from 'recharts';
+  BarChart,PieChart,AreaChart,XAxis, YAxis,  Tooltip,Legend, Bar,  Pie, Cell,ResponsiveContainer, Area,} from 'recharts';
 import { FaTasks, FaMedal, FaChartLine, FaClock } from 'react-icons/fa';
 
 // Types

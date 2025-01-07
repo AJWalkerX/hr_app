@@ -1,32 +1,37 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { hrDispatch, hrUseSelector } from "../../../stores";
+import { IShiftListResponse } from "../../../models/Response/IShiftListResponse";
+import { fetchShiftList } from "../../../stores/features/shiftPanelSlice";
+import ShiftListItem from "../../atoms/ShiftListCard/ShiftListItem";
 
 function CompanyShiftList() {
- 
-  const [shifts, setShifts] = useState<{ id: number; name: string; startTime: string; endTime: string }[]>([]);
- 
-  const fetchShifts = async () => {
-   
-    const exampleShifts = [
-      { id: 1, name: "Sabah Vardiyası", startTime: "09:00", endTime: "17:00" },
-      { id: 2, name: "Öğle Vardiyası", startTime: "12:00", endTime: "20:00" },
-      { id: 3, name: "Gece Vardiyası", startTime: "22:00", endTime: "06:00" },
-      { id: 4, name: "Haftasonu Vardiyası", startTime: "10:00", endTime: "18:00" },
-      { id: 5, name: "Akşam Vardiyası", startTime: "17:00", endTime: "01:00" }
-    ];
+  const dispatch = useDispatch<hrDispatch>();
 
-    setShifts(exampleShifts);
-
-  };
+  const shifts: IShiftListResponse[] = hrUseSelector(
+    (state) => state.shift.shiftList
+  );
 
   useEffect(() => {
-    fetchShifts();
-  }, []);
+    dispatch(fetchShiftList());
+  }, [dispatch]);
 
   return (
     <div>
-      <div>
-        <h4 className="text-center">Vardiya Listesi</h4>
+      <h4 className="text-center my-4">Vardiya Listesi</h4>
+      {shifts.length === 0 ? (
+        <div
+          className="alert alert-warning text-center mx-auto py-2 px-4"
+          role="alert"
+          style={{
+            maxWidth: "600px",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+          }}
+        >
+          Atanmış Vardiya Bulunmamaktadır.
+        </div>
+      ) : (
         <table className="table table-striped table-hover text-center">
           <thead className="table-gray">
             <tr>
@@ -57,34 +62,12 @@ function CompanyShiftList() {
             </tr>
           </thead>
           <tbody>
-            {shifts.map((shift) => (
-              <tr key={shift.id}>
-                <td>{shift.name}</td>
-                <td>{shift.startTime}</td>
-                <td>{shift.endTime}</td>
-                <td>
-                  <button
-                    onClick={() => shift.id}
-                    className="btn btn-danger ms-3"
-                    style={{ color: "white" }}
-                  >
-                    Sil
-                  </button>
-
-
-                  <button
-                    onClick={() => shift.id}
-                    className="btn btn-secondary ms-3"
-                    style={{ color: "white" }}
-                  >
-                    Düzenle
-                  </button>
-                </td>
-              </tr>
+            {shifts.map((shift, index) => (
+              <ShiftListItem key={index} {...shift} />
             ))}
           </tbody>
         </table>
-      </div>
+      )}
     </div>
   );
 }

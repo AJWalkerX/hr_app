@@ -39,6 +39,7 @@ import ManagerSpendingViewPage from "./pages/ManagerSpendingViewPage";
 import ShiftManagerPage from "./pages/ShiftManagerPage";
 import ManagerEmbezzlementPage from "./pages/ManagerEmbezzlementPage";
 import ShiftAssignmentPage from "./pages/ShiftAssignmentPage";
+import PersonalViewAllMyEmbezzlementPage from "./pages/PersonalViewAllMyEmbezzlementPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -107,11 +108,12 @@ function RouterPage() {
       <Route path="/employee-details" element={<EmployeeDetailsPage/>}></Route>
       <Route path="/personal/view-my-spending" element={<PersonalViewAllMySpendingPage/>}></Route>
       <Route path="/manager/employees/spending-list" element={<ManagerSpendingViewPage/>}></Route>
-      <Route path="/comment/list/comment-details/:commentId" element={<CommentDetailsPage/>}></Route>
+      <Route path="/comment/comment-details/:commentId" element={<CommentDetailsPage/>}></Route>
       <Route path="/manager/shift-request" element={<ShiftManagerPage/>}></Route>
       <Route path="/manager/embezzlement" element={<ManagerEmbezzlementPage/>}></Route>
       <Route path="/manager/shift-assignment" element={<ShiftAssignmentPage/>}></Route>
-
+      <Route path="/personal/view-my-embezzlement" element={<PersonalViewAllMyEmbezzlementPage/>}></Route>
+      
     </Routes>
   );
 }

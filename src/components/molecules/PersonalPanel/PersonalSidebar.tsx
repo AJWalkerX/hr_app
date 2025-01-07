@@ -15,7 +15,7 @@ function PersonalSidebar() {
 
   return (
     <>
-      <div className="sidebar border-end sidebar-manager" style={{ backgroundColor: '#e5e8e8' }}>
+      <div className="sidebar border-end sidebar-manager" style={{width:'300px', backgroundColor: '#e5e8e8' }}>
         <div className="sidebar-header border-bottom">
           <div className="sidebar-brand">
             <img
@@ -121,6 +121,20 @@ function PersonalSidebar() {
                   </a>
                 </NavLink>
               </li>
+
+              <li className="nav-item">
+                <NavLink className="nav-link-manager" to={'/personal/view-my-embezzlement'}>
+                <a className='nav-link fw-bold' href=''>
+                  <span className="nav-icon">
+                    <span
+                      style={{ color: 'rgb(10, 57, 129)'}}
+                      className="fa-solid fa-clipboard-list"
+                    ></span>
+                  </span>{' '}
+                  ZİMMETLİ MATERYALLER
+                  </a>
+                </NavLink>
+              </li>
             </ul>
           </li>
         </ul>
@@ -169,6 +183,7 @@ function PersonalSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
+                style={{color:'white'}}
                 onClick={handleLogout}
                 data-bs-dismiss="modal"
               >
