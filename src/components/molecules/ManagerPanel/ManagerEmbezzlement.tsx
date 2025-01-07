@@ -12,6 +12,7 @@ function ManagerEmbezzlement() {
   const dispatch = useDispatch<hrDispatch>();
   const [showModal, setShowModal] = useState(false);
   const [newMaterial, setNewMaterial] = useState<IAddEmbezzlementRequestDto>({
+    title:"",
     description: "",
     embezzlementType: "",
   });
@@ -41,8 +42,9 @@ function ManagerEmbezzlement() {
     setShowModal(!showModal);
   };
 
-  const handleSubmitMaterial = () => {
-    dispatch(fetchAddEmbezzlement(newMaterial));
+  const handleSubmitMaterial = async () => {
+    await dispatch(fetchAddEmbezzlement(newMaterial));
+    dispatch(fetchEmbezzlementListByCompany());
     handleModalToggle();
   };
 
@@ -102,6 +104,20 @@ function ManagerEmbezzlement() {
                 ></button>
               </div>
               <div className="modal-body">
+              <div className="mb-3">
+                  <label htmlFor="description" className="form-label">
+                    Ürün İsmi
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    name="title"
+                    value={newMaterial.title}
+                    onChange={handleChange}
+                    placeholder="Materyalin ismini giriniz"
+                  />
+                </div>
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">
                     Açıklama
@@ -163,6 +179,7 @@ function ManagerEmbezzlement() {
           <thead className="table-dark">
             <tr>
               <th>Ürün</th>
+              <th>Ürün Açıklaması</th>
               <th>Ürün Türü</th>
               <th>Ürün Durumu</th>
               <th>Zimmetleme/Detay</th>

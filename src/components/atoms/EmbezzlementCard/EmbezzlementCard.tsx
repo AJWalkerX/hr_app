@@ -11,16 +11,25 @@ import {
   TextField,
 } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
-import { IEmbezzlementResponseDto } from "../../../models/Response/IEmbezzlementResponseDto";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
-import { fetchAssigmentEmbezzlement, fetchGetEmbezzlementDetails } from "../../../stores/features/embezzlementSlice";
-import { IGetEmbezzlementDetailsResponse } from "../../../models/Response/IGetEmbezzlementDetailsResponse";
+import { fetchAssigmentEmbezzlement, fetchEmbezzlementListByCompany } from "../../../stores/features/embezzlementSlice";
 
-interface EmbezzlementCardProps extends IEmbezzlementResponseDto {}
+interface EmbezzlementCardProps {
+  embezzlementId: number;
+  description: string;
+  embezzlementType: string;
+  embezzlementState: string;
+  title:string;
+  userDetails: {
+    avatar: string;
+    firstName: string;
+    lastName: string;
+  };
+}
 
 const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
-  const { description, embezzlementType, embezzlementState, embezzlementId } = props;
+  const { title,description, embezzlementType, embezzlementState, embezzlementId, userDetails } = props;
   const dispatch = useDispatch<hrDispatch>();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -31,11 +40,6 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  // Redux store'dan embezzlement details verisini alıyoruz
-  const embezzlementDetails: IGetEmbezzlementDetailsResponse | null = useSelector(
-    (state: any) => state.embezzlement.embezzlementDetails
-  );
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,7 +49,6 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
   };
 
   const handleDetailClick = () => {
-    dispatch(fetchGetEmbezzlementDetails(embezzlementId));
     setShowModal(true);
     handleClose();
   };
@@ -69,20 +72,18 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       lastName,
       email,
     };
-    dispatch(fetchAssigmentEmbezzlement(payload));
+   await dispatch(fetchAssigmentEmbezzlement(payload));
+   dispatch(fetchEmbezzlementListByCompany())
     handleCloseModal2();
   };
-
-  const avatarUrl = embezzlementDetails?.avatar || "";
-  const firstNameDetail = embezzlementDetails?.firstName || "";
-  const lastNameDetail = embezzlementDetails?.lastName || "";
 
   return (
     <>
       <tr>
         <th scope="row" style={{ verticalAlign: "middle" }}>
-          {description}
+          {title}
         </th>
+        <td style={{ verticalAlign: "middle" }}>{description}</td>
         <td style={{ verticalAlign: "middle" }}>{embezzlementType}</td>
         <td style={{ verticalAlign: "middle" }}>{embezzlementState}</td>
         <td style={{ verticalAlign: "middle" }}>
@@ -98,20 +99,20 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
 
       {/* Detay Modal */}
       <Dialog open={showModal} onClose={handleCloseModal}>
-        <DialogTitle>Embezzlement Details</DialogTitle>
+        <DialogTitle>Atanmış Kullanıcı Bilgisi</DialogTitle>
         <DialogContent>
-          {embezzlementDetails ? (
+          {userDetails ? (
             <>
               <img
-                src={avatarUrl}
+                src={userDetails.avatar}
                 alt="Avatar"
-                style={{ width: 50, height: 50, borderRadius: "50%" }}
+                style={{ width: 80, height: 80, borderRadius: "50%" }}
               />
               <p>
-                <strong>Adı:</strong> {firstNameDetail}
+                <strong>Personel Adı:</strong> {userDetails.firstName}
               </p>
               <p>
-                <strong>Soyadı:</strong> {lastNameDetail}
+                <strong>Personel Soyadı:</strong> {userDetails.lastName}
               </p>
             </>
           ) : (
