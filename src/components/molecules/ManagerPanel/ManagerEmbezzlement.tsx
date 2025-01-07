@@ -35,6 +35,8 @@ function ManagerEmbezzlement() {
     dispatch(fetchEmbezzlementListByCompany());
   }, [dispatch]);
 
+  console.log(embezzlementList); 
+  
   const handleModalToggle = () => {
     setShowModal(!showModal);
   };
