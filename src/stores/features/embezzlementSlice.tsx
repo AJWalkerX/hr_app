@@ -11,9 +11,6 @@ interface IEmbezzlementState {
   embezzlementList: IEmbezzlementResponseDto[];
   isEmbezlementListLoading: boolean;
 
-  embezzlementDetails: IGetEmbezzlementDetailsResponse | null;
-  isEmbezzlementDetailsLoading: boolean;
-
   addEmbezzlement: IAddEmbezzlementRequestDto | null;
   isAddEmbezzlementLoading: boolean;
 
@@ -22,8 +19,7 @@ interface IEmbezzlementState {
 
 // Başlangıç durumu
 const initialEmbezzlementState: IEmbezzlementState = {
-  embezzlementDetails: null,
-  isEmbezzlementDetailsLoading: false,
+ 
   embezzlementList: [],
   isEmbezlementListLoading: false,
   addEmbezzlement: null,
@@ -31,15 +27,8 @@ const initialEmbezzlementState: IEmbezzlementState = {
   isAssigmentEmbezzlementLoading: false,
 };
 
-export const fetchGetEmbezzlementDetails = createAsyncThunk(
-    'embezzlement/fetchGetEmbezzlementDetails',
-    async (embezzlementId: number) => {
-      const response = await fetch(`/api/embezzlements/${embezzlementId}`);
-      return response.json();  
-    }
-  );
 
-// Zimmet atama işlemi için async thunk
+
 export const fetchAssigmentEmbezzlement = createAsyncThunk(
   "embezzlement/fetchAssigmentEmbezzlement",
   async (payload: IAssignmentEmbezzlementRequest) => {
@@ -62,7 +51,7 @@ export const fetchAssigmentEmbezzlement = createAsyncThunk(
   }
 );
 
-// Zimmet listesi almak için async thunk
+
 export const fetchEmbezzlementListByCompany = createAsyncThunk(
   "embezzlement/fetchEmbezzlementListByCompany",
   async () => {
@@ -73,7 +62,7 @@ export const fetchEmbezzlementListByCompany = createAsyncThunk(
   }
 );
 
-// Yeni zimmet eklemek için async thunk
+
 export const fetchAddEmbezzlement = createAsyncThunk(
   "embezzlement/fetchAddEmbezzlement",
   async (payload: IAddEmbezzlementRequestDto) => {
@@ -93,7 +82,7 @@ export const fetchAddEmbezzlement = createAsyncThunk(
   }
 );
 
-// Slice tanımlamaları
+
 const embezzlementSlice = createSlice({
   name: "embezzlement",
   initialState: initialEmbezzlementState,
@@ -134,18 +123,6 @@ const embezzlementSlice = createSlice({
             ? { ...embezzlement, ...updatedEmbezzlement }
             : embezzlement
         );
-      }
-    });
-
-    builder.addCase(fetchGetEmbezzlementDetails.pending, (state) => {
-      state.isEmbezzlementDetailsLoading = true;
-    });
-    builder.addCase(fetchGetEmbezzlementDetails.fulfilled, (state, action: PayloadAction<IBaseResponse>) => {
-      state.isEmbezzlementDetailsLoading = false;
-      const data = action.payload;
-
-      if (data.code === 200) {
-        state.embezzlementDetails = data.data; // Veriyi state'e kaydediyoruz
       }
     });
   },
