@@ -6,6 +6,7 @@ import { IAddEmbezzlementRequestDto } from "../../models/Request/IAddEmbezzlemen
 import { IAssignmentEmbezzlementRequest } from "../../models/Request/IAssignmentEmbezzlementRequestDto";
 import { IGetEmbezzlementDetailsResponse } from "../../models/Response/IGetEmbezzlementDetailsResponse";
 import { IPersonalEmbezzlementResponse } from "../../models/Response/IPersonalEmbezzlementResponse";
+import { IDeleteEmbezzlementRequest } from "../../models/Request/IDeleteEmbezzlementRequest";
 
 // State tipini tanımlıyoruz
 interface IEmbezzlementState {
@@ -16,9 +17,12 @@ interface IEmbezzlementState {
   isAddEmbezzlementLoading: boolean;
 
   isAssigmentEmbezzlementLoading: boolean;
+  isDeleteEmbezzlementLoading: boolean;
 
   personalEmbezzlementList: IPersonalEmbezzlementResponse[];
   isPersonalEmbezzlementListLoading: boolean;
+
+
 }
 
 // Başlangıç durumu
@@ -29,6 +33,7 @@ const initialEmbezzlementState: IEmbezzlementState = {
   addEmbezzlement: null,
   isAddEmbezzlementLoading: false,
   isAssigmentEmbezzlementLoading: false,
+  isDeleteEmbezzlementLoading: false,
   personalEmbezzlementList: [],
   isPersonalEmbezzlementListLoading: false,
 };
@@ -42,6 +47,28 @@ export const fetchPersonalEmbezzlementList = createAsyncThunk(
     ).then((data)=> data.json());
   }
 );
+
+export const fetchDeleteEmbezzlementByUserId = createAsyncThunk(
+  "embezzlement/fetchDeleteEmbezzlementByUserId",
+  async(payload:IDeleteEmbezzlementRequest)=>{
+    const token=localStorage.getItem("token");
+    const requestBody ={
+      ...payload,
+      token:token,
+    };
+    const response = await fetch(
+      apis.embezzlementService +"/delete-embezzlement-by-userid",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      }
+    ).then((data) => data.json());
+    return response;
+  }
+)
 
 export const fetchAssigmentEmbezzlement = createAsyncThunk(
   "embezzlement/fetchAssigmentEmbezzlement",
@@ -139,6 +166,21 @@ const embezzlementSlice = createSlice({
         );
       }
     });
+    builder.addCase(fetchDeleteEmbezzlementByUserId.pending,(state)=>{
+      state.isDeleteEmbezzlementLoading=true;
+    });
+    builder.addCase(fetchDeleteEmbezzlementByUserId.fulfilled,(state,action:PayloadAction<IBaseResponse>)=>{
+      state.isDeleteEmbezzlementLoading = false;
+      if(action.payload.code === 200 && action.payload.data){
+        const updatedEmbezzlement = action.payload.data;
+        state.embezzlementList = state.embezzlementList.map(embezzlement =>
+          embezzlement.embezzlementId === updatedEmbezzlement.id ?
+          {...embezzlement,...updatedEmbezzlement}
+          : embezzlement
+        )
+      }
+    });
+
     builder.addCase(fetchPersonalEmbezzlementList.pending, (state) =>{
       state.isPersonalEmbezzlementListLoading = true;
     });

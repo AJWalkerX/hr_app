@@ -61,17 +61,18 @@ function ManagerEmbezzlement() {
   return (
     <>
       <div className="row mt-4 ms-5">
-        <div className="col-12 col-md-3 d-flex justify-content-center align-items-center">
+        <div className="col-12 col-md-9 d-flex justify-content-center align-items-center">
           <p
             style={{
               fontSize: "25px",
               fontWeight: "bold",
             }}
+            className="ms-5"
           >
             Zimmet Takibi
           </p>
         </div>
-        <div className="col-12 col-md-6"></div>
+        
         <div className="col-12 col-md-3 d-flex ">
           <button
             className="btn btn-outline-success my-2 my-sm-0 shadow-lg"
@@ -175,31 +176,36 @@ function ManagerEmbezzlement() {
 
       {/* Tablo */}
       <div className="table-responsive mt-5 me-5 ms-5">
-        <table className="table table-striped align-middle">
-          <thead className="table-dark">
-            <tr>
-              <th>Ürün</th>
-              <th>Ürün Açıklaması</th>
-              <th>Ürün Türü</th>
-              <th>Ürün Durumu</th>
-              <th>Zimmetleme/Detay</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isEmbezlementListLoading ? (
-              <tr>
-                <td colSpan={5} className="text-center">
-                  Yükleniyor...
-                </td>
-              </tr>
-            ) : (
-              embezzlementList.map((embezzlement) => (
-                <EmbezzlementCard key={embezzlement.embezzlementId} {...embezzlement} />
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+  <table className="table table-striped align-middle">
+    <thead className="table-dark">
+      <tr>
+        <th></th> {/* Satır numarası sütunu */}
+        <th>Ürün</th>
+        <th>Ürün Açıklaması</th>
+        <th>Ürün Türü</th>
+        <th>Ürün Durumu</th>
+        <th>Zimmetleme/Detay</th>
+      </tr>
+    </thead>
+    <tbody>
+      {isEmbezlementListLoading ? (
+        <tr>
+          <td colSpan={6} className="text-center">
+            Yükleniyor...
+          </td>
+        </tr>
+      ) : (
+        embezzlementList.map((embezzlement, index) => (
+          <EmbezzlementCard
+            key={embezzlement.embezzlementId}
+            {...embezzlement}
+            index={index} // index prop olarak gönderiliyor
+          />
+        ))
+      )}
+    </tbody>
+  </table>
+</div>
     </>
   );
 }

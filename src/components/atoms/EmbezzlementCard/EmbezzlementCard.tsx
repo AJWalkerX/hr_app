@@ -13,14 +13,20 @@ import {
 import { MoreHoriz } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { hrDispatch } from "../../../stores";
-import { fetchAssigmentEmbezzlement, fetchEmbezzlementListByCompany } from "../../../stores/features/embezzlementSlice";
+import Swal from "sweetalert2";
+import {
+  fetchAssigmentEmbezzlement,
+  fetchDeleteEmbezzlementByUserId,
+  fetchEmbezzlementListByCompany,
+} from "../../../stores/features/embezzlementSlice";
 
 interface EmbezzlementCardProps {
   embezzlementId: number;
   description: string;
   embezzlementType: string;
   embezzlementState: string;
-  title:string;
+  title: string;
+  index:number;
   userDetails: {
     avatar: string;
     firstName: string;
@@ -29,7 +35,7 @@ interface EmbezzlementCardProps {
 }
 
 const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
-  const { title,description, embezzlementType, embezzlementState, embezzlementId, userDetails } = props;
+  const { title, description, embezzlementType, embezzlementState, embezzlementId, userDetails, index } = props;
   const dispatch = useDispatch<hrDispatch>();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -55,6 +61,7 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
 
   const embezzlementClick = () => {
     setShowModal2(true);
+    handleClose();
   };
 
   const handleCloseModal = () => {
@@ -72,27 +79,70 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       lastName,
       email,
     };
-   await dispatch(fetchAssigmentEmbezzlement(payload));
-   dispatch(fetchEmbezzlementListByCompany())
+    await dispatch(fetchAssigmentEmbezzlement(payload));
+    dispatch(fetchEmbezzlementListByCompany());
     handleCloseModal2();
   };
+
+  const handleRemoveAssignment = async () => {
+    try {
+      const token = localStorage.getItem("token") || ""; // null durumunda boş string
+      const payload = {
+        embezzlementId,
+        token, // Artık sadece string
+      };
+  
+      const response = await dispatch(fetchDeleteEmbezzlementByUserId(payload)).unwrap();
+  
+      if (response.success) {
+        Swal.fire({
+          title: "Başarılı",
+          text: "Atama başarıyla kaldırıldı.",
+          icon: "success",
+          confirmButtonText: "Tamam",
+        });
+        dispatch(fetchEmbezzlementListByCompany());
+      } else {
+        Swal.fire({
+          title: "Hata",
+          text: response.message || "Atama kaldırılırken bir hata oluştu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Hata",
+        text: "Atama kaldırılırken bir hata oluştu.",
+        icon: "error",
+        confirmButtonText: "Tamam",
+      });
+    } finally {
+      handleClose();
+    }
+  };
+  
+  
+  
 
   return (
     <>
       <tr>
-        <th scope="row" style={{ verticalAlign: "middle" }}>
-          {title}
-        </th>
-        <td style={{ verticalAlign: "middle" }}>{description}</td>
-        <td style={{ verticalAlign: "middle" }}>{embezzlementType}</td>
-        <td style={{ verticalAlign: "middle" }}>{embezzlementState}</td>
-        <td style={{ verticalAlign: "middle" }}>
+      <th scope="row" style={{ verticalAlign: "middle" }}>
+        {index + 1} {/* Sıra numarası */}
+      </th>
+      <td style={{ verticalAlign: "middle" }}>{title}</td>
+      <td style={{ verticalAlign: "middle" }}>{description}</td>
+      <td style={{ verticalAlign: "middle" }}>{embezzlementType}</td>
+      <td style={{ verticalAlign: "middle" }}>{embezzlementState}</td>
+      <td style={{ verticalAlign: "middle" }}>
           <IconButton onClick={handleClick}>
             <MoreHoriz />
           </IconButton>
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleDetailClick}>Detay</MenuItem>
             <MenuItem onClick={embezzlementClick}>Personele Zimmetle</MenuItem>
+            <MenuItem onClick={handleRemoveAssignment}>Atamayı Kaldır</MenuItem>
           </Menu>
         </td>
       </tr>
