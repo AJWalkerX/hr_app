@@ -15,152 +15,199 @@ function PersonalSidebar() {
 
   return (
     <>
-      <div className="sidebar border-end sidebar-manager" style={{width:'300px', backgroundColor: '#e5e8e8' }}>
-        <div className="sidebar-header border-bottom">
-          <div className="sidebar-brand">
+      <div
+        className="sidebar border-end shadow-lg sidebar-manager"
+        style={{
+          width: '300px',
+          backgroundColor: '#f7f9f9',
+          borderRadius: '10px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          padding: '10px',
+        }}
+      >
+        <div className="sidebar-header border-bottom mb-4">
+          <div className="sidebar-brand text-center">
             <img
-              style={{ width: '60px', height: '60px', alignItems: 'center' }}
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                marginBottom: '10px',
+              }}
               src={logo}
               alt="logo"
             />
-            <span
+            <h4
               style={{
                 fontWeight: 'bold',
-                fontSize: '18px',
+                fontSize: '20px',
                 color: 'rgb(10, 57, 129)',
               }}
             >
               Personel Bilgi Sistemi
-            </span>
+            </h4>
           </div>
         </div>
         <ul className="sidebar-nav">
-          <li className="nav-item nav-group show">
-            <ul className="nav-group-items">
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal'}>
-                <a className='nav-link fw-bold' href=''>
-                <span className="nav-icon ">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)' }}
-                      className="fa-solid fa-house"
-                    ></span>
-                  </span>{' '}
-                  DASHBOARD
-                </a>
-                 
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink className="nav-link-manager" to={'/personal'}>
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-house"></i>
+                </span>{' '}
+                DASHBOARD
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/profile'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)' }}
-                      className="fa-solid fa-user"
-                    ></span>
-                  </span>{' '}
-                  PERSONEL BİLGİLERİ
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink className="nav-link-manager" to={'/personal/profile'}>
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-user"></i>
+                </span>{' '}
+                PERSONEL BİLGİLERİ
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/permit-request'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)' }}
-                      className="fa-solid fa-pen-to-square"
-                    ></span>
-                  </span>{' '}
-                  İZİN OLUŞTUR
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink
+              className="nav-link-manager"
+              to={'/personal/permit-request'}
+            >
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-pen-to-square"></i>
+                </span>{' '}
+                İZİN OLUŞTUR
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/view-your-permit'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)' }}
-                      className="fa-regular fa-calendar-days"
-                    ></span>
-                  </span>{' '}
-                  İZİNLERİ GÖRÜNTÜLE
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink
+              className="nav-link-manager"
+              to={'/personal/view-your-permit'}
+            >
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-regular fa-calendar-days"></i>
+                </span>{' '}
+                İZİNLERİ GÖRÜNTÜLE
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/add-spending'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)'}}
-                      className="fa-solid  fa-money-check-dollar"
-                    ></span>
-                  </span>{' '}
-                  HARCAMA EKLE
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink className="nav-link-manager" to={'/personal/add-spending'}>
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-money-check-dollar"></i>
+                </span>{' '}
+                HARCAMA EKLE
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/view-my-spending'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)'}}
-                      className="fa-solid  fa-money-check-dollar"
-                    ></span>
-                  </span>{' '}
-                  TÜM HARCAMALARIM
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink
+              className="nav-link-manager"
+              to={'/personal/view-my-spending'}
+            >
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-money-check-dollar"></i>
+                </span>{' '}
+                TÜM HARCAMALARIM
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-                <NavLink className="nav-link-manager" to={'/personal/view-my-embezzlement'}>
-                <a className='nav-link fw-bold' href=''>
-                  <span className="nav-icon">
-                    <span
-                      style={{ color: 'rgb(10, 57, 129)'}}
-                      className="fa-solid fa-clipboard-list"
-                    ></span>
-                  </span>{' '}
-                  ZİMMETLİ MATERYALLER
-                  </a>
-                </NavLink>
-              </li>
+          <li className="nav-item mb-3">
+            <NavLink
+              className="nav-link-manager"
+              to={'/personal/view-my-embezzlement'}
+            >
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-clipboard-list"></i>
+                </span>{' '}
+                ZİMMETLİ MATERYALLER
+              </a>
+            </NavLink>
+          </li>
 
-              <li className="nav-item">
-  <NavLink className="nav-link-manager" to={'/personal/shift-list'}>
-    <a className='nav-link fw-bold' href=''>
-      <span className="nav-icon">
-        <span
-          style={{ color: 'rgb(10, 57, 129)' }}
-          className="fa-solid fa-user-clock"
-        ></span>
-      </span>{' '}
-      PERSONEL VARDİYALARI
-    </a>
-  </NavLink>
-</li>
-
-
-            </ul>
+          <li className="nav-item mb-3">
+            <NavLink className="nav-link-manager" to={'/personal/shift-list'}>
+              <a className="nav-link d-flex align-items-center fw-bold" href="">
+                <span
+                  className="nav-icon me-2"
+                  style={{
+                    color: 'rgb(10, 57, 129)',
+                    transition: 'color 0.3s',
+                  }}
+                >
+                  <i className="fa-solid fa-user-clock"></i>
+                </span>{' '}
+                PERSONEL VARDİYALARI
+              </a>
+            </NavLink>
           </li>
         </ul>
-        <div className="sidebar-footer border-top d-flex">
+
+        <div className="sidebar-footer border-top d-flex justify-content-center pt-3">
           <button
-            className="sidebar-toggler sidebar-exit-button-m"
+            className="btn btn-outline-danger"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
-            type="button"
-          ></button>
+            style={{ width: '90%' }}
+          >
+            <i className="fa-solid fa-right-from-bracket me-2"></i>
+            Çıkış Yap
+          </button>
         </div>
       </div>
 
@@ -199,7 +246,7 @@ function PersonalSidebar() {
               <button
                 type="button"
                 className="btn btn-danger"
-                style={{color:'white'}}
+                style={{ color: 'white' }}
                 onClick={handleLogout}
                 data-bs-dismiss="modal"
               >
