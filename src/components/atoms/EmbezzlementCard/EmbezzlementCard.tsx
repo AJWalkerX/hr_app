@@ -79,17 +79,60 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       lastName,
       email,
     };
-    await dispatch(fetchAssigmentEmbezzlement(payload));
-    dispatch(fetchEmbezzlementListByCompany());
+  
+    
     handleCloseModal2();
+  
+    try {
+      const response = await dispatch(fetchAssigmentEmbezzlement(payload)).unwrap();
+  
+      if (response.success) {
+       
+        Swal.fire({
+          title: "Başarılı",
+          text: "Zimmet başarıyla verildi.",
+          icon: "success",
+          confirmButtonText: "Tamam",
+        });
+        dispatch(fetchEmbezzlementListByCompany());
+      } else {
+       
+        Swal.fire({
+          title: "Hata",
+          text:  "Zimmetleme işlemi başarısız oldu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+    
+        Swal.fire({
+          title: "Hata",
+          text:  "Zimmetleme işlemi sırasında bir hata oluştu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      } else {
+        Swal.fire({
+          title: "Hata",
+          text: "Bilinmeyen bir hata oluştu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      }
+    }
   };
+  
+  
+  
 
   const handleRemoveAssignment = async () => {
     try {
-      const token = localStorage.getItem("token") || ""; // null durumunda boş string
+      const token = localStorage.getItem("token") || ""; 
       const payload = {
         embezzlementId,
-        token, // Artık sadece string
+        token, 
       };
   
       const response = await dispatch(fetchDeleteEmbezzlementByUserId(payload)).unwrap();
@@ -105,22 +148,34 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       } else {
         Swal.fire({
           title: "Hata",
-          text: response.message || "Atama kaldırılırken bir hata oluştu.",
+          text:  "Atama kaldırılırken bir hata oluştu.",
           icon: "error",
           confirmButtonText: "Tamam",
         });
       }
-    } catch (error) {
-      Swal.fire({
-        title: "Hata",
-        text: "Atama kaldırılırken bir hata oluştu.",
-        icon: "error",
-        confirmButtonText: "Tamam",
-      });
+    } catch (error: unknown) { 
+      if (error instanceof Error) {  
+        
+        Swal.fire({
+          title: "Hata",
+          text:  "Atama kaldırılırken bir hata oluştu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      } else {
+        
+        Swal.fire({
+          title: "Hata",
+          text: "Bilinmeyen bir hata oluştu.",
+          icon: "error",
+          confirmButtonText: "Tamam",
+        });
+      }
     } finally {
       handleClose();
     }
   };
+  
   
   
   
@@ -149,65 +204,91 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
 
       {/* Detay Modal */}
       <Dialog open={showModal} onClose={handleCloseModal}>
-        <DialogTitle>Atanmış Kullanıcı Bilgisi</DialogTitle>
-        <DialogContent>
-          {userDetails ? (
-            <>
-              <img
-                src={userDetails.avatar}
-                alt="Avatar"
-                style={{ width: 80, height: 80, borderRadius: "50%" }}
-              />
-              <p>
-                <strong>Personel Adı:</strong> {userDetails.firstName}
-              </p>
-              <p>
-                <strong>Personel Soyadı:</strong> {userDetails.lastName}
-              </p>
-            </>
-          ) : (
-            <p>Herhangi bir personel ataması bulunmamaktadır.</p>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModal} color="primary">
-            Kapat
-          </Button>
-        </DialogActions>
-      </Dialog>
+  <DialogTitle style={{ textAlign: "center", fontWeight: "bold" }}>
+    Atanmış Kullanıcı Bilgisi
+  </DialogTitle>
+  <DialogContent style={{ textAlign: "center", padding: "20px" }}>
+    {userDetails ? (
+      <>
+        <img
+          src={userDetails.avatar}
+          alt="Avatar"
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            border: "3px solid #4CAF50",
+            marginBottom: "15px",
+          }}
+        />
+        <p style={{ fontSize: "16px", margin: "5px 0" }}>
+          <strong>Personel Adı:</strong> {userDetails.firstName}
+        </p>
+        <p style={{ fontSize: "16px", margin: "5px 0" }}>
+          <strong>Personel Soyadı:</strong> {userDetails.lastName}
+        </p>
+      </>
+    ) : (
+      <p style={{ fontSize: "16px", color: "#888" }}>
+        Herhangi bir personel ataması bulunmamaktadır.
+      </p>
+    )}
+  </DialogContent>
+  <DialogActions style={{ justifyContent: "center", paddingBottom: "15px" }}>
+    <button
+      onClick={handleCloseModal}
+      style={{
+        padding: "10px 20px",
+        backgroundColor: "#4CAF50",
+        color: "#fff",
+        border: "none",
+        borderRadius: "5px",
+        cursor: "pointer",
+        fontSize: "14px",
+      }}
+    >
+      Kapat
+    </button>
+  </DialogActions>
+</Dialog>
 
-      {/* Zimmet Modal */}
-      <Dialog open={showModal2} onClose={handleCloseModal2}>
-        <DialogTitle>Zimmeti vermek istediğiniz personelin bilgilerini giriniz.</DialogTitle>
-        <DialogContent>
-          <TextField
-            className="form-control mt-3"
-            placeholder="Personelin adı"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <TextField
-            className="form-control mt-3"
-            placeholder="Personelin soyadı"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <TextField
-            className="form-control mt-3"
-            placeholder="Personelin mail adresi"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModal2} color="secondary">
-            Kapat
-          </Button>
-          <Button onClick={handleAssignmentEmbezzlement} color="primary">
-            Zimmetle
-          </Button>
-        </DialogActions>
-      </Dialog>
+
+{/* Zimmet Modal */}
+<Dialog open={showModal2} onClose={handleCloseModal2}>
+  <DialogTitle>Zimmeti vermek istediğiniz personelin bilgilerini giriniz.</DialogTitle>
+  <DialogContent>
+    <TextField
+      className="form-control mt-3"
+      placeholder="Personelin adı"
+      value={firstName}
+      onChange={(e) => setFirstName(e.target.value)}
+    />
+    <TextField
+      className="form-control mt-3"
+      placeholder="Personelin soyadı"
+      value={lastName}
+      onChange={(e) => setLastName(e.target.value)}
+    />
+    <TextField
+      className="form-control mt-3"
+      placeholder="Personelin mail adresi"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+    <p style={{ fontSize: "14px", color: "#f44336", marginTop: "10px" }}>
+      Lütfen bilgileri doğru şekilde doldurun. Büyük/küçük harf uyumuna dikkat ediniz.
+    </p>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleCloseModal2} color="secondary">
+      Kapat
+    </Button>
+    <Button onClick={handleAssignmentEmbezzlement} color="primary">
+      Zimmetle
+    </Button>
+  </DialogActions>
+</Dialog>
+
     </>
   );
 };
