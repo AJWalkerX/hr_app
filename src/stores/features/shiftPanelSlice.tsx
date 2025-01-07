@@ -11,6 +11,7 @@ interface IShiftState {
   isCreateShiftLoading: boolean;
   shiftList: IShiftListResponse[];
   isShiftListLoading: boolean;
+  isShiftDeleteLoading: boolean;
 }
 
 const initialShiftState: IShiftState = {
@@ -19,6 +20,8 @@ const initialShiftState: IShiftState = {
 
   shiftList: [],
   isShiftListLoading: false,
+
+  isShiftDeleteLoading: false,
 };
 
 export const fetchCreateShift = createAsyncThunk(
@@ -54,10 +57,37 @@ export const fetchShiftList = createAsyncThunk(
   }
 );
 
+export const fetchDeleteShift = createAsyncThunk(
+  "shift/fetchDeleteShift",
+  async (shiftId: number) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      shiftId: shiftId,
+      token: token,
+    };
+    const response = await fetch(apis.shiftService + "/delete-shift", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then((data) => data.json());
+    return response;
+  }
+);
+
 const shiftSlice = createSlice({
   name: "shift",
   initialState: initialShiftState,
-  reducers: {},
+  reducers: {
+    deleteShift: (state, action: PayloadAction<number>) => {
+      state.isShiftDeleteLoading = true;
+      state.shiftList = state.shiftList.filter(
+        (item) => item.shiftId !== action.payload
+      );
+      state.isShiftDeleteLoading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchCreateShift.pending, (state) => {
       state.isCreateShiftLoading = true;
@@ -91,7 +121,31 @@ const shiftSlice = createSlice({
         state.shiftList = action.payload.data;
       }
     });
+
+    builder.addCase(fetchDeleteShift.pending, (state) => {
+      state.isShiftDeleteLoading = true;
+    });
+    builder.addCase(fetchDeleteShift.fulfilled, (state, action) => {
+      state.isShiftDeleteLoading = false;
+      if (action.payload.code === 200) {
+        state.shiftList = state.shiftList.filter(
+          (item) => item.shiftId !== action.payload.data
+        );
+        Swal.fire({
+          icon: "success",
+          title: action.payload.message,
+          timer: 3000,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Hata!",
+          text: action.payload.message,
+        });
+      }
+    });
   },
 });
 
+export const { deleteShift } = shiftSlice.actions;
 export default shiftSlice.reducer;
