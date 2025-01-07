@@ -28,6 +28,7 @@ import UserPermitViewPage from "./pages/UserPermitViewPage";
 import ManagerPermitView from "./pages/ManagerPermitViewPage";
 import ManagerPermitViewPage from "./pages/ManagerPermitViewPage";
 import ManagerCommentPage from "./pages/ManagerCommentPage";
+import PersonalShiftListPage from "./pages/PersonalShiftListPage";
 
 import AddSpendingPage from "./pages/AddSpendingPage";
 import PersonalViewYourPermitPage from "./pages/PersonalViewYourPermitPage";
@@ -113,7 +114,8 @@ function RouterPage() {
       <Route path="/manager/embezzlement" element={<ManagerEmbezzlementPage/>}></Route>
       <Route path="/manager/shift-assignment" element={<ShiftAssignmentPage/>}></Route>
       <Route path="/personal/view-my-embezzlement" element={<PersonalViewAllMyEmbezzlementPage/>}></Route>
-      
+      <Route path="/personal/shift-list" element={<PersonalShiftListPage/>}></Route>
+
     </Routes>
   );
 }
