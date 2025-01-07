@@ -121,6 +121,20 @@ function PersonalSidebar() {
                   </a>
                 </NavLink>
               </li>
+
+              <li className="nav-item">
+                <NavLink className="nav-link-manager" to={'/personal/view-my-embezzlement'}>
+                <a className='nav-link fw-bold' href=''>
+                  <span className="nav-icon">
+                    <span
+                      style={{ color: 'rgb(10, 57, 129)'}}
+                      className="fa-solid fa-clipboard-list"
+                    ></span>
+                  </span>{' '}
+                  ÜZERİME ZİMMETLENENLER
+                  </a>
+                </NavLink>
+              </li>
             </ul>
           </li>
         </ul>
