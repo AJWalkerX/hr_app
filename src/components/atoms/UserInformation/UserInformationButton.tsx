@@ -1,18 +1,20 @@
-import React from 'react'
-import './UserInformationButton.css' 
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import "./UserInformationButton.css";
+import { useNavigate } from "react-router-dom";
 
-function UserInformationButton() {
+function UserInformationButton(props: any) {
   const navigate = useNavigate();
 
   const handleSave = () => {
-    navigate("/manager")
-  }
+    navigate("/manager");
+  };
   return (
-    <div className='d-flex justify-content-center'>
-        <button className=' ms-5 saveButton' onClick={handleSave}>Kaydet</button>
+    <div className="d-flex justify-content-center">
+      <button className=" ms-5 saveButton" onClick={handleSave}>
+        Kaydet
+      </button>
     </div>
-  )
+  );
 }
 
-export default UserInformationButton
+export default UserInformationButton;

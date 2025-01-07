@@ -10,6 +10,7 @@ import { IUpdateEmployeeRequest } from "../../models/Request/IUpdateEmployeeRequ
 import { INewEmployeeRequest } from "../../models/Request/INewEmployeeRequest";
 import { IManagerSpendingResponse } from "../../models/Response/IManagerSpendingResponse";
 import { IspendingAuthorizeRequest } from "../../models/Request/ISpendingAuthorizeRequest";
+import { IFirstUpdateManagerRequest } from "../../models/Request/IFirstUpdateManagerRequest";
 
 interface IManagerPanelState {
   employeeList: IListEmployeeListResponse[];
@@ -22,7 +23,9 @@ interface IManagerPanelState {
   isDeleteEmployeeLoading: boolean;
   employeeSpendingList: IManagerSpendingResponse[];
   isEmployeeSpendingListLoading: boolean;
-  isSpendingAuthoriseLoading:boolean;
+  isSpendingAuthoriseLoading: boolean;
+  isFistUpdateManagerLoading: boolean;
+  isFistUpdateManagerSuccess: boolean;
 }
 
 const initialListEmployeeState: IManagerPanelState = {
@@ -35,17 +38,19 @@ const initialListEmployeeState: IManagerPanelState = {
   isAddNewEmployeeLoading: false,
   isDeleteEmployeeLoading: false,
   employeeSpendingList: [],
-  isEmployeeSpendingListLoading:false,
-  isSpendingAuthoriseLoading:false,
+  isEmployeeSpendingListLoading: false,
+  isSpendingAuthoriseLoading: false,
+  isFistUpdateManagerLoading: false,
+  isFistUpdateManagerSuccess: false,
 };
 
 export const fetchEmployeeListBySpending = createAsyncThunk(
   "manager/fetchEmployeeListBySpending",
   async () => {
-    const managerToken = localStorage.getItem("token")
+    const managerToken = localStorage.getItem("token");
     return await fetch(
       apis.managerService + "/manager-employees-spending?token=" + managerToken
-    ).then((data) => data.json()); 
+    ).then((data) => data.json());
   }
 );
 
@@ -67,6 +72,25 @@ export const fetchUpdateEmployee = createAsyncThunk(
         body: JSON.stringify(requestBody),
       }
     ).then((data) => data.json());
+    return response;
+  }
+);
+
+export const fetchUpdateEmployeeDetails = createAsyncThunk(
+  "manager/fetchUpdateEmployeeDetails",
+  async (payload: IFirstUpdateManagerRequest) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      ...payload,
+      token: token,
+    };
+    const response = await fetch(apis.managerService + "/update-manager", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then((data) => data.json());
     return response;
   }
 );
@@ -152,22 +176,22 @@ export const fetchPermitAuthorisation = createAsyncThunk(
 
 export const fetchAuthorizeSpending = createAsyncThunk(
   "manager/fetchAuthorizeSpending",
-  async(payload:IspendingAuthorizeRequest)=>{
+  async (payload: IspendingAuthorizeRequest) => {
     const token = localStorage.getItem("token");
-    const requestBody ={
+    const requestBody = {
       ...payload,
-      token:token,
+      token: token,
     };
     const response = await fetch(
-      apis.managerService+ "/spending-authorization",
+      apis.managerService + "/spending-authorization",
       {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
       }
-    ).then((data)=>data.json())
+    ).then((data) => data.json());
     return response;
   }
 );
@@ -181,12 +205,11 @@ const managerSlice = createSlice({
         (user) => user.userId !== action.payload
       );
     },
-    removeEmployeeFromSpendingList:(state,action:PayloadAction<number>)=>{
+    removeEmployeeFromSpendingList: (state, action: PayloadAction<number>) => {
       state.employeeSpendingList = state.employeeSpendingList.filter(
-        (emplooye)=>emplooye.userId !== action.payload
+        (emplooye) => emplooye.userId !== action.payload
       );
     },
-
   },
 
   extraReducers: (build) => {
@@ -247,14 +270,14 @@ const managerSlice = createSlice({
       }
     );
 
-    build.addCase(fetchEmployeeListBySpending.pending, (state)=>{
+    build.addCase(fetchEmployeeListBySpending.pending, (state) => {
       state.isEmployeeSpendingListLoading = true;
     });
     build.addCase(
       fetchEmployeeListBySpending.fulfilled,
-      (state,action: PayloadAction<IBaseResponse>)=>{
+      (state, action: PayloadAction<IBaseResponse>) => {
         state.isEmployeeSpendingListLoading = false;
-        if(action.payload.code === 200 ){
+        if (action.payload.code === 200) {
           state.employeeSpendingList = action.payload.data;
         }
       }
@@ -308,16 +331,40 @@ const managerSlice = createSlice({
       state.isPermitAuthoriseLoading = false;
     });
 
-    build.addCase(fetchAuthorizeSpending.pending,(state)=>{
-      state.isSpendingAuthoriseLoading=true;
+    build.addCase(fetchAuthorizeSpending.pending, (state) => {
+      state.isSpendingAuthoriseLoading = true;
     });
-    build.addCase(fetchAuthorizeSpending.fulfilled,(state)=>{
+    build.addCase(fetchAuthorizeSpending.fulfilled, (state) => {
       state.isSpendingAuthoriseLoading = false;
     });
 
+    build.addCase(fetchUpdateEmployeeDetails.pending, (state) => {
+      state.isFistUpdateManagerLoading = true;
+    });
+    build.addCase(
+      fetchUpdateEmployeeDetails.fulfilled,
+      (state, action: PayloadAction<IBaseResponse>) => {
+        state.isFistUpdateManagerLoading = false;
+        if (action.payload.code === 200) {
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
+          });
+          state.isFistUpdateManagerSuccess = true;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: action.payload.message,
+            timer: 3000,
+          });
+          state.isFistUpdateManagerSuccess = false;
+        }
+      }
+    );
   },
 });
 
-export const {removeEmployeeFromSpendingList} = managerSlice.actions;
+export const { removeEmployeeFromSpendingList } = managerSlice.actions;
 export const { removeUserFromPermitList } = managerSlice.actions;
 export default managerSlice.reducer;
