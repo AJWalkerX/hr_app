@@ -131,7 +131,7 @@ function PersonalSidebar() {
                       className="fa-solid fa-clipboard-list"
                     ></span>
                   </span>{' '}
-                  ÜZERİME ZİMMETLENENLER
+                  ZİMMETLİ MATERYALLER
                   </a>
                 </NavLink>
               </li>

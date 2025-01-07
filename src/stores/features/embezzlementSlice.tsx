@@ -5,6 +5,7 @@ import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import { IAddEmbezzlementRequestDto } from "../../models/Request/IAddEmbezzlementRequestDto";
 import { IAssignmentEmbezzlementRequest } from "../../models/Request/IAssignmentEmbezzlementRequestDto";
 import { IGetEmbezzlementDetailsResponse } from "../../models/Response/IGetEmbezzlementDetailsResponse";
+import { IPersonalEmbezzlementResponse } from "../../models/Response/IPersonalEmbezzlementResponse";
 
 // State tipini tanımlıyoruz
 interface IEmbezzlementState {
@@ -15,6 +16,9 @@ interface IEmbezzlementState {
   isAddEmbezzlementLoading: boolean;
 
   isAssigmentEmbezzlementLoading: boolean;
+
+  personalEmbezzlementList: IPersonalEmbezzlementResponse[];
+  isPersonalEmbezzlementListLoading: boolean;
 }
 
 // Başlangıç durumu
@@ -25,9 +29,19 @@ const initialEmbezzlementState: IEmbezzlementState = {
   addEmbezzlement: null,
   isAddEmbezzlementLoading: false,
   isAssigmentEmbezzlementLoading: false,
+  personalEmbezzlementList: [],
+  isPersonalEmbezzlementListLoading: false,
 };
 
-
+export const fetchPersonalEmbezzlementList = createAsyncThunk(
+  "embezzlement/fetchPersonalEmbezzlementList",
+  async () => {
+    const embezzlementToken = localStorage.getItem("token");
+    return await fetch(
+      apis.embezzlementService +"/get-all-my-embezzlement-list?token=" +embezzlementToken
+    ).then((data)=> data.json());
+  }
+);
 
 export const fetchAssigmentEmbezzlement = createAsyncThunk(
   "embezzlement/fetchAssigmentEmbezzlement",
@@ -125,6 +139,16 @@ const embezzlementSlice = createSlice({
         );
       }
     });
+    builder.addCase(fetchPersonalEmbezzlementList.pending, (state) =>{
+      state.isPersonalEmbezzlementListLoading = true;
+    });
+    builder.addCase(fetchPersonalEmbezzlementList.fulfilled, (state, action: PayloadAction<IBaseResponse>)=>{
+      state.isPersonalEmbezzlementListLoading = false;
+      if (action.payload.code ===200){
+        state.personalEmbezzlementList = action.payload.data;
+      }
+    });
+    
   },
 });
 
