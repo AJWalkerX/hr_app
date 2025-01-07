@@ -5,6 +5,7 @@ import { IBaseResponse } from "../../models/Response/IBaseResponse";
 import Swal from "sweetalert2";
 import { IShiftListResponse } from "../../models/Response/IShiftListResponse";
 import { DateTime } from "luxon";
+import { IAssignShiftRequest } from "../../models/Request/IAssignShiftRequest";
 
 interface IShiftState {
   createShift: ICreateShiftRequest[];
@@ -12,6 +13,7 @@ interface IShiftState {
   shiftList: IShiftListResponse[];
   isShiftListLoading: boolean;
   isShiftDeleteLoading: boolean;
+  isAssignmentShiftLoading: boolean;
 }
 
 const initialShiftState: IShiftState = {
@@ -22,6 +24,7 @@ const initialShiftState: IShiftState = {
   isShiftListLoading: false,
 
   isShiftDeleteLoading: false,
+  isAssignmentShiftLoading: false,
 };
 
 export const fetchCreateShift = createAsyncThunk(
@@ -35,6 +38,25 @@ export const fetchCreateShift = createAsyncThunk(
       shiftEnd: item.shiftEnd.toFormat("HH:mm"),
     }));
     const response = await fetch(apis.shiftService + "/create-shift", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then((data) => data.json());
+    return response;
+  }
+);
+
+export const fetchAssignmentShift = createAsyncThunk(
+  "shift/fetchAssignmentShift",
+  async (payload: IAssignShiftRequest[]) => {
+    const token = localStorage.getItem("token");
+    const requestBody = payload.map((item) => ({
+      ...item,
+      token: token,
+    }));
+    const response = await fetch(apis.shiftService + "/assign-shift", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,6 +153,26 @@ const shiftSlice = createSlice({
         state.shiftList = state.shiftList.filter(
           (item) => item.shiftId !== action.payload.data
         );
+        Swal.fire({
+          icon: "success",
+          title: action.payload.message,
+          timer: 3000,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Hata!",
+          text: action.payload.message,
+        });
+      }
+    });
+
+    builder.addCase(fetchAssignmentShift.pending, (state) => {
+      state.isAssignmentShiftLoading = true;
+    });
+    builder.addCase(fetchAssignmentShift.fulfilled, (state, action) => {
+      state.isAssignmentShiftLoading = false;
+      if (action.payload.code === 200) {
         Swal.fire({
           icon: "success",
           title: action.payload.message,

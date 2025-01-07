@@ -1,0 +1,19 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Saat çerçevesi -->
+  <circle cx="100" cy="100" r="90" fill="white" stroke="#2B3440" stroke-width="8"/>
+  
+  <!-- Saat çizgileri -->
+  <line x1="100" y1="20" x2="100" y2="35" stroke="#2B3440" stroke-width="4"/>
+  <line x1="100" y1="165" x2="100" y2="180" stroke="#2B3440" stroke-width="4"/>
+  <line x1="20" y1="100" x2="35" y2="100" stroke="#2B3440" stroke-width="4"/>
+  <line x1="165" y1="100" x2="180" y2="100" stroke="#2B3440" stroke-width="4"/>
+  
+  <!-- Saat merkezi -->
+  <circle cx="100" cy="100" r="8" fill="#2B3440"/>
+  
+  <!-- Akrep (saat ibresi) -->
+  <line x1="100" y1="100" x2="100" y2="60" stroke="#2B3440" stroke-width="6" transform="rotate(45 100 100)"/>
+  
+  <!-- Yelkovan (dakika ibresi) -->
+  <line x1="100" y1="100" x2="100" y2="40" stroke="#2B3440" stroke-width="4" transform="rotate(180 100 100)"/>
+</svg>
