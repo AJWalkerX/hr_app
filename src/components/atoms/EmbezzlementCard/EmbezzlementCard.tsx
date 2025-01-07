@@ -20,6 +20,7 @@ interface EmbezzlementCardProps {
   description: string;
   embezzlementType: string;
   embezzlementState: string;
+  title:string;
   userDetails: {
     avatar: string;
     firstName: string;
@@ -28,7 +29,7 @@ interface EmbezzlementCardProps {
 }
 
 const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
-  const { description, embezzlementType, embezzlementState, embezzlementId, userDetails } = props;
+  const { title,description, embezzlementType, embezzlementState, embezzlementId, userDetails } = props;
   const dispatch = useDispatch<hrDispatch>();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -71,7 +72,8 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
       lastName,
       email,
     };
-    dispatch(fetchAssigmentEmbezzlement(payload));
+   await dispatch(fetchAssigmentEmbezzlement(payload));
+   dispatch(fetchEmbezzlementListByCompany())
     handleCloseModal2();
   };
 
@@ -79,8 +81,9 @@ const EmbezzlementCard: React.FC<EmbezzlementCardProps> = (props) => {
     <>
       <tr>
         <th scope="row" style={{ verticalAlign: "middle" }}>
-          {description}
+          {title}
         </th>
+        <td style={{ verticalAlign: "middle" }}>{description}</td>
         <td style={{ verticalAlign: "middle" }}>{embezzlementType}</td>
         <td style={{ verticalAlign: "middle" }}>{embezzlementState}</td>
         <td style={{ verticalAlign: "middle" }}>

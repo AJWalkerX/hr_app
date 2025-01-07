@@ -7,6 +7,7 @@ export interface IEmbezzlementResponseDto {
 	 description: string,
 	 embezzlementType: string,
 	 embezzlementState: string,
+   title:string,
 	
   userDetails:{
      avatar: string,
