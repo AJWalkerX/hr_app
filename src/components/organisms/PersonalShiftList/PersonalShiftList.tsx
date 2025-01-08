@@ -80,10 +80,10 @@ function PersonalShiftList() {
                 textAlign: "center",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "scale(1.05)")
+                (e.currentTarget.style.transform = "")
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "scale(1)")
+                (e.currentTarget.style.transform = "")
               }
             >
               <h3
