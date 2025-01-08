@@ -29,7 +29,7 @@ function AdminWaitCustomers() {
             aria-label="Search"
           />
           <button
-            className="btn btn-outline-primary my-2 my-sm-0"
+            className="btn btn-outline-primary my-2 my-sm-0 me-3"
             type="submit"
           >
             Arama

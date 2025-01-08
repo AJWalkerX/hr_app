@@ -11,7 +11,20 @@
     
   }
 
-  .nav-link-admin{
-    text-decoration: none ;
-  }
+  .active-page {
+    background: linear-gradient(90deg, #051f4c, #0a3981, #4e6eb3);
+    color: white !important;
+    font-weight: bold;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.active-page:hover{
+  background: linear-gradient(90deg, #051f4c, #0a3981, #4e6eb3);
+  color: white !important;
+}
 

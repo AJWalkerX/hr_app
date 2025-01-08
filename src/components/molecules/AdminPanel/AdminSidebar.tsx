@@ -55,29 +55,67 @@ function AdminSidebar() {
     <ul className="nav-group-items">
 
       
-      <li className="nav-item">
-        <NavLink className='nav-link-admin' to={'/admin'}>
-        <a className="nav-link fw-bold" href="#"  >
-          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-house"></span></span> DASHBOARD
-        </a>
+      <li className="nav-item mt-3">
+        <NavLink  to={'/admin'}  className={({ isActive }) => isActive ? 'active-page' : ''} end style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+      
+        {({ isActive }) => (
+      <>
+        <i 
+          className="fa-solid fa-house" 
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', // Aktifse yeşil, değilse mavi
+            marginRight: '8px',
+          }}
+        ></i>
+        DASHBOARD
+      </>
+    )}
         </NavLink>
       </li>
 
-      <li className="nav-item">
-        <NavLink className='nav-link-admin' to={'/admin/customers'}>
-        <a className="nav-link fw-bold"  href="#">
-          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-users-line"></span></span> MÜŞTERİLER
-        </a>
+      <li className="nav-item mt-3">
+        <NavLink className={({ isActive }) => isActive ? 'active-page' : ''} to={'/admin/customers'} style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}} >
+        {({ isActive }) => (
+      <>
+        <i 
+          className="fa-solid fa-users-line" 
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', // Aktifse yeşil, değilse mavi
+            marginRight: '8px',
+          }}
+        ></i>
+        MÜŞTERİLER
+      </>
+    )}
         </NavLink>
       </li>
 
-      <li className="nav-item">
-        <NavLink className='nav-link-admin' to={'/admin/wait-customers'}>
-        <a className="nav-link fw-bold" href="#"   >
-          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-hourglass-half"></span></span> ONAY BEKLEYENLER
-        </a>
-        </NavLink>
-      </li>
+      <li className="nav-item mt-3">
+  <NavLink 
+    to={'/admin/wait-customers'} 
+    className={({ isActive }) => isActive ? 'active-page' : ''}
+    style={{
+      textDecoration: 'none', 
+      fontWeight: 'bold', 
+      color: 'rgb(10, 57, 129)'
+    }}
+  >
+    {({ isActive }) => (
+      <>
+        <i 
+          className="fa-solid fa-hourglass-half" 
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', // Aktifse yeşil, değilse mavi
+            marginRight: '8px',
+          }}
+        ></i>
+        ONAY BEKLEYENLER
+      </>
+    )}
+  </NavLink>
+</li>
+
+
 
     </ul>
   </li>

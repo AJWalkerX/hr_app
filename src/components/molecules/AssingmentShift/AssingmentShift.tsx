@@ -116,9 +116,12 @@ function AssingmentShift() {
           />
         </div>
         <h1 className="text-center mt-5">Vardiya Programı Atama</h1>
-        <h6 className="text-center mt-3">
+        <h5 className="text-center mt-3">
           Personel bilgilerini girerek vardiya programınızı
           olusturabilirsiniz...
+        </h5>
+        <h6 className="text-center mt-3" style={{color:'red'}}>
+            Lütfen büyük/Küçük harf duyarlılığına dikkat ediniz
         </h6>
 
         <div className="form-container mt-5">
