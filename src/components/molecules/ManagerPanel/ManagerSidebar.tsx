@@ -54,187 +54,212 @@ function ManagerSidebar() {
   <li className="nav-item nav-group show">
     <ul className="nav-group-items">
 
-      
-    <li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager'}>
-    <a className="nav-link d-flex align-items-center fw-bold" href="">
-      <span
-        className="nav-icon me-2"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <i className="fa-solid fa-house"></i>
-      </span>{' '}
-      DASHBOARD
-    </a>
-  </NavLink>
-</li>
+    <li className="nav-item mt-3">
+        <NavLink  to={'/manager'}  className={({ isActive }) => isActive ? 'active-page' : ''} end style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-house"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+        DASHBOARD
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/employees'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-users-line"></span>
-      </span>
-      ÇALIŞANLAR
-    </a>
-  </NavLink>
-</li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/permit'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="bi bi-person-raised-hand"></span>
-      </span>
-      ÇALIŞAN İZİN TALEPLERİ
-    </a>
-  </NavLink>
-</li>
+      <li className="nav-item mt-3">
+        <NavLink  to={'/manager/employees'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-users-line"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+        ÇALIŞANLAR
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/profile'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-user"></span>
-      </span>
-      PERSONEL BİLGİLERİ
-    </a>
-  </NavLink>
-</li>
+      <li className="nav-item mt-3">
+        <NavLink  to={'/manager/permit'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="bi bi-person-raised-hand"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)',
+            marginRight: '8px',
+          }}
+        ></i>
+        ÇALIŞAN İZİN TALEPLERİ
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/permit-request'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-pen-to-square"></span>
-      </span>
-      İZİN OLUŞTUR
-    </a>
-  </NavLink>
-</li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/view-manager-permit'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-regular fa-calendar-days"></span>
-      </span>
+      <li className="nav-item mt-3">
+        <NavLink  to={'/manager/profile'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-user"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+        PERSONEL BİLGİLERİ
+      </>
+    )}
+        </NavLink>
+      </li>
+
+
+     < li className="nav-item mt-3">
+        <NavLink  to={'/manager/permit-request'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-pen-to-square"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+       İZİN OLUŞTUR
+      </>
+    )}
+        </NavLink>
+      </li>
+
+      < li className="nav-item mt-3">
+        <NavLink  to={'/manager/view-manager-permit'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-regular fa-calendar-days"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
       İZİNLERİ GÖRÜNTÜLE
-    </a>
-  </NavLink>
-</li>
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/comment'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-regular fa-message"></span>
-      </span>
+
+      < li className="nav-item mt-3">
+        <NavLink  to={'/manager/comment'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-regular fa-message"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
       UYGULAMA DENEYİMİ
-    </a>
-  </NavLink>
-</li>
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/employees/spending-list'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-money-check-dollar"></span>
-      </span>
-      ÇALIŞAN HARCAMA <br /> TALEPLERİ
-    </a>
-  </NavLink>
-</li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/shift-request'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-users-gear"></span>
-      </span>
-      VARDİYA OLUŞTUR <br />
-    </a>
-  </NavLink>
-</li>
+      < li className="nav-item mt-3">
+        <NavLink  to={'/manager/employees/spending-list'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-money-check-dollar"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+       ÇALIŞAN HARCAMA <br /> TALEPLERİ
+      </>
+    )}
+        </NavLink>
+      </li>
 
-<li className="nav-item">
-  <NavLink className="nav-link-manager" to="/manager/shift-assignment">
-    <a className="nav-link fw-bold" href="#">
-      <span className="nav-icon">
-        <AssignmentIndIcon style={{ color: 'rgb(10, 57, 129)', fontSize: '24px' }} />
-      </span>
-      VARDİYA ATAMA <br />
-    </a>
-  </NavLink>
-</li>
 
-<li className="nav-item">
-  <NavLink className='nav-link-manager' to={'/manager/embezzlement'}>
-    <a className="nav-link fw-bold" href="#">
-      <span
-        className="nav-icon"
-        style={{
-          color: 'rgb(10, 57, 129)',
-          transition: 'color 0.3s',
-        }}
-      >
-        <span className="fa-solid fa-clipboard-list"></span>
-      </span>
-      ZİMMET TAKİBİ <br />
-    </a>
-  </NavLink>
-</li>
+
+      < li className="nav-item mt-3">
+        <NavLink  to={'/manager/shift-request'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-users-gear"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+      VARDİYA OLUŞTUR
+      </>
+    )}
+        </NavLink>
+      </li>
+
+
+ < li className="nav-item mt-3">
+        <NavLink  to={'/manager/shift-assignment'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-clipboard-user"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)',
+            marginRight: '8px',
+          }}
+        ></i>
+       VARDİYA ATAMA
+      </>
+    )}
+        </NavLink>
+      </li>
+
+      < li className="nav-item mt-3">
+        <NavLink  to={'/manager/embezzlement'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-clipboard-list"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+       ZİMMET TAKİBİ
+      </>
+    )}
+        </NavLink>
+      </li>
+
 
             
     </ul>
