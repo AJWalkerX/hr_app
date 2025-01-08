@@ -57,11 +57,11 @@ function RouterPage() {
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
   const isAuth = hrUseSelector((state) => state.auth.isAuth);
   const isManagerLogin = hrUseSelector((state) => state.auth.isManagerLogin);
+  const isFirstLogin = hrUseSelector(
+    (state) => state.auth.loginResponse?.position === "MANAGER"
+  );
 
   useEffect(() => {
-    const isFirstLogin = hrUseSelector(
-      (state) => state.auth.loginResponse?.position === "MANAGER"
-    );
     const managerToken = localStorage.getItem("token");
     const employeeToken = localStorage.getItem("token");
 
