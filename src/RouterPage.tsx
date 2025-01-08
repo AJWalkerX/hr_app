@@ -55,8 +55,11 @@ function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
   const navigate = useNavigate();
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
+  console.log("isAdminLogin: ", isAdminLogin);
   const isAuth = hrUseSelector((state) => state.auth.isAuth);
+  console.log("isAuth: ", isAuth);
   const isManagerLogin = hrUseSelector((state) => state.auth.isManagerLogin);
+  console.log("isManagerLogin: ", isManagerLogin);
   const isFirstLogin = hrUseSelector(
     (state) => state.auth.loginResponse?.position === "MANAGER"
   );
