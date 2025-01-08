@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { IShiftListResponse } from "../../models/Response/IShiftListResponse";
 import { DateTime } from "luxon";
 import { IAssignShiftRequest } from "../../models/Request/IAssignShiftRequest";
+import { IMyShiftResponse } from "../../models/Response/IMyShiftResponse";
 
 interface IShiftState {
   createShift: ICreateShiftRequest[];
@@ -14,6 +15,8 @@ interface IShiftState {
   isShiftListLoading: boolean;
   isShiftDeleteLoading: boolean;
   isAssignmentShiftLoading: boolean;
+  myShift: IMyShiftResponse[];
+  isMyShiftLoading:boolean;
 }
 
 const initialShiftState: IShiftState = {
@@ -25,7 +28,13 @@ const initialShiftState: IShiftState = {
 
   isShiftDeleteLoading: false,
   isAssignmentShiftLoading: false,
+
+  myShift:[],
+  isMyShiftLoading:false
 };
+
+
+
 
 export const fetchCreateShift = createAsyncThunk(
   "shift/fetchCreateShift",
@@ -64,6 +73,18 @@ export const fetchAssignmentShift = createAsyncThunk(
       body: JSON.stringify(requestBody),
     }).then((data) => data.json());
     return response;
+  }
+);
+
+export const fetchGetAllMyShifts= createAsyncThunk(
+  "shift/fetchGetAllMyShifts",
+  async () =>{
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      apis.shiftService + "/list-my-shift?token=" +token
+    );
+    const data = await response.json();
+    return data;
   }
 );
 
@@ -141,6 +162,16 @@ const shiftSlice = createSlice({
       state.isShiftListLoading = false;
       if (action.payload.code === 200) {
         state.shiftList = action.payload.data;
+      }
+    });
+
+    builder.addCase(fetchGetAllMyShifts.pending,(state)=>{
+      state.isMyShiftLoading = true;
+    });
+    builder.addCase(fetchGetAllMyShifts.fulfilled,(state,action)=>{
+      state.isMyShiftLoading = false;
+      if(action.payload.code === 200){
+        state.myShift = action.payload.data;
       }
     });
 
