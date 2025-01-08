@@ -55,247 +55,342 @@ function UserInformationBody() {
       companyAddress,
     };
     dispatch(fetchUpdateEmployeeDetails(employeeDetails));
+  };
+  useEffect(() => {
     if (isFistUpdateManagerSuccess) {
       navigate("/manager");
     }
-  };
+  }, [isFistUpdateManagerSuccess, navigate]);
   return (
     <>
-    <div className="col-4">
-      <h2 className="mt-5" style={{ color: 'rgb(10, 57, 129)', fontWeight: '600', fontSize: '24px' }}>
-        Kişisel Bilgiler
-      </h2>
-      <div className="input-group mb-3 mt-4">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Adınız"
-          name="firstName"
-          value={profile?.firstName || ""}
-          readOnly
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Soyadınız"
-          name="lastName"
-          value={profile?.lastName || ""}
-          readOnly
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="identityNumber No"
-          value={identityNumber}
-          onChange={(e) => setTc(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <span>Doğum Tarihinizi Giriniz:</span>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="date"
-          value={dateOfBirth.toISOString().split("T")[0]}
-          onChange={(e) => setDob(new Date(e.target.value))}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Telefon Numaranız"
-          value={mobileNumber}
-          onChange={(e) => setPhone(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Adresiniz"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="email"
-          placeholder="Mail Adresiniz"
-          name="email"
-          value={profile?.email || ""}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-  
-      <select
-        className="form-select mb-3"
-        aria-label="Cinsiyet Seçiniz"
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
-        style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-      >
-        <option selected>Cinsiyetiniz</option>
-        <option value="MALE">Erkek</option>
-        <option value="FEMALE">Kadın</option>
-        <option value="OTHER">Belirtmek İstemiyorum</option>
-      </select>
-    </div>
-  
-    <div className="col-4">
-      <h2 className="mt-5 ms-4" style={{ color: 'rgb(10, 57, 129)', fontWeight: '600', fontSize: '24px' }}>
-        Şirket Bilgileri
-      </h2>
-      <div className="input-group mb-3 mt-4">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Şirket Adı"
-          name="companyName"
-          value={profile?.companyName || ""}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Şirket Mail Adresi"
-          value={companyMail}
-          onChange={(e) => setCompanyEmail(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Şirket Telefon Numarası"
-          value={telNo}
-          onChange={(e) => setCompanyPhone(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Şirket Adresi"
-          value={companyAddress}
-          onChange={(e) => setCompanyAddress(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <select
-        className="form-select mb-3"
-        aria-label="Sektörünüz"
-        value={companyType}
-        onChange={(e) => setCompanyType(e.target.value)}
-        style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-      >
-        <option selected>Sektörünüz</option>
-        <option value="TECHNOLOGY">Teknoloji</option>
-        <option value="HEALTHCARE">Sağlık</option>
-        <option value="CONSTRUCTION">İnşaat</option>
-        <option value="FINANCE">Finans</option>
-        <option value="ENERGY">Enerji</option>
-        <option value="TOURISM">Turizm</option>
-        <option value="MEDIA_AND_ENTERTAINMENT">Medya ve Eğlence</option>
-        <option value="EDUCATION">Eğitim</option>
-        <option value="FOOD">Gıda</option>
-        <option value="AUTOMOTIVE">Otomotiv</option>
-        <option value="FASHION_AND_TEXTILE">Moda ve Tekstil</option>
-        <option value="UNKNOWN">Diğer</option>
-      </select>
-      <select
-        className="form-select mb-3"
-        aria-label="Ülkeniz"
-        value={region}
-        onChange={(e) => setRegion(e.target.value)}
-        style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-      >
-        <option selected>Ülkeniz</option>
-        <option value="TURKEY">Türkiye</option>
-      </select>
-      <div className="mt-3">
-        <p
-          className="ms-2 mt-5"
-          style={{ fontSize: "20px", color: 'rgb(10, 57, 129)', border: "none" }}
+      <div className="col-4">
+        <h2
+          className="mt-5"
+          style={{
+            color: "rgb(10, 57, 129)",
+            fontWeight: "600",
+            fontSize: "24px",
+          }}
         >
-          Şirket Logosu:
-        </p>
-        <input
-          className="form-control mb-2 mt-2"
-          type="file"
-          accept="image/*"
-          style={{ borderRadius: '10px' }}
-        />
+          Kişisel Bilgiler
+        </h2>
+        <div className="input-group mb-3 mt-4">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Adınız"
+            name="firstName"
+            value={profile?.firstName || ""}
+            readOnly
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Soyadınız"
+            name="lastName"
+            value={profile?.lastName || ""}
+            readOnly
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="identityNumber No"
+            value={identityNumber}
+            onChange={(e) => setTc(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <span>Doğum Tarihinizi Giriniz:</span>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="date"
+            value={dateOfBirth.toISOString().split("T")[0]}
+            onChange={(e) => setDob(new Date(e.target.value))}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Telefon Numaranız"
+            value={mobileNumber}
+            onChange={(e) => setPhone(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Adresiniz"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="email"
+            placeholder="Mail Adresiniz"
+            name="email"
+            value={profile?.email || ""}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+
+        <select
+          className="form-select mb-3"
+          aria-label="Cinsiyet Seçiniz"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          style={{
+            height: "50px",
+            borderRadius: "10px",
+            borderColor: "#004aad",
+          }}
+        >
+          <option selected>Cinsiyetiniz</option>
+          <option value="MALE">Erkek</option>
+          <option value="FEMALE">Kadın</option>
+          <option value="OTHER">Belirtmek İstemiyorum</option>
+        </select>
       </div>
-    </div>
-  
-    <div className="col-4">
-      <h2 className="mt-5 ms-4" style={{ color: 'rgb(10, 57, 129)', fontWeight: '600', fontSize: '24px' }}>
-        Kariyer Bilgileri
-      </h2>
-      <div className="input-group mb-3 mt-4">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Sosyal Güvenlik Numaranız"
-          value={socialSecurityNumber}
-          onChange={(e) => setSocialSecNum(e.target.value)}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <span>Çalışmaya Başlama Tarihinizi seçiniz:</span>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="date"
-          value={dateOfEmployment.toISOString().split("T")[0]}
-          onChange={(e) => setDoe(new Date(e.target.value))}
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Pozisyonunuz"
-          name="position"
-          value={profile?.position}
-          readOnly
-          style={{ height: "50px", borderRadius: '10px', borderColor: '#004aad' }}
-        />
-      </div>
-  
-      <div className="row me-5">
-        <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-primary ms-5 saveButton rounded-5"
-            onClick={handleClick}
-            style={{ borderRadius: '5px', padding: '10px 20px', fontWeight: 'bold' }}
+
+      <div className="col-4">
+        <h2
+          className="mt-5 ms-4"
+          style={{
+            color: "rgb(10, 57, 129)",
+            fontWeight: "600",
+            fontSize: "24px",
+          }}
+        >
+          Şirket Bilgileri
+        </h2>
+        <div className="input-group mb-3 mt-4">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Şirket Adı"
+            name="companyName"
+            value={profile?.companyName || ""}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Şirket Mail Adresi"
+            value={companyMail}
+            onChange={(e) => setCompanyEmail(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Şirket Telefon Numarası"
+            value={telNo}
+            onChange={(e) => setCompanyPhone(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Şirket Adresi"
+            value={companyAddress}
+            onChange={(e) => setCompanyAddress(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <select
+          className="form-select mb-3"
+          aria-label="Sektörünüz"
+          value={companyType}
+          onChange={(e) => setCompanyType(e.target.value)}
+          style={{
+            height: "50px",
+            borderRadius: "10px",
+            borderColor: "#004aad",
+          }}
+        >
+          <option selected>Sektörünüz</option>
+          <option value="TECHNOLOGY">Teknoloji</option>
+          <option value="HEALTHCARE">Sağlık</option>
+          <option value="CONSTRUCTION">İnşaat</option>
+          <option value="FINANCE">Finans</option>
+          <option value="ENERGY">Enerji</option>
+          <option value="TOURISM">Turizm</option>
+          <option value="MEDIA_AND_ENTERTAINMENT">Medya ve Eğlence</option>
+          <option value="EDUCATION">Eğitim</option>
+          <option value="FOOD">Gıda</option>
+          <option value="AUTOMOTIVE">Otomotiv</option>
+          <option value="FASHION_AND_TEXTILE">Moda ve Tekstil</option>
+          <option value="UNKNOWN">Diğer</option>
+        </select>
+        <select
+          className="form-select mb-3"
+          aria-label="Ülkeniz"
+          value={region}
+          onChange={(e) => setRegion(e.target.value)}
+          style={{
+            height: "50px",
+            borderRadius: "10px",
+            borderColor: "#004aad",
+          }}
+        >
+          <option selected>Ülkeniz</option>
+          <option value="TURKEY">Türkiye</option>
+        </select>
+        <div className="mt-3">
+          <p
+            className="ms-2 mt-5"
+            style={{
+              fontSize: "20px",
+              color: "rgb(10, 57, 129)",
+              border: "none",
+            }}
           >
-            Kaydet
-          </button>
+            Şirket Logosu:
+          </p>
+          <input
+            className="form-control mb-2 mt-2"
+            type="file"
+            accept="image/*"
+            style={{ borderRadius: "10px" }}
+          />
         </div>
       </div>
-    </div>
-  </>
-  
 
+      <div className="col-4">
+        <h2
+          className="mt-5 ms-4"
+          style={{
+            color: "rgb(10, 57, 129)",
+            fontWeight: "600",
+            fontSize: "24px",
+          }}
+        >
+          Kariyer Bilgileri
+        </h2>
+        <div className="input-group mb-3 mt-4">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Sosyal Güvenlik Numaranız"
+            value={socialSecurityNumber}
+            onChange={(e) => setSocialSecNum(e.target.value)}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <span>Çalışmaya Başlama Tarihinizi seçiniz:</span>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="date"
+            value={dateOfEmployment.toISOString().split("T")[0]}
+            onChange={(e) => setDoe(new Date(e.target.value))}
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
+        <div className="input-group mb-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Pozisyonunuz"
+            name="position"
+            value={profile?.position}
+            readOnly
+            style={{
+              height: "50px",
+              borderRadius: "10px",
+              borderColor: "#004aad",
+            }}
+          />
+        </div>
 
-  
+        <div className="row me-5">
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-primary ms-5 saveButton rounded-5"
+              onClick={handleClick}
+              style={{
+                borderRadius: "5px",
+                padding: "10px 20px",
+                fontWeight: "bold",
+              }}
+            >
+              Kaydet
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
