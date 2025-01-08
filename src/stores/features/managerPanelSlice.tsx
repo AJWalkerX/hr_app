@@ -54,6 +54,17 @@ export const fetchEmployeeListBySpending = createAsyncThunk(
   }
 );
 
+export const fetchGetUserPermitInfo = createAsyncThunk(
+  "manager/fetchGetUserPermitInfo",
+  async () => {
+    const managerToken = localStorage.getItem("token");
+    return await fetch(apis.managerService + "/get-user-permit-list?token="+managerToken)
+    .then(
+      (data) => data.json()
+    );
+  }
+);
+
 export const fetchUpdateEmployee = createAsyncThunk(
   "manager/fetchUpdateEmployee",
   async (payload: IUpdateEmployeeRequest) => {
@@ -114,14 +125,7 @@ export const fetchDeleteEmployee = createAsyncThunk(
   }
 );
 
-export const fetchGetUserPermitInfo = createAsyncThunk(
-  "manager/fetchGetUserPermitInfo",
-  async () => {
-    return await fetch(apis.managerService + "/get-user-permit-list").then(
-      (data) => data.json()
-    );
-  }
-);
+
 
 export const fetchAddNewEmployee = createAsyncThunk(
   "manager/fetchAddNewEmployee",
