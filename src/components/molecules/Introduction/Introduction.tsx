@@ -1,6 +1,7 @@
 
 import React from "react";
 import './Introduction.css'
+import { Link } from "react-router-dom";
 function Introduction() {
   return (
     <>
@@ -14,7 +15,7 @@ function Introduction() {
               <p  style={{fontWeight:'bold',color:'white', fontSize:'80px'}}>
                Bordronun artık <span style={{color:'#37AFE1',fontWeight:'bold'}}>kolayı var!</span> 
               </p>
-                <p style={{color:'#BBE9FF', fontSize:'18px'}}> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit possimus cupiditate blanditiis autem quae iure, omnis eaque inventore minima fuga incidunt ex exercitationem quos sit voluptas nobis earum ea ipsum.</p>
+                <p style={{color:'#BBE9FF', fontSize:'18px'}}> Kolay İK Bordro kullanıcı dostu tasarımı, modern ekranları, hatasız hesaplama yeteneği, güncel mevzuatlara uyumlu yapısıyla ay sonu sizi strese sokan bordro operasyonunu ortadan kaldırıyor.</p>
                 <br />
               </div>
              
@@ -25,13 +26,15 @@ function Introduction() {
             </div>
           </div>
 
-          <div className="row">
-              <button type="button" className="btn-introduction mt-4 me-3 ">
-                  <span>HEMEN İNCELEYİN</span>
-                  <i className="arrow-style fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-              
+                  <div className="row">
+          <button type="button" className="btn-introduction mt-4 me-3 ">
+            <Link to="/register" style={{ textDecoration: 'none' }}>
+              <span>HEMEN İNCELEYİN</span>
+              <i className="arrow-style fa-solid fa-arrow-right"></i>
+            </Link>
+          </button>
+        </div>
+                      
 
 
 
