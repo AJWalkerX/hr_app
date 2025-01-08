@@ -49,74 +49,110 @@ function PersonalShiftList() {
           display: "flex",
           flexWrap: "nowrap",
           gap: "10px",
-          marginTop: "-50px", // Kartları yukarıya almak için margin-top değerini ekledim
+          marginTop: "-50px",
         }}
       >
-        {myShiftList.map((shift, index) => (
-          <div
-            key={index}
-            style={{
-              backgroundColor: "#fff",
-              borderRadius: "10px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              padding: "20px",
-              width: "700px",
-              minHeight: "250px",
-              transition: "transform 0.3s ease",
-              cursor: "pointer",
-              flexShrink: "0",
-              textAlign: "center",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "scale(1.05)")
-            }
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          >
-            <h3
-              style={{ fontSize: "1.4em", color: "#333", fontWeight: "bold" }}
-            >
-              {shift.shiftName}
-            </h3>
-            <p
-              style={{ fontSize: "1.1em", color: "#777", marginBottom: "15px" }}
-            >
-              Başlangıç:{" "}
-              {shift.startTime
-                ? DateTime.fromISO(shift.startTime).toFormat("dd.MM.yyyy HH:mm")
-                : "Bilgi mevcut değil"}
-            </p>
-            <p
-              style={{ fontSize: "1.1em", color: "#777", marginBottom: "15px" }}
-            >
-              Bitiş:{" "}
-              {shift.endTime
-                ? DateTime.fromISO(shift.endTime).toFormat("dd.MM.yyyy HH:mm")
-                : "Bilgi mevcut değil"}
-            </p>
+        {myShiftList.map((shift, index) => {
+          // Eğer StartDate ve endDate, Date nesnesi değilse, doğrudan ISO string'e çeviriyoruz
+          const startDate = 
+            typeof shift.StartDate === "string"
+              ? DateTime.fromISO(shift.StartDate)
+              : DateTime.fromJSDate(shift.StartDate);
+          
+          const endDate = 
+            typeof shift.endDate === "string"
+              ? DateTime.fromISO(shift.endDate)
+              : DateTime.fromJSDate(shift.endDate);
 
-            <h4
+          return (
+            <div
+              key={index}
               style={{
-                fontSize: "1.2em",
-                color: "#2a3d66",
-                fontWeight: "bold",
+                backgroundColor: "#fff",
+                borderRadius: "10px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                padding: "20px",
+                width: "700px",
+                minHeight: "250px",
+                transition: "transform 0.3s ease",
+                cursor: "pointer",
+                flexShrink: "0",
+                textAlign: "center",
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             >
-              Tarihler:
-            </h4>
-            <ul style={{ listStyle: "none", padding: "0" }}>
-              <li
+              <h3
                 style={{
-                  fontSize: "1em",
-                  color: "#555",
-                  marginBottom: "10px",
+                  fontSize: "1.4em",
+                  color: "#333",
+                  fontWeight: "bold",
                 }}
               >
-                {DateTime.fromJSDate(shift.StartDate).toFormat("dd.MM.yyyy")} -{" "}
-                {DateTime.fromJSDate(shift.endDate).toFormat("dd.MM.yyyy")}
-              </li>
-            </ul>
-          </div>
-        ))}
+                {shift.shiftName}
+              </h3>
+              <p
+                style={{
+                  fontSize: "1.1em",
+                  color: "#777",
+                  marginBottom: "15px",
+                }}
+              >
+                Başlangıç:{" "}
+                {shift.startTime
+                  ? DateTime.fromISO(shift.startTime).toFormat(
+                      "dd.MM.yyyy HH:mm"
+                    )
+                  : "Bilgi mevcut değil"}
+              </p>
+              <p
+                style={{
+                  fontSize: "1.1em",
+                  color: "#777",
+                  marginBottom: "15px",
+                }}
+              >
+                Bitiş:{" "}
+                {shift.endTime
+                  ? DateTime.fromISO(shift.endTime).toFormat(
+                      "dd.MM.yyyy HH:mm"
+                    )
+                  : "Bilgi mevcut değil"}
+              </p>
+
+              <h4
+                style={{
+                  fontSize: "1.2em",
+                  color: "#2a3d66",
+                  fontWeight: "bold",
+                }}
+              >
+                Tarihler:
+              </h4>
+              <ul style={{ listStyle: "none", padding: "0" }}>
+                <li
+                  style={{
+                    fontSize: "1em",
+                    color: "#555",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {startDate.isValid
+                    ? startDate.toFormat("dd.MM.yyyy")
+                    : "Geçersiz Tarih"}{" "}
+                  -{" "}
+                  {endDate.isValid
+                    ? endDate.toFormat("dd.MM.yyyy")
+                    : "Geçersiz Tarih"}
+                </li>
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
