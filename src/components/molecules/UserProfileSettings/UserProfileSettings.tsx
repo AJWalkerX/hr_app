@@ -3,8 +3,12 @@ import "./UserProfileSettings.css";
 import { IUserProfileSettings } from "../../../models/IUserProfileSettings";
 import { hrDispatch, hrUseSelector } from "../../../stores";
 import { useDispatch } from "react-redux";
-import { fetchUserProfileSettings, fetchUpdateProfileSettings } from "../../../stores/features/userPanelSlice";
-import Swal from 'sweetalert2';
+import {
+  fetchUserProfileSettings,
+  fetchUpdateProfileSettings,
+} from "../../../stores/features/userPanelSlice";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 const UserProfileSettings = () => {
   const profile: IUserProfileSettings | any = hrUseSelector(
@@ -33,27 +37,26 @@ const UserProfileSettings = () => {
     if (updatedProfile) {
       const updatedData = {
         userId: updatedProfile.userId, // Ensure userId is included
-        avatar: updatedProfile.avatar || profile?.avatar || '',
-        firstName: updatedProfile.firstName || '',
-        lastName: updatedProfile.lastName || '',
-        identityNumber: updatedProfile.identityNumber || '',
-        dateOfBirth: updatedProfile.dateOfBirth || '',
-        mobileNumber: updatedProfile.mobileNumber || '',
-        address: updatedProfile.address || '',
-        gender: updatedProfile.gender || '',
-        email: updatedProfile.email || '',
-        position: updatedProfile.position || '',
-        dateOfEmployment: updatedProfile.dateOfEmployment || '',
-        socialSecurityNumber: updatedProfile.socialSecurityNumber || '',
+        avatar: updatedProfile.avatar || profile?.avatar || "",
+        firstName: updatedProfile.firstName || "",
+        lastName: updatedProfile.lastName || "",
+        identityNumber: updatedProfile.identityNumber || "",
+        dateOfBirth: updatedProfile.dateOfBirth || "",
+        mobileNumber: updatedProfile.mobileNumber || "",
+        address: updatedProfile.address || "",
+        gender: updatedProfile.gender || "",
+        email: updatedProfile.email || "",
+        position: updatedProfile.position || "",
+        dateOfEmployment: updatedProfile.dateOfEmployment || "",
+        socialSecurityNumber: updatedProfile.socialSecurityNumber || "",
       };
 
       dispatch(fetchUpdateProfileSettings(updatedData));
-      
+
       Swal.fire({
-        icon: 'success',
-        title: 'Başarılı!',
-        text: 'Profil bilgileriniz başarıyla güncellendi.',
-       
+        icon: "success",
+        title: "Başarılı!",
+        text: "Profil bilgileriniz başarıyla güncellendi.",
       });
       setIsEditing(false); // Düzenleme modunu kapat
     }
@@ -82,11 +85,7 @@ const UserProfileSettings = () => {
             src={profile?.avatar}
             alt="Profile"
           />
-          <input type="text" 
-          hidden
-          readOnly
-          value={profile?.userId}
-          />
+          <input type="text" hidden readOnly value={profile?.userId} />
 
           <span className="font-weight-bold text-white">
             <input
@@ -95,7 +94,6 @@ const UserProfileSettings = () => {
                 textAlign: "center",
                 fontWeight: "bold",
               }}
-
               type="text"
               value={`${profile?.firstName || ""} ${profile?.lastName || ""}`}
               readOnly
@@ -255,16 +253,34 @@ const UserProfileSettings = () => {
           </div>
 
           <div className="mt-5 text-center">
+            <NavLink
+              to="/set-new-password"
+              className="btn btn-primary profile-button"
+            >
+              Sifremi degistir
+            </NavLink>
             {!isEditing ? (
-              <button className="btn btn-primary profile-button" type="button" onClick={handleEditClick}>
+              <button
+                className="btn btn-primary profile-button ms-2"
+                type="button"
+                onClick={handleEditClick}
+              >
                 Düzenle
               </button>
             ) : (
               <>
-                <button className="btn btn-primary profile-button profile-btn-wide" type="button" onClick={handleSaveClick}>
+                <button
+                  className="btn btn-primary profile-button profile-btn-wide"
+                  type="button"
+                  onClick={handleSaveClick}
+                >
                   Kaydet
                 </button>
-                <button className="btn btn-secondary profile-button profile-btn-wide" type="button" onClick={handleCancelClick}>
+                <button
+                  className="btn btn-secondary profile-button profile-btn-wide"
+                  type="button"
+                  onClick={handleCancelClick}
+                >
                   İptal
                 </button>
               </>

@@ -34,12 +34,17 @@ export const fetchForgotPassword = createAsyncThunk(
 export const fetchNewPassword = createAsyncThunk(
   "forgotPassword/fetchNewPassword",
   async (payload: INewPasswordRequest) => {
+    const token = localStorage.getItem("token");
+    const requestBody = {
+      ...payload,
+      token: token,
+    };
     const response = await fetch(apis.userService + "/new-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(requestBody),
     }).then((data) => data.json());
     return response;
   }
@@ -75,6 +80,13 @@ const forgotPasswordSlice = createSlice({
         state.isResetPasswordLoading = false;
         if (action.payload.code === 200) {
           state.isSuccess = true;
+          Swal.fire({
+            icon: "success",
+            title: action.payload.message,
+            timer: 3000,
+          }).then(() => {
+            window.location.href = "/login";
+          });
         } else {
           Swal.fire({
             icon: "error",
