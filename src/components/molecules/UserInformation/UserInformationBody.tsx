@@ -31,7 +31,12 @@ function UserInformationBody() {
   const [companyMail, setCompanyEmail] = useState("");
   const [telNo, setCompanyPhone] = useState("");
   const [companyAddress, setCompanyAddress] = useState("");
+  const [avatar,setAvatar] = useState("");
+  const [companyLogo,setCompanyLogo]= useState("")
 
+  const [isValidUrl, setIsValidUrl] = useState(true); // URL'nin geçerli olup olmadığını kontrol etmek için
+  
+ 
   const dispatch = useDispatch<hrDispatch>();
   useEffect(() => {
     dispatch(fetchUserProfileSettings());
@@ -39,8 +44,8 @@ function UserInformationBody() {
   const handleClick = () => {
     const employeeDetails: IFirstUpdateManagerRequest = {
       token: "", // add a token value here
-      avatar: "", // add an avatar value here
-      companyLogo: "",
+      avatar, // add an avatar value here
+      companyLogo ,
       identityNumber,
       dateOfBirth,
       mobileNumber,
@@ -61,6 +66,34 @@ function UserInformationBody() {
       navigate("/manager");
     }
   }, [isFistUpdateManagerSuccess, navigate]);
+
+  const handleAvatarUrlChange = (e:any) => {
+    const url = e.target.value;
+    setAvatar(url);
+    
+
+    // URL geçerli mi kontrol et
+    try {
+      new URL(url);
+      setIsValidUrl(true);
+    } catch (error) {
+      setIsValidUrl(false);
+    }
+  };
+
+  const handleCompanyUrlChange = (e:any) => {
+    const url = e.target.value;
+    setCompanyLogo(url);
+    
+
+    // URL geçerli mi kontrol et
+    try {
+      new URL(url);
+      setIsValidUrl(true);
+    } catch (error) {
+      setIsValidUrl(false);
+    }
+  };
   return (
     <>
       <div className="col-4">
@@ -191,7 +224,50 @@ function UserInformationBody() {
           <option value="FEMALE">Kadın</option>
           <option value="OTHER">Belirtmek İstemiyorum</option>
         </select>
+
+        <div>
+      <label htmlFor="photoUrl"
+      style={{
+        fontSize: "20px",
+        color: "rgb(10, 57, 129)",
+        border: "none",
+      }}
+      >Fotoğraf URL'si:</label>
+      <input
+        className="form-control mb-2 mt-2"
+        type="text"
+        id="avatar"
+        placeholder="Fotoğraf URL'sini girin"
+        value={avatar}
+        onChange={handleAvatarUrlChange}
+        style={{
+          height: "50px",
+          borderRadius: "10px",
+          borderColor: "#004aad",
+        }}
+      />
+      {!isValidUrl && <p style={{ color: "red" }}>Geçerli bir URL girin.</p>}
+
+      {isValidUrl && avatar && (
+        <div>
+          <p>Fotoğraf Önizlemesi:</p>
+          <img
+            src={avatar}
+            alt="Fotoğraf Önizlemesi"
+            style={{
+              maxWidth: "300px",
+              maxHeight: "300px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+            }}
+          />
+        </div>
+      )}
+    </div>
+
       </div>
+
+    
 
       <div className="col-4">
         <h2
@@ -299,25 +375,48 @@ function UserInformationBody() {
           <option selected>Ülkeniz</option>
           <option value="TURKEY">Türkiye</option>
         </select>
-        <div className="mt-3">
-          <p
-            className="ms-2 mt-5"
+        <div>
+      <label htmlFor="photoUrl"
+      style={{
+        fontSize: "20px",
+        color: "rgb(10, 57, 129)",
+        border: "none",
+      }}
+      >Şirket Logo URL'si:</label>
+      <input
+        className="form-control mb-2 mt-2"
+        type="text"
+        id="companyLogo"
+        placeholder="Fotoğraf URL'sini girin"
+        value={companyLogo}
+        onChange={handleCompanyUrlChange}
+        style={{
+          height: "50px",
+          borderRadius: "10px",
+          borderColor: "#004aad",
+        }}
+      />
+      {!isValidUrl && <p style={{ color: "red" }}>Geçerli bir URL girin.</p>}
+
+      {isValidUrl && companyLogo && (
+        <div>
+          <p>Logo Önizlemesi:</p>
+          <img
+            src={companyLogo}
+            alt="Fotoğraf Önizlemesi"
             style={{
-              fontSize: "20px",
-              color: "rgb(10, 57, 129)",
-              border: "none",
+              maxWidth: "300px",
+              maxHeight: "300px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
             }}
-          >
-            Şirket Logosu:
-          </p>
-          <input
-            className="form-control mb-2 mt-2"
-            type="file"
-            accept="image/*"
-            style={{ borderRadius: "10px" }}
           />
         </div>
+      )}
+    </div>
       </div>
+      
+      
 
       <div className="col-4">
         <h2
