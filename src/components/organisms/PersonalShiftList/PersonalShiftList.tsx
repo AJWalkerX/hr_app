@@ -47,19 +47,19 @@ function PersonalShiftList() {
       <div
         style={{
           display: "flex",
-          flexWrap: "nowrap",
+          flexWrap: "wrap",
           gap: "10px",
           marginTop: "-50px",
         }}
       >
         {myShiftList.map((shift, index) => {
           // Eğer StartDate ve endDate, Date nesnesi değilse, doğrudan ISO string'e çeviriyoruz
-          const startDate = 
+          const startDate =
             typeof shift.StartDate === "string"
               ? DateTime.fromISO(shift.StartDate)
               : DateTime.fromJSDate(shift.StartDate);
-          
-          const endDate = 
+
+          const endDate =
             typeof shift.endDate === "string"
               ? DateTime.fromISO(shift.endDate)
               : DateTime.fromJSDate(shift.endDate);
@@ -79,12 +79,8 @@ function PersonalShiftList() {
                 flexShrink: "0",
                 textAlign: "center",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "")
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "")}
             >
               <h3
                 style={{
@@ -104,9 +100,7 @@ function PersonalShiftList() {
               >
                 Başlangıç:{" "}
                 {shift.startTime
-                  ? DateTime.fromISO(shift.startTime).toFormat(
-                      "dd.MM.yyyy HH:mm"
-                    )
+                  ? DateTime.fromISO(shift.startTime).toFormat("HH:mm")
                   : "Bilgi mevcut değil"}
               </p>
               <p
@@ -118,9 +112,7 @@ function PersonalShiftList() {
               >
                 Bitiş:{" "}
                 {shift.endTime
-                  ? DateTime.fromISO(shift.endTime).toFormat(
-                      "dd.MM.yyyy HH:mm"
-                    )
+                  ? DateTime.fromISO(shift.endTime).toFormat("HH:mm")
                   : "Bilgi mevcut değil"}
               </p>
 
