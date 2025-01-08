@@ -5,10 +5,10 @@ import AdminCustomers from '../components/molecules/AdminPanel/AdminCustomers'
 function AdminCustomersPage() {
   return (
     <div className='row'>
-        <div className="col-3">
+        <div className="col-2">
           <AdminSidebar/>
           </div>
-        <div className="col-9">
+        <div className="col-10">
           
             <AdminCustomers/>
             
