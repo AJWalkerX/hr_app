@@ -4,12 +4,11 @@
   border-radius: 30px;
   border: none;
   color: white;
-  background-color: #006ea6;
-  font-size: 26px;
-  margin-top: 70px;
+  background-color: rgb(10, 57, 129);
+  font-size: 22px;
   margin-top: 210px;
 }
 
 .saveButton:hover {
-  background-color: #7fa1c3;
+  background-color: #4892db;
 }
