@@ -43,7 +43,9 @@ const adminAuthSlice = createSlice({
       localStorage.removeItem("adminToken");
     },
     adminLogin(state) {
-      state.isAdminAuth = true;
+      if (localStorage.getItem("adminToken")) {
+        state.isAdminAuth = true;
+      }
     },
   },
   extraReducers: (build) => {

@@ -16,6 +16,7 @@ interface IAuthState {
   isLoginLoading: boolean;
   isRegisterLoading: boolean;
   user: IUserModel | null;
+  isManagerLogin: boolean;
 }
 
 const initialAuthState: IAuthState = {
@@ -24,6 +25,7 @@ const initialAuthState: IAuthState = {
   isAuth: false,
   isLoginLoading: false,
   isRegisterLoading: false,
+  isManagerLogin: false,
 };
 
 export const fetchRegister = createAsyncThunk(
@@ -62,7 +64,11 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
     },
     login(state) {
-      state.isAuth = true;
+      const token = localStorage.getItem("token");
+      if (token) {
+        state.isAuth = true;
+        state.isManagerLogin = state.loginResponse?.position === "MANAGER";
+      }
     },
   },
   extraReducers: (build) => {

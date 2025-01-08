@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -43,20 +49,31 @@ import ShiftAssignmentPage from "./pages/ShiftAssignmentPage";
 import PersonalViewAllMyEmbezzlementPage from "./pages/PersonalViewAllMyEmbezzlementPage";
 import { Login } from "@mui/icons-material";
 import NotFoundPage from "./pages/NotFoundPage";
+import { login, logout } from "./stores/features/authSlice";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
+  const navigate = useNavigate();
   const location = useLocation();
+
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
   const isAuth = hrUseSelector((state) => state.auth.isAuth);
-
-  const isManagerLogin = hrUseSelector(
-    (state) => state.auth.loginResponse?.position === "MANAGER"
-  );
+  const isManagerLogin = hrUseSelector((state) => state.auth.isManagerLogin);
   const isFirstLogin = hrUseSelector(
     (state) => state.auth.loginResponse?.isFirstLogin
   );
-  console.log(isFirstLogin);
+
+  useEffect(() => {
+    const managerToken = localStorage.getItem("token");
+    const employeeToken = localStorage.getItem("employeeToken");
+
+    if (managerToken || employeeToken) {
+      dispatch(login());
+    } else if (!managerToken || !employeeToken) {
+      dispatch(logout());
+    }
+  }, [dispatch]);
+
   useEffect(() => {
     const adminToken = localStorage.getItem("adminToken");
     if (adminToken) {
@@ -70,7 +87,11 @@ function RouterPage() {
       localStorage.removeItem("adminToken");
       dispatch(adminLogout());
     }
-  }, [dispatch, location.pathname]);
+    if (isFirstLogin !== undefined && isFirstLogin) {
+      navigate("/user-information");
+    }
+  }, [dispatch, location.pathname, isFirstLogin, navigate]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
