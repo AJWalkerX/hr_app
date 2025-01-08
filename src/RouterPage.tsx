@@ -41,6 +41,8 @@ import ShiftManagerPage from "./pages/ShiftManagerPage";
 import ManagerEmbezzlementPage from "./pages/ManagerEmbezzlementPage";
 import ShiftAssignmentPage from "./pages/ShiftAssignmentPage";
 import PersonalViewAllMyEmbezzlementPage from "./pages/PersonalViewAllMyEmbezzlementPage";
+import { Login } from "@mui/icons-material";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
@@ -51,9 +53,6 @@ function RouterPage() {
   const isManagerLogin = hrUseSelector(
     (state) => state.auth.loginResponse?.position === "MANAGER"
   );
-  const position = hrUseSelector((state) => state.auth.loginResponse?.position);
-  console.log(position);
-  console.log(isManagerLogin);
   const isFirstLogin = hrUseSelector(
     (state) => state.auth.loginResponse?.isFirstLogin
   );
@@ -84,38 +83,111 @@ function RouterPage() {
       <Route path="/admin-login" element={<AdminLoginPage />} />
       <Route
         path="/admin/customers"
-        element={isAdminLogin ? <AdminCustomersPage /> : <AdminLoginPage />}
+        element={isAdminLogin ? <AdminCustomersPage /> : <NotFoundPage />}
       />
       <Route
         path="/admin/wait-customers"
-        element={isAdminLogin ? <AdminWaitCustomersPage /> : <AdminLoginPage />}
+        element={isAdminLogin ? <AdminWaitCustomersPage /> : <NotFoundPage />}
       />
-      <Route path="/user-information" element={<UserInformationPage />} />
-      <Route path="/personal/profile" element={<UserProfileSettingsPage />} />
-      <Route path="/manager" element={<ManagerHomePage />} />
-      <Route path="/manager/permit" element={<UserPermitPage />} />
-      <Route path="/manager/employees" element={<ManagerEmployeesPage />} />
+      <Route
+        path="/user-information"
+        element={isManagerLogin ? <UserInformationPage /> : <LoginPage />}
+      />
+      <Route
+        path="/personal/profile"
+        element={isAuth ? <UserProfileSettingsPage /> : <NotFoundPage />}
+      />
+      <Route
+        path="/manager"
+        element={isManagerLogin ? <ManagerHomePage /> : <LoginPage />}
+      />
+      <Route
+        path="/manager/permit"
+        element={isManagerLogin ? <UserPermitPage /> : <NotFoundPage />}
+      />
+      <Route
+        path="/manager/employees"
+        element={isAuth ? <ManagerEmployeesPage /> : <NotFoundPage />}
+      />
 
       <Route path="/set-new-password" element={<SetNewPasswordPage />}></Route>
-      <Route path="/personal/permit-request" element={<PermitRequestPage/>}> </Route>
-      <Route path="/personal" element={<PersonelHomePage/>}></Route>
-      <Route path="/manager/permit-request" element={<PermitRequestManagerPage/>}> </Route>
-      <Route path="/manager/profile" element={<ManagerProfileSettingsPage/>} />
-      <Route path="/personal/view-your-permit" element={<PersonalViewYourPermitPage/>}></Route>
-      <Route path="/manager/view-manager-permit" element={<ManagerPermitViewPage/>}></Route>
-      <Route path="/manager/comment" element={<ManagerCommentPage/>}></Route>
+      <Route
+        path="/personal/permit-request"
+        element={isAuth ? <PermitRequestPage /> : <NotFoundPage />}
+      >
+        {" "}
+      </Route>
+      <Route path="/personal" element={<PersonelHomePage />}></Route>
+      <Route
+        path="/manager/permit-request"
+        element={
+          isManagerLogin ? <PermitRequestManagerPage /> : <NotFoundPage />
+        }
+      >
+        {" "}
+      </Route>
+      <Route
+        path="/manager/profile"
+        element={
+          isManagerLogin ? <ManagerProfileSettingsPage /> : <NotFoundPage />
+        }
+      />
+      <Route
+        path="/personal/view-your-permit"
+        element={isAuth ? <PersonalViewYourPermitPage /> : <NotFoundPage />}
+      ></Route>
+      <Route
+        path="/manager/view-manager-permit"
+        element={isManagerLogin ? <ManagerPermitViewPage /> : <NotFoundPage />}
+      ></Route>
+      <Route
+        path="/manager/comment"
+        element={isManagerLogin ? <ManagerCommentPage /> : <NotFoundPage />}
+      ></Route>
       <Route path="/comment/list" element={<CommentListPage />} />
-      <Route path="/personal/add-spending" element={<AddSpendingPage/>}></Route>
-      <Route path="/employee-details" element={<EmployeeDetailsPage/>}></Route>
-      <Route path="/personal/view-my-spending" element={<PersonalViewAllMySpendingPage/>}></Route>
-      <Route path="/manager/employees/spending-list" element={<ManagerSpendingViewPage/>}></Route>
-      <Route path="/comment/comment-details/:commentId" element={<CommentDetailsPage/>}></Route>
-      <Route path="/manager/shift-request" element={<ShiftManagerPage/>}></Route>
-      <Route path="/manager/embezzlement" element={<ManagerEmbezzlementPage/>}></Route>
-      <Route path="/manager/shift-assignment" element={<ShiftAssignmentPage/>}></Route>
-      <Route path="/personal/view-my-embezzlement" element={<PersonalViewAllMyEmbezzlementPage/>}></Route>
-      <Route path="/personal/shift-list" element={<PersonalShiftListPage/>}></Route>
-
+      <Route
+        path="/personal/add-spending"
+        element={isAuth ? <AddSpendingPage /> : <NotFoundPage />}
+      ></Route>
+      <Route path="/employee-details" element={<EmployeeDetailsPage />}></Route>
+      <Route
+        path="/personal/view-my-spending"
+        element={isAuth ? <PersonalViewAllMySpendingPage /> : <NotFoundPage />}
+      ></Route>
+      <Route
+        path="/manager/employees/spending-list"
+        element={
+          isManagerLogin ? <ManagerSpendingViewPage /> : <NotFoundPage />
+        }
+      ></Route>
+      <Route
+        path="/comment/comment-details/:commentId"
+        element={<CommentDetailsPage />}
+      ></Route>
+      <Route
+        path="/manager/shift-request"
+        element={isManagerLogin ? <ShiftManagerPage /> : <NotFoundPage />}
+      ></Route>
+      <Route
+        path="/manager/embezzlement"
+        element={
+          isManagerLogin ? <ManagerEmbezzlementPage /> : <NotFoundPage />
+        }
+      ></Route>
+      <Route
+        path="/manager/shift-assignment"
+        element={isManagerLogin ? <ShiftAssignmentPage /> : <NotFoundPage />}
+      ></Route>
+      <Route
+        path="/personal/view-my-embezzlement"
+        element={
+          isAuth ? <PersonalViewAllMyEmbezzlementPage /> : <NotFoundPage />
+        }
+      ></Route>
+      <Route
+        path="/personal/shift-list"
+        element={isAuth ? <PersonalShiftListPage /> : <NotFoundPage />}
+      ></Route>
     </Routes>
   );
 }
