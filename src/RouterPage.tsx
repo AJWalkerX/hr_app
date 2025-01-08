@@ -65,7 +65,7 @@ function RouterPage() {
 
   useEffect(() => {
     const managerToken = localStorage.getItem("token");
-    const employeeToken = localStorage.getItem("employeeToken");
+    const employeeToken = localStorage.getItem("token");
 
     if (managerToken || employeeToken) {
       dispatch(login());

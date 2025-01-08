@@ -105,6 +105,7 @@ const authSlice = createSlice({
         if (action.payload.code === 200) {
           state.isAuth = true;
           state.loginResponse = action.payload.data;
+          state.isManagerLogin = state.loginResponse?.position === "MANAGER";
 
           if (state.loginResponse?.token) {
             localStorage.setItem("token", state.loginResponse.token);
