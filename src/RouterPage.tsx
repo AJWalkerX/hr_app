@@ -58,8 +58,6 @@ function RouterPage() {
   console.log("isAdminLogin: ", isAdminLogin);
   const isAuth = hrUseSelector((state) => state.auth.isAuth);
   console.log("isAuth: ", isAuth);
-  const isManagerLogin = hrUseSelector((state) => state.auth.isManagerLogin);
-  console.log("isManagerLogin: ", isManagerLogin);
   const isFirstLogin = hrUseSelector(
     (state) => state.auth.loginResponse?.position === "MANAGER"
   );
@@ -70,7 +68,7 @@ function RouterPage() {
 
     if (managerToken || employeeToken) {
       dispatch(login());
-    } else if (!managerToken || !employeeToken) {
+    } else if (!employeeToken) {
       dispatch(logout());
     }
     if (isFirstLogin) {
@@ -104,7 +102,7 @@ function RouterPage() {
       />
       <Route
         path="/user-information"
-        element={isManagerLogin ? <UserInformationPage /> : <LoginPage />}
+        element={isAuth ? <UserInformationPage /> : <LoginPage />}
       />
       <Route
         path="/personal/profile"
@@ -112,11 +110,11 @@ function RouterPage() {
       />
       <Route
         path="/manager"
-        element={isManagerLogin ? <ManagerHomePage /> : <LoginPage />}
+        element={isAuth ? <ManagerHomePage /> : <LoginPage />}
       />
       <Route
         path="/manager/permit"
-        element={isManagerLogin ? <UserPermitPage /> : <NotFoundPage />}
+        element={isAuth ? <UserPermitPage /> : <NotFoundPage />}
       />
       <Route
         path="/manager/employees"
@@ -136,17 +134,13 @@ function RouterPage() {
       ></Route>
       <Route
         path="/manager/permit-request"
-        element={
-          isManagerLogin ? <PermitRequestManagerPage /> : <NotFoundPage />
-        }
+        element={isAuth ? <PermitRequestManagerPage /> : <NotFoundPage />}
       >
         {" "}
       </Route>
       <Route
         path="/manager/profile"
-        element={
-          isManagerLogin ? <ManagerProfileSettingsPage /> : <NotFoundPage />
-        }
+        element={isAuth ? <ManagerProfileSettingsPage /> : <NotFoundPage />}
       />
       <Route
         path="/personal/view-your-permit"
@@ -154,11 +148,11 @@ function RouterPage() {
       ></Route>
       <Route
         path="/manager/view-manager-permit"
-        element={isManagerLogin ? <ManagerPermitViewPage /> : <NotFoundPage />}
+        element={isAuth ? <ManagerPermitViewPage /> : <NotFoundPage />}
       ></Route>
       <Route
         path="/manager/comment"
-        element={isManagerLogin ? <ManagerCommentPage /> : <NotFoundPage />}
+        element={isAuth ? <ManagerCommentPage /> : <NotFoundPage />}
       ></Route>
       <Route path="/comment/list" element={<CommentListPage />} />
       <Route
@@ -172,9 +166,7 @@ function RouterPage() {
       ></Route>
       <Route
         path="/manager/employees/spending-list"
-        element={
-          isManagerLogin ? <ManagerSpendingViewPage /> : <NotFoundPage />
-        }
+        element={isAuth ? <ManagerSpendingViewPage /> : <NotFoundPage />}
       ></Route>
       <Route
         path="/comment/comment-details/:commentId"
@@ -182,17 +174,15 @@ function RouterPage() {
       ></Route>
       <Route
         path="/manager/shift-request"
-        element={isManagerLogin ? <ShiftManagerPage /> : <NotFoundPage />}
+        element={isAuth ? <ShiftManagerPage /> : <NotFoundPage />}
       ></Route>
       <Route
         path="/manager/embezzlement"
-        element={
-          isManagerLogin ? <ManagerEmbezzlementPage /> : <NotFoundPage />
-        }
+        element={isAuth ? <ManagerEmbezzlementPage /> : <NotFoundPage />}
       ></Route>
       <Route
         path="/manager/shift-assignment"
-        element={isManagerLogin ? <ShiftAssignmentPage /> : <NotFoundPage />}
+        element={isAuth ? <ShiftAssignmentPage /> : <NotFoundPage />}
       ></Route>
       <Route
         path="/personal/view-my-embezzlement"
@@ -210,11 +200,7 @@ function RouterPage() {
 
 export default function App() {
   return (
-    <BrowserRouter
-      future={{
-        v7_relativeSplatPath: true,
-      }}
-    >
+    <BrowserRouter>
       <RouterPage />
     </BrowserRouter>
   );
