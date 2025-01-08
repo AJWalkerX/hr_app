@@ -51,153 +51,159 @@ function PersonalSidebar() {
           </div>
         </div>
         <ul className="sidebar-nav">
-          <li className="nav-item mb-3">
-            <NavLink className="nav-link-manager" to={'/personal'}>
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-house"></i>
-                </span>{' '}
-                DASHBOARD
-              </a>
-            </NavLink>
-          </li>
 
-          <li className="nav-item mb-3">
-            <NavLink className="nav-link-manager" to={'/personal/profile'}>
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-user"></i>
-                </span>{' '}
-                PERSONEL BİLGİLERİ
-              </a>
-            </NavLink>
-          </li>
+          <li className="nav-item mt-3">
+                  <NavLink  to={'/personal'}  className={({ isActive }) => isActive ? 'active-page' : ''} end style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+               
+                  {({ isActive }) => (
+                <>
+                  <i
+                    className="fa-solid fa-house"
+                    style={{
+                      color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+                      marginRight: '8px',
+                    }}
+                  ></i>
+                 DASHBOARD
+                </>
+              )}
+                  </NavLink>
+                </li>
 
-          <li className="nav-item mb-3">
-            <NavLink
-              className="nav-link-manager"
-              to={'/personal/permit-request'}
-            >
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-pen-to-square"></i>
-                </span>{' '}
-                İZİN OLUŞTUR
-              </a>
-            </NavLink>
-          </li>
+           <li className="nav-item mt-3">
+                  <NavLink  to={'/personal/profile'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+               
+                  {({ isActive }) => (
+                <>
+                  <i
+                    className="fa-solid fa-user"
+                    style={{
+                      color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+                      marginRight: '8px',
+                    }}
+                  ></i>
+                  PERSONEL BİLGİLERİ
+                </>
+              )}
+                  </NavLink>
+                </li>
 
-          <li className="nav-item mb-3">
-            <NavLink
-              className="nav-link-manager"
-              to={'/personal/view-your-permit'}
-            >
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
+             <li className="nav-item mt-3">
+                     <NavLink  to={'/personal/permit-request'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+                  
+                     {({ isActive }) => (
+                   <>
+                     <i
+                       className="fa-solid fa-pen-to-square"
+                       style={{
+                         color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+                         marginRight: '8px',
+                       }}
+                     ></i>
+                     İZİN OLUŞTUR
+                   </>
+                 )}
+                     </NavLink>
+                   </li>
+             
+        
+           <li className="nav-item mt-3">
+                  <NavLink  to={'/personal/view-your-permit'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+               
+                  {({ isActive }) => (
+                <>
+                  <i
+                    className="fa-regular fa-calendar-days"
+                    style={{
+                      color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+                      marginRight: '8px',
+                    }}
+                  ></i>
+                 İZİNLERİ GÖRÜNTÜLE
+                </>
+              )}
+                  </NavLink>
+                </li>
+        
+<li className="nav-item mt-3">
+        <NavLink  to={'/personal/add-spending'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-money-check-dollar"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+        HARCAMA EKLE
+      </>
+    )}
+        </NavLink>
+      </li>
+      
+         <li className="nav-item mt-3">
+                <NavLink  to={'/personal/view-my-spending'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+             
+                {({ isActive }) => (
+              <>
+                <i
+                  className="fa-solid fa-money-check-dollar"
                   style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
+                    color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+                    marginRight: '8px',
                   }}
-                >
-                  <i className="fa-regular fa-calendar-days"></i>
-                </span>{' '}
-                İZİNLERİ GÖRÜNTÜLE
-              </a>
-            </NavLink>
-          </li>
-
-          <li className="nav-item mb-3">
-            <NavLink className="nav-link-manager" to={'/personal/add-spending'}>
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-money-check-dollar"></i>
-                </span>{' '}
-                HARCAMA EKLE
-              </a>
-            </NavLink>
-          </li>
-
-          <li className="nav-item mb-3">
-            <NavLink
-              className="nav-link-manager"
-              to={'/personal/view-my-spending'}
-            >
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-money-check-dollar"></i>
-                </span>{' '}
+                ></i>
                 TÜM HARCAMALARIM
-              </a>
-            </NavLink>
-          </li>
+              </>
+            )}
+                </NavLink>
+              </li>
+          
+<li className="nav-item mt-3">
+        <NavLink  to={'/personal/view-my-embezzlement'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-clipboard-list"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+         ZİMMETLİ MATERYALLER
+      </>
+    )}
+        </NavLink>
+      </li>
 
-          <li className="nav-item mb-3">
-            <NavLink
-              className="nav-link-manager"
-              to={'/personal/view-my-embezzlement'}
-            >
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-clipboard-list"></i>
-                </span>{' '}
-                ZİMMETLİ MATERYALLER
-              </a>
-            </NavLink>
-          </li>
 
-          <li className="nav-item mb-3">
-            <NavLink className="nav-link-manager" to={'/personal/shift-list'}>
-              <a className="nav-link d-flex align-items-center fw-bold" href="">
-                <span
-                  className="nav-icon me-2"
-                  style={{
-                    color: 'rgb(10, 57, 129)',
-                    transition: 'color 0.3s',
-                  }}
-                >
-                  <i className="fa-solid fa-user-clock"></i>
-                </span>{' '}
-                PERSONEL VARDİYALARI
-              </a>
-            </NavLink>
-          </li>
+
+
+      <li className="nav-item mt-3">
+        <NavLink  to={'/personal/shift-list'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+     
+        {({ isActive }) => (
+      <>
+        <i
+          className="fa-solid fa-user-clock"
+          style={{
+            color: isActive ? 'white' : 'rgb(10, 57, 129)', 
+            marginRight: '8px',
+          }}
+        ></i>
+          PERSONEL VARDİYALARI
+      </>
+    )}
+        </NavLink>
+      </li>
+        
+    
+          
+
+
         </ul>
 
         <div className="sidebar-footer border-top d-flex justify-content-center pt-3">
