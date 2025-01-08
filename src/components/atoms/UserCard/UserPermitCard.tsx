@@ -12,7 +12,6 @@ function UserPermitCard(props: IUserPermitResponse) {
   const dispatch = useDispatch<hrDispatch>();
   const doApprove = async () => {
     const answer = "Approved";
-    dispatch(removeUserFromPermitList(props.userId));
     dispatch(
       fetchPermitAuthorisation({
         userId: props.userId,
@@ -21,6 +20,7 @@ function UserPermitCard(props: IUserPermitResponse) {
       })
     );
     await dispatch(fetchGetUserPermitInfo());
+    dispatch(removeUserFromPermitList(props.userId));
   };
   const doReject = async () => {
     const answer = "Rejected";
@@ -32,6 +32,7 @@ function UserPermitCard(props: IUserPermitResponse) {
       })
     );
     await dispatch(fetchGetUserPermitInfo());
+    dispatch(removeUserFromPermitList(props.userId));
   };
   return (
     <tr>
