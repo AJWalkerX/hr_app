@@ -54,16 +54,14 @@ import { login, logout } from "./stores/features/authSlice";
 function RouterPage() {
   const dispatch = useDispatch<hrDispatch>();
   const navigate = useNavigate();
-  const location = useLocation();
-
   const isAdminLogin = hrUseSelector((state) => state.adminAuth.isAdminAuth);
   const isAuth = hrUseSelector((state) => state.auth.isAuth);
   const isManagerLogin = hrUseSelector((state) => state.auth.isManagerLogin);
-  const isFirstLogin = hrUseSelector(
-    (state) => state.auth.loginResponse?.isFirstLogin
-  );
 
   useEffect(() => {
+    const isFirstLogin = hrUseSelector(
+      (state) => state.auth.loginResponse?.position === "MANAGER"
+    );
     const managerToken = localStorage.getItem("token");
     const employeeToken = localStorage.getItem("token");
 
@@ -72,9 +70,9 @@ function RouterPage() {
     } else if (!managerToken || !employeeToken) {
       dispatch(logout());
     }
-  }, [dispatch]);
-
-  useEffect(() => {
+    if (isFirstLogin) {
+      navigate("/user-information");
+    }
     const adminToken = localStorage.getItem("adminToken");
     if (adminToken) {
       dispatch(adminLogin());
@@ -82,15 +80,6 @@ function RouterPage() {
       dispatch(adminLogout());
     }
   }, [dispatch]);
-  useEffect(() => {
-    if (!location.pathname.includes("/admin")) {
-      localStorage.removeItem("adminToken");
-      dispatch(adminLogout());
-    }
-    if (isFirstLogin !== undefined && isFirstLogin) {
-      navigate("/user-information");
-    }
-  }, [dispatch, location.pathname, isFirstLogin, navigate]);
 
   return (
     <Routes>
