@@ -5,7 +5,7 @@ import ViewYourPermit from '../components/molecules/ViewYourPermit/ViewYourPermi
 
 function ManagerPermitViewPage() {
   return (
-    <div style={{ backgroundColor: '#e5e8e8',height:'100vh'}} className="container-fluid">
+    <div style={{height:'100vh'}} className="container-fluid">
         
     <div className="row">
       <div className="col-1">

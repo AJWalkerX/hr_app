@@ -17,7 +17,7 @@ function UserPermit() {
   }, [dispatch]);
 
   return (
-    <div style={{ backgroundColor: "#e5e8e8" }} className="container">
+    <div  className="container">
       <div className="text-center mb-4">
         <h1>İzin Yönetim Paneli</h1>
       </div>
