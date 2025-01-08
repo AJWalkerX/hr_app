@@ -16,12 +16,38 @@ function AdminSidebar() {
   
   return (
     <>
-    <div className="sidebar border-end sidebar-admin">
-      <div className="sidebar-header border-bottom">
-        <div className="sidebar-brand">
-            <img style={{width: '80px',height: '80px'}} 
-            src={logo}/><span style={{fontWeight: 'bold',fontSize: '22px',color: 'rgb(10, 57, 129)'}}>
-                Kolaysa İK Admin Arayüzü</span>
+    <div className="sidebar border-end sidebar-admin"
+    style={{
+      width: '300px',
+      backgroundColor: '#f7f9f9',
+      borderRadius: '10px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      padding: '10px',
+    }}
+    >
+      <div className="sidebar-header border-bottom mb-4">
+        <div className="sidebar-brand text-center">
+        <img
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                marginBottom: '10px',
+                marginRight:'10px'
+              }}
+              src={logo}
+              alt="logo"
+            />
+            <h4
+              style={{
+                fontWeight: 'bold',
+                fontSize: '19px',
+                color: 'rgb(10, 57, 129)',
+                
+              }}
+            >
+              KolaysaİK Admin Bilgi Sistemi 
+            </h4>
         </div>
       </div>
       <ul className="sidebar-nav">
@@ -32,7 +58,7 @@ function AdminSidebar() {
       <li className="nav-item">
         <NavLink className='nav-link-admin' to={'/admin'}>
         <a className="nav-link fw-bold" href="#"  >
-          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-house"></span></span> ANASAYFA
+          <span className="nav-icon"><span style={{color: 'rgb(10, 57, 129)'}} className="fa-solid fa-house"></span></span> DASHBOARD
         </a>
         </NavLink>
       </li>
@@ -56,10 +82,18 @@ function AdminSidebar() {
     </ul>
   </li>
 </ul>
-      <div className="sidebar-footer border-top d-flex" >
-        <button className="sidebar-toggler sidebar-exit-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button"></button>
+<div className="sidebar-footer border-top d-flex justify-content-center pt-3">
+          <button
+            className="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            style={{ width: '90%' }}
+          >
+            <i className="fa-solid fa-right-from-bracket me-2"></i>
+            Çıkış Yap
+          </button>
+        </div>
       </div>
-    </div>
 
     <div
         className="modal fade"

@@ -28,7 +28,7 @@ const personalData = [
 function PersonalShiftList() {
   
     return (
-        <div style={{ padding: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f4f4' }}>
+        <div style={{ padding: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <div>
             <h2 style={{
               textAlign: 'center',

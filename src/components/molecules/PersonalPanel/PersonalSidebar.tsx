@@ -33,6 +33,7 @@ function PersonalSidebar() {
                 height: '60px',
                 borderRadius: '50%',
                 marginBottom: '10px',
+                marginLeft: '24px'
               }}
               src={logo}
               alt="logo"
@@ -42,6 +43,7 @@ function PersonalSidebar() {
                 fontWeight: 'bold',
                 fontSize: '20px',
                 color: 'rgb(10, 57, 129)',
+                marginLeft:'25px'
               }}
             >
               Personel Bilgi Sistemi

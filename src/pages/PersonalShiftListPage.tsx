@@ -4,12 +4,12 @@ import PersonalShiftList from '../components/organisms/PersonalShiftList/Persona
 
 function PersonalShiftListPage() {
   return (
-    <div className="container-fluid"  style={{ height:'100vh',backgroundColor: '#f0f4f8' }}>
+    <div className="container-fluid"  style={{ height:'100vh'}}>
      <div className="row">
-     <div className="col-2" style={{backgroundColor: '#f0f4f8'}}>
+     <div className="col-2">
      <PersonalSidebar/>
      </div>
-     <div className="col-10" style={{backgroundColor: '#f0f4f8'}}>
+     <div className="col-10" >
        <PersonalShiftList/>
      </div>
      </div>
