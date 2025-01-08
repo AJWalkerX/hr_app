@@ -26,10 +26,10 @@
 }
 
 .btn-introduction:hover{
-    background-color: #37AFE1; /* Hover arka plan rengi */
+    background-color: #1aaceb; /* Hover arka plan rengi */
     color: white; /* Yazı rengi */
-    box-shadow: 0px 0px 28px -11px rgba(255, 255, 255, 1); /* Hover gölge */
-    transform: translateY(5px); /* Hover hareket */
+    box-shadow: 0px 0px 28px -11px rgba(255, 255, 255, 10); /* Hover gölge */
+    
 
 }
 
