@@ -117,7 +117,10 @@ function RouterPage() {
       >
         {" "}
       </Route>
-      <Route path="/personal" element={<PersonelHomePage />}></Route>
+      <Route
+        path="/personal"
+        element={isAuth ? <PersonelHomePage /> : <LoginPage />}
+      ></Route>
       <Route
         path="/manager/permit-request"
         element={
