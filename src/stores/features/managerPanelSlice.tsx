@@ -58,10 +58,9 @@ export const fetchGetUserPermitInfo = createAsyncThunk(
   "manager/fetchGetUserPermitInfo",
   async () => {
     const managerToken = localStorage.getItem("token");
-    return await fetch(apis.managerService + "/get-user-permit-list?token="+managerToken)
-    .then(
-      (data) => data.json()
-    );
+    return await fetch(
+      apis.managerService + "/get-user-permit-list?token=" + managerToken
+    ).then((data) => data.json());
   }
 );
 
@@ -124,8 +123,6 @@ export const fetchDeleteEmployee = createAsyncThunk(
     return response;
   }
 );
-
-
 
 export const fetchAddNewEmployee = createAsyncThunk(
   "manager/fetchAddNewEmployee",
@@ -206,12 +203,12 @@ const managerSlice = createSlice({
   reducers: {
     removeUserFromPermitList: (state, action: PayloadAction<number>) => {
       state.userPermitCardList = state.userPermitCardList.filter(
-        (user) => user.userId !== action.payload
+        (_, index) => index !== action.payload
       );
     },
     removeEmployeeFromSpendingList: (state, action: PayloadAction<number>) => {
       state.employeeSpendingList = state.employeeSpendingList.filter(
-        (emplooye) => emplooye.userId !== action.payload
+        (_, index) => index !== action.payload
       );
     },
   },
