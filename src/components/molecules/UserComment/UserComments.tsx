@@ -34,7 +34,10 @@ const UserComments = () => {
             </p>
             <button
             className="btn btn-primary mt-3"
-            onClick={() => navigate("/comment/list")} // Yönlendirme işlemi
+            onClick={() => {
+              navigate("/comment/list"); // Yönlendirme işlemi
+              window.scrollTo(0, 0); // Sayfanın en üstüne kaydır
+            }}
           >
             TÜMÜNÜ İNCELEYİN
           </button>
