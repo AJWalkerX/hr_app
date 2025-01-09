@@ -74,7 +74,7 @@ function ManagerSidebar() {
 
 
       <li className="nav-item mt-3">
-        <NavLink  to={'/manager/employees'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+        <NavLink  to={'/manager/employees'}  className={({ isActive }) => isActive ? 'active-page' : ''} end style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
      
         {({ isActive }) => (
       <>
@@ -92,7 +92,7 @@ function ManagerSidebar() {
       </li>
 
       <li className="nav-item mt-3">
-        <NavLink  to={'/manager/permit'}  className={({ isActive }) => isActive ? 'active-page' : ''}  style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
+        <NavLink  to={'/manager/permit'}  className={({ isActive }) => isActive ? 'active-page' : ''} style={{textDecoration:'none', fontWeight:'bold', color:'rgb(10, 57, 129)'}}>
      
         {({ isActive }) => (
       <>
@@ -197,7 +197,7 @@ function ManagerSidebar() {
             marginRight: '8px',
           }}
         ></i>
-       ÇALIŞAN HARCAMA <br /> TALEPLERİ
+       ÇALIŞAN HARCAMA TALEPLERİ
       </>
     )}
         </NavLink>
